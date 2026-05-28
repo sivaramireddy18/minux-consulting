@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Coaching Operating Rules, Pedagogical guidelines, and scoring card rubrics for the systems engineering training program.">
+    <title>Coaching Portal & Evaluation Standards | Minux Academy</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Glassmorphic Cyber Header -->
+    <header id="main-header">
+        <div class="nav-container">
+            <a href="index.html" class="logo" id="header-logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+                MINUX<span>CONSULTING</span>
+            </a>
+            <button class="nav-toggle" id="menu-toggle" aria-label="Toggle Navigation Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="navigation-list">
+                <li><a href="index.html" id="link-home">Home</a></li>
+                <li><a href="embedded-linux.html" id="link-emb">Embedded & Linux Talent</a></li>
+                <li><a href="c-programming.html" id="link-c">C Core Specialists</a></li>
+                <li><a href="python-automation.html" id="link-py">HIL Automation Architects</a></li>
+                <li><a href="coaching-manual.html" id="link-coach">Vetting Protocol</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Track Coach Hero -->
+    <section class="track-hero coach" id="track-intro">
+        <div class="hero-content">
+            <span class="badge" style="background-color: rgba(236, 72, 153, 0.15); color: var(--color-coach); border-color: rgba(236, 72, 153, 0.3);">Vetting Directive</span>
+            <h1 style="color: white; margin-bottom: 1rem;">Operating Rules & Evaluation Standards</h1>
+            <p style="color: #94A3B8; max-width: 600px; margin: 0 auto;">Establishing absolute rigor. We do not evaluate using loose curves: our candidates are graded against high-stakes industrial safety benchmarks.</p>
+        </div>
+    </section>
+
+    <!-- Content Split Layout -->
+    <main class="track-container" id="curriculum-timeline">
+        
+        <!-- Left: Operating Rules & Rubrics -->
+        <section class="timeline-wrapper">
+            <h2 style="font-size: 1.75rem; margin-bottom: 2rem; color: var(--text-primary);">The Candidate-Client Interface Laws</h2>
+            
+            <!-- Dynamic search input to filter evaluation directives -->
+            <input type="text" class="filter-search-box" placeholder="search rules (e.g. 'warning', 'leak', 'python', 'type')...">
+
+            <div class="timeline">
+                
+                <!-- Rule 1 -->
+                <div class="timeline-item" id="rule-1-card">
+                    <span class="week-badge">Rule 01</span>
+                    <h3>The Zero-Warning Directive</h3>
+                    <p>Every line of C code written during this vetting process must compile under GCC/Clang cleanly using <code>-std=c11 -Wall -Wextra -Werror -pedantic</code>. If a single warning is emitted, compilation aborts, and the submission is rejected immediately without further audit.</p>
+                </div>
+
+                <!-- Rule 2 -->
+                <div class="timeline-item" id="rule-2-card">
+                    <span class="week-badge">Rule 02</span>
+                    <h3>Zero-Leak Dynamic Memory Policy</h3>
+                    <p>Dynamic memory allocation must be managed with absolute precision. All compiled binaries are executed through Valgrind Memcheck. If a single byte of memory is leaked, or if an uninitialized memory read or invalid free is detected, the candidate fails the milestone evaluation automatically.</p>
+                </div>
+
+                <!-- Rule 3 -->
+                <div class="timeline-item" id="rule-3-card">
+                    <span class="week-badge">Rule 03</span>
+                    <h3>Defensive Coding & Standards (MISRA C Subset)</h3>
+                    <p>Safety-critical code requires strict standards. Standard library calls that are susceptible to stack buffer overflows (e.g. <code>strcpy</code>, <code>sprintf</code>, <code>gets</code>) are strictly banned. Candidates must use bounded alternatives (<code>strncpy</code>, <code>snprintf</code>) and adhere to MISRA C safety-critical principles.</p>
+                </div>
+
+                <!-- Rule 4 -->
+                <div class="timeline-item" id="rule-4-card">
+                    <span class="week-badge">Rule 04</span>
+                    <h3>Strict Python Type Quality</h3>
+                    <p>In python automation scripts, type omissions are forbidden. All code must incorporate explicit static type annotations, validated under strict Mypy checks. Connection handles and serial sockets must implement context managers to prevent open-resource locks.</p>
+                </div>
+
+            </div>
+
+            <!-- Scoring Rubric Details -->
+            <div class="session-box" style="margin-top: 3rem;" id="rubric-box">
+                <h3 style="margin-top: 0; margin-bottom: 1.5rem; color: var(--text-primary); font-size: 1.25rem;">The 10-Point Technical Score Rubric</h3>
+                
+                <table style="width: 100%; border-collapse: collapse; font-size: 0.95rem; border: 1px solid var(--border-light);">
+                    <thead>
+                        <tr style="background-color: var(--bg-darker);">
+                            <th style="border: 1px solid var(--border-light); padding: 0.75rem; font-weight: 600; text-align: left; color: var(--text-primary);">Rating Band</th>
+                            <th style="border: 1px solid var(--border-light); padding: 0.75rem; font-weight: 600; text-align: left; color: var(--text-primary);">Technical Criteria</th>
+                            <th style="border: 1px solid var(--border-light); padding: 0.75rem; font-weight: 600; text-align: left; color: var(--text-primary);">Outcome Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="border: 1px solid var(--border-light); padding: 0.75rem; font-weight: 600; color: var(--color-embedded);">9 to 10 Points</td>
+                            <td style="border: 1px solid var(--border-light); padding: 0.75rem; color: var(--text-secondary);">Perfect algorithmic correctness, optimized memory margins, 100% test coverage, and complete execution of the highly complex Stretch Task.</td>
+                            <td style="border: 1px solid var(--border-light); padding: 0.75rem; font-weight: 600; color: var(--color-embedded);">Pass with Distinction</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid var(--border-light); padding: 0.75rem; font-weight: 600; color: var(--color-python);">7 to 8 Points</td>
+                            <td style="border: 1px solid var(--border-light); padding: 0.75rem; color: var(--text-secondary);">Functional code passes unit tests, with zero compiler warnings and zero leaks. However, minor styling or non-optimal variables scope refactoring is possible.</td>
+                            <td style="border: 1px solid var(--border-light); padding: 0.75rem; font-weight: 600; color: var(--color-python);">Passed</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid var(--border-light); padding: 0.75rem; font-weight: 600; color: var(--color-c-systems);">0 to 6 Points</td>
+                            <td style="border: 1px solid var(--border-light); padding: 0.75rem; color: var(--text-secondary);">Warnings present, memory leak detected, missing unit tests, or security standard violations. Candidate blocked from advancing to next Phase.</td>
+                            <td style="border: 1px solid var(--border-light); padding: 0.75rem; font-weight: 600; color: var(--color-c-systems);">Rejected (Remediation)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </section>
+
+        <!-- Right: Sidebar Checklist Widgets -->
+        <aside class="sidebar" id="track-sidebar">
+            
+            <!-- Interactive Coaching Cockpit Simulator Widget -->
+            <div class="sidebar-widget" id="widget-cockpit">
+                <h3>Milestone Gate Calculator</h3>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem;">Input candidate evaluation scores to check gate lock/remediation alerts dynamically.</p>
+                <div class="calc-container" style="background: transparent; border: none; padding: 0; margin-top: 0;">
+                    <div class="calc-row">
+                        <span class="calc-label">Compile Checks</span>
+                        <input type="number" class="calc-input" id="score-compile" min="0" max="10" value="10">
+                    </div>
+                    <div class="calc-row">
+                        <span class="calc-label">Valgrind Clean</span>
+                        <input type="number" class="calc-input" id="score-memory" min="0" max="10" value="9">
+                    </div>
+                    <div class="calc-row">
+                        <span class="calc-label">Whiteboard Viva</span>
+                        <input type="number" class="calc-input" id="score-whiteboard" min="0" max="10" value="8">
+                    </div>
+                    <button class="calc-btn" id="coaching-calc-btn" style="background-color: var(--color-coach); color: white;">Audit Candidate Gate</button>
+                    
+                    <div class="calc-result" id="calc-result-display" style="display: none; font-size: 0.9rem; margin-top: 1.25rem; border: 1px solid var(--border-light);"></div>
+                </div>
+            </div>
+
+            <!-- PDF Manual Downloads Widget -->
+            <div class="sidebar-widget" id="widget-manuals">
+                <h3>Master Manual PDF Files</h3>
+                <ul class="widget-list">
+                    <li>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                        Embedded Systems Specs
+                    </li>
+                    <li>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                        C Programming Specs
+                    </li>
+                    <li>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                        Python Automation Specs
+                    </li>
+                </ul>
+            </div>
+
+        </aside>
+
+    </main>
+
+    <!-- Footer -->
+    <footer id="main-footer">
+        <div class="footer-container">
+            <a href="index.html" class="footer-logo">MINUX<span>CONSULTING</span></a>
+            <ul class="footer-nav">
+                <li><a href="embedded-linux.html">Embedded & Linux</a></li>
+                <li><a href="c-programming.html">C Programming</a></li>
+                <li><a href="python-automation.html">Python Automation</a></li>
+                <li><a href="coaching-manual.html">Vetting Protocol</a></li>
+            </ul>
+        </div>
+        <div class="footer-copyright">
+            <p>&copy; 2026 Minux Consulting. Supplying vetted, battle-tested systems engineering consultants to top global MNCs.</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

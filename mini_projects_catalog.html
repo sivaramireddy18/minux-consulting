@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>15 Systems Engineering Mini-Projects Catalog</title>
+    <style>
+    
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
+
+@page {
+    size: A4;
+    margin: 20mm;
+    @bottom-right {
+        content: counter(page);
+        font-family: 'Outfit', sans-serif;
+        font-size: 8pt;
+        color: #64748b;
+        font-weight: 500;
+    }
+    @bottom-left {
+        content: "Systems Engineering 15 Mini-Projects Catalog | Technical Director";
+        font-family: 'Outfit', sans-serif;
+        font-size: 8pt;
+        color: #64748b;
+        font-weight: 500;
+    }
+}
+
+body {
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: #1e293b;
+    line-height: 1.6;
+    font-size: 10.5pt;
+}
+
+h1, h2, h3, h4 {
+    color: #0f172a;
+    font-weight: 600;
+    font-family: 'Outfit', sans-serif;
+    page-break-after: avoid;
+    break-after: avoid;
+}
+
+h1 {
+    font-size: 24pt;
+    border-bottom: 2px solid #d97706;
+    padding-bottom: 8px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    page-break-before: always;
+    break-before: page;
+}
+
+/* Prevent cover page break on very first heading */
+.first-page h1 {
+    page-break-before: avoid !important;
+    break-before: avoid !important;
+}
+
+h2 {
+    font-size: 16pt;
+    color: #d97706;
+    margin-top: 30px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 4px;
+}
+
+h3 {
+    font-size: 12pt;
+    color: #0f172a;
+    margin-top: 20px;
+    margin-bottom: 8px;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 12px;
+    text-align: justify;
+}
+
+ul, ol {
+    margin-top: 0;
+    margin-bottom: 16px;
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 6px;
+}
+
+code {
+    font-family: 'Fira Code', 'Courier New', monospace;
+    font-size: 9pt;
+    background-color: #f8fafc;
+    color: #d97706;
+    padding: 2px 4px;
+    border-radius: 4px;
+    border: 1px solid #e2e8f0;
+}
+
+pre {
+    background-color: #0f172a;
+    color: #f8fafc;
+    padding: 12px 16px;
+    border-radius: 6px;
+    overflow: hidden;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    margin-top: 10px;
+    margin-bottom: 18px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    border: 1px solid #1e293b;
+}
+
+pre code {
+    background-color: transparent;
+    color: #e2e8f0;
+    padding: 0;
+    font-size: 8.5pt;
+    border: none;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    font-size: 9.5pt;
+}
+
+th, td {
+    border: 1px solid #cbd5e1;
+    padding: 8px 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #f1f5f9;
+    color: #0f172a;
+    font-weight: 600;
+}
+
+tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+
+.cover-page {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    page-break-after: always;
+    break-after: page;
+    text-align: center;
+    padding-top: 50mm;
+}
+
+.cover-title {
+    font-size: 32pt;
+    color: #0f172a;
+    font-weight: 700;
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+.cover-subtitle {
+    font-size: 16pt;
+    color: #d97706;
+    font-weight: 400;
+    margin-bottom: 40px;
+}
+
+.cover-meta {
+    font-size: 11pt;
+    color: #64748b;
+    margin-top: auto;
+    border-top: 1px solid #cbd5e1;
+    padding-top: 20px;
+}
+
+    </style>
+</head>
+<body>
+    
+    <div class="cover-page">
+        <div class="cover-title">15 SYSTEMS ENGINEERING<br>MINI-PROJECTS CATALOG</div>
+        <div class="cover-subtitle">Targeted, Weekly-Scale Technical Exercises with MNC Jira Checklists</div>
+        <div class="cover-meta">
+            <strong>Scope:</strong> Low-level C, register-level FreeRTOS & Python HIL test scripts<br>
+            <strong>Author:</strong> Senior Systems Architect & Coach<br>
+            <strong>Workspace Root:</strong> /home/siva/sivaramireddy/Project1/
+        </div>
+    </div>
+    <div class="section"><h1>Minux Catalog: 15 High-Impact Systems Engineering Mini-Projects</h1>
+<p>This catalog presents <strong>15 professional-grade, targeted systems mini-projects</strong> (5 per track) designed to develop first-principles engineering proficiency. Each mini-project is structured exactly like standard MNC Jira task blocks, providing concise goals, technical stacks, and granular checklists.</p>
+<hr />
+<h2>🏛️ Track 1: C Systems Programming (Mini-Projects 1–5)</h2>
+<h3>1. Minux-Canary: Stack Frame Buffer Guard</h3>
+<ul>
+<li><strong>Concept:</strong> Implement a software-based stack buffer corruption detector that inserts compile-time custom patterns ("Canaries") before variables and asserts their integrity before returns.</li>
+<li><strong>Tech Stack:</strong> C11, Assembly pointer auditing, GCC <code>-O0</code> debug context.</li>
+<li><strong>MNC Jira Tasks Checklist:</strong></li>
+<li>[ ] <strong>[JIRA-MP-C101]</strong> Declare memory struct wrapping buffer space and trailing unsigned integer canary keys.</li>
+<li>[ ] <strong>[JIRA-MP-C102]</strong> Write a macro <code>INIT_GUARD(obj)</code> that initializes random pattern keys inside structures.</li>
+<li>[ ] <strong>[JIRA-MP-C103]</strong> Implement <code>int check_integrity(obj)</code> that compares canary memory offsets with initial patterns.</li>
+<li>[ ] <strong>[JIRA-MP-C104]</strong> Test via intentional buffer overwrite strings to assert that corruption alerts trigger.</li>
+</ul>
+<h3>2. MemAlign-Light: Safe Block Memory Manager</h3>
+<ul>
+<li><strong>Concept:</strong> Build a fast memory allocator that pre-allocates an array of bytes and serves memory blocks aligned exactly to CPU word boundaries (4 or 8 bytes) to avoid unaligned access penalties.</li>
+<li><strong>Tech Stack:</strong> C11, static assertions (<code>_Static_assert</code>), offset bitmasks math.</li>
+<li><strong>MNC Jira Tasks Checklist:</strong></li>
+<li>[ ] <strong>[JIRA-MP-C201]</strong> Write alignment calculation macro: <code>#define ALIGN(sz) (((sz) + 7) &amp; ~7)</code> (8-byte boundary).</li>
+<li>[ ] <strong>[JIRA-MP-C202]</strong> Implement <code>void *mem_alloc(size_t size)</code> that shifts the offset pointer aligned to boundaries.</li>
+<li>[ ] <strong>[JIRA-MP-C203]</strong> Add compile-time safety check ensuring total buffer capacity is a multiple of word sizes.</li>
+<li>[ ] <strong>[JIRA-MP-C204]</strong> Write test loops asserting that all returned pointers are multiples of 8.</li>
+</ul>
+<h3>3. BitRouter: Branch-Free Command Router</h3>
+<ul>
+<li><strong>Concept:</strong> Implement an ultra-fast event command router that processes packed 16-bit registers configurations and routes instructions to jump-tables without using any branch <code>if</code> or <code>switch</code> selectors.</li>
+<li><strong>Tech Stack:</strong> Bitwise operations, function pointer arrays, address offsets mapping.</li>
+<li><strong>MNC Jira Tasks Checklist:</strong></li>
+<li>[ ] <strong>[JIRA-MP-C301]</strong> Define command structures mapping 4-bit operational codes and 12-bit payload values.</li>
+<li>[ ] <strong>[JIRA-MP-C302]</strong> Construct an array of 16 function pointers matching all possible 4-bit codes.</li>
+<li>[ ] <strong>[JIRA-MP-C303]</strong> Implement a branch-free execution loop: <code>handlers[opcode](payload)</code> executing instantly.</li>
+<li>[ ] <strong>[JIRA-MP-C304]</strong> Test and verify that passing invalid indexes returns safe, default "noop" handlers.</li>
+</ul>
+<h3>4. RawHex: Unbuffered Hexadecimal File Dump</h3>
+<ul>
+<li><strong>Concept:</strong> Write a low-level command-line hex dump tool that bypasses standard library buffers, reading binary files directly using unbuffered systems descriptors, and printing clean formatting strings.</li>
+<li><strong>Tech Stack:</strong> Unbuffered system I/O (<code>open</code>, <code>read</code>), raw stdout descriptors.</li>
+<li><strong>MNC Jira Tasks Checklist:</strong></li>
+<li>[ ] <strong>[JIRA-MP-C401]</strong> Open binary targets using unbuffered <code>open(path, O_RDONLY)</code>.</li>
+<li>[ ] <strong>[JIRA-MP-C402]</strong> Read data into a fixed-size 16-byte buffer in a loop, handling partial block read returns cleanly.</li>
+<li>[ ] <strong>[JIRA-MP-C403]</strong> Write format formatting routines transforming bytes to hex chars (<code>0-F</code>) using bit-masks.</li>
+<li>[ ] <strong>[JIRA-MP-C404]</strong> Direct unbuffered write output strings to file descriptor <code>1</code> (<code>STDOUT_FILENO</code>).</li>
+</ul>
+<h3>5. SafeStr: Hardened MISRA-Compliant String Library</h3>
+<ul>
+<li><strong>Concept:</strong> Build a safe string library that replaces risky <code>strcpy</code> / <code>strcat</code> calls. The library must strictly audit buffer boundaries, allocate zero transient heap variables, and maintain 100% MISRA C compliance.</li>
+<li><strong>Tech Stack:</strong> C11, static checkers (<code>cppcheck</code>), boundary assertions.</li>
+<li><strong>MNC Jira Tasks Checklist:</strong></li>
+<li>[ ] <strong>[JIRA-MP-C501]</strong> Implement <code>int safestr_copy(char *dest, size_t dest_sz, const char *src)</code> with bounds checking.</li>
+<li>[ ] <strong>[JIRA-MP-C502]</strong> Implement safe concatenation <code>safestr_concat()</code> tracking remaining buffer space.</li>
+<li>[ ] <strong>[JIRA-MP-C503]</strong> Add explicit null-termination guarantees on all exit paths, even under truncation.</li>
+<li>[ ] <strong>[JIRA-MP-C504]</strong> Verify clean cppcheck audits with zero style or safety standard alerts.</li>
+</ul>
+<hr />
+<h2>🏛️ Track 2: Embedded Systems &amp; Linux (Mini-Projects 6–10)</h2>
+<h3>6. DMA-RingBuffer: UART Telemetry Stream</h3>
+<ul>
+<li><strong>Concept:</strong> Configure a UART transmitter on an STM32 MCU to continuously stream circular ring buffer telemetry using Direct Memory Access (DMA) channels, avoiding CPU processing interrupts.</li>
+<li><strong>Tech Stack:</strong> Bare-metal MCU registers (USART, RCC, DMA), interrupt routines.</li>
+<li><strong>MNC Jira Tasks Checklist:</strong></li>
+<li>[ ] <strong>[JIRA-MP-E101]</strong> Map a circular queue ring buffer struct inside microcontroller SRAM.</li>
+<li>[ ] <strong>[JIRA-MP-E102]</strong> Configure DMA Stream registers mapping source to USART data register and enabling circular transfers.</li>
+<li>[ ] <strong>[JIRA-MP-E103]</strong> Implement a thread-safe <code>enqueue</code> routine that feeds telemetry variables to the ring buffer.</li>
+<li>[ ] <strong>[JIRA-MP-E104]</strong> Trace output bytes over a logic analyzer, validating that DMA handles stream transfers with zero CPU loads.</li>
+</ul>
+<h3>7. ADC-Alarm: Interrupt-Driven Voltage Guard</h3>
+<ul>
+<li><strong>Concept:</strong> Program an STM32 microcontroller to continuously read analog voltages from a potentiometer. If the value crosses an over-voltage limit, immediately trigger a hardware NVIC interrupt that de-energizes load pins.</li>
+<li><strong>Tech Stack:</strong> STM32 register RCC/GPIO/ADC, NVIC interrupt vector setups.</li>
+<li><strong>MNC Jira Tasks Checklist:</strong></li>
+<li>[ ] <strong>[JIRA-MP-E201]</strong> Initialize ADC registers configuring continuous scan mode and select channels.</li>
+<li>[ ] <strong>[JIRA-MP-E202]</strong> Map ADC interrupt vector routines inside the custom startup vector table.</li>
+<li>[ ] <strong>[JIRA-MP-E203]</strong> Implement the ADC ISR that checks voltages and pulls digital output pins immediately Low (0V).</li>
+<li>[ ] <strong>[JIRA-MP-E204]</strong> Verify that the de-energize trigger fires in sub-microsecond intervals.</li>
+</ul>
+<h3>8. Watchdog-Sync: FreeRTOS Task Supervisor</h3>
+<ul>
+<li><strong>Concept:</strong> Build a dedicated high-priority watchdog supervisor task in FreeRTOS that pings lower-priority tasks and triggers a hardware Watchdog Reset if any task becomes unresponsive.</li>
+<li><strong>Tech Stack:</strong> FreeRTOS Task API, Event Groups, Hardware Independent Watchdog (IWDG).</li>
+<li><strong>MNC Jira Tasks Checklist:</strong></li>
+<li>[ ] <strong>[JIRA-MP-E301]</strong> Initialize an STM32 Independent Watchdog (IWDG) register with a 1-second timeout.</li>
+<li>[ ] <strong>[JIRA-MP-E302]</strong> Create a FreeRTOS Event Group where each active task must set a unique bit periodically.</li>
+<li>[ ] <strong>[JIRA-MP-E303]</strong> Build the <code>Watchdog_Task</code> that blocks on event bits checks. If all bits are set, it kicks the watchdog.</li>
+<li>[ ] <strong>[JIRA-MP-E304]</strong> Test by forcing a task into an infinite sleep loop to verify that the hardware reboots successfully.</li>
+</ul>
+<h3>9. SysfsGPIO: Linux Device sysfs Driver</h3>
+<ul>
+<li><strong>Concept:</strong> Write an out-of-tree loadable Linux kernel module character driver that creates user-accessible control files in the <code>/sys/class/</code> directory, allowing users to toggle GPIOs via shell echoes.</li>
+<li><strong>Tech Stack:</strong> Linux LKM, Sysfs nodes (<code>kobject</code>), GPIO Kernel API (<code>gpiod</code>).</li>
+<li><strong>MNC Jira Tasks Checklist:</strong></li>
+<li>[ ] <strong>[JIRA-MP-E401]</strong> Create a loadable kernel module register structure with class creation handlers.</li>
+<li>[ ] <strong>[JIRA-MP-E402]</strong> Create a sysfs attribute node named <code>gpio_state</code> mapping read/write callback functions.</li>
+<li>[ ] <strong>[JIRA-MP-E403]</strong> Implement the write callback to parse user string input (<code>"1"</code> or <code>"0"</code>) and drive GPIO registers.</li>
+<li>[ ] <strong>[JIRA-MP-E404]</strong> Verify that writing values (<code>echo 1 &gt; /sys/class/minux/gpio_state</code>) toggles physical pins cleanly.</li>
+</ul>
+<h3>10. DTSOverlay: Dynamic Device Tree Driver</h3>
+<ul>
+<li><strong>Concept:</strong> Compile and dynamically load a Device Tree Overlay (<code>.dtbo</code>) that adds a virtual telemetry peripheral node to your Embedded Linux board, and map a character driver to bind to it via compatible strings.</li>
+<li><strong>Tech Stack:</strong> Device Trees (<code>DTS</code>), Device Tree Compiler (<code>DTC</code>), Linux platform driver interfaces.</li>
+<li><strong>MNC Jira Tasks Checklist:</strong></li>
+<li>[ ] <strong>[JIRA-MP-E501]</strong> Write a Device Tree Source file (<code>overlay.dts</code>) defining a virtual node with custom compat properties.</li>
+<li>[ ] <strong>[JIRA-MP-E502]</strong> Compile to overlay binary: <code>dtc -@ -I dts -O dtb -o overlay.dtbo overlay.dts</code>.</li>
+<li>[ ] <strong>[JIRA-MP-E503]</strong> Write a kernel platform driver that registers and binds to the device compatible string.</li>
+<li>[ ] <strong>[JIRA-MP-E504]</strong> Load overlay dynamically and verify that the kernel platform driver binds and probes successfully.</li>
+</ul>
+<hr />
+<h2>🏛️ Track 3: Python Automation &amp; HIL Frameworks (Mini-Projects 11–15)</h2>
+<h3>11. AutoCal: SCPI VISA DMM Calibrator</h3>
+<ul>
+<li><strong>Concept:</strong> Design a Python script using PyVISA that connects to a digital multimeter (DMM) via SCPI commands, sweeps reference test voltages, calculates calibration offset coefficients, and writes them to the DMM.</li>
+<li><strong>Tech Stack:</strong> Python 3, PyVISA, SCPI instrumentation mapping.</li>
+<li><strong>MNC Jira Tasks Checklist:</strong></li>
+<li>[ ] <strong>[JIRA-MP-A101]</strong> Establish serial or ethernet VISA connection with a simulated DMM device.</li>
+<li>[ ] <strong>[JIRA-MP-A102]</strong> Send SCPI query strings <code>:MEASURE:VOLTAGE:DC?</code> in a calibration loop.</li>
+<li>[ ] <strong>[JIRA-MP-A103]</strong> Calculate drift variations and formulate linear offset equations.</li>
+<li>[ ] <strong>[JIRA-MP-A104]</strong> Write calibration coefficients back to the DMM using safe write parameters.</li>
+</ul>
+<h3>12. stateless-HIL: Pytest Power Sweep</h3>
+<ul>
+<li><strong>Concept:</strong> Build a stateless test script in pytest using conftest fixtures that connects to a DC power supply, sweeps output voltage through parameterized values, and asserts output limits.</li>
+<li><strong>Tech Stack:</strong> Python 3, pytest, parameterization decorators, instrument drivers.</li>
+<li><strong>MNC Jira Tasks Checklist:</strong></li>
+<li>[ ] <strong>[JIRA-MP-A201]</strong> Write a conftest setup fixture that opens and resets a virtual DC power supply.</li>
+<li>[ ] <strong>[JIRA-MP-A202]</strong> Create a parameterized sweep matrix: <code>@pytest.mark.parametrize("V", [1.0, 1.8, 3.3, 5.0])</code>.</li>
+<li>[ ] <strong>[JIRA-MP-A203]</strong> Write the test case checking that measured values are within a 1% safety threshold.</li>
+<li>[ ] <strong>[JIRA-MP-A204]</strong> Configure fixture teardown to de-energize output rails cleanly, even if the test assertions fail.</li>
+</ul>
+<h3>13. AsyncLogger: Thread-Safe Telemetry Log</h3>
+<ul>
+<li><strong>Concept:</strong> Construct a highly performant data-logger that spawns a dedicated consumer thread to pull telemetry packets off a synchronized queue and write them to a Parquet file, avoiding data loss.</li>
+<li><strong>Tech Stack:</strong> Python 3, thread queues (<code>queue.Queue</code>), Pandas/PyArrow engine.</li>
+<li><strong>MNC Jira Tasks Checklist:</strong></li>
+<li>[ ] <strong>[JIRA-MP-A301]</strong> Build a consumer thread function loop that blocks on <code>queue.get()</code> with explicit exit checks.</li>
+<li>[ ] <strong>[JIRA-MP-A302]</strong> Implement a thread-safe telemetry producer pushing incoming mock values onto the queue.</li>
+<li>[ ] <strong>[JIRA-MP-A303]</strong> Inside the consumer, batch queue frames and write them portably into a Parquet dataset block.</li>
+<li>[ ] <strong>[JIRA-MP-A304]</strong> Verify 100% data preservation under high-frequency load stress tests.</li>
+</ul>
+<h3>14. ELFAudit: pre-Flash symbol checks</h3>
+<ul>
+<li><strong>Concept:</strong> Write a Python tool using <code>pyelftools</code> that parses a compiled ELF firmware file, searches for the exact memory address of a global telemetry buffer variable, and confirms it aligns to boundaries.</li>
+<li><strong>Tech Stack:</strong> Python 3, <code>pyelftools</code>, symbol mappings.</li>
+<li><strong>MNC Jira Tasks Checklist:</strong></li>
+<li>[ ] <strong>[JIRA-MP-A401]</strong> Open and parse compiled target ELF binary files in binary read mode.</li>
+<li>[ ] <strong>[JIRA-MP-A402]</strong> Extract symbol tables (.symtab) and locate targeted variable keys.</li>
+<li>[ ] <strong>[JIRA-MP-A403]</strong> Assert that the variable's memory offset address is divisible by 4 or 8 (proper alignment).</li>
+<li>[ ] <strong>[JIRA-MP-A404]</strong> Integrate this check as a pre-flashing validation step, exiting with error code <code>-1</code> on alignment failures.</li>
+</ul>
+<h3>15. CI-Reporter: pytest JUnit notification</h3>
+<ul>
+<li><strong>Concept:</strong> Write a Python continuous integration script that executes a test suite, parses the resulting JUnit XML test report, formats a concise Markdown build status report, and posts it to a Slack webhook.</li>
+<li><strong>Tech Stack:</strong> Python 3, pytest, JUnit XML ElementTree parsing, HTTP post requests.</li>
+<li><strong>MNC Jira Tasks Checklist:</strong></li>
+<li>[ ] <strong>[JIRA-MP-A501]</strong> Execute pytest subprocess commands generating <code>report.xml</code> files.</li>
+<li>[ ] <strong>[JIRA-MP-A502]</strong> Parse the generated XML extracting metrics: <code>tests</code>, <code>failures</code>, <code>skipped</code>, and execution time.</li>
+<li>[ ] <strong>[JIRA-MP-A503]</strong> Formulate a clean Markdown dashboard string (e.g. <em>Build Status: Passed. Tests: 12</em>).</li>
+<li>[ ] <strong>[JIRA-MP-A504]</strong> Dispatch this summary payload to a simulated Slack webhook URL using Python HTTP requests.</li>
+</ul></div>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Minux Consulting - Embedded Systems & Linux Kernel Talent Pipeline Specification. Verification criteria for STM32 drivers, RTOS, and loadable kernel modules.">
+    <title>Embedded & Linux Kernel Talent Spec | Minux Consulting</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Glassmorphic Cyber Header -->
+    <header id="main-header">
+        <div class="nav-container">
+            <a href="index.html" class="logo" id="header-logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+                MINUX<span>CONSULTING</span>
+            </a>
+            <button class="nav-toggle" id="menu-toggle" aria-label="Toggle Navigation Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="navigation-list">
+                <li><a href="index.html" id="link-home">Home</a></li>
+                <li><a href="embedded-linux.html" id="link-emb">Embedded & Linux Talent</a></li>
+                <li><a href="c-programming.html" id="link-c">C Core Specialists</a></li>
+                <li><a href="python-automation.html" id="link-py">HIL Automation Architects</a></li>
+                <li><a href="coaching-manual.html" id="link-coach">Vetting Protocol</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Track Teal Hero -->
+    <section class="track-hero emb" id="track-intro">
+        <div class="hero-content">
+            <span class="badge" style="background-color: rgba(20, 184, 166, 0.15); color: var(--color-embedded); border-color: rgba(20, 184, 166, 0.3);">Pipeline Spec 01</span>
+            <h1 style="color: white; margin-bottom: 1rem;">Embedded Systems & Linux Kernel</h1>
+            <p style="color: #94A3B8; max-width: 600px; margin: 0 auto;">Vetting specification for elite systems engineers capable of deploying zero-warning STM32 register-level drivers, bootloaders, and custom loadable kernel modules.</p>
+        </div>
+    </section>
+
+    <!-- Content Split Layout -->
+    <main class="track-container" id="curriculum-timeline">
+        
+        <!-- Left: Chronological Timeline -->
+        <section class="timeline-wrapper">
+            <h2 style="font-size: 1.75rem; margin-bottom: 2rem; color: var(--text-primary);">Verification & Vetting Milestones</h2>
+            
+            <!-- Dynamic search input to filter phases -->
+            <input type="text" class="filter-search-box" placeholder="search technical skills (e.g. 'SPI', 'timer', 'interrupt', 'kernel', 'Yocto')...">
+
+            <div class="timeline">
+                
+                <!-- Phase 1 -->
+                <div class="timeline-item" id="phase-1-card">
+                    <span class="week-badge">Phase 1</span>
+                    <h3>Foundations of Embedded C & Digital Logic</h3>
+                    <p>Verified competencies: Master radix representations, gate delays timing calculation, pointer lifetime scoping, volatile register updates, dynamic stack frame structures, memory alignment packing, and clean Makefile dependencies.</p>
+                    <div class="session-box">
+                        <h4>Verified Skills Core</h4>
+                        <ul class="session-list">
+                            <li>Digital Logic Gate Delay & Half-Adders tracking</li>
+                            <li>Storage context mapping (static, extern) & volatile correct</li>
+                            <li>Memory packing alignments & custom heap block arena setups</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Phase 2 -->
+                <div class="timeline-item" id="phase-2-card">
+                    <span class="week-badge">Phase 2</span>
+                    <h3>MCU Architecture & Bare-Metal Driver Dev</h3>
+                    <p>Verified competencies: STM32 register manipulation without vendor libraries, vector bootstrap tables, raw interrupt nesting NVIC priorities, SysTick timer capturing, and full register-level SPI and I2C protocols.</p>
+                    <div class="session-box">
+                        <h4>Verified Skills Core</h4>
+                        <ul class="session-list">
+                            <li>Vector Boot Tables & custom linker script building</li>
+                            <li>Periodic Timer Interrupts, PSC, ARR calculations</li>
+                            <li>Serial UART & synchronous buses (I2C/SPI) register mappings</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Phase 3 -->
+                <div class="timeline-item" id="phase-3-card">
+                    <span class="week-badge">Phase 3</span>
+                    <h3>Systems Programming & Linux Essentials</h3>
+                    <p>Verified competencies: POSIX unbuffered descriptor pathways (read/write), mmap memory mappings, fork-execvp execution management, thread synchronization, mutex critical states, and dynamic automated bash audits.</p>
+                    <div class="session-box">
+                        <h4>Verified Skills Core</h4>
+                        <ul class="session-list">
+                            <li>Low-level system unbuffered calls (open, read, write) & mmap</li>
+                            <li>Multi-processing (fork, execvp) & shared memory IPCs</li>
+                            <li>POSIX threads (pthreads), mutex critical sections, condition variables</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Phase 4 -->
+                <div class="timeline-item" id="phase-4-card">
+                    <span class="week-badge">Phase 4</span>
+                    <h3>Real-Time Operating Systems (RTOS)</h3>
+                    <p>Verified competencies: FreeRTOS core scheduler ports, Task Control Blocks (TCB) memory auditing, preemptive loops, priority inversions mechanisms, software timers, and deferred interrupt handling.</p>
+                    <div class="session-box">
+                        <h4>Verified Skills Core</h4>
+                        <ul class="session-list">
+                            <li>Task states, preemptive scheduler loops, context switches</li>
+                            <li>Priority inversions, priority inheritance, semaphores signaling</li>
+                            <li>Memory allocation models (heap_1 to heap_5) & stack overflow hooks</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Phase 5 -->
+                <div class="timeline-item" id="phase-5-card">
+                    <span class="week-badge">Phase 5</span>
+                    <h3>Embedded Linux & Kernel Space Drivers</h3>
+                    <p>Verified competencies: Custom bootloader (U-Boot CLI) compilation, stable Linux kernel cross-compilation, device tree overlays compatible nodes, and char driver operations (cdev, file operations, user copying).</p>
+                    <div class="session-box">
+                        <h4>Verified Skills Core</h4>
+                        <ul class="session-list">
+                            <li>Custom stable kernel cross-compilation & targets boot</li>
+                            <li>Device Tree compatible strings overlay node mappings</li>
+                            <li>Character device file operations (cdev, major/minor, user copy)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Phase 6 -->
+                <div class="timeline-item" id="phase-6-card">
+                    <span class="week-badge">Phase 6</span>
+                    <h3>Yocto, Buildroot & Capstone Integration</h3>
+                    <p>Verified competencies: Poky layers management, customized BitBake recipes, raw TCP/IP socket concurrent servers, emergency boot audits, and boot-time optimization locks below 8 seconds.</p>
+                    <div class="session-box">
+                        <h4>Verified Skills Core</h4>
+                        <ul class="session-list">
+                            <li>Yocto Layer metadata recipes (.bb) & BitBake compiles</li>
+                            <li>Concurrent TCP/IP Socket communication protocols</li>
+                            <li>Defensive profiling, gdbserver, and boot-time optimizations</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Right: Sidebar Checklist Widgets -->
+        <aside class="sidebar" id="track-sidebar">
+            
+            <!-- Target Hardware Widget -->
+            <div class="sidebar-widget" id="widget-hardware">
+                <h3>Required Tool Mastery</h3>
+                <ul class="widget-list">
+                    <li>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-embedded);"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        STM32F4 Discovery (ARM Cortex-M4)
+                    </li>
+                    <li>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-embedded);"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        Raspberry Pi 4 (Cortex-A72 BSP)
+                    </li>
+                    <li>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-embedded);"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        8-Channel Logic Analyzer (SPI/I2C trace)
+                    </li>
+                    <li>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-embedded);"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        USB-to-UART TTL CP2102 Bridge
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Daily Vetting Checks Widget -->
+            <div class="sidebar-widget" id="widget-cadence">
+                <h3>Vetting Pipeline Checks</h3>
+                <ul class="widget-list">
+                    <li>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        Live GDB debug check sessions
+                    </li>
+                    <li>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        Whiteboard Viva architectural test
+                    </li>
+                    <li>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        -Werror zero compiler warnings
+                    </li>
+                </ul>
+            </div>
+
+        </aside>
+
+    </main>
+
+    <!-- Footer -->
+    <footer id="main-footer">
+        <div class="footer-container">
+            <a href="index.html" class="footer-logo">MINUX<span>CONSULTING</span></a>
+            <ul class="footer-nav">
+                <li><a href="embedded-linux.html">Embedded & Linux</a></li>
+                <li><a href="c-programming.html">C Programming</a></li>
+                <li><a href="python-automation.html">Python Automation</a></li>
+                <li><a href="coaching-manual.html">Vetting Protocol</a></li>
+            </ul>
+        </div>
+        <div class="footer-copyright">
+            <p>&copy; 2026 Minux Consulting. Supplying vetted, battle-tested systems engineering consultants to top global MNCs.</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

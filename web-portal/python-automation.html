@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Minux Consulting - HIL Automation Architects Talent Pipeline Specification. Verification criteria for PyVISA instruments, pytest test benches, and CI/CD pipelines.">
+    <title>HIL Automation Architects Talent Spec | Minux Consulting</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Glassmorphic Cyber Header -->
+    <header id="main-header">
+        <div class="nav-container">
+            <a href="index.html" class="logo" id="header-logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+                MINUX<span>CONSULTING</span>
+            </a>
+            <button class="nav-toggle" id="menu-toggle" aria-label="Toggle Navigation Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="navigation-list">
+                <li><a href="index.html" id="link-home">Home</a></li>
+                <li><a href="embedded-linux.html" id="link-emb">Embedded & Linux Talent</a></li>
+                <li><a href="c-programming.html" id="link-c">C Core Specialists</a></li>
+                <li><a href="python-automation.html" id="link-py">HIL Automation Architects</a></li>
+                <li><a href="coaching-manual.html" id="link-coach">Vetting Protocol</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Track Blue Hero -->
+    <section class="track-hero py" id="track-intro">
+        <div class="hero-content">
+            <span class="badge" style="background-color: rgba(59, 130, 246, 0.15); color: var(--color-python); border-color: rgba(59, 130, 246, 0.3);">Pipeline Spec 03</span>
+            <h1 style="color: white; margin-bottom: 1rem;">HIL Test Automation Architects</h1>
+            <p style="color: #94A3B8; max-width: 600px; margin: 0 auto;">Vetting specification for automation consultants ready to build multi-threaded test loggers, write SCPI instrumentation drivers, configure pytest scopes, and lock down CI/CD pipelines.</p>
+        </div>
+    </section>
+
+    <!-- Content Split Layout -->
+    <main class="track-container" id="curriculum-timeline">
+        
+        <!-- Left: Weekly Schedule -->
+        <section class="timeline-wrapper">
+            <h2 style="font-size: 1.75rem; margin-bottom: 2rem; color: var(--text-primary);">Verification & Vetting Milestones</h2>
+            
+            <!-- Dynamic search input to filter phases -->
+            <input type="text" class="filter-search-box" placeholder="search technical skills (e.g. 'Serial', 'VISA', 'ELF', 'thread', 'Ruff')...">
+
+            <div class="timeline">
+                
+                <!-- Milestone 1 -->
+                <div class="timeline-item" id="m1-card">
+                    <span class="week-badge">Phase 1</span>
+                    <h3>Embedded Python & Hardware Scripting</h3>
+                    <p>Verified competencies: Implement host-side scripts wrapping toolchains and flash tools, write unbuffered PySerial byte readers, unpack raw binary packets with CRC-16 checks, and program MicroPython peripherals.</p>
+                    <div class="session-box">
+                        <h4>Weekly Breakdown</h4>
+                        <ul class="session-list">
+                            <li><strong>Module A:</strong> Subprocesses stream capturing, paths pathlib portability & argparse CLIs</li>
+                            <li><strong>Module B:</strong> Serial communications (PySerial), struct binary packaging & CRC-16 checks</li>
+                            <li><strong>Module C:</strong> MicroPython, register pins peripheral controls & memory-safe interrupt ISRs</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Milestone 2 -->
+                <div class="timeline-item" id="m2-card">
+                    <span class="week-badge">Phase 2</span>
+                    <h3>Test Automation & Hardware-in-the-Loop (HIL)</h3>
+                    <p>Verified competencies: Program lab instrument connection wrappers (SCPI) using PyVISA resource manager context blocks, build stateless pytest fixtures, and design automated relay fault-injections.</p>
+                    <div class="session-box">
+                        <h4>Weekly Breakdown</h4>
+                        <ul class="session-list">
+                            <li><strong>Module A:</strong> Instrumentation wrappers, PyVISA resource mapping & SCPI syntax trees</li>
+                            <li><strong>Module B:</strong> Pytest structures, yield setup/teardown fixtures & parameterized sweeps</li>
+                            <li><strong>Module C:</strong> HIL closed loops, relay control & power brownout/short-circuit fault injection</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Milestone 3 -->
+                <div class="timeline-item" id="m3-card">
+                    <span class="week-badge">Phase 3</span>
+                    <h3>Advanced Automation & Binary Auditing</h3>
+                    <p>Verified competencies: Parse compiled firmware ELF segments (.text, .data, .bss) and symbol address offsets in Python, build multi-threaded data loggers, and compile Click CLI test report builders.</p>
+                    <div class="session-box">
+                        <h4>Weekly Breakdown</h4>
+                        <ul class="session-list">
+                            <li><strong>Module A:</strong> ELF layouts parsing (pyelftools), memory segment sizing & pre-flashing gates</li>
+                            <li><strong>Module B:</strong> Concurrency thread limits (GIL), thread-safe queues & CSV/Parquet data-logging</li>
+                            <li><strong>Module C:</strong> Nested CLI commands (Click), Matplotlib graphing & Weasyprint PDF reports</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Milestone 4 -->
+                <div class="timeline-item" id="m4-card">
+                    <span class="week-badge">Phase 4</span>
+                    <h3>Enterprise Framework & CI/CD</h3>
+                    <p>Verified competencies: Write type-safe scripts under strict Mypy checks, apply connection Singleton factory patterns, write automated Jenkinsfile pipelines, parse JUnit XML metrics, and build HIL test matrices.</p>
+                    <div class="session-box">
+                        <h4>Weekly Breakdown</h4>
+                        <ul class="session-list">
+                            <li><strong>Module A:</strong> Mypy static types, Singleton managers, Factory loaders & Black/Ruff check automations</li>
+                            <li><strong>Module B:</strong> CI/CD continuous integration (GitHub Actions), JUnit XML parser & Slack webhooks</li>
+                            <li><strong>Module C:</strong> Enterprise HIL framework, concurrent exceptions handling & emergency de-energize recovery</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Right: Sidebar Standards & Libraries -->
+        <aside class="sidebar" id="track-sidebar">
+            
+            <!-- Code Quality Standard Widget -->
+            <div class="sidebar-widget" id="widget-quality">
+                <h3>Code Quality Standard</h3>
+                <ul class="widget-list">
+                    <li>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-python);"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <code>mypy --strict</code> (Zero type omissions allowed)
+                    </li>
+                    <li>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-python);"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <code>black</code> (Auto-code formatting lock)
+                    </li>
+                    <li>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-python);"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <code>ruff</code> (High-speed linting validations)
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Core Automation Libraries Widget -->
+            <div class="sidebar-widget" id="widget-libs">
+                <h3>Core Automation Libraries</h3>
+                <ul class="widget-list">
+                    <li>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                        pyvisa & pyserial
+                    </li>
+                    <li>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                        pyelftools (ELF analysis)
+                    </li>
+                    <li>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                        pandas & matplotlib
+                    </li>
+                    <li>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                        click (CLI builder)
+                    </li>
+                </ul>
+            </div>
+
+        </aside>
+
+    </main>
+
+    <!-- Footer -->
+    <footer id="main-footer">
+        <div class="footer-container">
+            <a href="index.html" class="footer-logo">MINUX<span>CONSULTING</span></a>
+            <ul class="footer-nav">
+                <li><a href="embedded-linux.html">Embedded & Linux</a></li>
+                <li><a href="c-programming.html">C Programming</a></li>
+                <li><a href="python-automation.html">Python Automation</a></li>
+                <li><a href="coaching-manual.html">Vetting Protocol</a></li>
+            </ul>
+        </div>
+        <div class="footer-copyright">
+            <p>&copy; 2026 Minux Consulting. Supplying vetted, battle-tested systems engineering consultants to top global MNCs.</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

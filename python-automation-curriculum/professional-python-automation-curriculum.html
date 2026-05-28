@@ -1,0 +1,2011 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Professional Python Embedded & Automation Curriculum</title>
+    <style>
+    
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
+
+@page {
+    size: A4;
+    margin: 20mm;
+    @bottom-right {
+        content: counter(page);
+        font-family: 'Outfit', sans-serif;
+        font-size: 8pt;
+        color: #64748b;
+        font-weight: 500;
+    }
+    @bottom-left {
+        content: "Python in Embedded & Automation Framework Design | Senior Automation Architect";
+        font-family: 'Outfit', sans-serif;
+        font-size: 8pt;
+        color: #64748b;
+        font-weight: 500;
+    }
+}
+
+body {
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: #1e293b;
+    line-height: 1.6;
+    font-size: 10.5pt;
+}
+
+h1, h2, h3, h4 {
+    color: #0f172a;
+    font-weight: 600;
+    font-family: 'Outfit', sans-serif;
+    page-break-after: avoid;
+    break-after: avoid;
+}
+
+h1 {
+    font-size: 24pt;
+    border-bottom: 2px solid #1e3a8a;
+    padding-bottom: 8px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    page-break-before: always;
+    break-before: page;
+}
+
+/* Prevent cover page break on very first heading */
+.first-page h1 {
+    page-break-before: avoid !important;
+    break-before: avoid !important;
+}
+
+h2 {
+    font-size: 16pt;
+    color: #1e3a8a;
+    margin-top: 30px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 4px;
+}
+
+h3 {
+    font-size: 12pt;
+    color: #d97706;
+    margin-top: 20px;
+    margin-bottom: 8px;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 12px;
+    text-align: justify;
+}
+
+ul, ol {
+    margin-top: 0;
+    margin-bottom: 16px;
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 6px;
+}
+
+code {
+    font-family: 'Fira Code', 'Courier New', monospace;
+    font-size: 9pt;
+    background-color: #f8fafc;
+    color: #1e3a8a;
+    padding: 2px 4px;
+    border-radius: 4px;
+    border: 1px solid #e2e8f0;
+}
+
+pre {
+    background-color: #0f172a;
+    color: #f8fafc;
+    padding: 12px 16px;
+    border-radius: 6px;
+    overflow: hidden;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    margin-top: 10px;
+    margin-bottom: 18px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    border: 1px solid #1e293b;
+}
+
+pre code {
+    background-color: transparent;
+    color: #e2e8f0;
+    padding: 0;
+    font-size: 8.5pt;
+    border: none;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    font-size: 9.5pt;
+}
+
+th, td {
+    border: 1px solid #cbd5e1;
+    padding: 8px 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #f1f5f9;
+    color: #0f172a;
+    font-weight: 600;
+}
+
+tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+
+.cover-page {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    page-break-after: always;
+    break-after: page;
+    text-align: center;
+    padding-top: 50mm;
+}
+
+.cover-title {
+    font-size: 32pt;
+    color: #0f172a;
+    font-weight: 700;
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+.cover-subtitle {
+    font-size: 16pt;
+    color: #d97706;
+    font-weight: 400;
+    margin-bottom: 40px;
+}
+
+.cover-meta {
+    font-size: 11pt;
+    color: #64748b;
+    margin-top: auto;
+    border-top: 1px solid #cbd5e1;
+    padding-top: 20px;
+}
+
+    </style>
+</head>
+<body>
+    
+    <div class="cover-page">
+        <div class="cover-title">PYTHON FOR EMBEDDED &<br>AUTOMATION FRAMEWORK DESIGN</div>
+        <div class="cover-subtitle">A Rigorous, First-Principles Hardware-in-the-Loop Test Suite Curriculum</div>
+        <div class="cover-meta">
+            <strong>Duration:</strong> 12 Weeks | <strong>Level:</strong> Advanced Automation<br>
+            <strong>Mentor:</strong> Senior Automation Architect & Coach<br>
+            <strong>Workspace Root:</strong> /home/siva/sivaramireddy/Project1/python-automation-curriculum/
+        </div>
+    </div>
+    <div class="section"><h1>Python for Embedded Systems &amp; Automation Framework Design: Onboarding Guide</h1>
+<p>Welcome to the <strong>Python for Embedded Systems &amp; Automation Framework Design Master Plan</strong>. This curriculum is designed by a Senior Systems Coach to transition engineering students into elite automation architects capable of constructing multi-threaded, hardware-in-the-loop (HIL) test suites and CI/CD pipelines.</p>
+<p>In modern hardware teams, Python is the glue. It does not replace microcontroller microcode, but instead wraps around it, orchestrating compiler pipelines, running physical testing instruments (oscilloscopes, load units), logging high-speed sensor streams, and auditing binary compilation maps.</p>
+<hr />
+<h2>📂 Curriculum Workspace Layout</h2>
+<p>Your training environment is structured cleanly inside the <code>python-automation-curriculum/</code> folder:</p>
+<pre><code class="language-text">python-automation-curriculum/
+├── README.md                      # This Onboarding &amp; Setup Portal
+├── python-trainer-rules.md        # Strict Python style laws, design patterns, and type policies
+├── 12-week-python-roadmap.md      # Master chronological milestones timeline and summary
+├── python-milestone-scorecard.md  # Gatekeeper assignments and grading scorecards
+├── plans/                         # Deep-dive weekly execution plans
+│   ├── week-01-python-plan.md     # Week 01: Host Automation &amp; CLI wrapping
+│   ├── week-02-python-plan.md     # Week 02: Hardware Scripting &amp; Serial Communications
+│   │   ...
+│   └── week-12-python-plan.md     # Week 12: Production-Grade Capstone HIL Framework Project
+└── build_pdf_python.py            # Automated compilation tool for PDF generation
+</code></pre>
+<hr />
+<h2>🛠️ Environment Setup &amp; Toolchain Index</h2>
+<p>To ensure reproducibility, you will manage dependencies using isolated virtual environments. Standard global pip installs are banned.</p>
+<h3>1. Ubuntu Linux Prereqs Installation</h3>
+<p>Ensure your host machine has Python 3.10+ and the required system packages installed:</p>
+<pre><code class="language-bash">sudo apt update &amp;&amp; sudo apt install -y \
+    python3-pip \
+    python3-venv \
+    python3-dev \
+    libusb-1.0-0-dev \
+    weasyprint
+</code></pre>
+<h3>2. Environment Isolation Setup</h3>
+<p>We will use Python's built-in <code>venv</code> module for environment isolation. Inside the curriculum root, run:</p>
+<pre><code class="language-bash"># Create virtual environment
+python3 -m venv .venv
+
+# Activate virtual environment
+source .venv/bin/activate
+
+# Upgrade packaging tools
+pip install --upgrade pip setuptools wheel
+</code></pre>
+<h3>3. Core Automation Packages Checklist</h3>
+<p>Install the mandatory systems-level Python libraries within your virtual environment:</p>
+<pre><code class="language-bash">pip install \
+    pytest \
+    mypy \
+    pyserial \
+    pyelftools \
+    pyvisa \
+    pandas \
+    matplotlib \
+    click \
+    black \
+    ruff
+</code></pre>
+<hr />
+<h2>🏛️ Static Analysis &amp; Formatting Standards</h2>
+<p>All automation code developed in this curriculum must be audited defensively using static checkers:</p>
+<ol>
+<li><strong>Strict Type Hinting (<code>mypy</code>):</strong>
+   All function parameters and returns must carry explicit type annotations. No untyped signatures allowed.
+   <code>bash
+   mypy --strict src/</code></li>
+<li><strong>Deterministic Formatting (<code>black</code>):</strong>
+   Automate visual consistency by running the black code formatter.
+   <code>bash
+   black src/</code></li>
+<li><strong>Advanced Linting (<code>ruff</code>):</strong>
+   Scan for style issues, dead code, and performance traps.
+   <code>bash
+   ruff check src/</code></li>
+</ol>
+<hr />
+<h2>🏁 Let's Begin</h2>
+<p>Proceed next to read the <a href="file:///home/siva/sivaramireddy/Project1/python-automation-curriculum/python-trainer-rules.md">python-trainer-rules.md</a> to understand the strict quality laws governing your submissions, and then trace your journey in <a href="file:///home/siva/sivaramireddy/Project1/python-automation-curriculum/12-week-python-roadmap.md">12-week-python-roadmap.md</a>!</p></div><div class="section"><h1>Professional Coach: Python Automation operating Rules &amp; Laws</h1>
+<p>As an automation architect and Senior Systems Coach, my role is to hold you to the absolute highest software engineering standards. Below are the <strong>strict rules and laws</strong> governing all Python code submissions during this 12-week intensive Automation Framework track.</p>
+<p>Any violation of these rules results in an automatic <strong>FAIL</strong> for that week's assignment. No exceptions.</p>
+<hr />
+<h2>🚫 Rule 1: The "Strict-Type" Directive</h2>
+<p>All Python files must incorporate explicit C-like static type annotations. 
+* <strong>The Law:</strong> You must type all function inputs, outputs, and class member variables. The <code>typing</code> module (<code>List</code>, <code>Dict</code>, <code>Union</code>, <code>Callable</code>) must be leveraged for complex mappings.
+* <strong>The Verification:</strong> Every submission is audited using <strong>Mypy</strong>:
+  <code>bash
+  mypy --strict src/</code>
+  If Mypy emits a single warning, typing omission, or dynamic type conversion alert, your code is rejected immediately without further review.
+* <strong>The Logic:</strong> Dynamic typing is a primary source of runtime bugs in large automation frameworks. Explicit static type hints act as compile-time documentation, preventing hardware command parameter mismatches.</p>
+<hr />
+<h2>🧠 Rule 2: Strict Hardware Connection &amp; Thread Safety</h2>
+<p>When automation scripts interface with physical instruments (VISA, Serial, TCP), connections must be guarded.
+* <strong>The Law:</strong> All hardware connections must implement <strong>Context Managers</strong> (<code>__enter__</code> and <code>__exit__</code>) to guarantee that ports and sockets are closed cleanly on errors.
+* <strong>Concurrency Law:</strong> When reading telemetry streams inside parallel threads, shared objects must be accessed safely via thread-safe structures (<code>queue.Queue</code>) or guarded by execution Locks (<code>threading.Lock</code>).</p>
+<hr />
+<h2>🏗️ Rule 3: Mandatory Design Patterns for Hardware Control</h2>
+<p>To write maintainable HIL test suites, you must adhere to three core object-oriented design patterns:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Pattern Name</th>
+<th style="text-align: left;">Application</th>
+<th style="text-align: left;">Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Singleton Handle</strong></td>
+<td style="text-align: left;">Dedicated connection drivers (e.g. <code>VISAConnectionManager</code>).</td>
+<td style="text-align: left;">Prevents open-port lock conflicts by ensuring only a single dynamic connection handler instance exists for each instrument.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Device Object (DOM)</strong></td>
+<td style="text-align: left;">Mapping raw register bytes to high-level device classes.</td>
+<td style="text-align: left;">Decouples raw hardware commands (e.g., <code>write("*RST")</code>) from logical assertions (e.g., <code>scope.reset()</code>).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Factory Pattern</strong></td>
+<td style="text-align: left;">Dynamic test runner hardware target variants.</td>
+<td style="text-align: left;">Allows test frameworks to swap mock hardware objects with physical hardware dynamically based on test configurations.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>🛠️ Rule 4: pytest Hardening &amp; Fixture Isolation</h2>
+<ul>
+<li><strong>The Law:</strong> Raw test functions must be stateless. All setups (powering up instrument) and teardowns (graceful shutdown) must occur within scoped <strong>pytest fixtures</strong>.</li>
+<li><strong>Global States Forbidden:</strong> Global variables used to store test states or hardware handles are strictly banned. Everything must be passed dynamically via fixture dependency injection.</li>
+</ul>
+<hr />
+<h2>🎓 Coach's Grading Rubric</h2>
+<p>Each week, your coach evaluates your deliverables out of a 10-point scale:</p>
+<h3>🔴 0 to 6 points: Rejected / Remediation Required</h3>
+<ul>
+<li><strong>Criteria:</strong> Static typing warnings present under <code>mypy --strict</code>, unhandled hardware resource leaks, global variables in test states, or missing teardowns in fixtures.</li>
+<li><strong>Coach's Directive:</strong> Resubmit within 48 hours after applying required design patterns and type hardening.</li>
+</ul>
+<h3>🟡 7 to 8 points: Passed</h3>
+<ul>
+<li><strong>Criteria:</strong> Zero Mypy errors, clean pytest test runs, proper context managers. However, there are minor layout, lack of parameterization, or sub-optimal threading designs.</li>
+<li><strong>Coach's Directive:</strong> Approved to advance, but styling fixes must be applied before the next milestone audit.</li>
+</ul>
+<h3>🟢 9 to 10 points: Passed with Distinction</h3>
+<ul>
+<li><strong>Criteria:</strong> Flawless typed architecture, 100% unit/integration coverage, elegant design pattern implementation, and completion of the complex <strong>Stretch Task</strong>.</li>
+<li><strong>Coach's Directive:</strong> Approved to advance with commendation.</li>
+</ul></div><div class="section"><h1>Master Curriculum Roadmap: Python for Embedded Systems &amp; Automation</h1>
+<p>This 12-week curriculum is a fast-paced, high-intensity software engineering program. It is designed to take you from a basic Python programmer into an elite test automation architect who builds robust Hardware-in-the-Loop (HIL) test suites, CI/CD pipelines, and binary parsing scripts.</p>
+<hr />
+<h2>🏛️ Chronological Milestones Overview</h2>
+<pre><code class="language-mermaid">graph TD
+    Phase1[Milestone 1: Embedded Python &amp; Hardware Scripting&lt;br/&gt;Weeks 1-3] --&gt; Phase2[Milestone 2: Test Automation &amp; HIL Testing&lt;br/&gt;Weeks 4-6]
+    Phase2 --&gt; Phase3[Milestone 3: Advanced Automation &amp; Binary Auditing&lt;br/&gt;Weeks 7-9]
+    Phase3 --&gt; Phase4[Milestone 4: Enterprise Framework &amp; CI/CD&lt;br/&gt;Weeks 10-12]
+</code></pre>
+<hr />
+<h2>📅 Chronological Week-by-Week Breakdown</h2>
+<h3>🔹 Milestone 1: Embedded Python &amp; Hardware Scripting</h3>
+<p><strong>Focus:</strong> Command-line wrapper tools, parsing binary frames over serial pipelines, and flashing and controlling Edge microcontrollers (MicroPython).</p>
+<ul>
+<li><strong>Week 01: Host Automation &amp; CLI wrapping</strong></li>
+<li><em>Theme:</em> Subprocess redirection, defensive input execution, argument parsing, automated flashes.</li>
+<li><em>Assignment:</em> Build a robust CLI compiling and flashing wrapper that schedules compiler pipelines dynamically.</li>
+<li><strong>Week 02: Hardware Scripting &amp; Serial Communications</strong></li>
+<li><em>Theme:</em> PySerial architectures, unbuffered byte reading, binary packing (<code>struct</code>), CRC validation.</li>
+<li><em>Assignment:</em> Write a packet serialization/deserialization telemetry reader parsing raw USB streams.</li>
+<li><strong>Week 03: MicroPython &amp; Microcontroller Prototyping</strong></li>
+<li><em>Theme:</em> MicroPython execution context, GPIO, ADC, PWM registers control, interrupt safety, USB REPL.</li>
+<li><em>Assignment:</em> Construct an edge temperature logger running on simulated MCU hardware.</li>
+<li><em>Gatekeeper Check:</em> <strong>Milestone 1 Core Gatekeeper Assignment.</strong></li>
+</ul>
+<hr />
+<h3>🔹 Milestone 2: Test Automation &amp; Hardware-in-the-Loop (HIL)</h3>
+<p><strong>Focus:</strong> Lab instrumentation wrapping, SCPI/VISA standards, structural pytest automation, and fault-injection HIL setups.</p>
+<ul>
+<li><strong>Week 04: Instrumentation Control (PyVISA &amp; SCPI)</strong></li>
+<li><em>Theme:</em> Instrument control interfaces, PyVISA VISA resource maps, SCPI string tables, Raw TCP sockets.</li>
+<li><em>Assignment:</em> Design a complete, simulated Programmable Power Supply VISA driver wrapper.</li>
+<li><strong>Week 05: Test Framework Architecture (pytest &amp; Fixtures)</strong></li>
+<li><em>Theme:</em> Setup/teardown isolation fixtures, dynamic discovery, test parametrizations, timeouts and retries.</li>
+<li><em>Assignment:</em> Write a multi-instrument hardware test suite using robust pytest dependencies.</li>
+<li><strong>Week 06: Hardware-in-the-Loop (HIL) &amp; Fault Injection</strong></li>
+<li><em>Theme:</em> Relays control, automated fault injection, loop verification, asynchronous failure monitors.</li>
+<li><em>Assignment:</em> Build an automated fault-injection test system simulating real hardware failures.</li>
+<li><em>Gatekeeper Check:</em> <strong>Milestone 2 Core Gatekeeper Assignment.</strong></li>
+</ul>
+<hr />
+<h3>🔹 Milestone 3: Advanced Automation &amp; Binary Auditing</h3>
+<p><strong>Focus:</strong> Parsing compiled firmware images, high-performance telemetry data logging, and metrics reporting dashboards.</p>
+<ul>
+<li><strong>Week 07: Firmware Analysis &amp; Binary Parsing</strong></li>
+<li><em>Theme:</em> ELF binary parsing (<code>pyelftools</code>), compiler memory mapping, symbol address resolution.</li>
+<li><em>Assignment:</em> Write a static memory auditor checking ELF sections sizes and warning on stack overlaps.</li>
+<li><strong>Week 08: High-Performance Telemetry Data Logging</strong></li>
+<li><em>Theme:</em> Thread-safe serial readers, data queues, streaming file storage (CSV, Parquet, Pandas integration).</li>
+<li><em>Assignment:</em> Design a multi-threaded telemetry streaming data-logger that processes high-frequency feeds.</li>
+<li><strong>Week 09: Dynamic CLI Tools &amp; Metrics Reporting</strong></li>
+<li><em>Theme:</em> Interactive CLI builders (<code>click</code>), automated report generators (PDF, HTML reports generation).</li>
+<li><em>Assignment:</em> Build a CLI metrics generator generating professional PDF test reports dynamically.</li>
+<li><em>Gatekeeper Check:</em> <strong>Milestone 3 Core Gatekeeper Assignment.</strong></li>
+</ul>
+<hr />
+<h3>🔹 Milestone 4: Enterprise Framework &amp; CI/CD</h3>
+<p><strong>Focus:</strong> Design patterns, static type audits, Jenkins/GitHub Actions integrations, and graduation capstone execution.</p>
+<ul>
+<li><strong>Week 10: Python Code Quality, Typing, &amp; Design Patterns</strong></li>
+<li><em>Theme:</em> Mypy static type hints, design patterns (Singleton, Factory, Device wrappers), Black/Ruff checkers.</li>
+<li><em>Assignment:</em> Refactor a legacy, untyped testing framework into a fully-typed, object-oriented framework.</li>
+<li><strong>Week 11: CI/CD Pipelines &amp; Execution Orchestration</strong></li>
+<li><em>Theme:</em> Automated pipelines orchestration, parsing JUnit XML test outputs, Slack/email reports integrations.</li>
+<li><em>Assignment:</em> Construct an automated Jenkinsfile/GitHub Actions workflow orchestrating HIL tests on git push.</li>
+<li><strong>Week 12: Production-Grade Capstone HIL Framework Project</strong></li>
+<li><em>Theme:</em> Multi-threaded frameworks assembly, error diagnostics, final coaching portfolio presentations.</li>
+<li><em>Assignment:</em> Design a complete, modular, fully-typed, and multi-threaded <strong>Hardware-in-the-Loop test automation framework</strong> with zero errors.</li>
+<li><em>Gatekeeper Check:</em> <strong>Milestone 4 Final Graduation Audit.</strong></li>
+</ul>
+<hr />
+<h2>🏁 Advancement Directive</h2>
+<p>Before beginning, review the <a href="file:///home/siva/sivaramireddy/Project1/python-automation-curriculum/python-milestone-scorecard.md">python-milestone-scorecard.md</a> to understand the requirements of the Milestone Gates you must clear to graduate this curriculum!</p></div><div class="section"><h1>Professional Python Automation: Milestone Scorecard</h1>
+<p>To progress through the curriculum, the student must successfully clear the <strong>Gatekeeper Assignment</strong> at the end of each milestone. Standard curves are banned: these assessments are scored on an industrial <strong>Pass/Fail</strong> basis against a strict engineering rubric.</p>
+<hr />
+<h2>🏆 Milestone 1 Gatekeeper: Dynamic MicroPython Telemetry Node</h2>
+<ul>
+<li><strong>Checkpoint:</strong> End of Week 03 (Milestone 1)</li>
+<li><strong>Goal:</strong> Verify compiler subprocess wrapping, pySerial communications, MicroPython REPL scripting, and packet serialization checks.</li>
+</ul>
+<h3>📝 Core Specifications</h3>
+<ol>
+<li>Write an automated host-side controller in Python that connects to an edge microcontroller running MicroPython over serial USB.</li>
+<li>The host must wrap the <code>ampy</code> or <code>rshell</code> command-line tools to dynamically flash the MicroPython telemetry code.</li>
+<li>Once flashed, the host must connect over PySerial, parse raw binary streams packet-by-packet (<code>struct</code> unpack), and validate each payload using a 16-bit Cyclic Redundancy Check (CRC-16).</li>
+<li>Code must be 100% type-annotated, checked with <code>mypy --strict</code>, and formatted cleanly with <code>black</code>.</li>
+</ol>
+<h3>📊 Evaluation Scoring Rubric</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Evaluation Metric</th>
+<th style="text-align: left;">Passing Criteria (Must Met)</th>
+<th style="text-align: left;">Triggers Automatic Failure (FAIL)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Typing &amp; Formatting</strong></td>
+<td style="text-align: left;"><code>mypy --strict</code> passes with 0 warnings; Black formatter returns zero style shifts.</td>
+<td style="text-align: left;">Single untyped parameter, use of <code>Any</code> type, or formatting check errors.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Telemetry Parsing</strong></td>
+<td style="text-align: left;">Unpacks raw byte streams successfully; detects CRC checksum mismatches.</td>
+<td style="text-align: left;">Buffer overflow exceptions, missing CRC checks, or unclosed serial ports.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CLI Wrapper</strong></td>
+<td style="text-align: left;">Subprocess flashing executes with strict timeouts and grabs execution errors.</td>
+<td style="text-align: left;">Hanging subprocess commands without timeout configurations.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>🏆 Milestone 2 Gatekeeper: Instrumented Hardware-in-the-Loop Test Suite</h2>
+<ul>
+<li><strong>Checkpoint:</strong> End of Week 06 (Milestone 2)</li>
+<li><strong>Goal:</strong> Verify VISA instrumentation wrapping, pytest fixtures architectures, parameterizations, and automated fault-injection HIL scripting.</li>
+</ul>
+<h3>📝 Core Specifications</h3>
+<ol>
+<li>Wrap simulated lab instruments (Power Supply, Multimeter, Oscilloscope) using the <strong>Singleton pattern</strong> for raw VISA connection handles.</li>
+<li>Implement <strong>Device Object Models (DOM)</strong> to provide clean APIs (e.g. <code>power_supply.set_voltage(5.0)</code>).</li>
+<li>Build a pytest-driven automated testing harness containing:</li>
+<li>A class-scoped <code>hardware_setup</code> fixture establishing VISA connections and configuring standard safe voltage ceilings.</li>
+<li>Functional test cases that inject faults (e.g. commanding the power supply to brownout) and assert that the device behaves defensively.</li>
+<li>Manage setups and teardowns safely within fixtures, ensuring instrument power rails are shut off in all exit paths.</li>
+</ol>
+<h3>📊 Evaluation Scoring Rubric</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Evaluation Metric</th>
+<th style="text-align: left;">Passing Criteria (Must Met)</th>
+<th style="text-align: left;">Triggers Automatic Failure (FAIL)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Resource Safety</strong></td>
+<td style="text-align: left;">Instrument connections closed in all exit paths using context managers or fixture teardowns.</td>
+<td style="text-align: left;">Unclosed sockets, lingering VISA sessions, or failing to cut power on failure.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Fixture Discipline</strong></td>
+<td style="text-align: left;">All setup/teardowns governed via dynamic fixture dependency injections; 0 global states.</td>
+<td style="text-align: left;">Using global variables to store test states or connection pointers.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Parametrization</strong></td>
+<td style="text-align: left;">Test cases utilize <code>@pytest.mark.parametrize</code> to scale verification across multiple voltage bounds.</td>
+<td style="text-align: left;">Redundant copy-pasted test cases for individual values.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>🏆 Milestone 3 Gatekeeper: ELF Firmware Analyzer &amp; Telemetry Plotter</h2>
+<ul>
+<li><strong>Checkpoint:</strong> End of Week 09 (Milestone 3)</li>
+<li><strong>Goal:</strong> Verify ELF binary structural auditing (<code>pyelftools</code>), multi-threaded telemetry logging, and CLI metrics reporting.</li>
+</ul>
+<h3>📝 Core Specifications</h3>
+<ol>
+<li>Write a firmware static memory analysis tool using <code>pyelftools</code> that parses a compiled ELF image. The tool must:</li>
+<li>Audit memory sizes (.text, .data, .bss) and flag alerts if allocation limits are exceeded.</li>
+<li>Retrieve symbol address tables and check for potential stack-to-heap collisions.</li>
+<li>Build a multi-threaded telemetry streaming data-logger. Use <code>threading.Thread</code> and a thread-safe <code>queue.Queue</code> to stream binary packet inputs to disk, avoiding data losses.</li>
+<li>Design a CLI interface using <code>click</code> that compiles these metrics dynamically and exports a beautifully formatted PDF report containing performance graphs (using Matplotlib).</li>
+</ol>
+<h3>📊 Evaluation Scoring Rubric</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Evaluation Metric</th>
+<th style="text-align: left;">Passing Criteria (Must Met)</th>
+<th style="text-align: left;">Triggers Automatic Failure (FAIL)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Binary Analysis</strong></td>
+<td style="text-align: left;">Successfully extracts symbol offsets and calculates size segments of ELF binaries.</td>
+<td style="text-align: left;">Crashing on malformed ELF structures, incorrect pointer math offsets calculations.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Thread Safety</strong></td>
+<td style="text-align: left;">Telemetry queue reads are thread-safe and non-blocking, avoiding race conditions or lockouts.</td>
+<td style="text-align: left;">Data losses on high-speed queues, unhandled thread exceptions, or locked threads.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CLI &amp; Reports</strong></td>
+<td style="text-align: left;">Click parser handles invalid arguments gracefully; PDF generates correct Matplotlib graphs.</td>
+<td style="text-align: left;">CLI crash on bad inputs; raw stdout prints without structured PDF outputs.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>🏆 Milestone 4 Gatekeeper: Enterprise CI/CD HIL Framework</h2>
+<ul>
+<li><strong>Checkpoint:</strong> End of Week 12 (Milestone 4 / Graduation)</li>
+<li><strong>Goal:</strong> Verify complete type safety, OOP design patterns, CI/CD automated configurations, and graduation capstone execution.</li>
+</ul>
+<h3>📝 Core Specifications</h3>
+<ol>
+<li>Design a comprehensive, modular <strong>Hardware-in-the-Loop Test Automation Framework</strong> from scratch.</li>
+<li>Structure the codebase using clean OOP patterns: Factory pattern for target boards selection, Device Object abstractions, Singleton connection managers.</li>
+<li>Integrate 100% strict static typing, validated using <code>mypy --strict</code>.</li>
+<li>Build a continuous integration workflow configuration (Jenkinsfile or GitHub Actions YAML) that:</li>
+<li>Automatically executes the test suite inside your virtual environment.</li>
+<li>Generates a JUnit XML metrics report.</li>
+<li>Rejects merges if test coverage falls below 90% or if static audits fail.</li>
+</ol>
+<h3>📊 Evaluation Scoring Rubric</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Evaluation Metric</th>
+<th style="text-align: left;">Passing Criteria (Must Met)</th>
+<th style="text-align: left;">Triggers Automatic Failure (FAIL)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Framework Design</strong></td>
+<td style="text-align: left;">Code utilizes clean DOM and Factory designs; 0 typing omissions or Any casts under Mypy.</td>
+<td style="text-align: left;">Spaghetti structures, raw VISA commands inside test cases, or Mypy type-check errors.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Pipeline Integration</strong></td>
+<td style="text-align: left;">CI/CD pipeline triggers test runs on commits, generates HTML reports, and parses JUnit output.</td>
+<td style="text-align: left;">Pipeline script failure, missing reports, or failing to block merges on test failures.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Graduation Portfolio</strong></td>
+<td style="text-align: left;">Complete portfolio review presenting test architectures, 100% type-checked framework, and CI/CD results.</td>
+<td style="text-align: left;">Incomplete code documentation, missing test cases, or failing type checks.</td>
+</tr>
+</tbody>
+</table></div><div class="section week-plan"><h1>Week 01: Host Automation &amp; CLI Wrapping</h1>
+<h2>🎯 Weekly Goal</h2>
+<p>Master Python's system scripting boundaries, control compiler and hardware flashing CLI tools via the <code>subprocess</code> module, handle path manipulations cleanly, and construct robust command-line argument parsers.</p>
+<h2>🎓 Weekly Outcome</h2>
+<p>By the end of this week, you will be able to launch and monitor system processes defensively from Python, capture and parse stdout/stderr streams without blocking thread execution, handle paths portably across systems using <code>pathlib</code>, and build type-safe CLI tools.</p>
+<hr />
+<h2>📅 Session Breakdown</h2>
+<h3>Monday: The Subprocess Execution Model</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Interfacing Python with the operating system shell.</li>
+<li>Why <code>os.system</code> is deprecated and dangerous (vulnerable to shell-injection security flaws).</li>
+<li>The <code>subprocess</code> module as the modern standard.</li>
+<li>Running blocking processes using <code>subprocess.run</code>.</li>
+<li>Running asynchronous non-blocking processes using <code>subprocess.Popen</code>.</li>
+<li><strong>Hands-on Experiment:</strong>
+  Execute a system directory listing safely:
+  ```python
+  import subprocess</li>
+</ul>
+<p># Run list directory command
+  result = subprocess.run(
+      ["ls", "-la"],
+      capture_output=True,
+      text=True,
+      check=True
+  )
+  print("STDOUT output:")
+  print(result.stdout)
+  ```</p>
+<hr />
+<h3>Tuesday: Defensive Stream Redirects &amp; Timeouts</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Preventing hung processes.</li>
+<li>In automation frameworks, calling a flashing tool that hangs indefinitely can freeze entire CI/CD pipelines.</li>
+<li><strong>The Law:</strong> All subprocess calls <em>must</em> enforce explicit execution timeouts.</li>
+<li>Capturing error outputs by mapping <code>stderr</code> to <code>stdout</code> pipes.</li>
+<li><strong>Hands-on Exercise:</strong>
+  Catch execution timeouts and parse shell errors dynamically:
+  ```python
+  import subprocess</li>
+</ul>
+<p>try:
+      # Simulate a process that hangs (sleep 10) but set a 2 second timeout
+      subprocess.run(["sleep", "10"], timeout=2)
+  except subprocess.TimeoutExpired as e:
+      print(f"Process timed out safely! Details: {e}")
+  ```</p>
+<hr />
+<h3>Wednesday: Path Operations (<code>pathlib</code>)</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> The portability trap.</li>
+<li>Windows uses backslashes (<code>\</code>) for file paths; Linux uses forward slashes (<code>/</code>). Hardcoding strings breaks code cross-platform.</li>
+<li><strong>The Solution:</strong> Python's modern <code>pathlib</code> library representing paths as abstract system objects rather than strings.</li>
+<li><strong>Hands-on Experiment:</strong>
+  Manipulate directory workspaces portably:
+  ```python
+  from pathlib import Path</li>
+</ul>
+<p># Get absolute path of current directory
+  curr_dir = Path(".").resolve()
+  print(f"Absolute Workspace: {curr_dir}")</p>
+<p># Join paths and create folders
+  build_dir = curr_dir / "build" / "output"
+  build_dir.mkdir(parents=True, exist_ok=True)
+  print(f"Build output directory successfully created: {build_dir.exists()}")
+  ```</p>
+<hr />
+<h3>Thursday: Argument Parsing (<code>argparse</code>)</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Designing structured user interfaces.</li>
+<li>Writing custom command-line interfaces (CLIs).</li>
+<li>Validating argument data types, setting defaults, and generating help manuals.</li>
+<li><strong>Hands-on Exercise:</strong>
+  Build a basic CLI configuration script:
+  ```python
+  import argparse</li>
+</ul>
+<p>def main() -&gt; None:
+      parser = argparse.ArgumentParser(description="Compiler automation tool.")
+      parser.add_argument("-t", "--target", required=True, help="MCU target string (e.g. esp32, rp2040)")
+      parser.add_argument("-v", "--voltage", type=float, default=3.3, help="Input voltage check value")
+      args = parser.parse_args()
+      print(f"Target: {args.target}, Voltage check: {args.voltage}V")</p>
+<p>if <strong>name</strong> == "<strong>main</strong>":
+      main()
+  ```</p>
+<hr />
+<h3>Friday: Configuration Files (YAML / JSON)</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Bypassing hardcoded configuration scripts.</li>
+<li>Reading and validating test configuration parameters dynamically from files.</li>
+</ul>
+<hr />
+<h2>🛠️ Hands-On Assignment: Automated GCC &amp; Flashing Wrapper</h2>
+<p>Design and build a robust Python automation command-line tool named <code>flash_build.py</code> that automates compiler and flashing pipelines.</p>
+<h3>1. Requirements</h3>
+<ul>
+<li>Provide a CLI interface that accepts: <code>--src</code> (path to C source folder), <code>--bin</code> (path to output binary), and <code>--baud</code> (baudrate for flashing).</li>
+<li>Using the <code>subprocess</code> module:</li>
+<li>Compile all C files in the target folder using <code>gcc -Wall -Wextra -Werror</code> inside a 5-second execution timeout.</li>
+<li>If compilation fails, parse the stderr output and highlight compiler error lines.</li>
+<li>If compilation succeeds, simulate a hardware flashing process by calling a mockup flashing script, handling timeout exceptions cleanly.</li>
+<li>All code must be strictly type-annotated and pass <code>mypy --strict</code>.</li>
+</ul>
+<h3>2. File Deliverables</h3>
+<ul>
+<li><code>flash_build.py</code>: Main CLI tool code.</li>
+<li><code>test_workspace/</code>: A folder containing both a clean-compiling C file and a broken C file for test scenarios.</li>
+</ul>
+<hr />
+<h2>📋 Deliverables Checklist</h2>
+<ul>
+<li>[ ] <code>flash_build.py</code> (Mypy type-hinted, zero warnings)</li>
+<li>[ ] <code>test_workspace/</code> (C compile verification targets)</li>
+<li>[ ] <code>requirements.txt</code> (Environment libraries dependencies)</li>
+</ul>
+<hr />
+<h2>❓ Self-Check Questions</h2>
+<ol>
+<li>Why is passing arguments as a list (e.g. <code>["ls", "-l"]</code>) in <code>subprocess</code> significantly safer than passing a single string (<code>"ls -l"</code>)?</li>
+<li>What happens to a subprocess that exceeds its timeout threshold, and how do you recover?</li>
+<li>How does <code>pathlib.Path</code> resolve path separators differences when running on a Windows vs Linux machine?</li>
+<li>Explain the difference between blocking <code>subprocess.run()</code> and non-blocking <code>subprocess.Popen()</code>.</li>
+<li>Why are hardcoded configurations inside scripts considered a major design flaw in testing frameworks?</li>
+</ol>
+<hr />
+<h2>🚀 Stretch Task</h2>
+<p>Modify your flashing wrapper to support <strong>parallel compilations</strong>. Implement a multi-processed compile manager that calls parallel compilers dynamically to compile multiple C files concurrently, merging outputs safely.</p>
+<hr />
+<h2>💡 Motivation Checkpoint</h2>
+<p>In silicon development teams, automated scripts compile and flash firmware thousands of times a day across massive server farms. A single unhandled timeout or path corruption can freeze testing arrays and waste thousands of development dollars. Writing robust, defensive system scripts is the first step of automation architecture.</p>
+<hr />
+<h2>🎓 Trainer Review Rules</h2>
+<ul>
+<li>Verify type-safety: Executing <code>mypy --strict flash_build.py</code> must complete with 0 alerts.</li>
+<li>Verify subprocess handling: Executing a compiler call that fails must be intercepted, and the clean terminal output must display <em>only</em> the compiler's syntax errors without throwing Python traceback crashes.</li>
+</ul></div><div class="section week-plan"><h1>Week 02: Hardware Scripting &amp; Serial Communications</h1>
+<h2>🎯 Weekly Goal</h2>
+<p>Master serial communication protocols from the host side using PySerial, read and write raw byte streams defensively, and serialize/deserialize complex data structures using Python's <code>struct</code> module.</p>
+<h2>🎓 Weekly Outcome</h2>
+<p>By the end of this week, you will be able to establish robust serial USB connections, manage serial stream buffer read loops, map raw incoming bytes to high-level Python dataclasses using <code>struct.unpack</code>, and validate data integrity using CRC-16 checks.</p>
+<hr />
+<h2>📅 Session Breakdown</h2>
+<h3>Monday: The PySerial Communications Layer</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Interfacing with serial channels.</li>
+<li>Configuring port names, baudrates, timeouts, parity, and stop bits.</li>
+<li><strong>The Trap:</strong> Blocking read operations without timeouts. Your read loops must always execute defensively using non-zero read timeouts.</li>
+<li>Clearing input/output buffers: <code>reset_input_buffer()</code>, <code>reset_output_buffer()</code>.</li>
+<li><strong>Hands-on Experiment:</strong>
+  Establish and open a serial connection:
+  ```python
+  import serial</li>
+</ul>
+<p># Configure serial port defensively
+  try:
+      with serial.Serial(port="/dev/ttyUSB0", baudrate=115200, timeout=1.0) as ser:
+          print(f"Serial port {ser.name} opened successfully!")
+          # Perform safe write
+          ser.write(b"PING\n")
+  except serial.SerialException as e:
+      print(f"Connection failed: {e}")
+  ```</p>
+<hr />
+<h3>Tuesday: The <code>struct</code> Packing Module</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Binary conversions in Python.</li>
+<li>Microcontrollers output data as raw binary bytes. Python must map these bytes to floats, ints, or chars.</li>
+<li><strong>The Solution:</strong> Python's built-in <code>struct</code> module.</li>
+<li>Code formatting codes: <code>f</code> (float), <code>H</code> (16-bit unsigned int), <code>B</code> (8-bit unsigned int), <code>&lt;</code> (force Little-Endian), <code>&gt;</code> (force Big-Endian).</li>
+<li><strong>Hands-on Exercise:</strong>
+  Pack and unpack telemetry data:
+  ```python
+  import struct</li>
+</ul>
+<p># Pack: 8-bit ID (1), 32-bit float temp (25.5), 16-bit counter (100)
+  # Little-Endian format: '&lt; B f H'
+  binary_packet = struct.pack("&lt;BfH", 1, 25.5, 100)
+  print(f"Packed Bytes: {binary_packet.hex().upper()}")</p>
+<p># Unpack
+  device_id, temp, counter = struct.unpack("<BfH", binary_packet)
+  print(f"Unpacked -> ID: {device_id}, Temp: {temp}, Counter: {counter}")
+  ```</p>
+<hr />
+<h3>Wednesday: Telemetry Byte Stream Parsing</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Finding packet boundaries.</li>
+<li>When reading raw byte streams over serial, data is not delivered in neat, separate packets. It arrives as a continuous stream of random bytes.</li>
+<li><strong>Framing:</strong> Using start-of-packet (<code>SOP</code>) and end-of-packet (<code>EOP</code>) byte codes (e.g. <code>0x02</code> and <code>0x03</code>) to identify valid packet blocks.</li>
+<li><strong>Hands-on Exercise:</strong> Write a defensive parser loop that scans incoming bytes and extracts complete packet frames.</li>
+</ul>
+<hr />
+<h3>Thursday: CRC-16 Checksums &amp; Data Integrity</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Validating hardware packet transmissions.</li>
+<li>Serial connections are noisy. EMI interference can flip bits.</li>
+<li>Using <strong>Cyclic Redundancy Checks (CRC-16)</strong> to detect packet corruptions.</li>
+<li><strong>Hands-on Exercise:</strong> Write a pure Python CRC-16 calculation function to validate packet frames before parsing.</li>
+</ul>
+<hr />
+<h3>Friday: Defensive Byte Mapping with Dataclasses</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Packaging raw values into clean, type-hinted object models (<code>dataclasses</code>).</li>
+</ul>
+<hr />
+<h2>🛠️ Hands-On Assignment: Hardware Telemetry Parser</h2>
+<p>Build a robust Python program named <code>telemetry_parser.py</code> that connects to a virtual serial port, extracts framed packets, checks CRC-16, and logs outputs.</p>
+<h3>1. Requirements</h3>
+<ul>
+<li>Define a packet frame structure: <code>SOP</code> (1 byte, <code>0xAA</code>), <code>Device_ID</code> (1 byte), <code>Voltage</code> (32-bit float), <code>Counter</code> (16-bit int), <code>CRC-16</code> (2 bytes), <code>EOP</code> (1 byte, <code>0xBB</code>).</li>
+<li>Implement a serial reader loop:</li>
+<li>Continually read bytes from the serial handle.</li>
+<li>Locate valid frames bounded by <code>SOP</code> and <code>EOP</code>.</li>
+<li>Validate the payload using a custom CRC-16 calculation function.</li>
+<li>If CRC passes, unpack components using the <code>struct</code> module and store them inside a type-hinted Python dataclass.</li>
+<li>Code must be fully type-hinted, checked with <code>mypy --strict</code>, and format-locked via Black.</li>
+</ul>
+<h3>2. File Deliverables</h3>
+<ul>
+<li><code>telemetry_parser.py</code>: Main parsing script containing connection and loops.</li>
+<li><code>virtual_serial.py</code>: A simulated serial port utility that generates raw byte telemetry streams with randomized data corruptions.</li>
+</ul>
+<hr />
+<h2>📋 Deliverables Checklist</h2>
+<ul>
+<li>[ ] <code>telemetry_parser.py</code> (Mypy type-hinted, zero warnings)</li>
+<li>[ ] <code>virtual_serial.py</code> (Mock telemetry generator utility)</li>
+<li>[ ] <code>requirements.txt</code> (Environment libraries dependencies)</li>
+</ul>
+<hr />
+<h2>❓ Self-Check Questions</h2>
+<ol>
+<li>Why is setting an explicit read timeout critical inside serial loop connection handles?</li>
+<li>What do the character codes <code>&lt;</code> and <code>&gt;</code> represent inside Python <code>struct</code> format strings, and why are they mandatory for cross-target parsing?</li>
+<li>Explain the mechanical steps of locating a packet frame inside a raw continuous byte stream.</li>
+<li>How does a Cyclic Redundancy Check (CRC) identify bitwise data corruption in noisy transmission environments?</li>
+<li>Why are standard Python dataclasses superior to raw index tuples for representing unpacked telemetry values?</li>
+</ol>
+<hr />
+<h2>🚀 Stretch Task</h2>
+<p>Modify your telemetry parser to support <strong>CSV telemetry recording</strong>. Integrate logic to automatically write valid telemetry packets into a thread-safe CSV log file, rotating logs dynamically when file sizes exceed 1MB.</p>
+<hr />
+<h2>💡 Motivation Checkpoint</h2>
+<p>Telemetry tracking is the heartbeat of spacecraft, automotive, and aeronautics control. During space missions (like Apollo or Mars Lander), data-logging scripts parse thousands of binary frames a second. If a script lacks robust boundary scanning or CRC validation, a single bit flip can corrupt the metrics dashboard and blind flight controllers.</p>
+<hr />
+<h2>🎓 Trainer Review Rules</h2>
+<ul>
+<li>Verify type-safety: Executing <code>mypy --strict telemetry_parser.py</code> must complete with 0 alerts.</li>
+<li>Verify fault-tolerance: Passing malformed packets containing invalid CRCs or truncated lengths must be caught and logged cleanly without throwing unhandled Python parser exceptions.</li>
+</ul></div><div class="section week-plan"><h1>Week 03: MicroPython &amp; Microcontroller Prototyping</h1>
+<h2>🎯 Weekly Goal</h2>
+<p>Master the execution context of MicroPython running on edge microcontroller hardware (ESP32/RP2040), control physical peripherals (GPIO, ADC, PWM), write interrupt service routines defensively, and automate host-to-target scripts deployment.</p>
+<h2>🎓 Weekly Outcome</h2>
+<p>By the end of this week, you will be able to program microcontrollers using MicroPython, configure hardware register abstractions, write clean hardware interrupt routines, manage edge data storage, and deploy automated flashing scripts using command-line wrappers.</p>
+<hr />
+<h2>📅 Session Breakdown</h2>
+<h3>Monday: The MicroPython Paradigm</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Python in silicon.</li>
+<li>How MicroPython wraps a C-based interpreter that fits inside microcontrollers with limited SRAM (typically &lt; 512KB).</li>
+<li>The boot sequence: <code>boot.py</code> (runs once at power-up) and <code>main.py</code> (runs the main loop).</li>
+<li>Interacting with the MicroPython REPL (Read-Eval-Print Loop) dynamically over USB serial.</li>
+<li><strong>Hands-on Experiment:</strong>
+  Auditing standard modules and memory inside the MicroPython shell:
+  ```python
+  import gc
+  import machine</li>
+</ul>
+<p># Check free RAM in bytes
+  print(f"Free memory: {gc.mem_free()} bytes")
+  ```</p>
+<hr />
+<h3>Tuesday: GPIO &amp; Peripheral Control</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Reading and writing signals.</li>
+<li>Controlling pins using <code>machine.Pin</code>.</li>
+<li><strong>Digital Output:</strong> Driving pins High (3.3V) or Low (0V).</li>
+<li><strong>Digital Input:</strong> Reading button states with pull-up/pull-down resistor configurations.</li>
+<li><strong>Hands-on Exercise:</strong>
+  Define and blink an LED pin:
+  ```python
+  from machine import Pin
+  import time</li>
+</ul>
+<p># Configure Pin 2 as output
+  led = Pin(2, Pin.OUT)</p>
+<p># Toggle pin state
+  for _ in range(5):
+      led.value(1)
+      time.sleep_ms(500)
+      led.value(0)
+      time.sleep_ms(500)
+  ```</p>
+<hr />
+<h3>Wednesday: Analog Interfacing &amp; PWM (ADC / PWM)</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Continuous wave manipulation.</li>
+<li><strong>Analog-to-Digital Converter (ADC):</strong> Reading sensor voltages (e.g. temperature sensors, potentiometers) and mapping them to digital ranges (e.g., 12-bit range 0-4095).</li>
+<li><strong>Pulse-Width Modulation (PWM):</strong> Controlling LED brightness or motor speeds by adjusting duty cycles.</li>
+<li><strong>Hands-on Exercise:</strong> Read analog voltages and write PWM outputs dynamically.</li>
+</ul>
+<hr />
+<h3>Thursday: Defensive Hardware Interrupts (IRQs)</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Asynchronous physical events.</li>
+<li><strong>Interrupt Service Routine (ISR):</strong> A function triggered immediately by a hardware pin transition (e.g., button press).</li>
+<li><strong>Critical Rules for ISRs in MicroPython:</strong><ul>
+<li>Keep it short! Long routines block other system operations.</li>
+<li><strong>No Allocations:</strong> Banish standard list creation or string formatting inside ISRs (allocating memory triggers errors inside interrupt contexts).</li>
+<li>Use <code>micropython.alloc_emergency_exception_buf</code> to capture ISR crash diagnostics.</li>
+</ul>
+</li>
+<li><strong>Hands-on Exercise:</strong>
+  Configure a safe, low-latency button interrupt:
+  ```python
+  import micropython
+  from machine import Pin</li>
+</ul>
+<p># Allocate emergency buffer for interrupts
+  micropython.alloc_emergency_exception_buf(100)</p>
+<p>btn_pressed = False</p>
+<p>def button_handler(pin):
+      global btn_pressed
+      btn_pressed = True # Short operation, zero allocations</p>
+<p>btn = Pin(12, Pin.IN, Pin.PULL_UP)
+  btn.irq(trigger=Pin.IRQ_FALLING, handler=button_handler)
+  ```</p>
+<hr />
+<h3>Friday: Host-Target Deployment Automation</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Automating code deployments.</li>
+<li>Bypassing manual copy-pasting. Using Python host tools (<code>ampy</code>, <code>rshell</code>) to upload files dynamically.</li>
+</ul>
+<hr />
+<h2>🛠️ Hands-On Assignment: Edge Data-Logger Node</h2>
+<p>Design and write a complete MicroPython application (<code>main.py</code>) that acts as an <strong>Edge Temperature Data-Logger</strong> with hardware interrupt triggers.</p>
+<h3>1. Requirements</h3>
+<ul>
+<li>Periodically read temperature from an analog sensor using ADC every 2 seconds.</li>
+<li>If temperature exceeds a ceiling threshold (e.g. 35°C), trigger a flashing LED alert using PWM.</li>
+<li>Provide an emergency stop interrupt: pressing a button must trigger an ISR that halts logging and safely de-energizes the LED immediately.</li>
+<li>Log all sensor records (timestamp, value, alert_state) into a local CSV file on the target's flash memory, checking that files are closed cleanly to prevent flash wear.</li>
+</ul>
+<h3>2. File Deliverables</h3>
+<ul>
+<li><code>boot.py</code>: Configures target setup.</li>
+<li><code>main.c</code> (MicroPython <code>main.py</code>): The core sensor and interrupt logging loop.</li>
+<li><code>deploy.py</code>: A host-side Python automation script that automatically flashes the target files over serial USB.</li>
+</ul>
+<hr />
+<h2>📋 Deliverables Checklist</h2>
+<ul>
+<li>[ ] <code>boot.py</code> (Initialization code)</li>
+<li>[ ] <code>main.py</code> (Hardened interrupt and logging loops)</li>
+<li>[ ] <code>deploy.py</code> (Automated flashing python script)</li>
+</ul>
+<hr />
+<h2>❓ Self-Check Questions</h2>
+<ol>
+<li>Why is the available memory (RAM) in MicroPython significantly smaller than in standard desktop CPython?</li>
+<li>Explain why dynamic memory allocations (e.g. string formatting) are prohibited inside MicroPython hardware Interrupt Service Routines (ISRs).</li>
+<li>How does <code>machine.Pin.PULL_UP</code> prevent digital input floating pin states?</li>
+<li>What does the emergency exception buffer <code>micropython.alloc_emergency_exception_buf()</code> resolve when debugging ISRs?</li>
+<li>How can you automate file transfers to a MicroPython microcontroller using command-line wrappers?</li>
+</ol>
+<hr />
+<h2>🚀 Stretch Task</h2>
+<p>Implement an <strong>asynchronous logger</strong> using MicroPython's <code>uasyncio</code> module. Structure your logging code to execute as concurrent async tasks (one task reading sensors, one task flashing LEDs, and one task monitoring interrupts), avoiding blocking loops entirely.</p>
+<hr />
+<h2>💡 Motivation Checkpoint</h2>
+<p>IoT edge nodes (like smart home sensors, agricultural monitors, and predictive maintenance collars) must run for years on small batteries. MicroPython allows rapid prototyping of these systems. Writing defensive, low-latency, interrupt-driven edge code ensures that devices stay online without crashing or draining battery reserves.</p>
+<hr />
+<h2>🎓 Trainer Review Rules</h2>
+<ul>
+<li>Verify ISR execution: Pressing the emergency button must trigger an immediate de-energization loop within microseconds.</li>
+<li>Verify memory discipline: Run garbage collection checks inside the loops to verify that active operations do not trigger memory leaks or excessive garbage collection sweeps.</li>
+</ul></div><div class="section week-plan"><h1>Week 04: Instrumentation Control (PyVISA &amp; SCPI)</h1>
+<h2>🎯 Weekly Goal</h2>
+<p>Master the SCPI (Standard Commands for Programmable Instruments) standard, interface with lab hardware dynamically using PyVISA, and write robust, reusable device drivers to control instruments (oscilloscopes, power supplies, load units).</p>
+<h2>🎓 Weekly Outcome</h2>
+<p>By the end of this week, you will be able to map active VISA resources, write a complete object-oriented driver wrapper for a programmable DC power supply, execute SCPI queries securely over raw socket and USB connections, and handle device errors gracefully.</p>
+<hr />
+<h2>📅 Session Breakdown</h2>
+<h3>Monday: The VISA Standard &amp; PyVISA</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> The Virtual Instrument Software Architecture (VISA) standard.</li>
+<li>Interfacing with instruments across different physical interfaces (USB, Ethernet, GPIB, Serial) using a unified software API.</li>
+<li>Installing and configuring the PyVISA backend.</li>
+<li>Querying active VISA resources.</li>
+<li><strong>Hands-on Experiment:</strong>
+  Scan for active hardware interfaces:
+  ```python
+  import pyvisa</li>
+</ul>
+<p># Initialize VISA resource manager
+  rm = pyvisa.ResourceManager()</p>
+<p># List all detected resources
+  resources = rm.list_resources()
+  print("Detected instruments:")
+  for res in resources:
+      print(f" -&gt; {res}")
+  ```</p>
+<hr />
+<h3>Tuesday: The SCPI Command Standard</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Standard Commands for Programmable Instruments.</li>
+<li>SCPI is a hierarchical tree-like text protocol.</li>
+<li>Common IEEE 488.2 commands:<ul>
+<li><code>*IDN?</code>: Identification query (returns manufacturer, model, serial).</li>
+<li><code>*RST</code>: Reset command (restores default safe factory configurations).</li>
+<li><code>*OPC?</code>: Operation Complete query (prevents command race conditions).</li>
+</ul>
+</li>
+<li>SCPI Syntax rules: colons (<code>:</code>), question marks (<code>?</code>), parameter spacing.</li>
+<li><strong>Hands-on Exercise:</strong>
+  Trace SCPI command structures:
+  <code>:SOURCE:VOLTAGE:LEVEL:IMMEDIATE:AMPLITUDE 5.0</code> (set voltage to 5V).</li>
+</ul>
+<hr />
+<h3>Wednesday: Device Driver Design Pattern</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> The Device Object Model (DOM).</li>
+<li>Why you must <strong>never</strong> hardcode raw SCPI strings directly in your test suites. </li>
+<li>Wrapping raw VISA write/query calls inside clean, type-hinted object-oriented wrapper classes.</li>
+<li><strong>Hands-on Exercise:</strong>
+  Build a basic VISA instrumentation wrapper:
+  ```python
+  import pyvisa</li>
+</ul>
+<p>class PowerSupply:
+      def <strong>init</strong>(self, visa_address: str):
+          self.rm = pyvisa.ResourceManager()
+          self.device = self.rm.open_resource(visa_address)
+          # Set safe write/read timeouts
+          self.device.timeout = 2000 # 2 seconds</p>
+<pre><code>  def reset(self) -&gt; None:
+      self.device.write("*RST")
+
+  def get_identity(self) -&gt; str:
+      return str(self.device.query("*IDN?")).strip()
+
+  def close(self) -&gt; None:
+      self.device.close()
+</code></pre>
+<p>```</p>
+<hr />
+<h3>Thursday: Raw TCP Socket Communications</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Controlling Ethernet-connected instruments without VISA layers.</li>
+<li>Interfacing directly via raw TCP socket programming (often on Port 5025).</li>
+<li><strong>Hands-on Exercise:</strong>
+  Connect and query an instrument over raw sockets using Python's <code>socket</code> module.</li>
+</ul>
+<hr />
+<h3>Friday: Error Queues &amp; Status Registers</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Auditing device internal states.</li>
+<li>Querying system errors using <code>:SYSTEM:ERROR?</code>.</li>
+<li>The necessity of clearing device error queues before and after test runs.</li>
+</ul>
+<hr />
+<h2>🛠️ Hands-On Assignment: Programmable Power Supply Driver</h2>
+<p>Design and implement a complete, fully type-annotated, and robust Python device driver class (<code>power_supply.py</code>) to wrap a programmable DC Power Supply.</p>
+<h3>1. Requirements</h3>
+<ul>
+<li>Define a class <code>ProgrammablePowerSupply</code> utilizing PyVISA.</li>
+<li>Implement the following methods:</li>
+<li><code>__enter__</code> and <code>__exit__</code> context managers (resource protection).</li>
+<li><code>reset()</code>: Resets the instrument.</li>
+<li><code>set_voltage_limit(limit: float)</code>: Sets an absolute safe over-voltage protection limit.</li>
+<li><code>set_output(voltage: float, current: float)</code>: Sets output parameters, checking bounds defensively.</li>
+<li><code>enable_output(state: bool)</code>: Toggles the output relay.</li>
+<li><code>measure_voltage() -&gt; float</code>: Queries active measured output voltage.</li>
+<li><code>check_errors() -&gt; list[str]</code>: Queries the error queue until empty.</li>
+<li>All code must be strictly type-annotated and pass <code>mypy --strict</code>.</li>
+</ul>
+<h3>2. File Deliverables</h3>
+<ul>
+<li><code>power_supply.py</code>: The instrument driver class.</li>
+<li><code>mock_instrument.py</code>: A simulated SCPI socket server utility that mimics a real programmable power supply (accepts connection, processes SCPI strings, and returns mock values).</li>
+</ul>
+<hr />
+<h2>📋 Deliverables Checklist</h2>
+<ul>
+<li>[ ] <code>power_supply.py</code> (Mypy type-hinted, context managers)</li>
+<li>[ ] <code>mock_instrument.py</code> (SCPI socket simulator)</li>
+<li>[ ] <code>requirements.txt</code> (Environment libraries dependencies)</li>
+</ul>
+<hr />
+<h2>❓ Self-Check Questions</h2>
+<ol>
+<li>What is the fundamental purpose of the Virtual Instrument Software Architecture (VISA) standard in engineering labs?</li>
+<li>Explain the hierarchical tree structure of SCPI commands, and why short/long formats (e.g. <code>MEASure:VOLTage?</code>) are supported.</li>
+<li>Why are context managers (<code>__enter__</code> / <code>__exit__</code>) essential when designing instrumentation drivers?</li>
+<li>How does the SCPI command <code>*OPC?</code> prevent synchronization errors when sending slow configurations (like device resets)?</li>
+<li>How does raw socket interfacing bypass the need to install heavy NI-VISA vendor backend installations?</li>
+</ol>
+<hr />
+<h2>🚀 Stretch Task</h2>
+<p>Modify your Power Supply driver to support <strong>ramping profiles</strong>. Implement a method <code>ramp_voltage(target: float, step: float, delay_ms: int)</code> that increments the voltage gradually from the current level to the target level, validating status states at each step to prevent hardware voltage surges.</p>
+<hr />
+<h2>💡 Motivation Checkpoint</h2>
+<p>In automotive, battery, and medical HIL testing labs, test racks contain millions of dollars of hardware components. If an automated script sends an incorrect SCPI voltage parameter due to a driver typo or parsing error, it can physically incinerate the device-under-test. Writing robust, fully typed, and bounds-checked drivers is a mandatory engineering safety law.</p>
+<hr />
+<h2>🎓 Trainer Review Rules</h2>
+<ul>
+<li>Verify type-safety: Executing <code>mypy --strict power_supply.py</code> must complete with 0 alerts.</li>
+<li>Verify context management: Initiating a connection and intentionally triggering a Python crash must close the raw VISA socket cleanly, confirmed by socket port scans.</li>
+</ul></div><div class="section week-plan"><h1>Week 05: Test Framework Architecture (pytest &amp; Fixtures)</h1>
+<h2>🎯 Weekly Goal</h2>
+<p>Master the pytest testing framework, leverage the power of dependency-injection fixtures to isolate hardware states, build parameterized test matrixes, and implement defensive hardware timeout and retry mechanisms.</p>
+<h2>🎓 Weekly Outcome</h2>
+<p>By the end of this week, you will be able to construct stateless test suites, write scoped setup/teardown fixtures that manage physical instrument lifetimes, write parameterized test cases to verify systems across varying bounds, and generate structured XML test results.</p>
+<hr />
+<h2>📅 Session Breakdown</h2>
+<h3>Monday: The Pytest Architecture</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Professional testing paradigms.</li>
+<li>Why standard <code>unittest</code> is archaic (too boilerplate, relies on heavy class inheritance).</li>
+<li>Pytest's functional testing approach.</li>
+<li>Test discovery rules (looks for files matching <code>test_*.py</code> and functions matching <code>test_*</code>).</li>
+<li>Basic assertions and pytest command-line switches (<code>-v</code> verbose, <code>-s</code> show stdout, <code>-x</code> exit on first failure).</li>
+<li><strong>Hands-on Experiment:</strong> Write a simple test file and run it using pytest.</li>
+</ul>
+<hr />
+<h3>Tuesday: The Power of Fixtures</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Stateless test isolation.</li>
+<li>What is a <strong>Fixture</strong>? A helper function that executes setups (pre-test configuration) and teardowns (post-test cleanup).</li>
+<li><strong>Fixture Scoping:</strong> Controlling fixture lifetimes:<ul>
+<li><code>function</code> (default): Runs once for every test case.</li>
+<li><code>module</code>: Runs once per test file.</li>
+<li><code>session</code>: Runs once per test suite execution.</li>
+</ul>
+</li>
+<li><strong>The Yield Keyword:</strong> Splitting setup and teardown phases.</li>
+<li><strong>Hands-on Exercise:</strong>
+  Build a fixture managing a mock connection:
+  ```python
+  import pytest</li>
+</ul>
+<p>@pytest.fixture(scope="function")
+  def database_connection():
+      # Setup phase
+      conn = "ESTABLISHED"
+      print("\n[SETUP] DB Connection opened.")
+      yield conn
+      # Teardown phase
+      print("\n[TEARDOWN] DB Connection closed.")</p>
+<p>def test_query(database_connection):
+      assert database_connection == "ESTABLISHED"
+      print(" -&gt; Running test query.")
+  <code>``
+  Run with:</code>pytest -s -v test_file.py` and inspect the setup/teardown sequence.</p>
+<hr />
+<h3>Wednesday: Hardware Fixtures &amp; Resource Protection</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Injecting hardware drivers cleanly.</li>
+<li>Managing lab equipment connections safely.</li>
+<li>Session-scoped fixtures establish hardware handles once, while function-scoped fixtures reset instrument outputs to safe baselines before every test.</li>
+<li><strong>Hands-on Exercise:</strong> Write a session-scoped fixture that opens a VISA instrument and a function-scoped fixture that resets it to factory defaults.</li>
+</ul>
+<hr />
+<h3>Thursday: Parameterized Test Matrixes</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> High-scale verification matrices.</li>
+<li>Avoid duplicate test code. Using <code>@pytest.mark.parametrize</code> to run a single test block across a list of varying inputs.</li>
+<li><strong>Hands-on Exercise:</strong>
+  Parameterize a voltage check:
+  ```python
+  import pytest</li>
+</ul>
+<p>@pytest.mark.parametrize("voltage, current", [
+      (1.2, 0.1),
+      (3.3, 0.5),
+      (5.0, 1.0)
+  ])
+  def test_voltage_limits(voltage, current):
+      print(f"Testing target power state: {voltage}V @ {current}A")
+      assert voltage &lt;= 5.0
+  ```</p>
+<hr />
+<h3>Friday: Hardware Retries &amp; Timeouts</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Dealing with intermittent hardware noise.</li>
+<li>Hardware tests occasionally fail due to minor signal noise.</li>
+<li>Implementing retry decorators and managing execution timeouts defensively.</li>
+</ul>
+<hr />
+<h2>🛠️ Hands-On Assignment: Hardware Characterization Test Suite</h2>
+<p>Design and implement a modular pytest test suite (<code>test_hardware.py</code>) that audits a target device's electrical power states.</p>
+<h3>1. Requirements</h3>
+<ul>
+<li>Wrap the <code>ProgrammablePowerSupply</code> driver (from Week 4) inside a pytest fixture.</li>
+<li>Structuring the fixtures:</li>
+<li><code>instrument_session</code> (session-scoped): Establishes the VISA connection and yields the driver object. Teardown must disable output and close VISA resource.</li>
+<li><code>power_rail</code> (function-scoped): Accepts <code>instrument_session</code>, resets it, sets standard voltage safety limits, and yields the driver.</li>
+<li>Write a parameterized test case <code>test_voltage_regulation</code>:</li>
+<li>Tests voltage settings from <code>1.0V</code> to <code>5.0V</code> in <code>0.5V</code> steps.</li>
+<li>In each test: sets power supply voltage, sleeps for 100ms, measures active voltage, and asserts that the measured voltage is within a 2% margin of the commanded voltage.</li>
+<li>Code must be fully type-hinted and pass <code>mypy --strict</code>.</li>
+</ul>
+<h3>2. File Deliverables</h3>
+<ul>
+<li><code>test_hardware.py</code>: The pytest file.</li>
+<li><code>conftest.py</code>: Shared fixtures file (pytest standard).</li>
+<li><code>pytest.ini</code>: Framework configuration file.</li>
+</ul>
+<hr />
+<h2>📋 Deliverables Checklist</h2>
+<ul>
+<li>[ ] <code>conftest.py</code> (Session and function fixtures)</li>
+<li>[ ] <code>test_hardware.py</code> (Parameterized test cases)</li>
+<li>[ ] <code>pytest.ini</code> (Config files)</li>
+<li>[ ] <code>requirements.txt</code> (Environment libraries dependencies)</li>
+</ul>
+<hr />
+<h2>❓ Self-Check Questions</h2>
+<ol>
+<li>Why is global state sharing considered highly dangerous when writing automated hardware testing suites?</li>
+<li>Explain how the <code>yield</code> statement partitions setup and teardown stages inside a pytest fixture.</li>
+<li>What are the mechanical differences between a <code>session</code>-scoped fixture and a <code>function</code>-scoped fixture?</li>
+<li>How does the decorator <code>@pytest.mark.parametrize</code> optimize code reuse when testing boundaries?</li>
+<li>Why should a hardware test case incorporate explicit test timeouts, and how do you achieve this in pytest?</li>
+</ol>
+<hr />
+<h2>🚀 Stretch Task</h2>
+<p>Write a custom <strong>pytest plugin hook</strong> (inside <code>conftest.py</code>) that captures test execution statistics. If a test case fails, intercept the hook, query the simulated instrument's error queue automatically, and append the device error log directly into the pytest failure report.</p>
+<hr />
+<h2>💡 Motivation Checkpoint</h2>
+<p>Automated test coverage is the line between quality hardware and catastrophic failure. Hardware teams at companies like Tesla and SpaceX run thousands of parameterized test scenarios dynamically against ECUs and batteries. Structuring tests stateless and isolating hardware resources via fixtures prevents cascading test failures and guarantees clean test execution data.</p>
+<hr />
+<h2>🎓 Trainer Review Rules</h2>
+<ul>
+<li>Verify type-safety: Executing <code>mypy --strict test_hardware.py conftest.py</code> must complete with 0 alerts.</li>
+<li>Verify clean teardowns: Force a test to fail (e.g. inject an assert failure). The teardown code inside fixtures must still execute, cut the output power rails of the simulated supply, and close the sockets cleanly.</li>
+</ul></div><div class="section week-plan"><h1>Week 06: Hardware-in-the-Loop (HIL) &amp; Fault Injection</h1>
+<h2>🎯 Weekly Goal</h2>
+<p>Master the principles of Hardware-in-the-Loop (HIL) testing, control physical relay boards to dynamically manipulate electrical signals, and build automated fault injection scenarios to stress-test device safety responses.</p>
+<h2>🎓 Weekly Outcome</h2>
+<p>By the end of this week, you will be able to construct HIL test loops, write driver layers to control multi-channel USB/Ethernet relay boards, automate physical fault injections (signal short-circuits, brownouts, power cuts), and monitor asynchronous target responses under load.</p>
+<hr />
+<h2>📅 Session Breakdown</h2>
+<h3>Monday: Hardware-in-the-Loop (HIL) Principles</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Testing physical hardware in a closed loop.</li>
+<li>In advanced systems, software cannot be tested in pure isolation on PC simulators. It must run on the actual target microcontroller.</li>
+<li><strong>The HIL Concept:</strong> The target microcontroller's pins are connected to a test rack containing automated testing instruments and relay boards. Python controls the test rack to simulate a real physical environment (sensors, signals, power grids).</li>
+<li>closed-loop vs open-loop test architectures.</li>
+<li><strong>Hands-on Experiment:</strong>
+  Trace block schematics of a standard HIL test loop connecting host scripts, simulated sensor buses (I2C/SPI), and physical target pins.</li>
+</ul>
+<hr />
+<h3>Tuesday: Relay Board Driver Design</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Dynamically switching physical connections.</li>
+<li>What is a relay? An electromagnetically operated switch.</li>
+<li>Using multi-channel USB/Ethernet relay boards to connect and disconnect lines.</li>
+<li>De-energizing and energizing channels dynamically from Python via serial commands or raw socket controls.</li>
+<li><strong>Hands-on Exercise:</strong>
+  Build a clean class wrapping a standard USB relay controller:
+  ```python
+  import serial</li>
+</ul>
+<p>class RelayController:
+      def <strong>init</strong>(self, port: str):
+          self.ser = serial.Serial(port, 9600, timeout=1.0)</p>
+<pre><code>  def set_channel(self, channel: int, state: bool) -&gt; None:
+      # Standard hex protocol for a typical USB relay board
+      cmd = bytearray([0xA0, channel, 0x01 if state else 0x00, 0x00])
+      # Calculate verification sum
+      cmd[3] = (cmd[0] + cmd[1] + cmd[2]) &amp; 0xFF
+      self.ser.write(cmd)
+
+  def close(self) -&gt; None:
+      self.ser.close()
+</code></pre>
+<p>```</p>
+<hr />
+<h3>Wednesday: Fault Injection Paradigms</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Intentional system abuse.</li>
+<li>To verify that safety-critical firmware reacts correctly to physical hazards, we must <em>inject</em> faults during operation.</li>
+<li><strong>Core Fault Scenarios:</strong><ol>
+<li><strong>Power Faults:</strong> Brownouts (reducing voltage to critical boundaries), raw power cuts.</li>
+<li><strong>Bus Faults:</strong> Disconnecting communication lines (SDA/SCL) mid-transaction.</li>
+<li><strong>Signal Faults:</strong> Short-circuiting pins to Ground or 3.3V rails.</li>
+</ol>
+</li>
+<li><strong>Hands-on Exercise:</strong> Design the logical flow chart for an automated brownout injection test sequence.</li>
+</ul>
+<hr />
+<h3>Thursday: Asynchronous Failure Monitoring</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Spotting failures in real time.</li>
+<li>When a fault is injected, the target MCU might emit crash data over UART or trigger a physical GPIO alarm.</li>
+<li>Python must run asynchronous listening threads that watch for these indicators while the main test thread is executing fault steps.</li>
+<li><strong>Hands-on Exercise:</strong> Write a Python thread that monitors a target serial output for crash messages (<code>"PANIC"</code>, <code>"ASSERT"</code>) during testing.</li>
+</ul>
+<hr />
+<h3>Friday: Safe HIL Recovery Routines</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Cleaning up after chaos.</li>
+<li>If a fault injection test case aborts or crashes, the HIL rack must restore instruments and relays to safe, neutral, de-energized states to prevent equipment damage.</li>
+</ul>
+<hr />
+<h2>🛠️ Hands-On Assignment: HIL Fault Injection Test Harness</h2>
+<p>Build an automated <strong>HIL Fault Injection Test Harness</strong> (<code>hil_fault_harness.py</code>) that simulates power anomalies and evaluates a virtual target MCU's recovery capabilities.</p>
+<h3>1. Requirements</h3>
+<ul>
+<li>Wrap the <code>RelayController</code> and <code>ProgrammablePowerSupply</code> inside unified pytest fixtures.</li>
+<li>Implement a HIL test sequence that:</li>
+<li>Powers up the virtual target device at <code>3.3V</code>.</li>
+<li>Spawns an asynchronous monitoring thread listening to the target's serial telemetry channel.</li>
+<li>Uses a relay channel to simulate an "I2C Bus Disconnect" fault (energize relay to disconnect SDA line).</li>
+<li>Asserts that the target telemetry channel registers a <code>"BUS_ERROR"</code> warning within 500ms.</li>
+<li>Recovers by de-energizing the relay (reconnecting SDA) and verifies that the target returns to <code>"SYSTEM_OK"</code> status.</li>
+<li>All code must be strictly type-annotated, checked with Mypy, and Black formatted.</li>
+</ul>
+<h3>2. File Deliverables</h3>
+<ul>
+<li><code>hil_fault_harness.py</code>: The pytest HIL execution file.</li>
+<li><code>virtual_target.py</code>: A socket utility that simulates a physical target microcontroller's telemetry port, responding to simulated power variations and relay signals.</li>
+</ul>
+<hr />
+<h2>📋 Deliverables Checklist</h2>
+<ul>
+<li>[ ] <code>hil_fault_harness.py</code> (Mypy type-hinted, context managers)</li>
+<li>[ ] <code>virtual_target.py</code> (Telemetry socket simulator)</li>
+<li>[ ] <code>requirements.txt</code> (Environment libraries dependencies)</li>
+</ul>
+<hr />
+<h2>❓ Self-Check Questions</h2>
+<ol>
+<li>Why is Hardware-in-the-Loop (HIL) testing critical in automotive and safety-critical industries?</li>
+<li>Explain how relay boards are leveraged in automated testing to simulate communication line cutoffs.</li>
+<li>What is a "Brownout Fault," and how does a programmable power supply simulate it under script control?</li>
+<li>Why must fault-monitoring threads execute asynchronously while HIL test cases execute?</li>
+<li>What are the core safety recovery steps a HIL test suite must execute if a test crashes midway?</li>
+</ol>
+<hr />
+<h2>🚀 Stretch Task</h2>
+<p>Implement an <strong>automated recovery loop</strong> that checks for target freeze conditions. If the virtual target stops emitting telemetry completely (deadlock or crash), trigger a relay to completely cycle the target's physical power line (Hard Reset), verifying that it boots back up cleanly.</p>
+<hr />
+<h2>💡 Motivation Checkpoint</h2>
+<p>Automated HIL fault-injection is the baseline requirement for obtaining safety certifications (like ISO 26262 for automotive ECUs). Companies like Boeing or Mercedes-Benz run millions of automated fault-injection cycles on test rigs, simulating engine failures, sensor outages, and battery short circuits to verify that safety-critical control loops protect human passengers.</p>
+<hr />
+<h2>🎓 Trainer Review Rules</h2>
+<ul>
+<li>Verify type-safety: Executing <code>mypy --strict hil_fault_harness.py</code> must complete with 0 alerts.</li>
+<li>The test execution log must show that all asynchronous threads are terminated cleanly. No zombie threads or unclosed socket connections are permitted.</li>
+</ul></div><div class="section week-plan"><h1>Week 07: Firmware Analysis &amp; Binary Parsing</h1>
+<h2>🎯 Weekly Goal</h2>
+<p>Master the structure of compiled firmware files (Executable and Linkable Format - ELF), write Python tools to parse symbols and sections using the <code>pyelftools</code> library, and build automated static memory audits to prevent microcontroller stack-to-heap overlaps.</p>
+<h2>🎓 Weekly Outcome</h2>
+<p>By the end of this week, you will be able to dissect ELF headers, map memory section sizes (<code>.text</code>, <code>.data</code>, <code>.bss</code>), extract specific symbol memory offsets, parse compiler map files, and build automated pre-flashing validation gates.</p>
+<hr />
+<h2>📅 Session Breakdown</h2>
+<h3>Monday: The ELF Layout &amp; Header Parser</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> The Executable and Linkable Format (ELF) structure.</li>
+<li>Standard segments in compiled embedded binaries:<ul>
+<li><strong>ELF Header:</strong> Identifies target architecture (ARM, RISC-V, x86), endianness, and entry address.</li>
+<li><strong>Section Header Table:</strong> Maps raw binary segments (.text, .rodata, .data, .bss).</li>
+<li><strong>Symbol Table (<code>.symtab</code>):</strong> Contains names and memory addresses of all functions and global variables.</li>
+</ul>
+</li>
+<li><strong>Hands-on Experiment:</strong>
+  Write a Python script to parse basic ELF header info using <code>pyelftools</code>:
+  ```python
+  from elftools.elf.elffile import ELFFile</li>
+</ul>
+<p>with open("firmware.elf", "rb") as f:
+      elf = ELFFile(f)
+      print("ELF Header Details:")
+      print(f" -&gt; Architecture: {elf.get_machine_arch()}")
+      print(f" -&gt; Endianness: {elf.little_endian}")
+  ```</p>
+<hr />
+<h3>Tuesday: Mapping Memory Sections</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Auditing static memory footprint.</li>
+<li>Microcontrollers have highly constrained Flash (typically &lt; 1MB) and SRAM (typically &lt; 128KB).</li>
+<li><strong>.text:</strong> Compiled code size (consumes Flash).</li>
+<li><strong>.data / .bss:</strong> Static and global variables (consumes SRAM).</li>
+<li>Why test automation must audit these sizes to prevent hardware out-of-memory crashes.</li>
+<li><strong>Hands-on Exercise:</strong>
+  Extract and print the sizes of all segments:
+  ```python
+  from elftools.elf.elffile import ELFFile</li>
+</ul>
+<p>with open("firmware.elf", "rb") as f:
+      elf = ELFFile(f)
+      for section in elf.iter_sections():
+          print(f"Section: {section.name:&lt;10} | Size: {section['sh_size']:&lt;6} bytes | Addr: {hex(section['sh_addr'])}")
+  ```</p>
+<hr />
+<h3>Wednesday: Extracting Symbols &amp; Offsets</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Dynamic symbol parsing.</li>
+<li>Locating specific variables in memory dynamically.</li>
+<li>Automating debugging: mapping symbol addresses to GDB breakpoints or checking variables during HIL runtime memory inspections.</li>
+<li><strong>Hands-on Exercise:</strong> Write a Python function that returns the hex address of any given function symbol name by iterating over the ELF <code>.symtab</code> section.</li>
+</ul>
+<hr />
+<h3>Thursday: Parsing Compiler Map Files</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Extracting allocation summaries from text logs.</li>
+<li>Most compilers (GCC) output detailed <code>.map</code> files during builds.</li>
+<li>Using regex in Python to scan map files and identify massive global arrays that consume SRAM.</li>
+</ul>
+<hr />
+<h3>Friday: Pre-Flashing Integrity Validation</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Designing CI/CD validation gates.</li>
+<li>Automated testing checks: Block the flashing process immediately if the static SRAM allocation exceeds 90% of physical microcontroller limits, preventing bricked hardware.</li>
+</ul>
+<hr />
+<h2>🛠️ Hands-On Assignment: Automated Memory Footprint Auditor</h2>
+<p>Design and build a Python command-line utility named <code>firmware_auditor.py</code> that parses compiled ELF binaries, audits segment allocations, and checks limits.</p>
+<h3>1. Requirements</h3>
+<ul>
+<li>Provide a CLI interface that accepts: <code>--elf</code> (path to compiled firmware file), <code>--flash-limit</code> (Flash size limit in bytes), and <code>--sram-limit</code> (SRAM size limit in bytes).</li>
+<li>The script must:</li>
+<li>Parse the ELF file sections using <code>pyelftools</code>.</li>
+<li>Compute Total Flash Usage (<code>.text</code> + <code>.data</code> + <code>.rodata</code>) and Total SRAM Usage (<code>.data</code> + <code>.bss</code>).</li>
+<li>Validate these sizes against the parsed limits.</li>
+<li>If size allocations exceed 90%, print a warnings list. If they exceed 100%, print a fatal error message and exit with return code <code>-1</code>.</li>
+<li>All code must be strictly type-annotated, checked with Mypy, and Black formatted.</li>
+</ul>
+<h3>2. File Deliverables</h3>
+<ul>
+<li><code>firmware_auditor.py</code>: The static memory analysis script.</li>
+<li><code>test_workspace/</code>: Directory containing dynamic mockup ELF binary files for test runs.</li>
+</ul>
+<hr />
+<h2>📋 Deliverables Checklist</h2>
+<ul>
+<li>[ ] <code>firmware_auditor.py</code> (Mypy type-hinted, zero warnings)</li>
+<li>[ ] <code>test_workspace/</code> (C compile mockups)</li>
+<li>[ ] <code>requirements.txt</code> (Environment libraries dependencies)</li>
+</ul>
+<hr />
+<h2>❓ Self-Check Questions</h2>
+<ol>
+<li>What are the differences between relocatable object files and Executable and Linkable Format (ELF) structures?</li>
+<li>How does the size of the <code>.bss</code> section in an ELF file differ from the actual size it occupies on the physical disk?</li>
+<li>Explain how static memory allocations (.data and .bss) can trigger hardware heap/stack overlaps at microcontroller runtime.</li>
+<li>Why is it useful to extract function symbols address offsets dynamically using Python in automated test environments?</li>
+<li>What does a compiler <code>.map</code> file record, and how does regex help parse it?</li>
+</ol>
+<hr />
+<h2>🚀 Stretch Task</h2>
+<p>Implement an <strong>automated symbol address hook</strong>. Expand your tool so that it reads a target firmware ELF, extracts the exact memory address of a global telemetry array variable, and writes this address directly into a test configuration file to automate runtime memory injection assertions.</p>
+<hr />
+<h2>💡 Motivation Checkpoint</h2>
+<p>In safety-critical avionics firmware development, software is strictly audited for SRAM allocation footprint. Exceeding stack/heap allocations can trigger memory overrides, causing non-deterministic crashes mid-flight. Pre-flashing ELF validation scripts are the first line of defense in hardware release pipelines.</p>
+<hr />
+<h2>🎓 Trainer Review Rules</h2>
+<ul>
+<li>Verify type-safety: Executing <code>mypy --strict firmware_auditor.py</code> must complete with 0 alerts.</li>
+<li>Verify limits verification: Inputting limits smaller than target ELF sections must exit with exact error codes and report the precise byte overflow calculations cleanly.</li>
+</ul></div><div class="section week-plan"><h1>Week 08: High-Performance Telemetry Data Logging</h1>
+<h2>🎯 Weekly Goal</h2>
+<p>Master Python's threading execution model, implement thread-safe data queues to handle high-speed inputs, and build a high-performance telemetry data logger that streams metrics cleanly to disk without data losses.</p>
+<h2>🎓 Weekly Outcome</h2>
+<p>By the end of this week, you will be able to spawn concurrent consumer/producer threads, protect shared queues using <code>queue.Queue</code>, process incoming telemetry inputs asynchronously, write data portably to CSV or binary Parquet formats, and benchmark execution performance.</p>
+<hr />
+<h2>📅 Session Breakdown</h2>
+<h3>Monday: The Python Concurrency Model (GIL)</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> The Global Interpreter Lock (GIL).</li>
+<li>Why CPython restricts execution to a single thread at a time for CPU-bound tasks.</li>
+<li>Why threading is <strong>highly effective for I/O-bound tasks</strong> (such as serial reading, network listening, disk writing), where threads spend most of their time waiting for data.</li>
+<li>Spawning threads using the <code>threading</code> module.</li>
+<li><strong>Hands-on Experiment:</strong>
+  Spawn a parallel logging thread:
+  ```python
+  import threading
+  import time</li>
+</ul>
+<p>def log_worker() -&gt; None:
+      print("Logging thread started.")
+      time.sleep(2)
+      print("Logging thread complete.")</p>
+<p>t = threading.Thread(target=log_worker)
+  t.start()
+  t.join() # Wait for thread to finish
+  ```</p>
+<hr />
+<h3>Tuesday: Thread-Safe Queues (<code>queue.Queue</code>)</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> The Producer-Consumer pattern.</li>
+<li>In high-speed systems, reading data and writing data in the same thread blocks execution. While Python is writing to a slow disk, serial buffers overflow, leading to data loss.</li>
+<li><strong>The Solution:</strong> A dedicated <strong>Producer Thread</strong> that reads incoming serial bytes and pushes them onto a queue, and a separate <strong>Consumer Thread</strong> that pops bytes off the queue and writes them to the disk.</li>
+<li>Using Python's built-in <code>queue.Queue</code> which handles internal lock synchronization automatically.</li>
+<li><strong>Hands-on Exercise:</strong>
+  Build a basic producer-consumer queue loop:
+  ```python
+  import threading
+  import queue
+  import time</li>
+</ul>
+<p>data_queue: queue.Queue[int] = queue.Queue()</p>
+<p>def producer() -&gt; None:
+      for i in range(5):
+          data_queue.put(i)
+          time.sleep(0.5)</p>
+<p>def consumer() -&gt; None:
+      while True:
+          item = data_queue.get()
+          if item is None: # Exit signal
+              break
+          print(f"Consumed: {item}")
+          data_queue.task_done()
+  ```</p>
+<hr />
+<h3>Wednesday: Async Telemetry Streaming</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Structuring logging loops.</li>
+<li>Protecting loops from blocking on I/O delays.</li>
+<li>Creating clean exit signals (using <code>threading.Event</code> objects) to stop threads gracefully without locking.</li>
+</ul>
+<hr />
+<h3>Thursday: High-Performance Data Formats (CSV vs Parquet)</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Structural storage.</li>
+<li><strong>CSV:</strong> Human-readable but massive, parsing is CPU-heavy.</li>
+<li><strong>Parquet:</strong> Columnar binary storage, compressed, lightning-fast reads/writes (utilizes Pandas).</li>
+<li><strong>Hands-on Exercise:</strong> Benchmarking the write speed and disk consumption of CSV logging vs binary Parquet mapping.</li>
+</ul>
+<hr />
+<h3>Friday: Queue Overflow &amp; CPU Throttling</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Defensive concurrency.</li>
+<li>Managing queue limits (<code>maxsize</code>). </li>
+<li>Preventing memory leaks when the consumer lags behind high-speed producers.</li>
+</ul>
+<hr />
+<h2>🛠️ Hands-On Assignment: Concurrent Telemetry Logger</h2>
+<p>Design and implement a multi-threaded high-frequency <strong>Telemetry Data Logger</strong> (<code>concurrent_logger.py</code>) that handles high-speed inputs safely.</p>
+<h3>1. Requirements</h3>
+<ul>
+<li>Implement a <strong>Producer Thread</strong> that reads simulated raw telemetry data from a socket or serial port and pushes it immediately onto a <code>queue.Queue</code>.</li>
+<li>Implement a <strong>Consumer Thread</strong> that pops data off the queue, processes validation parameters, and writes data portably to a CSV log.</li>
+<li>Ensure thread synchronization:</li>
+<li>Use a <code>threading.Event</code> to stop threads gracefully on terminal exits (Ctrl+C).</li>
+<li>Use timeouts inside <code>queue.get(timeout=1.0)</code> to check for exit signals periodically.</li>
+<li>All code must be strictly type-annotated, checked with Mypy, and Black formatted.</li>
+</ul>
+<h3>2. File Deliverables</h3>
+<ul>
+<li><code>concurrent_logger.py</code>: Main thread executor and queue manager.</li>
+<li><code>mock_sensor.py</code>: Utility generating continuous, high-speed data feeds.</li>
+</ul>
+<hr />
+<h2>📋 Deliverables Checklist</h2>
+<ul>
+<li>[ ] <code>concurrent_logger.py</code> (Mypy type-hinted, safe threads)</li>
+<li>[ ] <code>mock_sensor.py</code> (High-speed socket data source)</li>
+<li>[ ] <code>requirements.txt</code> (Environment libraries dependencies)</li>
+</ul>
+<hr />
+<h2>❓ Self-Check Questions</h2>
+<ol>
+<li>Why does the Python Global Interpreter Lock (GIL) not hinder performance in I/O-bound telemetry readers?</li>
+<li>Explain how the Producer-Consumer pattern prevents serial port buffer overflow data losses.</li>
+<li>How does <code>threading.Event</code> optimize thread coordination compared to standard integer flag polling?</li>
+<li>What are the performance and storage size differences between CSV and Parquet file formats?</li>
+<li>How do you prevent thread locks (deadlocks) when multiple concurrent consumer threads share queues?</li>
+</ol>
+<hr />
+<h2>🚀 Stretch Task</h2>
+<p>Modify your telemetry logger to support <strong>automatic data compression</strong>. Integrate logic so that when a CSV file size exceeds 5MB, the consumer thread automatically spins up a background compression task (<code>zipfile</code> or <code>gzip</code>) to compress the old log file asynchronously while active logging continues uninterrupted.</p>
+<hr />
+<h2>💡 Motivation Checkpoint</h2>
+<p>Automated test benches in flight simulation, battery evaluation, or turbine auditing generate millions of telemetry points per second. If a logging tool locks the execution thread for a fraction of a second during a disk flush, telemetry data is lost, rendering validation logs useless. Writing robust, thread-safe asynchronous loggers is a core systems requirement.</p>
+<hr />
+<h2>🎓 Trainer Review Rules</h2>
+<ul>
+<li>Verify thread execution: The application must terminate cleanly on keyboard exits, joining and killing all threads. No zombie processes or locked sockets must remain.</li>
+<li>The logger must complete under high-frequency benchmarks with <strong>zero data frame losses</strong>, validated by matching sent sequence numbers against written log indexes.</li>
+</ul></div><div class="section week-plan"><h1>Week 09: Dynamic CLI Tools &amp; Metrics Reporting</h1>
+<h2>🎯 Weekly Goal</h2>
+<p>Master the creation of professional command-line interface (CLI) utilities using the <code>click</code> library, parse automation test outputs dynamically, and auto-generate beautifully styled PDF/HTML reports complete with performance data plots.</p>
+<h2>🎓 Weekly Outcome</h2>
+<p>By the end of this week, you will be able to write complex nested CLI commands, validate arguments dynamically, process test execution results databases, generate Matplotlib analysis charts, and compile them into automated PDF metrics reports.</p>
+<hr />
+<h2>📅 Session Breakdown</h2>
+<h3>Monday: Advanced CLIs with <code>click</code></h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Declaring structured command trees in Python.</li>
+<li>Why standard <code>argparse</code> scales poorly for complex CLI utilities that require nested subcommands (like <code>git add</code> vs <code>git commit</code>).</li>
+<li>Introduction to <strong>Click (Command Line Interface Creation Kit)</strong>.</li>
+<li>Using decorators to declare commands (<code>@click.command</code>), subcommands (<code>@click.group</code>), parameters (<code>@click.option</code>), and argument validators.</li>
+<li><strong>Hands-on Experiment:</strong>
+  Build a basic Click subcommand tool:
+  ```python
+  import click</li>
+</ul>
+<p>@click.group()
+  def cli() -&gt; None:
+      pass</p>
+<p>@cli.command()
+  @click.option("--port", default="/dev/ttyUSB0", help="Serial port address")
+  def connect(port: str) -&gt; None:
+      click.echo(f"Establishing serial connection to {port}")</p>
+<p>if <strong>name</strong> == "<strong>main</strong>":
+      cli()
+  ```</p>
+<hr />
+<h3>Tuesday: Click Types &amp; Validation</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Defensive CLI arguments.</li>
+<li>Click parameter types: <code>click.Path</code> (validates path existence), <code>click.Choice</code> (restricts arguments to specific options), <code>click.IntRange</code>.</li>
+<li><strong>Hands-on Exercise:</strong>
+  Build a secure file parsing interface:
+  ```python
+  import click
+  from pathlib import Path</li>
+</ul>
+<p>@click.command()
+  @click.option(
+      "--config", 
+      type=click.Path(exists=True, file_okay=True, dir_okay=False, path_type=Path),
+      required=True,
+      help="Path to YAML test configuration file"
+  )
+  def run_test(config: Path) -&gt; None:
+      click.echo(f"Verified config path exists: {config}")
+  ```</p>
+<hr />
+<h3>Wednesday: Plotting Performance Metrics (Matplotlib)</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Visualizing test results data.</li>
+<li>Converting log arrays into statistical plots.</li>
+<li>Generating voltage regulation sweeps, temperature rise logs, and test execution duration distributions.</li>
+<li>Exporting charts dynamically to temporary files.</li>
+<li><strong>Hands-on Exercise:</strong> Write a Python function that consumes a CSV log, generates a voltage-versus-time line graph, and saves it as a PNG image.</li>
+</ul>
+<hr />
+<h3>Thursday: Automated PDF Reports Generation</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Generating executive summary documents.</li>
+<li>Creating styled reports using HTML structures and compiling them directly to PDF using <strong>Weasyprint</strong> within Python.</li>
+<li>Injecting dynamic inline CSS, building tables of results, and embedding generated Matplotlib charts.</li>
+<li><strong>Hands-on Exercise:</strong> Write a Python script that reads an HTML template, replaces placeholders with test statistics and chart images, and compiles it directly to a PDF.</li>
+</ul>
+<hr />
+<h3>Friday: Interactive CLI Progress Animations</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Enhancing user experiences.</li>
+<li>Using Click UI helpers to display dynamic loaders (<code>click.progressbar</code>, spinners, status logs) while long-running tests are executing.</li>
+</ul>
+<hr />
+<h2>🛠️ Hands-On Assignment: Automated Test Report Compiler</h2>
+<p>Design and build a professional command-line utility named <code>report_compiler.py</code> using Click that processes CSV test log outputs and auto-generates a PDF report.</p>
+<h3>1. Requirements</h3>
+<ul>
+<li>Create a Click CLI subcommand tree:</li>
+<li><code>report_compiler.py parse --log &lt;path&gt;</code>: Scans CSV log data and prints a summary to the console.</li>
+<li><code>report_compiler.py compile --log &lt;path&gt; --output &lt;path&gt;</code>: Generates Matplotlib voltage plots, builds a styled HTML file containing test pass/fail metrics tables, and compiles it via Weasyprint to a PDF report.</li>
+<li>Incorporate Click progress bars to show compilation status.</li>
+<li>All code must be strictly type-annotated, checked with Mypy, and Black formatted.</li>
+</ul>
+<h3>2. File Deliverables</h3>
+<ul>
+<li><code>report_compiler.py</code>: The main Click CLI and compiler script.</li>
+<li><code>mock_test_results.csv</code>: A mockup test logs file.</li>
+</ul>
+<hr />
+<h2>📋 Deliverables Checklist</h2>
+<ul>
+<li>[ ] <code>report_compiler.py</code> (Mypy type-hinted, Click groups)</li>
+<li>[ ] <code>mock_test_results.csv</code> (CSV log file)</li>
+<li>[ ] <code>requirements.txt</code> (Environment libraries dependencies)</li>
+</ul>
+<hr />
+<h2>❓ Self-Check Questions</h2>
+<ol>
+<li>Why is the Click library superior to <code>argparse</code> when constructing nested subcommands pipelines?</li>
+<li>How does <code>click.Path(exists=True)</code> harden your command-line tools against runtime path errors?</li>
+<li>Explain the mechanism used to embed dynamically generated Matplotlib plots into an HTML report before PDF compilation.</li>
+<li>Why is the combination of HTML templates and Weasyprint preferred over raw PDF writing libraries (like ReportLab)?</li>
+<li>What role do CLI progress indicators play in professional developer experience?</li>
+</ol>
+<hr />
+<h2>🚀 Stretch Task</h2>
+<p>Implement an <strong>automated database summary hook</strong>. Expand your tool so that it automatically parses a JUnit XML test results file, extracts failure details, and includes a dynamically styled "Failures Callout Box" in the generated PDF report highlighting failing files, line numbers, and tracebacks.</p>
+<hr />
+<h2>💡 Motivation Checkpoint</h2>
+<p>In automated manufacturing and silicon validation teams, test arrays run thousands of validation sweeps overnight. Directors and engineers cannot read millions of raw CSV log rows to check hardware health. Building automated CLI tools that compile logs, plot sweeps, and generate executive PDF reports enables rapid, clean engineering sign-offs.</p>
+<hr />
+<h2>🎓 Trainer Review Rules</h2>
+<ul>
+<li>Verify CLI parameter security: Attempting to call the CLI with missing files or out-of-range limits must be intercepted by Click's default validators and exit cleanly without raising Python code exceptions.</li>
+<li>The compiled PDF must contain the embedded Matplotlib PNG charts cleanly aligned within page margins, without clipping or formatting overlaps.</li>
+</ul></div><div class="section week-plan"><h1>Week 10: Python Code Quality, Typing, &amp; Design Patterns</h1>
+<h2>🎯 Weekly Goal</h2>
+<p>Harness the full power of Python's static typing engine (<code>mypy</code>), deploy essential enterprise-grade object-oriented design patterns (Singleton, Factory, DOM) for hardware abstraction, and automate style consistency using black and ruff.</p>
+<h2>🎓 Weekly Outcome</h2>
+<p>By the end of this week, you will be able to write 100% type-safe Python code under strict Mypy checks, apply structural design patterns to isolate hardware configurations, eliminate open-connection lockups using Singleton managers, and automate style checks.</p>
+<hr />
+<h2>📅 Session Breakdown</h2>
+<h3>Monday: Strict Static Typing with Mypy</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Bridge-building between dynamic Python and static type safety.</li>
+<li>Why standard Python dynamic execution leads to subtle bugs in large automation frameworks (e.g. passing a string value to a function expecting a float).</li>
+<li>Using Mypy for static type validation.</li>
+<li>Core typing signatures: <code>Union</code>, <code>Optional</code>, <code>Callable</code>, <code>Any</code> (and why <code>Any</code> is considered a code smell under strict rules).</li>
+<li>Advanced typing: generics (<code>TypeVar</code>), protocols (<code>Protocol</code> for static interfaces mapping).</li>
+<li><strong>Hands-on Experiment:</strong>
+  Auditing type mismatches at compile time:
+  <code>bash
+  # Run strict static type check on src
+  mypy --strict src/</code></li>
+</ul>
+<hr />
+<h3>Tuesday: The Singleton &amp; Connection Manager</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Managing hardware connection safety.</li>
+<li><strong>The Problem:</strong> In large test suites, multiple tests might attempt to open connection sessions to the same physical instrument simultaneously, locking ports and triggering communication errors.</li>
+<li><strong>The Solution:</strong> The <strong>Singleton Pattern</strong> ensures that a class has only one instance and provides a global access point to it.</li>
+<li><strong>Hands-on Exercise:</strong>
+  Implement a thread-safe Singleton Connection Manager:
+  ```python
+  import threading
+  from typing import Optional</li>
+</ul>
+<p>class VISAConnectionManager:
+      _instance: Optional["VISAConnectionManager"] = None
+      _lock: threading.Lock = threading.Lock()</p>
+<pre><code>  def __new__(cls) -&gt; "VISAConnectionManager":
+      with cls._lock:
+          if cls._instance is None:
+              cls._instance = super().__new__(cls)
+              cls._instance._init_manager()
+      return cls._instance
+
+  def _init_manager(self) -&gt; None:
+      self.connection_handle = "VISA_ESTABLISHED"
+      print("[SINGLETON] Unique Connection Manager initialized.")
+</code></pre>
+<p>```</p>
+<hr />
+<h3>Wednesday: The Factory Design Pattern</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Swapping hardware targets dynamically.</li>
+<li><strong>The Problem:</strong> Tests need to run against the real physical microcontroller on HIL benches, but developers must also run tests locally against simulated mock objects during offline debugging.</li>
+<li><strong>The Solution:</strong> The <strong>Factory Pattern</strong> decouples object creation, allowing the framework to dynamically instantiate real or mock device drivers based on configuration inputs.</li>
+<li><strong>Hands-on Exercise:</strong> Build a driver factory that instantiates either <code>PhysicalOscilloscope</code> or <code>MockOscilloscope</code> depending on a config file string.</li>
+</ul>
+<hr />
+<h3>Thursday: The Device Object Model (DOM)</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Abstraction layer separation.</li>
+<li>Representing physical hardware units as discrete class objects that map low-level registers and communications commands to high-level methods, keeping test code clean and readable.</li>
+</ul>
+<hr />
+<h3>Friday: Code Cleanliness Automations (Black &amp; Ruff)</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Automating style reviews.</li>
+<li>Running <code>black</code> to format code uniformly.</li>
+<li>Using <code>ruff</code> as a high-speed linter and style auditor to identify dead imports, performance issues, and format violations automatically.</li>
+</ul>
+<hr />
+<h2>🛠️ Hands-On Assignment: HARDENED Device Driver Framework</h2>
+<p>Take a disorganized, untyped, and unmaintained legacy hardware automation testing suite and refactor it into a 100% type-safe, object-oriented framework.</p>
+<h3>1. Requirements</h3>
+<ul>
+<li>Implement a thread-safe <code>InstrumentManager</code> using the Singleton pattern.</li>
+<li>Implement a <code>DeviceFactory</code> that dynamically instantiates device wrapper classes.</li>
+<li>Incorporate strict Mypy types across all classes—running <code>mypy --strict</code> must return <strong>zero</strong> errors or warnings.</li>
+<li>Automate code formatting: all files must compile cleanly and match <code>black</code> and <code>ruff</code> rules.</li>
+</ul>
+<h3>2. File Deliverables</h3>
+<ul>
+<li><code>manager.py</code>: Singleton connection manager.</li>
+<li><code>factory.py</code>: Decoupled device driver factory.</li>
+<li><code>drivers.py</code>: Base interfaces and specific instrument wrappers (using DOM).</li>
+<li><code>test_hardened.py</code>: Test cases utilizing the drivers.</li>
+</ul>
+<hr />
+<h2>📋 Deliverables Checklist</h2>
+<ul>
+<li>[ ] <code>manager.py</code> (Mypy type-hinted, thread-safe Singleton)</li>
+<li>[ ] <code>factory.py</code> (Dynamic object creator)</li>
+<li>[ ] <code>drivers.py</code> (DOM layout wrappers)</li>
+<li>[ ] <code>requirements.txt</code> (Environment libraries dependencies)</li>
+</ul>
+<hr />
+<h2>❓ Self-Check Questions</h2>
+<ol>
+<li>Why is the <code>Any</code> type annotation restricted under strict Mypy checks, and what type-safe alternatives exist?</li>
+<li>How does the Singleton pattern prevent port conflict errors inside concurrent testing setups?</li>
+<li>Explain how the Factory pattern helps you write HIL tests that can run seamlessly offline using mocked hardware.</li>
+<li>What is the distinction between a low-level register write command and a Device Object Model (DOM) method?</li>
+<li>How do Black and Ruff optimize developer efficiency in software engineering teams?</li>
+</ol>
+<hr />
+<h2>🚀 Stretch Task</h2>
+<p>Implement an <strong>asynchronous connection supervisor</strong>. Expand your Singleton Manager to incorporate a background monitoring thread that pings the target hardware connections dynamically every 5 seconds. If a connection is dropped, trigger automated hot-swapping recovery routines.</p>
+<hr />
+<h2>💡 Motivation Checkpoint</h2>
+<p>Enterprise automation frameworks (at companies like Google, Apple, or Intel) contain millions of lines of code. Dynamic typing and chaotic structure architectures lead to unmaintainable codebases. Applying clean OOP patterns and type annotations keeps frameworks maintainable, safe, and easily scalable across multiple test platforms.</p>
+<hr />
+<h2>🎓 Trainer Review Rules</h2>
+<ul>
+<li>Verify type safety: Executing <code>mypy --strict</code> must pass with 0 errors.</li>
+<li>The framework must demonstrate successful Singleton behavior: instantiating the connection manager multiple times in different parts of the test run must yield the exact same memory pointer address.</li>
+</ul></div><div class="section week-plan"><h1>Week 11: CI/CD Pipelines &amp; Execution Orchestration</h1>
+<h2>🎯 Weekly Goal</h2>
+<p>Harness Continuous Integration (CI/CD) engines to orchestrate hardware automation suites automatically on code changes, generate and parse standard JUnit XML test reports, and automate status alerts.</p>
+<h2>🎓 Weekly Outcome</h2>
+<p>By the end of this week, you will be able to write robust CI/CD pipeline scripts (GitHub Actions YAML / Jenkinsfile), configure automated execution environments, parse pytest JUnit XML results databases, check coverage thresholds dynamically, and automate Slack alerts.</p>
+<hr />
+<h2>📅 Session Breakdown</h2>
+<h3>Monday: The CI/CD Hardware Pipeline</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> The automated hardware release flow.</li>
+<li>In professional engineering, every commit triggers automated builds.</li>
+<li><strong>The HIL Pipeline:</strong> When a developer pushes C code to a repository, the CI/CD server triggers a pipeline that:<ol>
+<li>Compiles the firmware.</li>
+<li>Runs static code audits.</li>
+<li>Deploys the firmware to a physical HIL test bench.</li>
+<li>Invokes Python pytest automation suites.</li>
+<li>Records and parses results.</li>
+</ol>
+</li>
+<li><strong>Hands-on Experiment:</strong>
+  Trace block maps of a CI/CD server connecting to a local physical HIL host runner.</li>
+</ul>
+<hr />
+<h3>Tuesday: JUnit XML Reporting</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Standardizing test data.</li>
+<li>JUnit XML is the global standard format for representing test results.</li>
+<li>Configuring pytest to output JUnit XML databases:
+    <code>bash
+    pytest --junitxml=build/report.xml</code></li>
+<li>Parsing XML structures in Python using the <code>xml.etree.ElementTree</code> library to count passes, failures, and execution times.</li>
+<li><strong>Hands-on Exercise:</strong>
+  Parse a test report dynamically and output metrics to the console:
+  ```python
+  import xml.etree.ElementTree as ET</li>
+</ul>
+<p>tree = ET.parse("report.xml")
+  root = tree.getroot()</p>
+<p># Extract summary attributes
+  tests = int(root.attrib.get("tests", 0))
+  failures = int(root.attrib.get("failures", 0))
+  print(f"Total Tests Executed: {tests} | Failures: {failures}")
+  ```</p>
+<hr />
+<h3>Wednesday: GitHub Actions for Automation</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Writing workflow scripts.</li>
+<li>Understanding GitHub Actions runner structures.</li>
+<li>Structuring steps: checking out code, caching dependencies, setting up Python environments, running pytest, and archiving artifact reports.</li>
+<li><strong>Hands-on Exercise:</strong>
+  Build a basic <code>.github/workflows/test.yml</code> runner configuration:
+  <code>yaml
+  name: Automated Automation Tests
+  on: [push]
+  jobs:
+    test:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v3
+        - name: Set up Python
+          uses: actions/setup-python@v4
+          with:
+            python-version: '3.10'
+        - name: Install dependencies
+          run: |
+            pip install -r requirements.txt
+        - name: Run test suite
+          run: |
+            pytest --junitxml=build/report.xml</code></li>
+</ul>
+<hr />
+<h3>Thursday: Pipeline Quality Gates</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Enforcing baseline metrics.</li>
+<li>Blocking merges if code coverage falls below 90%, if there are static analysis warnings, or if any core hardware test case fails.</li>
+</ul>
+<hr />
+<h3>Friday: Slack &amp; Email Notification Webhooks</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Keeping teams informed.</li>
+<li>Sending automated HTTP POST requests containing styled Markdown results summaries directly to team Slack channels after build completes.</li>
+</ul>
+<hr />
+<h2>🛠️ Hands-On Assignment: Automated HIL Pipeline Orchestrator</h2>
+<p>Design and implement a complete <strong>Automated Test Orchestrator script</strong> (<code>pipeline_orchestrator.py</code>) and a GitHub Actions workflow that executes tests and alerts on failures.</p>
+<h3>1. Requirements</h3>
+<ul>
+<li>Write a Python script <code>pipeline_orchestrator.py</code> that:</li>
+<li>Spawns pytest as a subprocess to execute the test suite and output <code>report.xml</code>.</li>
+<li>Parses <code>report.xml</code> using <code>xml.etree.ElementTree</code>.</li>
+<li>Formats an executive Markdown build summary (e.g. <em>Tests Run: 15, Passed: 14, Failures: 1</em>).</li>
+<li>Simulates dispatching this report via an HTTP POST request to a Slack webhook.</li>
+<li>Write a <code>.github/workflows/hil.yml</code> file that orchestrates the execution dynamically.</li>
+<li>All code must be strictly type-annotated, checked with Mypy, and Black formatted.</li>
+</ul>
+<h3>2. File Deliverables</h3>
+<ul>
+<li><code>pipeline_orchestrator.py</code>: Main parsing and dispatch script.</li>
+<li><code>hil.yml</code>: GitHub Actions pipeline YAML configuration.</li>
+</ul>
+<hr />
+<h2>📋 Deliverables Checklist</h2>
+<ul>
+<li>[ ] <code>pipeline_orchestrator.py</code> (Mypy type-hinted, XML parsing)</li>
+<li>[ ] <code>hil.yml</code> (Complete GitHub Action script)</li>
+<li>[ ] <code>requirements.txt</code> (Environment libraries dependencies)</li>
+</ul>
+<hr />
+<h2>❓ Self-Check Questions</h2>
+<ol>
+<li>Why is JUnit XML the preferred standard format for continuous integration test outputs?</li>
+<li>How do you construct a pipeline step in GitHub Actions that only executes if previous steps failed (capturing crash logs)?</li>
+<li>What is a "Pipeline Quality Gate," and how does it protect main repository branches?</li>
+<li>Explain how webhooks utilize HTTP POST payloads to transmit test data directly to Slack.</li>
+<li>In enterprise environments, how do local self-hosted runners differ from cloud runners when accessing physical lab hardware?</li>
+</ol>
+<hr />
+<h2>🚀 Stretch Task</h2>
+<p>Modify your orchestrator script to <strong>auto-parse tracebacks</strong>. Expand the XML parser so that if a test case fails, it automatically extracts the failure's stack traceback details and appends a "Developer Debugging Callout" directly into the Slack notification payload.</p>
+<hr />
+<h2>💡 Motivation Checkpoint</h2>
+<p>Continuous integration is the heart of professional Agile engineering. Software giants and automotive manufacturers trigger millions of automated pipeline jobs daily. Setting up self-executing pipelines with rigorous quality gates ensures that buggy or unsafe code is blocked from ever reaching production hardware systems.</p>
+<hr />
+<h2>🎓 Trainer Review Rules</h2>
+<ul>
+<li>Verify type safety: Executing <code>mypy --strict pipeline_orchestrator.py</code> must complete with 0 alerts.</li>
+<li>The XML parser must handle empty or malformed XML files cleanly, raising custom structured error alerts instead of crashing with raw parsing tracebacks.</li>
+</ul></div><div class="section week-plan"><h1>Week 12: Production-Grade Capstone HIL Framework Project</h1>
+<h2>🎯 Weekly Goal</h2>
+<p>Assemble all your object-oriented design patterns, PyVISA instrumentation wrappers, thread-safe asynchronous logging queues, and dynamic JUnit XML reporting engines to build an enterprise-grade <strong>HIL Test Automation Framework</strong> from scratch.</p>
+<h2>🎓 Weekly Outcome</h2>
+<p>By the end of this week, you will be able to construct large, type-safe, modular Python frameworks, manage complex hardware setups and teardowns dynamically, trace concurrent exceptions defensively, parse and graph telemetry sweeps, and present your work inside a professional systems portfolio.</p>
+<hr />
+<h2>📅 Session Breakdown</h2>
+<h3>Monday: The System Architectural Blueprint</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Architecture of an enterprise-grade HIL automation suite.</li>
+<li>Structural directories: <code>drivers/</code> (instrument layers), <code>tests/</code> (stateless verification suites), <code>telemetry/</code> (queue logging threads), <code>utils/</code> (config and report compilers).</li>
+<li>Design pattern checkpoints: instantiating instruments via Singleton managers, configuring platforms dynamically via Factories.</li>
+<li><strong>Hands-on Experiment:</strong> Map a detailed class architecture schema displaying hardware drivers relationships and test injection points.</li>
+</ul>
+<hr />
+<h3>Tuesday: Multi-Threaded Exception Handling</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Preventing framework crashes.</li>
+<li>In concurrent frameworks, if a background logging thread throws an exception, standard programs run in silence while the main test continues, leading to silent test validity failures.</li>
+<li><strong>The Law:</strong> All background threads must incorporate global exception catch blocks that report crashes directly back to the main test loop.</li>
+</ul>
+<hr />
+<h3>Wednesday: Advanced Diagnostic Logging</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Generating clear engineering audit trails.</li>
+<li>Why standard <code>print()</code> statements are banned in professional frameworks.</li>
+<li>Configuring Python's built-in <code>logging</code> module.</li>
+<li>Logging levels: <code>DEBUG</code> (register level detail), <code>INFO</code> (test steps), <code>WARNING</code> (retries), <code>ERROR</code> (hardware bounds violations).</li>
+<li>Directing logs to both standard outputs and persistent log files.</li>
+</ul>
+<hr />
+<h3>Thursday: Optimization &amp; Hardware Safety Audits</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Protecting fragile instrumentation rigs.</li>
+<li>Checking the framework's behavior during abort events (Ctrl+C, power failures).</li>
+<li>Ensuring absolute de-energization loops execute cleanly, even under crash conditions, protecting expensive lab equipment.</li>
+</ul>
+<hr />
+<h3>Friday: Assembling the Systems Portfolio</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Demonstrating your expertise to hiring managers.</li>
+<li>Writing high-impact README files detailing architecture, Mypy type passes, and JUnit reports.</li>
+<li>Preparing for technical systems-level interviews.</li>
+</ul>
+<hr />
+<h2>🛠️ Hands-On Assignment: Enterprise HIL Test Automation Framework</h2>
+<p>Design and build a fully functional, fully-typed, and multi-threaded <strong>Hardware-in-the-Loop Test Automation Framework</strong> (named <code>hil-framework</code>) in pure Python.</p>
+<h3>1. Requirements</h3>
+<ul>
+<li>Structure the project cleanly across modular directories (<code>drivers/</code>, <code>tests/</code>, <code>telemetry/</code>, <code>reports/</code>).</li>
+<li>Implement:</li>
+<li>A thread-safe <code>InstrumentManager</code> (Singleton pattern) managing VISA connections.</li>
+<li>High-reliability <code>PowerSupply</code> and <code>Multimeter</code> wrappers using context managers.</li>
+<li>A pytest testing harness that parameters tests over a sweep of voltage targets, monitors telemetry asynchronously, and logs records to Parquet/CSV formats.</li>
+<li>An automated <code>report_compiler.py</code> that processes logs, generates performance graphs (Matplotlib), and compiles a styled PDF summary.</li>
+<li>Code must compile cleanly, pass Mypy strict type checks with <strong>zero warnings</strong>, and run under black/ruff guidelines.</li>
+</ul>
+<h3>2. File Deliverables</h3>
+<ul>
+<li><code>drivers/</code>: Instrument wrapper modules.</li>
+<li><code>tests/</code>: Parameterized pytest scenarios.</li>
+<li><code>telemetry/</code>: Thread-safe async logging modules.</li>
+<li><code>reports/</code>: PDF compilation and CLI scripts.</li>
+<li><code>Makefile</code>: Automates setup, test runs, linting, and PDF reporting.</li>
+</ul>
+<hr />
+<h2>📋 Deliverables Checklist</h2>
+<ul>
+<li>[ ] Complete <code>drivers/</code>, <code>tests/</code>, <code>telemetry/</code>, and <code>reports/</code> folder structures.</li>
+<li>[ ] <code>Makefile</code> (Automated targets <code>make setup</code>, <code>make test</code>, <code>make lint</code>, <code>make report</code>)</li>
+<li>[ ] <code>requirements.txt</code> (Environment libraries dependencies)</li>
+</ul>
+<hr />
+<h2>❓ Self-Check Questions</h2>
+<ol>
+<li>Why is a centralized Exception Supervisor critical when executing concurrent test threads?</li>
+<li>How does configuring Python's <code>logging</code> module outperform standard inline <code>print()</code> statements in large test runs?</li>
+<li>What are the mechanical steps required to guarantee that a physical HIL test rack enters a safe state if the main controller PC loses power?</li>
+<li>Explain how you would decouple test logic from physical address configurations to ensure portability across different lab benches.</li>
+<li>What are the essential portfolio elements required to demonstrate test framework design mastery to recruiters?</li>
+</ol>
+<hr />
+<h2>🚀 Stretch Task</h2>
+<p>Implement an <strong>automated recovery loop</strong> that checks for target freeze conditions. If the virtual target stops emitting telemetry completely (deadlock or crash), trigger a relay to completely cycle the target's physical power line (Hard Reset), verifying that it boots back up cleanly.</p>
+<hr />
+<h2>💡 Motivation Checkpoint</h2>
+<p>Writing a custom test automation framework is the ultimate graduation test of an automation engineer. It requires combining hardware communications, thread safety, testing isolation, data parsing, and continuous integration pipeline management. Completing this project successfully demonstrates that you are ready to construct enterprise-grade automated systems.</p>
+<hr />
+<h2>🎓 Trainer Review Rules</h2>
+<ul>
+<li>Verify type safety: Executing <code>mypy --strict</code> on your framework must pass with 0 errors.</li>
+<li>Verify recovery safety: Forcing a test execution crash must de-energize the simulated power supply immediately and close all VISA connections cleanly.</li>
+</ul></div>
+</body>
+</html>

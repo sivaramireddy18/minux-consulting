@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Systems Engineering Capstone Projects Portfolio</title>
+    <style>
+    
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
+
+@page {
+    size: A4;
+    margin: 20mm;
+    @bottom-right {
+        content: counter(page);
+        font-family: 'Outfit', sans-serif;
+        font-size: 8pt;
+        color: #64748b;
+        font-weight: 500;
+    }
+    @bottom-left {
+        content: "Systems Engineering Capstone Projects Portfolio | Senior Systems Architect";
+        font-family: 'Outfit', sans-serif;
+        font-size: 8pt;
+        color: #64748b;
+        font-weight: 500;
+    }
+}
+
+body {
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: #1e293b;
+    line-height: 1.6;
+    font-size: 10.5pt;
+}
+
+h1, h2, h3, h4 {
+    color: #0f172a;
+    font-weight: 600;
+    font-family: 'Outfit', sans-serif;
+    page-break-after: avoid;
+    break-after: avoid;
+}
+
+h1 {
+    font-size: 24pt;
+    border-bottom: 2px solid #4f46e5;
+    padding-bottom: 8px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    page-break-before: always;
+    break-before: page;
+}
+
+/* Prevent cover page break on very first heading */
+.first-page h1 {
+    page-break-before: avoid !important;
+    break-before: avoid !important;
+}
+
+h2 {
+    font-size: 16pt;
+    color: #4f46e5;
+    margin-top: 30px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 4px;
+}
+
+h3 {
+    font-size: 12pt;
+    color: #0f172a;
+    margin-top: 20px;
+    margin-bottom: 8px;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 12px;
+    text-align: justify;
+}
+
+ul, ol {
+    margin-top: 0;
+    margin-bottom: 16px;
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 6px;
+}
+
+code {
+    font-family: 'Fira Code', 'Courier New', monospace;
+    font-size: 9pt;
+    background-color: #f8fafc;
+    color: #4f46e5;
+    padding: 2px 4px;
+    border-radius: 4px;
+    border: 1px solid #e2e8f0;
+}
+
+pre {
+    background-color: #0f172a;
+    color: #f8fafc;
+    padding: 12px 16px;
+    border-radius: 6px;
+    overflow: hidden;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    margin-top: 10px;
+    margin-bottom: 18px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    border: 1px solid #1e293b;
+}
+
+pre code {
+    background-color: transparent;
+    color: #e2e8f0;
+    padding: 0;
+    font-size: 8.5pt;
+    border: none;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    font-size: 9.5pt;
+}
+
+th, td {
+    border: 1px solid #cbd5e1;
+    padding: 8px 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #f1f5f9;
+    color: #0f172a;
+    font-weight: 600;
+}
+
+tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+
+.cover-page {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    page-break-after: always;
+    break-after: page;
+    text-align: center;
+    padding-top: 50mm;
+}
+
+.cover-title {
+    font-size: 32pt;
+    color: #0f172a;
+    font-weight: 700;
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+.cover-subtitle {
+    font-size: 16pt;
+    color: #4f46e5;
+    font-weight: 400;
+    margin-bottom: 40px;
+}
+
+.cover-meta {
+    font-size: 11pt;
+    color: #64748b;
+    margin-top: auto;
+    border-top: 1px solid #cbd5e1;
+    padding-top: 20px;
+}
+
+    </style>
+</head>
+<body>
+    
+    <div class="cover-page">
+        <div class="cover-title">SYSTEMS ENGINEERING<br>CAPSTONE PROJECTS PORTFOLIO</div>
+        <div class="cover-subtitle">MNC-Style Architectural Frameworks & Granular Task Breakdowns</div>
+        <div class="cover-meta">
+            <strong>Scope:</strong> Advanced C Systems, FreeRTOS Embedded & Python HIL Frameworks<br>
+            <strong>Author:</strong> Senior Systems Architect & Technical Director<br>
+            <strong>Workspace Root:</strong> /home/siva/sivaramireddy/Project1/
+        </div>
+    </div>
+    <div class="section"><h1>Minux Portfolio: Enterprise-Grade Systems Engineering Capstone Projects</h1>
+<p>This portfolio defines <strong>three high-impact, professional-grade capstone projects</strong> spanning C Systems, Embedded Systems, and Python Automation. Each project is designed from the perspective of an Engineering Manager and Senior Architect to replicate world-class MNC engineering pipelines (like Tesla, NVIDIA, or Qualcomm).</p>
+<hr />
+<h2>🏆 Project 1 (C Systems): MinuxDB - Concurrent Key-Value Database Engine</h2>
+<p>An elite, high-performance, disk-persisted concurrent Key-Value Database Engine written in pure C11, bypassing standard high-level SQL database libraries.</p>
+<h3>🏛️ System Architecture</h3>
+<pre><code class="language-mermaid">graph TD
+    Client[&quot;Client Thread (REPL/API)&quot;] --&gt;|Submit Command| Parser[&quot;Command Parser &amp; Validator&quot;]
+    Parser --&gt;|Aligned Allocation| Arena[&quot;Memory Arena / Pool Manager&quot;]
+    Parser --&gt;|Write-Ahead Log| Disk[&quot;Unbuffered I/O File Descriptor (.log)&quot;]
+    Parser --&gt;|Mutex Protected Write| Index[&quot;In-Memory Index Tree (Hash/B-Tree)&quot;]
+    Index --&gt;|Concurrency Control| RWLock[&quot;POSIX Read-Write Locks&quot;]
+</code></pre>
+<h3>🛠️ Core Tech Stack &amp; Requirements</h3>
+<ul>
+<li><strong>Language/Standard:</strong> Strict ISO C11 (<code>-std=c11 -Wall -Wextra -Werror -pedantic</code>).</li>
+<li><strong>Memory Management:</strong> Custom 8-byte aligned Memory Arena (for transient parse tokens) and Object Pool (for database index nodes). Standard <code>malloc</code> strictly banned in execution loops.</li>
+<li><strong>Systems I/O:</strong> Direct, unbuffered file descriptors (<code>open</code>, <code>read</code>, <code>write</code>, <code>close</code>, <code>fsync</code>) for Write-Ahead Logging (WAL).</li>
+<li><strong>Concurrency:</strong> POSIX Threads (<code>pthreads</code>), Read-Write Locks (<code>pthread_rwlock_t</code>) for thread-safe concurrent index lookups.</li>
+<li><strong>Safety:</strong> 100% MISRA C compliance subset, validated via <code>cppcheck</code>. Zero memory leaks under Valgrind.</li>
+</ul>
+<hr />
+<h3>📋 MNC-Style Sprint Task Breakdown (Jira Checklist)</h3>
+<h4>🏃‍♂️ Sprint 1: Memory Architecture &amp; Basic Storage</h4>
+<ul>
+<li><strong>[JIRA-CDB-101] Custom Aligned Arena Allocator Core</strong></li>
+<li><em>Description:</em> Pre-allocate a 10MB memory pool. Implement O(1) linear allocation adjusting offsets to 8-byte boundaries.</li>
+<li><em>Deliverable:</em> <code>arena.h</code>/<code>arena.c</code> containing <code>arena_alloc</code> with compile-time assertions.</li>
+<li><strong>[JIRA-CDB-102] Object Pool Node Allocator</strong></li>
+<li><em>Description:</em> Implement a block allocator using free-list bitmaps to serve database entry nodes in constant O(1) time.</li>
+<li><em>Deliverable:</em> <code>pool.h</code>/<code>pool.c</code> with 0 external fragmentation.</li>
+<li><strong>[JIRA-CDB-103] Unbuffered Write-Ahead Log (WAL) Engine</strong></li>
+<li><em>Description:</em> Write a persistent logger that records database insert operations directly to disk via raw system descriptors, forcing disk sync (<code>fsync</code>).</li>
+<li><em>Deliverable:</em> <code>wal.c</code> managing crash-resilient append-only logs.</li>
+</ul>
+<h4>🏃‍♂️ Sprint 2: Database Indexing &amp; Command Parsing</h4>
+<ul>
+<li><strong>[JIRA-CDB-201] High-Speed In-Memory Hash Index</strong></li>
+<li><em>Description:</em> Build an in-memory hash table using separate chaining for collision resolution, storing key-to-offset maps.</li>
+<li><em>Deliverable:</em> <code>index_hash.c</code> supporting O(1) key lookups.</li>
+<li><strong>[JIRA-CDB-202] Branch-Free Command Tokenizer</strong></li>
+<li><em>Description:</em> Write a state-machine based command string parser that extracts commands (<code>GET</code>, <code>PUT</code>, <code>DEL</code>) with cyclomatic complexity &lt;= 3.</li>
+<li><em>Deliverable:</em> <code>parser.c</code> parsing string queries into structured execution models.</li>
+</ul>
+<h4>🏃‍♂️ Sprint 3: Concurrency &amp; Lock Disciplines</h4>
+<ul>
+<li><strong>[JIRA-CDB-301] Dynamic Read-Write Locks Integration</strong></li>
+<li><em>Description:</em> Protect the Hash Index using POSIX RW Locks, enabling concurrent read lookups but mutually exclusive write modifications.</li>
+<li><em>Deliverable:</em> Thread-safe hash table execution paths verified under Helgrind.</li>
+<li><strong>[JIRA-CDB-302] Active Transactions Crash Recovery Manager</strong></li>
+<li><em>Description:</em> Implement a recovery boot routine that scans the WAL file, parses uncommitted transactions, and rebuilds the hash index automatically.</li>
+<li><em>Deliverable:</em> <code>recovery.c</code> verifying index reconstruction on dirty boots.</li>
+</ul>
+<h4>🏃‍♂️ Sprint 4: Performance Audits &amp; Verification</h4>
+<ul>
+<li><strong>[JIRA-CDB-401] Cppcheck &amp; MISRA C Compliance Audit</strong></li>
+<li><em>Description:</em> Run static analysis check over all database modules using MISRA guidelines checkers. Eliminate all warnings.</li>
+<li><em>Deliverable:</em> Cppcheck terminal report with 0 style, memory, or warning errors.</li>
+<li><strong>[JIRA-CDB-402] Valgrind Leak-Check &amp; Gprof Profiling</strong></li>
+<li><em>Description:</em> Profile database throughput under a parallel load of 100,000 operations, auditing memory leak bounds.</li>
+<li><em>Deliverable:</em> Gprof profiling report identifying hot-spots, and Valgrind logging showing 0 bytes lost.</li>
+</ul>
+<hr />
+<h2>🏆 Project 2 (Embedded): MinuxGateway - Real-Time Industrial IoT Gateway</h2>
+<p>A real-time, closed-loop telemetry gateway utilizing FreeRTOS on an STM32 microcontroller to capture analog sensors data, communicating via DMA-UART with a custom Embedded Linux character device module running on a Raspberry Pi.</p>
+<h3>🏛️ System Architecture</h3>
+<pre><code class="language-text">+--------------------------------------+      UART DMA      +------------------------------------------+
+|       STM32 MCU (FreeRTOS)           |     Telemetry      |        Raspberry Pi (Embedded Linux)     |
+|  [ADC Task] -&gt; [Queue] -&gt; [TX Task]  |-------------------&gt;|  [Kernel Module Driver] -&gt; [/dev/minux]  |
+|         ^ (Hardware Interrupt)       |      Channel       |                 |                        |
+|  [Emergency Button IRQ]              |                    |  [User Space Daemon] -&gt; [Data Logging]   |
++--------------------------------------+                    +------------------------------------------+
+</code></pre>
+<h3>🛠️ Core Tech Stack &amp; Requirements</h3>
+<ul>
+<li><strong>MCU Firmware:</strong> FreeRTOS ports, direct register manipulation RCC/GPIO/USART, NVIC nested interrupts, DMA channel control, STM32F4.</li>
+<li><strong>Kernel Space:</strong> Out-of-tree Linux Kernel Module (LKM), character device registration (<code>cdev</code>), file operations (<code>file_operations</code>), user-kernel space copy (<code>copy_to_user</code>), Device Tree compatible string mapping.</li>
+<li><strong>Hardware Interfacing:</strong> Direct UART TTL wired bridges, logic analyzers for frame debugging.</li>
+</ul>
+<hr />
+<h3>📋 MNC-Style Sprint Task Breakdown (Jira Checklist)</h3>
+<h4>🏃‍♂️ Sprint 1: FreeRTOS Edge Firmware Setup</h4>
+<ul>
+<li><strong>[JIRA-GW-101] MCU Register Clock &amp; GPIO Drivers</strong></li>
+<li><em>Description:</em> Initialize RCC clock dividers and configure GPIO pins for LEDs and buttons at the direct register level.</li>
+<li><em>Deliverable:</em> <code>gpio_driver.c</code> with absolute zero HAL usage.</li>
+<li><strong>[JIRA-GW-102] FreeRTOS Multi-Tasking Core Setup</strong></li>
+<li><em>Description:</em> Create two tasks: <code>Task_SensorRead</code> (priority 2) reading ADC voltage levels, and <code>Task_TelemetryTransmit</code> (priority 1) managing serial pipelines.</li>
+<li><em>Deliverable:</em> Task synchronization loop utilizing FreeRTOS Message Queues.</li>
+<li><strong>[JIRA-GW-103] Low-Latency Emergency Interrupt (ISR)</strong></li>
+<li><em>Description:</em> Configure EXTI line interrupts for an emergency stop button, invoking an ISR that immediately suspends tasks and clears power pins.</li>
+<li><em>Deliverable:</em> Safe ISR executing in constant time with zero FreeRTOS allocations.</li>
+</ul>
+<h4>🏃‍♂️ Sprint 2: Direct Memory Access (DMA) USART Drivers</h4>
+<ul>
+<li><strong>[JIRA-GW-201] USART register-Level Driver</strong></li>
+<li><em>Description:</em> Program USART baudrate calculation math (BRR) and control registers to configure serial frames format (8N1).</li>
+<li><em>Deliverable:</em> <code>usart.c</code> supporting byte-level read/write.</li>
+<li><strong>[JIRA-GW-202] DMA Telemetry Channel Configuration</strong></li>
+<li><em>Description:</em> Configure DMA stream channels to automatically transfer sensor data queues from SRAM to the USART transmit register, bypassing CPU overhead.</li>
+<li><em>Deliverable:</em> Verified high-frequency telemetry output over DMA without CPU polling halts.</li>
+</ul>
+<h4>🏃‍♂️ Sprint 3: Linux Kernel space character Driver</h4>
+<ul>
+<li><strong>[JIRA-GW-301] Out-of-Tree Kernel Module Template</strong></li>
+<li><em>Description:</em> Write a kernel module build configuration Makefile (<code>Kbuild</code>) and initialization functions (<code>init_module</code> / <code>cleanup_module</code>).</li>
+<li><em>Deliverable:</em> Compiled loadable module (<code>minux_gateway.ko</code>) flashing cleanly.</li>
+<li><strong>[JIRA-GW-302] Character Device Registration &amp; Dev Nodes</strong></li>
+<li><em>Description:</em> Register major/minor device numbers and create character device nodes under <code>/dev/minux</code> automatically using class mappings.</li>
+<li><em>Deliverable:</em> <code>/dev/minux</code> file entry dynamically generated upon loading module.</li>
+<li><strong>[JIRA-GW-303] File Operations &amp; User-Kernel Copy</strong></li>
+<li><em>Description:</em> Implement <code>file_operations</code> handlers, mapping unbuffered <code>read</code> requests to copy stored UART telemetry buffers to user space.</li>
+<li><em>Deliverable:</em> <code>copy_to_user</code> memory mapping execution with proper error checking.</li>
+</ul>
+<h4>🏃‍♂️ Sprint 4: End-to-End Integration &amp; Boot Optimization</h4>
+<ul>
+<li><strong>[JIRA-GW-401] User Space Logging Daemon</strong></li>
+<li><em>Description:</em> Write a C-based Linux daemon that reads telemetry packets from <code>/dev/minux</code> and commits them to persistent storage.</li>
+<li><em>Deliverable:</em> Logging daemon running asynchronously as a systemd service.</li>
+<li><strong>[JIRA-GW-402] Hardware-in-the-Loop Boot Audit</strong></li>
+<li><em>Description:</em> Connect a logic analyzer, trace start sequences, and optimize kernel loading, verifying that the target starts telemetry within 8 seconds.</li>
+<li><em>Deliverable:</em> High-resolution timing log confirming sub-8 second edge boot times.</li>
+</ul>
+<hr />
+<h2>🏆 Project 3 (Automation): MinuxHIL - Enterprise HIL Automation Framework</h2>
+<p>A fully typed, modular, and concurrent <strong>Hardware-in-the-Loop (HIL) Test Automation Framework</strong> written in pytest, incorporating PyVISA SCPI drivers factories, relay fault injections, binary ELF parsing, and automated Jenkins pipelines.</p>
+<h3>🏛️ System Architecture</h3>
+<pre><code class="language-mermaid">graph TD
+    TestRunner[&quot;pytest Engine (conftest.py)&quot;] --&gt;|Dynamic Selection| DriverFactory[&quot;Device Driver Factory&quot;]
+    DriverFactory --&gt;|VISA/SCPI connection| PowerSupply[&quot;Singleton Power Supply Wrapper&quot;]
+    DriverFactory --&gt;|Serial USB interface| RelayBoard[&quot;Relay Controller (Fault Injection)&quot;]
+    TestRunner --&gt;|Queue Telemetry| LogThread[&quot;Asynchronous Logging Thread&quot;]
+    TestRunner --&gt;|Post-Test Compile| PDFReport[&quot;Weasyprint HTML-to-PDF Engine&quot;]
+    TestRunner --&gt;|Archiving| CI[&quot;Jenkins / GitHub Actions pipeline&quot;]
+</code></pre>
+<h3>🛠️ Core Tech Stack &amp; Requirements</h3>
+<ul>
+<li><strong>Framework:</strong> pytest, parameterized testing matrices, conftest.py fixtures injection.</li>
+<li><strong>Interfacing:</strong> PyVISA SCPI protocols, USB Relay serial, PySerial byte parsing.</li>
+<li><strong>Type Safety:</strong> 100% strict type hints (<code>mypy --strict</code> compliance).</li>
+<li><strong>Firmware Audits:</strong> ELF section sizes and symbol table analysis (<code>pyelftools</code>).</li>
+<li><strong>CI/CD:</strong> Jenkinsfile / GitHub Actions pipeline, JUnit XML parsed results summaries, Slack notification webhooks.</li>
+</ul>
+<hr />
+<h3>📋 MNC-Style Sprint Task Breakdown (Jira Checklist)</h3>
+<h4>🏃‍♂️ Sprint 1: Connection Abstractions &amp; VISA DOMs</h4>
+<ul>
+<li><strong>[JIRA-HIL-101] Singleton VISA Connection Manager</strong></li>
+<li><em>Description:</em> Build a thread-safe connection manager class ensuring only a single VISA resource manager session operates per instrument port.</li>
+<li><em>Deliverable:</em> <code>visa_manager.py</code> with 0 duplicate connection sessions.</li>
+<li><strong>[JIRA-HIL-102] Device Object Model (DOM) SCPI wrappers</strong></li>
+<li><em>Description:</em> Wrap DC Power Supplies and Digital Multimeters. Implement high-level methods (e.g. <code>set_voltage()</code>, <code>measure_current()</code>), checking inputs defensively.</li>
+<li><em>Deliverable:</em> <code>power_supply.py</code> and <code>dmm.py</code> drivers with strict typing.</li>
+</ul>
+<h4>🏃‍♂️ Sprint 2: Pytest Fixtures &amp; Fault Injection</h4>
+<ul>
+<li><strong>[JIRA-HIL-201] Scoped Setup/Teardown Fixtures</strong></li>
+<li><em>Description:</em> Write a session-scoped <code>instrument_session</code> fixture that initiates VISA ports, and a function-scoped <code>power_rail</code> fixture that resets rails.</li>
+<li><em>Deliverable:</em> <code>conftest.py</code> with robust, clean teardown de-energize protections.</li>
+<li><strong>[JIRA-HIL-202] USB Relay Fault Injector Driver</strong></li>
+<li><em>Description:</em> Write a serial driver for a multi-channel relay board, enabling software-driven fault injections (e.g. short-circuiting sensor buses).</li>
+<li><em>Deliverable:</em> <code>relay_driver.py</code> with channel toggle controls.</li>
+<li><strong>[JIRA-HIL-203] Parameterized Voltage Sweeps Tests</strong></li>
+<li><em>Description:</em> Write a pytest scenario executing a 10-step voltage regulation sweep, verifying target accuracy within 2% using parameterized matrices.</li>
+<li><em>Deliverable:</em> <code>test_regulation.py</code> running sweeps automatically.</li>
+</ul>
+<h4>🏃‍♂️ Sprint 3: Advanced ELF Parsing &amp; Asynchronous Logging</h4>
+<ul>
+<li><strong>[JIRA-HIL-301] Pre-Flashing ELF Static memory Auditor</strong></li>
+<li><em>Description:</em> Build a validation utility using <code>pyelftools</code> that parses a compiled ELF firmware file, checks section allocations, and blocks execution if SRAM sizes exceed 90%.</li>
+<li><em>Deliverable:</em> <code>elf_auditor.py</code> integrated into pytest pre-flight checks.</li>
+<li><strong>[JIRA-HIL-302] Multi-Threaded Asynchronous Telemetry Logger</strong></li>
+<li><em>Description:</em> Spawn a background logging thread that consumes telemetry byte streams from PySerial, parses frames using the <code>struct</code> module, and commits them to a thread-safe queue.</li>
+<li><em>Deliverable:</em> <code>async_logger.py</code> with 0 frame losses.</li>
+</ul>
+<h4>🏃‍♂️ Sprint 4: Reporting &amp; CI/CD Pipelines</h4>
+<ul>
+<li><strong>[JIRA-HIL-401] Click CLI Metrics compiler &amp; PDF Generator</strong></li>
+<li><em>Description:</em> Build a CLI using <code>click</code> that parses the output CSV metrics, graphs voltage sweeps using Matplotlib, builds a styled HTML template, and compiles it via Weasyprint to a PDF report.</li>
+<li><em>Deliverable:</em> <code>report_generator.py</code> producing professional reports.</li>
+<li><strong>[JIRA-HIL-402] Continuous Integration Pipeline &amp; Slack Webhook</strong></li>
+<li><em>Description:</em> Write a GitHub Actions workflow that runs your pytest suites, compiles JUnit XML reports, and sends structured build alerts to a Slack channel webhook.</li>
+<li><em>Deliverable:</em> <code>.github/workflows/hil.yml</code> passing lint, typing, test, and reporting stages.</li>
+</ul></div>
+</body>
+</html>

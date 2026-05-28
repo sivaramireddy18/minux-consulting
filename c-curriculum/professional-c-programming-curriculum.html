@@ -1,0 +1,2268 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Professional C Systems Programming Curriculum</title>
+    <style>
+    
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
+
+@page {
+    size: A4;
+    margin: 20mm;
+    @bottom-right {
+        content: counter(page);
+        font-family: 'Outfit', sans-serif;
+        font-size: 8pt;
+        color: #64748b;
+        font-weight: 500;
+    }
+    @bottom-left {
+        content: "Professional C Systems Programming Master Plan | Senior Systems Coach";
+        font-family: 'Outfit', sans-serif;
+        font-size: 8pt;
+        color: #64748b;
+        font-weight: 500;
+    }
+}
+
+body {
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: #1e293b;
+    line-height: 1.6;
+    font-size: 10.5pt;
+}
+
+h1, h2, h3, h4 {
+    color: #0f172a;
+    font-weight: 600;
+    font-family: 'Outfit', sans-serif;
+    page-break-after: avoid;
+    break-after: avoid;
+}
+
+h1 {
+    font-size: 24pt;
+    border-bottom: 2px solid #c2410c;
+    padding-bottom: 8px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    page-break-before: always;
+    break-before: page;
+}
+
+/* Prevent cover page break on very first heading */
+.first-page h1 {
+    page-break-before: avoid !important;
+    break-before: avoid !important;
+}
+
+h2 {
+    font-size: 16pt;
+    color: #c2410c;
+    margin-top: 30px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 4px;
+}
+
+h3 {
+    font-size: 12pt;
+    color: #1e293b;
+    margin-top: 20px;
+    margin-bottom: 8px;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 12px;
+    text-align: justify;
+}
+
+ul, ol {
+    margin-top: 0;
+    margin-bottom: 16px;
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 6px;
+}
+
+code {
+    font-family: 'Fira Code', 'Courier New', monospace;
+    font-size: 9pt;
+    background-color: #f8fafc;
+    color: #c2410c;
+    padding: 2px 4px;
+    border-radius: 4px;
+    border: 1px solid #e2e8f0;
+}
+
+pre {
+    background-color: #0f172a;
+    color: #f8fafc;
+    padding: 12px 16px;
+    border-radius: 6px;
+    overflow: hidden;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    margin-top: 10px;
+    margin-bottom: 18px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    border: 1px solid #1e293b;
+}
+
+pre code {
+    background-color: transparent;
+    color: #e2e8f0;
+    padding: 0;
+    font-size: 8.5pt;
+    border: none;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    font-size: 9.5pt;
+}
+
+th, td {
+    border: 1px solid #cbd5e1;
+    padding: 8px 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #f1f5f9;
+    color: #0f172a;
+    font-weight: 600;
+}
+
+tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+
+.cover-page {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    page-break-after: always;
+    break-after: page;
+    text-align: center;
+    padding-top: 50mm;
+}
+
+.cover-title {
+    font-size: 32pt;
+    color: #0f172a;
+    font-weight: 700;
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+.cover-subtitle {
+    font-size: 16pt;
+    color: #c2410c;
+    font-weight: 400;
+    margin-bottom: 40px;
+}
+
+.cover-meta {
+    font-size: 11pt;
+    color: #64748b;
+    margin-top: auto;
+    border-top: 1px solid #cbd5e1;
+    padding-top: 20px;
+}
+
+    </style>
+</head>
+<body>
+    
+    <div class="cover-page">
+        <div class="cover-title">PROFESSIONAL C SYSTEMS<br>PROGRAMMING MASTER PLAN</div>
+        <div class="cover-subtitle">A Rigorous, First-Principles Code-Security & Concurrency Curriculum</div>
+        <div class="cover-meta">
+            <strong>Duration:</strong> 12 Weeks | <strong>Level:</strong> Advanced Systems C<br>
+            <strong>Mentor:</strong> Senior Systems Coach & Technical Architect<br>
+            <strong>Workspace Root:</strong> /home/siva/sivaramireddy/Project1/c-curriculum/
+        </div>
+    </div>
+    <div class="section"><h1>Professional C Systems Programming Master Plan: Onboarding &amp; Setup Guide</h1>
+<p>Welcome to the <strong>Professional C Systems Programming Master Plan</strong>. This curriculum is designed by a Senior Systems Coach to transition aspiring engineers from basic syntax writing into production-grade systems C programming.</p>
+<p>C is not just a language; it is an interface to the hardware and the operating system. To write secure, highly performant, and safety-critical C code (such as for space exploration, automotive control, or kernel development), you must understand compiler operations, memory segment layout, and CPU instruction pipelines.</p>
+<hr />
+<h2>📂 Curriculum Workspace Layout</h2>
+<p>Your training environment is structured cleanly inside the <code>c-curriculum/</code> folder. Ensure your workspace maps exactly to this layout:</p>
+<pre><code class="language-text">c-curriculum/
+├── README.md                      # This Onboarding &amp; Setup Portal
+├── c-trainer-operating-rules.md   # Strict coding laws, MISRA standards, and grading criteria
+├── 12-week-c-roadmap.md           # Master chronological milestones timeline and summary
+├── c-milestone-scorecard.md       # Gatekeeper assignments and grading scorecards
+├── plans/                         # Deep-dive weekly execution plans
+│   ├── week-01-c-plan.md          # Week 01: Compiler Mechanics &amp; Build Systems
+│   ├── week-02-c-plan.md          # Week 02: Types, Representations, &amp; CPU Realities
+│   │   ...
+│   └── week-12-c-plan.md          # Week 12: Production-Grade Capstone Systems Project
+└── build_pdf_c.py                 # Automated compilation tool for PDF generation
+</code></pre>
+<hr />
+<h2>🛠️ High-Intensity Professional Toolchain Setup</h2>
+<p>In this program, <strong>integrated development environments (IDEs) with automatic build buttons are banned</strong>. You must understand every compiler flag, linker phase, and debugging diagnostic directly from first-principles using terminal tools.</p>
+<h3>1. Ubuntu Linux Environment Checklist</h3>
+<p>Ensure your host machine has the proper toolchain tools installed:</p>
+<pre><code class="language-bash">sudo apt update &amp;&amp; sudo apt install -y \
+    build-essential \
+    gcc \
+    clang \
+    make \
+    gdb \
+    valgrind \
+    cppcheck \
+    clang-tidy \
+    lcov \
+    weasyprint
+</code></pre>
+<h3>2. The Professional Compiler Configuration</h3>
+<p>All code generated during this curriculum <strong>must compile without warnings under the following strict flags</strong>:</p>
+<ul>
+<li><code>-Wall</code>: Enable all standard warnings.</li>
+<li><code>-Wextra</code>: Enable extra warnings not covered by <code>-Wall</code>.</li>
+<li><code>-Werror</code>: <strong>Treat all warnings as errors</strong>. Any warning triggers a compilation failure.</li>
+<li><code>-pedantic</code>: Issue all warnings demanded by strict ISO C.</li>
+<li><code>-std=c11</code>: Use the strict standard C11 dialect.</li>
+</ul>
+<p>Example Compilation:</p>
+<pre><code class="language-bash">gcc -std=c11 -Wall -Wextra -Werror -pedantic -O2 main.c -o system_prog
+</code></pre>
+<h3>3. Core Developer Tools Index</h3>
+<ul>
+<li><strong>Compiler (GCC / Clang):</strong> For converting human-readable C source files into ELF-formatted binaries.</li>
+<li><strong>Build System (GNU Make):</strong> For incremental, dependency-tracked compiles. You will write robust Makefiles from scratch.</li>
+<li><strong>Memory Analyzer (Valgrind):</strong> For checking heap memory leaks, uninitialized memory reads, buffer overflows, and invalid frees.</li>
+<li><strong>Static Analyzers (Cppcheck &amp; Clang-Tidy):</strong> For identifying structural design flaws and checking coding standard violations.</li>
+<li><strong>Debugger (GDB):</strong> For register audits, stack backtraces, memory watches, and segmentation fault debugging.</li>
+<li><strong>Coverage Tracker (Gcov / Lcov):</strong> For ensuring unit tests hit 100% of branch and statement pathways.</li>
+</ul>
+<hr />
+<h2>🎓 The Elite Pedagogical Model</h2>
+<p>This is not a traditional academic course. Your coach treats you as a <strong>Junior Firmware Engineer</strong> in a high-stakes engineering environment:</p>
+<ol>
+<li><strong>Daily Cadence:</strong> Focus on the concepts allocated for each day. Follow the day's session breakdown and execute the minor code checks.</li>
+<li><strong>Weekly Assignments:</strong> Delivered as production-ready specifications. You must build, compile, and document your projects.</li>
+<li><strong>No Safety Nets:</strong> You write your own tests, write your own Makefiles, and debug your own segmentation faults.</li>
+<li><strong>Pedagogical Gates:</strong> You <em>cannot</em> proceed to a new milestone without passing the corresponding gatekeeper milestone assignment listed in the <code>c-milestone-scorecard.md</code>.</li>
+</ol>
+<hr />
+<h2>🏁 Let's Begin</h2>
+<p>Proceed next to read the <a href="file:///home/siva/sivaramireddy/Project1/c-curriculum/c-trainer-operating-rules.md">c-trainer-operating-rules.md</a> to understand the strict quality laws governing your submissions, and then trace your journey in <a href="file:///home/siva/sivaramireddy/Project1/c-curriculum/12-week-c-roadmap.md">12-week-c-roadmap.md</a>!</p></div><div class="section"><h1>Professional Coach: C Systems Programming Operating Rules &amp; Laws</h1>
+<p>As a Senior Systems Coach, my role is to hold you to the absolute highest industry standards. Below are the <strong>strict pedagogical laws</strong> governing all code submissions during this 12-week intensive C Programming track. </p>
+<p>Any violation of these rules results in an automatic <strong>FAIL</strong> for that week's assignment. No exceptions.</p>
+<hr />
+<h2>🚫 Rule 1: The "Zero-Warning" Directive</h2>
+<p>All submissions must compile under <strong>GCC</strong> or <strong>Clang</strong> using the following compiler flags:</p>
+<pre><code class="language-bash">-std=c11 -Wall -Wextra -Werror -pedantic
+</code></pre>
+<ul>
+<li><strong>The Law:</strong> If a single warning is emitted, compilation fails, and your submission is rejected without review.</li>
+<li><strong>The Logic:</strong> Warnings indicate code ambiguity, compiler assumptions, or latent compiler bugs. In high-stakes systems programming, warnings are bugs waiting to explode.</li>
+</ul>
+<hr />
+<h2>🧠 Rule 2: Strict Memory Security &amp; Leak Laws</h2>
+<p>Dynamic memory allocation (<code>malloc</code>, <code>calloc</code>, <code>realloc</code>) must be managed with flawless ownership logic.
+* <strong>The Law:</strong> Every byte allocated <em>must</em> be freed cleanly before program termination. Zero dynamic memory leaks are permitted.
+* <strong>The Verification:</strong> Every assignment binary is executed through <strong>Valgrind Memcheck</strong>:
+  <code>bash
+  valgrind --leak-check=full --show-leak-kinds=all --errors-to-code=1 ./assignment_bin</code>
+  If Valgrind reports a single byte lost, uninitialized read, array out-of-bounds, or invalid free, the assignment fails.</p>
+<hr />
+<h2>📜 Rule 3: Defensive C &amp; MISRA-C Safety Principles</h2>
+<p>You must adhere to a strict subset of the <strong>MISRA C (Guidelines for the Use of the C Language in Critical Systems)</strong> standards:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Violation Category</th>
+<th style="text-align: left;">Forbidden / Mandatory Patterns</th>
+<th style="text-align: left;">Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Buffer Security</strong></td>
+<td style="text-align: left;"><strong>FORBIDDEN:</strong> <code>strcpy</code>, <code>strcat</code>, <code>sprintf</code>, <code>gets</code>, <code>scanf</code></td>
+<td style="text-align: left;">Susceptible to classic stack buffer overflows. Use secure, bounded functions (<code>strncpy</code>, <code>strncat</code>, <code>snprintf</code>, <code>fgets</code>).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Pointer Arithmetic</strong></td>
+<td style="text-align: left;"><strong>MANDATORY:</strong> Bounds checking on all offset calculations.</td>
+<td style="text-align: left;">Out-of-bounds pointer adjustments trigger undefined behavior and memory exploitation.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Variable Scope</strong></td>
+<td style="text-align: left;"><strong>MANDATORY:</strong> Initialize all variables at declaration. Define variables in the narrowest possible scope.</td>
+<td style="text-align: left;">Uninitialized stack variables contain random trash data, leading to non-deterministic execution bugs.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Control Structures</strong></td>
+<td style="text-align: left;"><strong>MANDATORY:</strong> Use braces <code>{}</code> for all conditional branches (<code>if</code>, <code>else</code>, <code>while</code>, <code>for</code>), even single-line blocks.</td>
+<td style="text-align: left;">Prevents dangling-else logic bugs and compiler parser confusion (e.g., Apple's famous <code>goto fail</code> bug).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Data Types</strong></td>
+<td style="text-align: left;"><strong>MANDATORY:</strong> Use explicit fixed-width integers (<code>uint8_t</code>, <code>int32_t</code>, <code>uintptr_t</code>) for all data processing.</td>
+<td style="text-align: left;">Raw type sizes (<code>int</code>, <code>long</code>) vary across cross-compilation targets, causing overflow/truncation bugs.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>🛠️ Rule 4: Mandatory Static Analysis &amp; Code Quality Checks</h2>
+<p>Before presenting your code to your coach, you must run automated static analysis:</p>
+<pre><code class="language-bash">cppcheck --enable=all --inconclusive --error-exitcode=1 src/
+</code></pre>
+<ul>
+<li><strong>The Law:</strong> Static analysis must report <strong>zero style, performance, portability, or warning errors</strong>.</li>
+<li><strong>The Logic:</strong> Static analysis scans for semantic flaws (like dead code, logical redundancies, and API misuse) that normal compilers sometimes miss.</li>
+</ul>
+<hr />
+<h2>🏗️ Rule 5: Pure C and Modular Compilation</h2>
+<ul>
+<li><strong>The Law:</strong> Every assignment must compile via an automated <strong>Makefile</strong> that supports incremental compilation and dependency tracking.</li>
+<li><strong>The Make Rules:</strong> All Makefiles must contain the following standard targets:</li>
+<li><code>all</code>: Build the main executable.</li>
+<li><code>clean</code>: Remove all compilation artifacts (<code>.o</code>, <code>.d</code>, binaries).</li>
+<li><code>test</code>: Compile and run the automated unit testing suite.</li>
+<li><strong>Header Discipline:</strong> Avoid declaring variables or writing functional code inside headers (<code>.h</code>). Headers must only contain function signatures, struct/union declarations, macro definitions, and external declarations (<code>extern</code>).</li>
+</ul>
+<hr />
+<h2>🎓 Coach's Grading Rubric</h2>
+<p>Each week, your coach evaluates your deliverables out of a 10-point technical scale, mapped to three performance bands:</p>
+<h3>🔴 0 to 6 points: Rejected / Remediation Required</h3>
+<ul>
+<li><strong>Criteria:</strong> Compile warnings present, memory leak detected by Valgrind, missing unit tests, or safety violations (e.g. using <code>strcpy</code>).</li>
+<li><strong>Coach's Directive:</strong> You are blocked from advancing. You must execute the week's remediation plan and resubmit within 48 hours.</li>
+</ul>
+<h3>🟡 7 to 8 points: Passed</h3>
+<ul>
+<li><strong>Criteria:</strong> Code compiles cleanly, zero memory leaks, and passes functional unit tests. However, there are minor layout, stylistic issues, or sub-optimal execution paths.</li>
+<li><strong>Coach's Directive:</strong> Approved to advance, but you must apply style fixes to the codebase before the next milestone audit.</li>
+</ul>
+<h3>🟢 9 to 10 points: Passed with Distinction</h3>
+<ul>
+<li><strong>Criteria:</strong> Perfect clean code, robust Makefile dependencies, 100% test coverage, elegant structure, and completion of the highly complex <strong>Stretch Task</strong>.</li>
+<li><strong>Coach's Directive:</strong> Exemplary systems-level execution. Approved to advance with commendation.</li>
+</ul></div><div class="section"><h1>Master Curriculum Roadmap: Professional C Systems Programming</h1>
+<p>This 12-week curriculum is a fast-paced, high-intensity systems engineering program. It is designed to take you from a basic programmer into a systems engineer who thinks at the hardware, compiler, and OS boundary.</p>
+<hr />
+<h2>🏛️ Chronological Milestones Overview</h2>
+<pre><code class="language-mermaid">graph TD
+    Phase1[Milestone 1: The Machine &amp; The Compiler&lt;br/&gt;Weeks 1-3] --&gt; Phase2[Milestone 2: Memory &amp; Execution Context&lt;br/&gt;Weeks 4-6]
+    Phase2 --&gt; Phase3[Milestone 3: Data Structures &amp; System Boundaries&lt;br/&gt;Weeks 7-9]
+    Phase3 --&gt; Phase4[Milestone 4: Defensive Coding &amp; Concurrency&lt;br/&gt;Weeks 10-12]
+</code></pre>
+<hr />
+<h2>📅 Chronological Week-by-Week Breakdown</h2>
+<h3>🔹 Milestone 1: The Machine &amp; The Compiler</h3>
+<p><strong>Focus:</strong> Understanding how code becomes machine instructions, how data is represented on CPUs, and how branches behave under load.</p>
+<ul>
+<li><strong>Week 01: Compiler Mechanics &amp; Build Systems</strong></li>
+<li><em>Theme:</em> Preprocessing, Compilation, Assembly, Linking stages. GCC build control flags. Makefile writing.</li>
+<li><em>Assignment:</em> Build a multi-file library system with an incremental, self-dependency-tracking Makefile.</li>
+<li><strong>Week 02: Types, Representations, &amp; CPU Realities</strong></li>
+<li><em>Theme:</em> Sign extension, float representation limits, bit shift properties, integer overflow detection.</li>
+<li><em>Assignment:</em> Write a robust floating-point decimal audit parser and safe bitwise-based numeric validator.</li>
+<li><strong>Week 03: Control Flow &amp; Defensive Branching</strong></li>
+<li><em>Theme:</em> Cyclomatic complexity, branch optimization, infinite loop prevention, compiler optimizations.</li>
+<li><em>Assignment:</em> Create an optimized state-machine command parser with branch-free algorithms.</li>
+<li><em>Gatekeeper Check:</em> <strong>Milestone 1 Core Gatekeeper Assignment.</strong></li>
+</ul>
+<hr />
+<h3>🔹 Milestone 2: Memory &amp; Execution Context</h3>
+<p><strong>Focus:</strong> Gaining precise mastery over application memory segment allocations, execution stacks, pointers, and custom struct packing.</p>
+<ul>
+<li><strong>Week 04: The Call Stack &amp; Execution Frames</strong></li>
+<li><em>Theme:</em> Activation records, storage classes (<code>static</code>, <code>extern</code>, <code>register</code>), stack buffer safety.</li>
+<li><em>Assignment:</em> Construct an emulator of stack activation records with frame registers tracing.</li>
+<li><strong>Week 05: The Pointers Paradigm &amp; Direct Memory Access</strong></li>
+<li><em>Theme:</em> Dereferencing mechanisms, pointer-decay, function pointers, event dispatch tables.</li>
+<li><em>Assignment:</em> Build a dynamic Event Dispatcher using a registered function pointer jump-table.</li>
+<li><strong>Week 06: Compound Data Structures &amp; Layout</strong></li>
+<li><em>Theme:</em> Structure padding, memory alignments, unions, bitfields, binary network serialization.</li>
+<li><em>Assignment:</em> Implement a binary protocol pack/unpack engine with byte-alignment configurations.</li>
+<li><em>Gatekeeper Check:</em> <strong>Milestone 2 Core Gatekeeper Assignment.</strong></li>
+</ul>
+<hr />
+<h3>🔹 Milestone 3: Data Structures &amp; System Boundaries</h3>
+<p><strong>Focus:</strong> Direct management of dynamic heap allocators, interacting with the operating system boundaries, and macro metaprogramming.</p>
+<ul>
+<li><strong>Week 07: Dynamic Memory Management (Heap)</strong></li>
+<li><em>Theme:</em> Heap layout, boundary tags, fragmentation. Custom Arena and Object Pool allocators.</li>
+<li><em>Assignment:</em> Design and write a custom <strong>Memory Arena &amp; Object Pool Allocator</strong> without using <code>malloc</code> in active loops.</li>
+<li><strong>Week 08: Low-Level File I/O &amp; Error Handling</strong></li>
+<li><em>Theme:</em> System calls vs Standard library, file descriptors, <code>errno</code> recovery, memory-mapped files (<code>mmap</code>).</li>
+<li><em>Assignment:</em> Build a low-level, high-performance file parsing engine using <code>mmap</code> and raw unbuffered I/O.</li>
+<li><strong>Week 09: Preprocessor Metaprogramming</strong></li>
+<li><em>Theme:</em> Preprocessor mechanics, macros hazards, X-Macros for boilerplate reduction, code generation.</li>
+<li><em>Assignment:</em> Implement a fully generic key-value map code-generator using X-Macros.</li>
+<li><em>Gatekeeper Check:</em> <strong>Milestone 3 Core Gatekeeper Assignment.</strong></li>
+</ul>
+<hr />
+<h3>🔹 Milestone 4: Defensive Coding &amp; Concurrency</h3>
+<p><strong>Focus:</strong> Enforcing industrial safety standards, POSIX multi-threaded programming, and building high-performance production systems.</p>
+<ul>
+<li><strong>Week 10: Code Standards, Static Analysis, &amp; Testing</strong></li>
+<li><em>Theme:</em> MISRA C critical guidelines, static analysis (<code>cppcheck</code>, <code>clang-tidy</code>), unit testing (<code>Unity</code>), coverage.</li>
+<li><em>Assignment:</em> Rewrite an unsafe library into a 100% MISRA-compliant, statically checked, fully unit-tested library.</li>
+<li><strong>Week 11: Multi-Threading, Race Conditions, &amp; Atomic Safety</strong></li>
+<li><em>Theme:</em> POSIX threads (<code>pthreads</code>), race conditions, mutex lock disciplines, atomic safety, lock-free basics.</li>
+<li><em>Assignment:</em> Create a thread-safe Thread Pool Executor with work-stealing queue locks.</li>
+<li><strong>Week 12: Production-Grade Capstone Systems Project</strong></li>
+<li><em>Theme:</em> System assembly, performance audits, profiling (<code>gprof</code>), final coaching presentation.</li>
+<li><em>Assignment:</em> Write a fully featured, custom <strong>Concurrent CLI Command Shell</strong> or a thread-safe, memory-tracked key-value store database with zero leaks.</li>
+<li><em>Gatekeeper Check:</em> <strong>Milestone 4 Final Graduation Audit.</strong></li>
+</ul>
+<hr />
+<h2>🏁 Advancement Directive</h2>
+<p>Before beginning, review the <a href="file:///home/siva/sivaramireddy/Project1/c-curriculum/c-milestone-scorecard.md">c-milestone-scorecard.md</a> to understand the requirements of the Milestone Gates you must clear to graduate this curriculum!</p></div><div class="section"><h1>Professional C Systems Programming: Milestone Scorecard</h1>
+<p>To progress through the curriculum, the student must successfully clear the <strong>Gatekeeper Assignment</strong> at the end of each milestone. Standard GPA curves are banned: these assessments are scored on an industrial <strong>Pass/Fail</strong> basis against a strict engineering rubric.</p>
+<hr />
+<h2>🏆 Milestone 1 Gatekeeper: High-Performance Command Parser Engine</h2>
+<ul>
+<li><strong>Checkpoint:</strong> End of Week 03 (Milestone 1)</li>
+<li><strong>Goal:</strong> Verify compiler flags command, safe bit-shifting, branch-free logic, state machines, and Makefile dependency tracking.</li>
+</ul>
+<h3>📝 Core Specifications</h3>
+<ol>
+<li>Write a custom command line parser that processes binary configurations directly from standard input.</li>
+<li>The engine must compile with zero warnings using <code>-std=c11 -Wall -Wextra -Werror -pedantic</code>.</li>
+<li>Use a branch-free state machine to parse strings into operations (e.g. <code>ADD</code>, <code>SUB</code>, <code>SHIFT_LEFT</code>, <code>MASK</code>). No complex nested <code>if-else</code> blocks inside core loop paths.</li>
+<li>Integrate a self-dependency Makefile that rebuilds modules only if code/header dependencies change.</li>
+</ol>
+<h3>📊 Evaluation Scoring Rubric</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Evaluation Metric</th>
+<th style="text-align: left;">Passing Criteria (Must Met)</th>
+<th style="text-align: left;">Triggers Automatic Failure (FAIL)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Warnings &amp; Build</strong></td>
+<td style="text-align: left;">Compiles with GCC cleanly under strict flags; Makefile contains <code>all</code> and <code>clean</code>.</td>
+<td style="text-align: left;">Single compile warning, or raw GCC commands inside shell scripts (instead of Makefile).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Logic &amp; Control</strong></td>
+<td style="text-align: left;">Parser operates with cyclomatic complexity &lt;= 3 in all functions. State machine operates correctly.</td>
+<td style="text-align: left;">Nested logical structures, raw <code>goto</code> calls, or infinite loop hazards.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Tooling &amp; Cleanliness</strong></td>
+<td style="text-align: left;">Code passed through <code>cppcheck --enable=all</code> with zero style/warning reports.</td>
+<td style="text-align: left;">Portability or design flaws flagged by static analysis.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>🏆 Milestone 2 Gatekeeper: Binary Protocol Serialization Engine</h2>
+<ul>
+<li><strong>Checkpoint:</strong> End of Week 06 (Milestone 2)</li>
+<li><strong>Goal:</strong> Verify understanding of call frames, pointer casting, struct layouts, structure packing/alignment, and serial stream mapping.</li>
+</ul>
+<h3>📝 Core Specifications</h3>
+<ol>
+<li>Design a binary network protocol telemetry package containing header, payload, dynamic sensor arrays, checksum, and footer.</li>
+<li>Force the structure alignments to match standard network transport streams without padding bytes (<code>#pragma pack</code> or <code>_Alignas</code>).</li>
+<li>Build serialize and deserialize functions using pointer offsets and casting to map telemetry frames to structures.</li>
+<li>Implement automatic byte-swapping to ensure Big-Endian/Little-Endian host compatibility (network byte order translation).</li>
+</ol>
+<h3>📊 Evaluation Scoring Rubric</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Evaluation Metric</th>
+<th style="text-align: left;">Passing Criteria (Must Met)</th>
+<th style="text-align: left;">Triggers Automatic Failure (FAIL)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Data Alignment</strong></td>
+<td style="text-align: left;">Struct sizes match expected payload byte size exactly. Alignment verified via compile-time assertions (<code>_Static_assert</code>).</td>
+<td style="text-align: left;">Extra structure padding bytes detected; missing byte-swapping checks.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Pointers &amp; Casting</strong></td>
+<td style="text-align: left;">Cast operations handled without violating strict aliasing rules; pointer math bounds checked.</td>
+<td style="text-align: left;">Buffer overflow hazards, raw out-of-bounds pointer offsets.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Testing</strong></td>
+<td style="text-align: left;">Automated unit tests covering serialization/deserialization correctness under multiple endian setups.</td>
+<td style="text-align: left;">No unit tests; tests fail to mock packet corruptions.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>🏆 Milestone 3 Gatekeeper: Custom Memory Arena &amp; Object Pool Allocator</h2>
+<ul>
+<li><strong>Checkpoint:</strong> End of Week 09 (Milestone 3)</li>
+<li><strong>Goal:</strong> Verify understanding of dynamic memory management, low-level heap mappings, file I/O operations, and X-Macros.</li>
+</ul>
+<h3>📝 Core Specifications</h3>
+<ol>
+<li>Implement a custom memory manager that creates a massive contiguous pool of memory using <code>mmap</code> or standard structures.</li>
+<li>Provide two allocators:</li>
+<li><strong>Arena Allocator:</strong> Fast linear allocations with a bulk free capability.</li>
+<li><strong>Object Pool Allocator:</strong> Constant-time fixed-size block allocations with random-access freeing and metadata bitmapping.</li>
+<li>Completely ban the use of standard <code>malloc</code> and <code>free</code> inside active application code blocks.</li>
+<li>Generate diagnostic logging that tracks current allocations, fragmentation margins, and leak states. Write logs to file via unbuffered low-level systems I/O (<code>write</code>).</li>
+</ol>
+<h3>📊 Evaluation Scoring Rubric</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Evaluation Metric</th>
+<th style="text-align: left;">Passing Criteria (Must Met)</th>
+<th style="text-align: left;">Triggers Automatic Failure (FAIL)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Memory Mechanics</strong></td>
+<td style="text-align: left;">Custom allocator handles alignments properly; linear allocation speeds validated; zero dynamic leaks on pool exit.</td>
+<td style="text-align: left;">Valgrind flags dynamic pool memory leaks, uninitialized reads, or invalid frees.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Systems I/O</strong></td>
+<td style="text-align: left;">Log file writing utilizes direct system calls (<code>open</code>, <code>write</code>, <code>close</code>) with error diagnostics mapped to <code>errno</code>.</td>
+<td style="text-align: left;">Using buffered standard <code>fopen</code>/<code>fprintf</code> streams.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Code Generation</strong></td>
+<td style="text-align: left;">X-Macros utilized to dynamically declare object structure types and their pool instances automatically.</td>
+<td style="text-align: left;">Manual boilerplate pool expansion code.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>🏆 Milestone 4 Gatekeeper: Thread-Safe Concurrent Systems Shell</h2>
+<ul>
+<li><strong>Checkpoint:</strong> End of Week 12 (Milestone 4 / Graduation)</li>
+<li><strong>Goal:</strong> Verify complete understanding of thread concurrency, race conditions, POSIX locks, defensive code standards, and production profiling.</li>
+</ul>
+<h3>📝 Core Specifications</h3>
+<ol>
+<li>Build a custom multi-threaded execution shell capable of processing background tasks, pipelined commands, and thread pools.</li>
+<li>Ensure 100% compliance with a selected safety-critical subset of MISRA-C guidelines.</li>
+<li>Manage concurrency safely: use mutexes and condition variables to schedule execution threads; eliminate all race conditions on the task pool queue.</li>
+<li>Perform system performance audits using <code>gprof</code> or <code>perf</code> to profile and eliminate thread execution locks bottlenecks.</li>
+<li>Code must be 100% clean under Valgrind's leak-check and thread-check (<code>helgrind</code>/<code>drd</code>) tools.</li>
+</ol>
+<h3>📊 Evaluation Scoring Rubric</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Evaluation Metric</th>
+<th style="text-align: left;">Passing Criteria (Must Met)</th>
+<th style="text-align: left;">Triggers Automatic Failure (FAIL)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Thread Concurrency</strong></td>
+<td style="text-align: left;">Zero deadlocks; zero race conditions; tasks processed in parallel. Helgrind/DRD executes with zero warnings.</td>
+<td style="text-align: left;">Thread synchronization issues, deadlocks, or lock bouncing.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Safety Standards</strong></td>
+<td style="text-align: left;">Passed <code>cppcheck</code> under MISRA standard checkers with zero flags. Buffer lengths verified defensively.</td>
+<td style="text-align: left;">Unsafe standard string function calls; MISRA violations.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Graduation Audit</strong></td>
+<td style="text-align: left;">Complete portfolio review presenting execution profiles, zero memory leaks, Makefile, and robust multi-threading test suite.</td>
+<td style="text-align: left;">Dynamic memory leaks, failure to spawn parallel task workers.</td>
+</tr>
+</tbody>
+</table></div><div class="section week-plan"><h1>Week 01: Compiler Mechanics &amp; Build Systems</h1>
+<h2>🎯 Weekly Goal</h2>
+<p>Understand how human-readable C files are transformed into machine-executable binaries, control every stage of the compilation pipeline (preprocessing, compilation, assembly, linking), and master automated build systems using GNU Make.</p>
+<h2>🎓 Weekly Outcome</h2>
+<p>By the end of this week, you will be able to dissect ELF binaries, explain compilation flags, write robust Makefiles that handle automated file dependency-tracking, and build modular, clean-compiling C libraries.</p>
+<hr />
+<h2>📅 Session Breakdown</h2>
+<h3>Monday: The Four Stages of C Compilation</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Deep-dive into the four compilation stages:</li>
+<li><strong>Preprocessing (<code>cpp</code>):</strong> Header inclusion (<code>#include</code>), macro expansion (<code>#define</code>), conditional compilation (<code>#ifdef</code>). Generates <code>.i</code> files.</li>
+<li><strong>Compilation (<code>cc1</code>):</strong> Translates preprocessed C code into assembly instructions. Performs syntax audits, type checks, and optimizations. Generates <code>.s</code> files.</li>
+<li><strong>Assembly (<code>as</code>):</strong> Translates assembly instructions into relocatable machine instructions (object code). Generates <code>.o</code> files.</li>
+<li><strong>Linking (<code>ld</code>):</strong> Resolves symbols, binds library functions, and constructs the final executable (ELF format).</li>
+<li><strong>Hands-on Experiment:</strong>
+  We will compile a simple C file, pausing at every single stage of the compiler pipeline:
+  ```bash
+  # 1. Preprocess only (observe the expanded macros and headers)
+  gcc -E main.c -o main.i</li>
+</ul>
+<p># 2. Compile to assembly (read the assembly registers)
+  gcc -S main.i -o main.s</p>
+<p># 3. Assemble to object file (raw binary code)
+  gcc -c main.s -o main.o</p>
+<p># 4. Link to final executable
+  gcc main.o -o main_exec
+  ```</p>
+<hr />
+<h3>Tuesday: The Professional Compiler Flag Suite</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Mastering the flags that distinguish professional systems-level engineers from hobbyists.</li>
+<li><strong>Core Flag Index:</strong></li>
+<li><code>-Wall -Wextra -Werror -pedantic</code>: Force complete conformance, converting all warnings into fatal compilation errors.</li>
+<li><code>-O2</code> vs <code>-O0</code>: Understand compiler optimizations (register assignments, loop unrolling, instruction scheduling) and how they affect debugging.</li>
+<li><code>-g3 -ggdb</code>: Include rich debugging symbols for GDB, enabling you to inspect macros at runtime.</li>
+<li><strong>Hands-on Exercise:</strong>
+  Compile a C code that contains latent bugs (e.g. uninitialized variable use, unused function parameters) and observe how the flag suite prevents compilation.
+  <code>c
+  /* unsafe.c */
+  #include &lt;stdio.h&gt;
+  int main(void) {
+      int x; // Uninitialized
+      printf("Value: %d\n", x);
+      return 0;
+  }</code>
+  Compile with:
+  <code>bash
+  gcc -std=c11 -Wall -Wextra -Werror -pedantic -O2 unsafe.c -o unsafe</code>
+  Observe the compilation aborting immediately.</li>
+</ul>
+<hr />
+<h3>Wednesday: Object Files &amp; Symbol Resolution</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Dissecting Relocatable Object Files (<code>.o</code>) and Symbol Tables.</li>
+<li>What is the difference between global, static, and external symbols?</li>
+<li>Understanding symbols states: Undefined (<code>U</code>), Text (<code>T</code>), Data (<code>D</code>), BSS (<code>B</code>).</li>
+<li><strong>Hands-on Tools:</strong>
+  Using <code>nm</code> and <code>objdump</code> to trace symbols and raw sections inside object files:
+  ```bash
+  # View all symbols inside an object file
+  nm main.o</li>
+</ul>
+<p># Inspect ELF sections (.text, .data, .bss, .rodata)
+  objdump -h main.o</p>
+<p># Disassemble binary code into readable assembly instructions
+  objdump -d main.o
+  ```</p>
+<hr />
+<h3>Thursday: Introduction to GNU Make</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Automated builds using Makefiles.</li>
+<li>Makefile anatomy: Targets, Dependencies, and Commands.</li>
+<li>The critical role of tabs vs spaces (Make rules <em>must</em> be indented with a single tab character).</li>
+<li>Standard variables: <code>CC</code>, <code>CFLAGS</code>, <code>LDFLAGS</code>, <code>SRC</code>, <code>OBJ</code>, <code>TARGET</code>.</li>
+<li><strong>Hands-on Experiment:</strong>
+  Write a basic Makefile that compiles a three-file project.
+  ```makefile
+  CC = gcc
+  CFLAGS = -std=c11 -Wall -Wextra -Werror -pedantic -g</li>
+</ul>
+<p>all: app</p>
+<p>app: main.o utils.o
+    $(CC) $(CFLAGS) main.o utils.o -o app</p>
+<p>main.o: main.c
+    $(CC) $(CFLAGS) -c main.c -o main.o</p>
+<p>utils.o: utils.c
+    $(CC) $(CFLAGS) -c utils.c -o utils.o</p>
+<p>clean:
+    rm -f *.o app
+  ```</p>
+<hr />
+<h3>Friday: Advanced Makefiles &amp; Auto-Dependency Tracking</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Hand-writing manual dependency rules scales poorly. If a header file (<code>utils.h</code>) changes, <code>main.c</code> must be recompiled.</li>
+<li><strong>Dynamic Dependency Generation:</strong> Using GCC flags <code>-MMD -MP</code> to auto-generate dependency files (<code>.d</code>) containing all header relationships.</li>
+<li><strong>Hands-on Project:</strong>
+  Build a production-grade, reusable Makefile that handles directory separation (<code>src/</code>, <code>build/</code>, <code>bin/</code>) and automatically tracks all header changes.</li>
+</ul>
+<hr />
+<h2>🛠️ Hands-On Assignment: Modular Matrix Math Library</h2>
+<p>Design, build, and modularize a multi-file matrix operations library containing matrix addition, transpose, and scalar multiplication, governed by a professional Makefile.</p>
+<h3>1. Code Architecture</h3>
+<p>Create three files:
+* <code>matrix.h</code>: Data structures and safe function declarations.
+* <code>matrix.c</code>: Implementations of matrix operations with safe boundary check inputs.
+* <code>main.c</code>: Test scenarios and performance audits.</p>
+<h3>2. Header Structure (<code>matrix.h</code>)</h3>
+<pre><code class="language-c">#ifndef MATRIX_H
+#define MATRIX_H
+
+#define MAX_ROWS 10
+#define MAX_COLS 10
+
+typedef struct {
+    int rows;
+    int cols;
+    double data[MAX_ROWS][MAX_COLS];
+} Matrix;
+
+/* Safely initialize a matrix */
+int matrix_init(Matrix *m, int rows, int cols, const double *values);
+
+/* Safely print a matrix */
+void matrix_print(const Matrix *m);
+
+/* Add m1 and m2, store result in dest. Return 0 on success, -1 on size mismatch. */
+int matrix_add(const Matrix *m1, const Matrix *m2, Matrix *dest);
+
+#endif /* MATRIX_H */
+</code></pre>
+<h3>3. The Professional Makefile</h3>
+<p>Write an automated Makefile that compiles your files. It <em>must</em> generate a <code>.d</code> dependency file for every source file, so that updating <code>matrix.h</code> automatically triggers the rebuild of all C files that include it.</p>
+<hr />
+<h2>📋 Deliverables Checklist</h2>
+<ul>
+<li>[ ] <code>matrix.h</code> (Clean interfaces, header guards)</li>
+<li>[ ] <code>matrix.c</code> (Bounds-checked matrix routines)</li>
+<li>[ ] <code>main.c</code> (Rich test framework)</li>
+<li>[ ] <code>Makefile</code> (Automated dependencies, separate <code>build/</code> directory)</li>
+</ul>
+<hr />
+<h2>❓ Self-Check Questions</h2>
+<ol>
+<li>Why does the compiler preprocessor expand <code>#include &lt;stdio.h&gt;</code> by copying the raw file content instead of linking it directly?</li>
+<li>What is the difference between compiler warnings with and without the <code>-pedantic</code> flag?</li>
+<li>How do the compiler flags <code>-MMD</code> and <code>-MP</code> work together to generate Makefile dependencies automatically?</li>
+<li>What is the distinction between relocatable object files (<code>.o</code>) and executables (<code>ELF</code>) during symbol resolution?</li>
+<li>Why are variables defined inside header files (<code>.h</code>) a major hazard when compiling multi-file C programs?</li>
+</ol>
+<hr />
+<h2>🚀 Stretch Task</h2>
+<p>Modify your Makefile to build your matrix operations into a <strong>Dynamic Shared Library</strong> (<code>.so</code>) file. Update the Makefile to link your test binary against this dynamic library at compile time, and configure the runtime search path (<code>-Wl,-rpath</code>) so the executable can locate the <code>.so</code> without system-wide installation.</p>
+<hr />
+<h2>💡 Motivation Checkpoint</h2>
+<p>In large-scale systems (like the Linux kernel, which has over 20 million lines of C code), compiling the entire system from scratch on every minor change is impossible. Mastering incremental compilation, dependency generation, and symbol tables is the baseline skill that allows you to work inside professional systems architectures without breaking builds or wasting compilation hours.</p>
+<hr />
+<h2>🎓 Trainer Review Rules</h2>
+<ul>
+<li>Compile code using <code>make</code>—it must compile with zero errors or warnings under the mandatory flag suite.</li>
+<li>Verify incremental compiling: modifying <code>matrix.h</code> must recompile <code>matrix.c</code> and <code>main.c</code>. Modifying <em>only</em> <code>main.c</code> must <em>not</em> recompile <code>matrix.c</code>.</li>
+<li>The Makefile must clear all object files and dependencies cleanly on <code>make clean</code>.</li>
+</ul></div><div class="section week-plan"><h1>Week 02: Types, Representations, &amp; CPU Realities</h1>
+<h2>🎯 Weekly Goal</h2>
+<p>Master the physical layout of data types in memory, understand CPU radix formats, explore float representation limits, and implement robust overflow/underflow detection in C.</p>
+<h2>🎓 Weekly Outcome</h2>
+<p>By the end of this week, you will be able to write architecture-independent code using explicit fixed-width integers, identify floating-point round-off flaws, detect arithmetic integer overflows <em>before</em> they occur, and manipulate raw binary bits securely.</p>
+<hr />
+<h2>📅 Session Breakdown</h2>
+<h3>Monday: The Integer Representation Layer</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> How integers are stored in silicon:</li>
+<li><strong>Unsigned Integers:</strong> Pure binary counting.</li>
+<li><strong>Signed Integers (Two's Complement):</strong> To negate a number, invert all bits and add 1. Understand why this layout makes CPU addition circuits identical for signed and unsigned math.</li>
+<li><strong>Sign Extension:</strong> What happens when casting a smaller signed type (e.g., <code>int8_t</code>) to a larger type (e.g., <code>int32_t</code>). Explain how the sign bit is duplicated to preserve the negative value.</li>
+<li><strong>Hands-on Experiment:</strong>
+  Inspect memory bytes using a pointer type-cast union:
+  ```c
+  #include <stdio.h>
+  #include <stdint.h></li>
+</ul>
+<p>int main(void) {
+      int8_t a = -5;
+      uint8_t <em>p = (uint8_t </em>)&a;
+      printf("Value: %d, Hex byte in memory: 0x%02X\n", a, *p);</p>
+<pre><code>  // Perform cast and observe sign extension
+  int32_t extended = a;
+  printf("Extended value: %d, Hex representation: 0x%08X\n", extended, extended);
+  return 0;
+</code></pre>
+<p>}
+  ```</p>
+<hr />
+<h3>Tuesday: Fixed-Width Integers (<code>stdint.h</code>)</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> The portability trap.</li>
+<li>In standard C, the size of raw types (<code>int</code>, <code>long</code>, <code>short</code>) is compiler and hardware dependent (e.g., <code>int</code> is 16-bit on old MCUs, 32-bit on modern x86/ARM CPUs).</li>
+<li>Why standard libraries for safety-critical coding demand fixed-width integers: <code>uint8_t</code>, <code>int16_t</code>, <code>uint32_t</code>, <code>int64_t</code>.</li>
+<li><strong>Hands-on Exercise:</strong>
+  Investigate architecture limits using standard macros:
+  ```c
+  #include <stdio.h>
+  #include <stdint.h>
+  #include <limits.h></li>
+</ul>
+<p>int main(void) {
+      printf("Max uint32_t: %u\n", UINT32_MAX);
+      printf("Min int16_t: %d, Max int16_t: %d\n", INT16_MIN, INT16_MAX);
+      return 0;
+  }
+  ```</p>
+<hr />
+<h3>Wednesday: IEEE-754 Floating-Point Realities</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Decimal representation limits.</li>
+<li>Single-precision (<code>float</code>) and Double-precision (<code>double</code>) representations: Sign bit, Exponent, and Significand (Mantissa).</li>
+<li>Why some fractions (like <code>0.1</code>) cannot be represented exactly in binary, causing infinite recurring decimals and round-off accumulation errors.</li>
+<li>Why <strong>never</strong> to use <code>==</code> or <code>!=</code> comparisons on floats.</li>
+<li><strong>Hands-on Experiment:</strong>
+  Demonstrate float precision leakage:
+  <code>c
+  #include &lt;stdio.h&gt;
+  int main(void) {
+      float sum = 0.0f;
+      for (int i = 0; i &lt; 10; i++) {
+          sum += 0.1f;
+      }
+      printf("Sum of 0.1 ten times: %.10f\n", sum);
+      if (sum == 1.0f) {
+          printf("Exactly 1.0\n");
+      } else {
+          printf("Not 1.0! Precision leakage occurred.\n");
+      }
+      return 0;
+  }</code>
+  Learn to compare floats using an epsilon value: <code>if (fabs(sum - 1.0f) &lt; 1e-6)</code>.</li>
+</ul>
+<hr />
+<h3>Thursday: Integer Overflow &amp; Underflow Disasters</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> The catastrophic safety hazard.</li>
+<li>In signed math, integer overflow is <strong>undefined behavior (UB)</strong>—the compiler might optimize away checks entirely.</li>
+<li>In unsigned math, overflow wraps around silently (<code>UINT_MAX + 1 == 0</code>).</li>
+<li>How overflow leads to heap buffer overflow exploits.</li>
+<li><strong>Hands-on Exercise:</strong>
+  Write defensive checking functions <em>before</em> executing the addition:
+  ```c
+  #include <stdio.h>
+  #include <stdint.h>
+  #include <stdbool.h></li>
+</ul>
+<p>bool safe_add_uint32(uint32_t a, uint32_t b, uint32_t <em>result) {
+      if (UINT32_MAX - a &lt; b) {
+          return false; // Overflow warning
+      }
+      </em>result = a + b;
+      return true;
+  }
+  ```</p>
+<hr />
+<h3>Friday: Endianness &amp; Byte Swapping</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Hardware architectures store bytes differently.</li>
+<li><strong>Little-Endian (x86, ARM default):</strong> Least Significant Byte (LSB) stored at lowest memory address.</li>
+<li><strong>Big-Endian (Network protocols):</strong> Most Significant Byte (MSB) stored at lowest address.</li>
+<li><strong>Hands-on Exercise:</strong>
+  Detect host endianness at runtime and write a custom byte-swapper function.</li>
+</ul>
+<hr />
+<h2>🛠️ Hands-On Assignment: Safe Float Parser &amp; Numeric Auditor</h2>
+<p>Implement a high-integrity parser that converts clean string inputs to numeric float coordinates and audits unsigned binary arithmetic arrays, protecting against overflows.</p>
+<h3>1. Requirements</h3>
+<ul>
+<li>Implement <code>int parse_coordinate(const char *str, float *val)</code> which extracts coordinates safely, checking for parse boundary limits and returning <code>0</code> on success, <code>-1</code> on format error.</li>
+<li>Implement <code>int safe_array_sum(const uint32_t *arr, int len, uint64_t *sum_out)</code> which computes sums and safely detects overflows, returning <code>-1</code> if array indices trigger bounds failures.</li>
+</ul>
+<h3>2. File Deliverables</h3>
+<ul>
+<li><code>auditor.h</code>: Declarations of boundary structures and functions.</li>
+<li><code>auditor.c</code>: Boundary checks implementation.</li>
+<li><code>main.c</code>: Unit tests asserting parser performance against overflow patterns.</li>
+</ul>
+<hr />
+<h2>📋 Deliverables Checklist</h2>
+<ul>
+<li>[ ] <code>auditor.h</code> (Strict header constraints)</li>
+<li>[ ] <code>auditor.c</code> (Safe addition and parse functions)</li>
+<li>[ ] <code>main.c</code> (Test runner demonstrating safe sum checks)</li>
+<li>[ ] <code>Makefile</code> (Zero warnings compile setup)</li>
+</ul>
+<hr />
+<h2>❓ Self-Check Questions</h2>
+<ol>
+<li>Why does Two's Complement representation make hardware logic subtraction identical to addition?</li>
+<li>What happens to the sign bit of an <code>int8_t</code> when cast to an <code>unsigned int</code> (sign extension vs raw byte mapping)?</li>
+<li>Why does single-precision float <code>0.1</code> cause recurring decimal errors in binary representation?</li>
+<li>Write a defensive condition to verify if multiplying two <code>uint32_t</code> values will trigger an overflow.</li>
+<li>How can you identify if your Linux host system is Little-Endian or Big-Endian in pure C without calling system tools?</li>
+</ol>
+<hr />
+<h2>🚀 Stretch Task</h2>
+<p>Implement an <strong>Arbitrary Precision Integer Addition Engine</strong> ("BigInt") that stores extremely massive numbers as an array of <code>uint8_t</code> digits (representing digits 0-9) and performs arithmetic addition using safe column-by-column carrying, allowing you to add numbers up to 100 digits long without overflow.</p>
+<hr />
+<h2>💡 Motivation Checkpoint</h2>
+<p>Integer overflows are one of the most exploited security vulnerabilities in software history. In 1996, the Ariane 5 rocket exploded 40 seconds after launch due to an unhandled 64-bit float to 16-bit signed integer conversion overflow, costing $370 million. Operating at a systems level means designing safe bounds checks into every transaction.</p>
+<hr />
+<h2>🎓 Trainer Review Rules</h2>
+<ul>
+<li>Validate parsing robustness: input strings with excessive spaces, negative signs, and non-numeric characters must fail cleanly.</li>
+<li>Unsigned addition arithmetic must trigger error return codes immediately upon boundary breach, without relying on wrap-around detection.</li>
+</ul></div><div class="section week-plan"><h1>Week 03: Control Flow &amp; Defensive Branching</h1>
+<h2>🎯 Weekly Goal</h2>
+<p>Master secure control structures, understand how conditional jumps affect CPU execution pipelines, and learn how to optimize control paths using branch-free systems coding.</p>
+<h2>🎓 Weekly Outcome</h2>
+<p>By the end of this week, you will be able to construct robust state machines without redundant conditional blocks, explain CPU branch prediction states, write branch-free array filters, and protect your execution flows from infinite execution loops.</p>
+<hr />
+<h2>📅 Session Breakdown</h2>
+<h3>Monday: The Security Risks of Control Loops</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Loops are critical vectors for Denials of Service (DoS).</li>
+<li>Why all <code>while(1)</code> or <code>for(;;)</code> loops inside network or parsing routines must incorporate an absolute escape threshold.</li>
+<li>Ensuring loop termination conditions rely on strict monotonic counters.</li>
+<li><strong>Hands-on Experiment:</strong>
+  Analyze how unescapable conditions crash systems:
+  ```c
+  #include <stdio.h>
+  #include <stdbool.h></li>
+</ul>
+<p>void parse_data_unsafe(const char *buffer) {
+      int i = 0;
+      // UNSAFE: If buffer contains malformed null-termination, loop is infinite.
+      while (buffer[i] != '\n') {
+          // Process
+          i++;
+      }
+  }</p>
+<p>void parse_data_safe(const char *buffer, int max_len) {
+      int i = 0;
+      // SAFE: Multi-bounds verification
+      while (i &lt; max_len &amp;&amp; buffer[i] != '\n') {
+          // Process
+          i++;
+      }
+  }
+  ```</p>
+<hr />
+<h3>Tuesday: How CPUs Handle Branches</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> The CPU instruction pipeline.</li>
+<li>Modern CPUs use pipelining to pre-fetch instructions. When the CPU encounters a branch (<code>if</code>), it <em>predicts</em> which path will be taken to avoid stalling the pipeline.</li>
+<li><strong>Branch Misprediction Penalty:</strong> If the prediction is wrong, the CPU must flush the entire pipeline, costing significant execution cycles.</li>
+<li>Tracing how compilers compile <code>switch</code> statements into assembly <strong>Jump Tables</strong> for constant-time dispatch.</li>
+</ul>
+<hr />
+<h3>Wednesday: Branch-Free Coding Principles</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Eliminating <code>if</code> conditions inside critical inner loops.</li>
+<li>Replacing branches with bitwise masks or logical operations.</li>
+<li>Formula: <code>val = condition ? x : y;</code> can be rewritten as a branch-free operation.</li>
+<li><strong>Hands-on Experiment:</strong>
+  Observe the performance gap between a branched and branch-free array mapping.
+  ```c
+  #include <stdio.h>
+  #include <time.h>
+  #include <stdlib.h></li>
+</ul>
+<p>#define ARRAY_SIZE 100000</p>
+<p>int main(void) {
+      int *arr = malloc(ARRAY_SIZE * sizeof(int));
+      for (int i = 0; i &lt; ARRAY_SIZE; i++) arr[i] = rand() % 2;</p>
+<pre><code>  // Branched Loop
+  clock_t start = clock();
+  long long sum = 0;
+  for (int i = 0; i &lt; ARRAY_SIZE; i++) {
+      if (arr[i] == 1) {
+          sum += 10;
+      }
+  }
+  printf("Branched time: %f s\n", (double)(clock() - start) / CLOCKS_PER_SEC);
+
+  // Branch-Free Loop
+  start = clock();
+  sum = 0;
+  for (int i = 0; i &lt; ARRAY_SIZE; i++) {
+      // Multiply value directly by logic result (0 or 1)
+      sum += (arr[i] == 1) * 10;
+  }
+  printf("Branch-free time: %f s\n", (double)(clock() - start) / CLOCKS_PER_SEC);
+
+  free(arr);
+  return 0;
+</code></pre>
+<p>}
+  ```</p>
+<hr />
+<h3>Thursday: Safety in Complex Conditions</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Short-circuit evaluation hazards.</li>
+<li>In C, logical <code>&amp;&amp;</code> and <code>||</code> evaluate left-to-right and stop as soon as the result is known.</li>
+<li>Why you must <strong>never</strong> perform state mutations (like pointer increments or function calls) inside logical checks.</li>
+<li><strong>Hands-on Exercise:</strong>
+  Identify the short-circuit mutation bug:
+  <code>c
+  #include &lt;stdio.h&gt;
+  int main(void) {
+      int x = 0;
+      int y = 5;
+      // If x is 0, the second condition is never evaluated, meaning y is not incremented!
+      if (x != 0 &amp;&amp; ++y &gt; 5) {
+          printf("Passed\n");
+      }
+      printf("Value of y: %d (Expected: 6, Actual: 5 due to short-circuit)\n", y);
+      return 0;
+  }</code></li>
+</ul>
+<hr />
+<h3>Friday: Designing Clean State Machines</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Translating chaotic <code>if-else</code> trees into clean Event-Driven Finite State Machines (FSM).</li>
+<li><strong>Hands-on Exercise:</strong>
+  Define states using <code>enum</code> and map state actions cleanly to structured targets.</li>
+</ul>
+<hr />
+<h2>🛠️ Hands-On Assignment: Branch-Free Command Interpreter</h2>
+<p>Build a high-speed string configuration command interpreter that parses and processes an operations array.</p>
+<h3>1. Requirements</h3>
+<ul>
+<li>Eliminate nested conditional blocks inside the main execution loop.</li>
+<li>Parse 4 commands: <code>INIT</code>, <code>RUN</code>, <code>HALT</code>, <code>REBOOT</code>.</li>
+<li>State validation must occur via state transition lookup tables (FSM).</li>
+<li>Write unit tests that pass malformed streams to assert error recovery.</li>
+</ul>
+<h3>2. File Deliverables</h3>
+<ul>
+<li><code>interpreter.h</code>: State machine structures and validation functions.</li>
+<li><code>interpreter.c</code>: Branch-free FSM routines.</li>
+<li><code>main.c</code>: Unit tests.</li>
+</ul>
+<hr />
+<h2>📋 Deliverables Checklist</h2>
+<ul>
+<li>[ ] <code>interpreter.h</code> (Clean structs and enumerations)</li>
+<li>[ ] <code>interpreter.c</code> (Zero nested branches)</li>
+<li>[ ] <code>main.c</code> (Test runner parsing streams)</li>
+<li>[ ] <code>Makefile</code> (Strict C11 compiler setup)</li>
+</ul>
+<hr />
+<h2>❓ Self-Check Questions</h2>
+<ol>
+<li>How does a branch misprediction physically stall a CPU's instruction execution pipeline?</li>
+<li>Explain the mechanism compilers use to transform a <code>switch-case</code> block into an assembly Jump Table.</li>
+<li>Why are increments like <code>i++</code> dangerous when placed inside short-circuit logical operators (<code>&amp;&amp;</code>)?</li>
+<li>Write a branch-free C statement that sets variable <code>x</code> to <code>10</code> if <code>y &gt; 5</code>, otherwise sets it to <code>0</code>.</li>
+<li>What defines a monotonic loop variable, and why does it guarantee termination?</li>
+</ol>
+<hr />
+<h2>🚀 Stretch Task</h2>
+<p>Optimize your state machine processing to handle <strong>Simd-like</strong> parallel processing. Implement a branch-free parser that uses bitmask operations to process four 8-bit command codes packed into a single 32-bit register concurrently.</p>
+<hr />
+<h2>💡 Motivation Checkpoint</h2>
+<p>In safety-critical avionics firmware, the FAA requires absolute testing profiles for every possible execution branch (MC/DC coverage). Design techniques that minimize deep conditional structures not only yield massive speed performance gains but dramatically reduce testing overhead and compiler code paths complexity.</p>
+<hr />
+<h2>🎓 Trainer Review Rules</h2>
+<ul>
+<li>Verify cyclomatic complexity: No function can exceed a complexity rating of 3 (maximum of 2 nested logic paths).</li>
+<li>The command execution loop must operate with zero branching elements—utilize direct jump tables or bitmask multiplication.</li>
+</ul></div><div class="section week-plan"><h1>Week 04: The Call Stack &amp; Execution Frames</h1>
+<h2>🎯 Weekly Goal</h2>
+<p>Master the mechanics of the CPU call stack, understand how function calls allocate memory dynamically at runtime, control storage lifetimes (<code>static</code>, <code>extern</code>), and prevent stack corruption and buffer overflow exploits.</p>
+<h2>🎓 Weekly Outcome</h2>
+<p>By the end of this week, you will be able to map stack frame activation records, audit function calling conventions (<code>cdecl</code>, <code>stdcall</code>), trace local scopes in assembly, explain stack variable lifetimes, and deploy defensive bounds checks to protect the stack frame.</p>
+<hr />
+<h2>📅 Session Breakdown</h2>
+<h3>Monday: Call Stack Anatomy &amp; Activation Records</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> The LIFO (Last-In-First-Out) runtime stack.</li>
+<li>Stack directions (growth from high memory to low memory).</li>
+<li><strong>The Stack Frame (Activation Record):</strong> What gets pushed when a function is called:<ol>
+<li>Function Arguments.</li>
+<li>Return Address (where the CPU returns after execution).</li>
+<li>Saved Frame Pointer (<code>EBP</code>/<code>RBP</code>).</li>
+<li>Local Variables.</li>
+</ol>
+</li>
+<li><strong>Hands-on Experiment:</strong>
+  Trace stack growth direction by checking addresses of nested local variables:
+  ```c
+  #include <stdio.h></li>
+</ul>
+<p>void nest(int depth) {
+      int local;
+      printf("Depth %d: Local variable address: %p\n", depth, (void *)&amp;local);
+      if (depth &lt; 3) {
+          nest(depth + 1);
+      }
+  }</p>
+<p>int main(void) {
+      nest(1);
+      return 0;
+  }
+  ```
+  Observe that the memory addresses decrease as depth increases, demonstrating downward stack growth.</p>
+<hr />
+<h3>Tuesday: CPU Calling Conventions</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> The agreement between caller and callee.</li>
+<li>Who cleans the stack (caller or callee)?</li>
+<li><strong>cdecl (C Default):</strong> Caller cleans the stack. Supports variable argument lengths (<code>printf</code>).</li>
+<li><strong>stdcall (Win32):</strong> Callee cleans the stack.</li>
+<li><strong>fastcall:</strong> Passes first arguments in registers (<code>RCX</code>, <code>RDX</code>) for ultra-fast executions.</li>
+<li><strong>Hands-on Exercise:</strong>
+  Inspect disassembly to see how parameters are passed to functions (stack pushing vs register loading).</li>
+</ul>
+<hr />
+<h3>Wednesday: Variables Lifetime &amp; Scopes</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Storage Durations:</li>
+<li><strong>Automatic (<code>auto</code>):</strong> Allocated on stack upon block entry, destroyed on exit.</li>
+<li><strong>Static (<code>static</code>):</strong> Persistent memory allocated in the <code>.data</code> or <code>.bss</code> segments for the lifetime of the program.</li>
+<li><strong>External (<code>extern</code>):</strong> Global symbol reference declared in another compile unit.</li>
+<li><strong>Hands-on Experiment:</strong>
+  Verify persistent storage states:
+  ```c
+  #include <stdio.h></li>
+</ul>
+<p>int counter(void) {
+      static int count = 0; // Stored in .data segment, not on the stack!
+      return ++count;
+  }</p>
+<p>int main(void) {
+      printf("Run 1: %d\n", counter());
+      printf("Run 2: %d\n", counter());
+      return 0;
+  }
+  ```</p>
+<hr />
+<h3>Thursday: Stack Corruption &amp; Buffer Overflows</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Exploiting stack overflows.</li>
+<li>What happens when writing past array boundaries allocated on the stack.</li>
+<li>Overwriting the stored <strong>Return Address</strong> with shellcode or malformed addresses.</li>
+<li>Compiler defense mechanisms: <strong>Stack Canaries</strong> (<code>-fstack-protector</code>).</li>
+<li><strong>Hands-on Exercise:</strong>
+  Trace a basic stack overflow layout using a debugger:
+  ```c
+  #include <stdio.h>
+  #include <string.h></li>
+</ul>
+<p>void unsafe_copy(const char *input) {
+      char buffer[8];
+      // If input &gt; 8 bytes, buffer overflow!
+      strcpy(buffer, input); 
+      printf("Buffer: %s\n", buffer);
+  }
+  ```</p>
+<hr />
+<h3>Friday: Compiler Assembly Analysis</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Inspecting function prologue and epilogue.</li>
+<li><strong>Prologue:</strong> <code>push rbp; mov rbp, rsp; sub rsp, N</code> (allocates local space).</li>
+<li><strong>Epilogue:</strong> <code>leave; ret</code> (cleans local space and returns).</li>
+<li><strong>Hands-on Exercise:</strong> Disassemble and read prologue steps of your local binaries using GCC and objdump.</li>
+</ul>
+<hr />
+<h2>🛠️ Hands-On Assignment: Stack Call Frame Emulator</h2>
+<p>Write a simulator in C that mimics CPU stack frames allocation, parameter passing, and tracks register pointers.</p>
+<h3>1. Requirements</h3>
+<ul>
+<li>Implement a struct representing the CPU state (<code>Registers</code>: <code>ESP</code>, <code>EBP</code>, <code>EIP</code>).</li>
+<li>Mimic function execution calls: <code>sim_push_frame()</code>, <code>sim_pop_frame()</code>, and parameter allocations.</li>
+<li>Log all activation record parameters inside a stack dump visualizer.</li>
+<li>The simulator must gracefully catch "stack overflows" before frame limits are violated.</li>
+</ul>
+<h3>2. File Deliverables</h3>
+<ul>
+<li><code>stack_sim.h</code>: Registers, Frame structures, and boundaries.</li>
+<li><code>stack_sim.c</code>: Pushing and popping emulator functions.</li>
+<li><code>main.c</code>: Unit tests.</li>
+</ul>
+<hr />
+<h2>📋 Deliverables Checklist</h2>
+<ul>
+<li>[ ] <code>stack_sim.h</code> (Clean CPU registry representations)</li>
+<li>[ ] <code>stack_sim.c</code> (Safe emulated stack limits checks)</li>
+<li>[ ] <code>main.c</code> (Test suites tracking allocations)</li>
+<li>[ ] <code>Makefile</code> (Strict C11 rules compile)</li>
+</ul>
+<hr />
+<h2>❓ Self-Check Questions</h2>
+<ol>
+<li>Why does the CPU call stack grow downwards on most modern computer architectures?</li>
+<li>What are the mechanical trade-offs between <code>cdecl</code> and <code>stdcall</code> calling conventions?</li>
+<li>How does declaring a variable <code>static</code> inside a function block change its storage allocation and lifetime?</li>
+<li>Explain how a "Stack Canary" prevents malicious execution redirection during a buffer overflow event.</li>
+<li>In assembly, what exact steps do the instructions <code>push rbp</code> and <code>mov rbp, rsp</code> accomplish?</li>
+</ol>
+<hr />
+<h2>🚀 Stretch Task</h2>
+<p>Implement an automated <strong>Stack Tracing Profiler</strong> inside your simulator. Add logic to record function depth, measure maximum simulated stack depth, and output a detailed profile graph illustrating call-tree operations.</p>
+<hr />
+<h2>💡 Motivation Checkpoint</h2>
+<p>Buffer overflows on the stack have been the base of legendary cyber-attacks, such as the 1988 Morris Worm (which brought down 10% of the early internet using a <code>gets</code> call exploit in fingerd). Operating in systems programming means recognizing that memory safety is an architectural absolute, not an afterthought.</p>
+<hr />
+<h2>🎓 Trainer Review Rules</h2>
+<ul>
+<li>Verify stack simulation boundaries: The program must successfully trigger custom simulated "segmentation faults" if the frame sizes overflow limits.</li>
+<li>All variable allocations inside the simulation must have explicit type sizes. No raw pointer adjustments without scale calculations.</li>
+</ul></div><div class="section week-plan"><h1>Week 05: The Pointers Paradigm &amp; Direct Memory Access</h1>
+<h2>🎯 Weekly Goal</h2>
+<p>Demystify raw memory addressing, master pointer arithmetic, understand arrays decay mechanics, harness generic <code>void *</code> pointers, and build dynamic call architectures using function pointers.</p>
+<h2>🎓 Weekly Outcome</h2>
+<p>By the end of this week, you will be able to perform safe pointer offsets, map multidimensional memory tables, write generic data processing functions, and design robust callback systems using function pointer jump-tables.</p>
+<hr />
+<h2>📅 Session Breakdown</h2>
+<h3>Monday: The Address Space &amp; Dereferencing</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> The pointer as a memory address storage register.</li>
+<li>Size of pointers (4 bytes on 32-bit CPU, 8 bytes on 64-bit CPU).</li>
+<li>The dereference operator (<code>*</code>) and address-of operator (<code>&amp;</code>).</li>
+<li>Type scale multiplier: How <code>p + 1</code> increments the address by <code>sizeof(*p)</code> bytes rather than just 1 raw byte.</li>
+<li><strong>Hands-on Experiment:</strong>
+  Prove pointer increment scaling:
+  ```c
+  #include <stdio.h>
+  #include <stdint.h></li>
+</ul>
+<p>int main(void) {
+      uint32_t arr[3] = {10, 20, 30};
+      uint32_t *p = arr;</p>
+<pre><code>  printf("Address of p: %p, Value: %u\n", (void *)p, *p);
+  printf("Address of p+1: %p, Value: %u\n", (void *)(p + 1), *(p + 1));
+
+  // Calculate raw address difference in bytes
+  uintptr_t diff = (uintptr_t)(p + 1) - (uintptr_t)p;
+  printf("Raw byte offset: %lu bytes (sizeof(uint32_t) = %lu)\n", diff, sizeof(uint32_t));
+  return 0;
+</code></pre>
+<p>}
+  ```</p>
+<hr />
+<h3>Tuesday: Array Decay &amp; Pointer Arithmetic</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Array and pointer relationship.</li>
+<li>Array names decay to pointers to their first elements when passed to functions.</li>
+<li>Multidimensional arrays layout (Row-Major layout in memory).</li>
+<li>Safe pointer limits bounds verification.</li>
+<li><strong>Hands-on Exercise:</strong>
+  Trace multidimensional offset access without index operators:
+  <code>c
+  #include &lt;stdio.h&gt;
+  int main(void) {
+      int grid[2][3] = {{1, 2, 3}, {4, 5, 6}};
+      int *p = &amp;grid[0][0];
+      // Access row 1, col 2 (value 6) using pure arithmetic offset
+      int val = *(p + (1 * 3) + 2);
+      printf("Val: %d (Expected: 6)\n", val);
+      return 0;
+  }</code></li>
+</ul>
+<hr />
+<h3>Wednesday: Generic Pointers (<code>void *</code>) &amp; Casts</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Data abstraction.</li>
+<li><code>void *</code> pointers represent pure untyped memory addresses.</li>
+<li>To read data, <code>void *</code> must be cast to a concrete type.</li>
+<li>Custom implementations of generic algorithms (e.g. <code>memcpy</code>, custom <code>qsort</code> style comparators).</li>
+<li><strong>Hands-on Exercise:</strong>
+  Write a generic memory swap function:
+  ```c
+  #include <stdio.h>
+  #include <string.h></li>
+</ul>
+<p>void swap_generic(void <em>a, void </em>b, size_t size) {
+      char temp[128]; // Local stack buffer
+      memcpy(temp, a, size);
+      memcpy(a, b, size);
+      memcpy(b, temp, size);
+  }
+  ```</p>
+<hr />
+<h3>Thursday: Function Pointers</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Execution callbacks.</li>
+<li>Function pointers store the entry address of executable code sections (<code>.text</code>).</li>
+<li>Syntax of function pointers declaration: <code>return_type (*pointer_name)(arg_types)</code>.</li>
+<li>Building event-dispatch loops and decoupled subsystems callbacks.</li>
+<li><strong>Hands-on Exercise:</strong>
+  Execute a call using a function pointer:
+  ```c
+  #include <stdio.h></li>
+</ul>
+<p>void handler(int code) {
+      printf("Handled code: %d\n", code);
+  }</p>
+<p>int main(void) {
+      void (*func_p)(int) = handler;
+      func_p(42); // Trigger callback
+      return 0;
+  }
+  ```</p>
+<hr />
+<h3>Friday: Jump Tables &amp; Dispatch Architectures</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> High-speed function dispatches.</li>
+<li>Bypassing heavy <code>if-else</code> cascades using an array of function pointers.</li>
+<li><strong>Hands-on Exercise:</strong> Map operations to integer indices and invoke actions instantly.</li>
+</ul>
+<hr />
+<h2>🛠️ Hands-On Assignment: Dynamic Callback Event Dispatcher</h2>
+<p>Design and build a dynamic <strong>Event Dispatcher System</strong> that registers callbacks to handle specific system state alerts.</p>
+<h3>1. Requirements</h3>
+<ul>
+<li>Define 4 Event Types: <code>TEMP_ALERT</code>, <code>PRESSURE_ALERT</code>, <code>SYS_HALT</code>, <code>RECOVERY</code>.</li>
+<li>Implement the callback signature: <code>typedef void (*EventCallback)(const void *event_data)</code>.</li>
+<li>Implement:</li>
+<li><code>int register_callback(int event_type, EventCallback cb)</code> which registers handlers dynamically.</li>
+<li><code>int dispatch_event(int event_type, const void *data)</code> which calls all registered events.</li>
+<li>Code must check for register duplicates and bounds, returning <code>-1</code> on errors.</li>
+</ul>
+<h3>2. File Deliverables</h3>
+<ul>
+<li><code>dispatcher.h</code>: Callback typings and arrays structure.</li>
+<li><code>dispatcher.c</code>: Registration and jump-table dispatch logic.</li>
+<li><code>main.c</code>: Unit tests simulating alerts triggers.</li>
+</ul>
+<hr />
+<h2>📋 Deliverables Checklist</h2>
+<ul>
+<li>[ ] <code>dispatcher.h</code> (Clean typings and boundaries)</li>
+<li>[ ] <code>dispatcher.c</code> (Bounds-checked registration)</li>
+<li>[ ] <code>main.c</code> (Rich callbacks validation scenario)</li>
+<li>[ ] <code>Makefile</code> (Strict C11 compiler setup)</li>
+</ul>
+<hr />
+<h2>❓ Self-Check Questions</h2>
+<ol>
+<li>Why does pointer increment math (<code>p + 1</code>) adjust different byte offsets depending on the target type size?</li>
+<li>What does the term "Array Decay" mean mechanically when passing arrays as parameters in C?</li>
+<li>Why is it illegal to directly dereference a generic <code>void *</code> pointer without performing a type-cast?</li>
+<li>Write the declaration for an array of 5 function pointers that return <code>void</code> and accept <code>double</code> as an argument.</li>
+<li>In security audits, why are uninitialized function pointers a critical target for buffer-overflow execution hijacking?</li>
+</ol>
+<hr />
+<h2>🚀 Stretch Task</h2>
+<p>Modify your Dispatcher system to support <strong>priority-based dispatches</strong>. Allow handlers to register with a priority score (1-5). During execution dispatch, sort and fire callbacks in chronological order of their priority level.</p>
+<hr />
+<h2>💡 Motivation Checkpoint</h2>
+<p>Function pointer jump-tables are the backbone of high-performance dispatches in Unix operating systems. For example, character device driver file operations (<code>open</code>, <code>read</code>, <code>write</code>, <code>close</code>) are mapped inside the Linux kernel using a struct of function pointers (<code>struct file_operations</code>). This enables clean, polymorphic object-oriented programming in pure, raw C.</p>
+<hr />
+<h2>🎓 Trainer Review Rules</h2>
+<ul>
+<li>Verify registration bounds: Attempting to register callbacks beyond index thresholds must return error codes immediately.</li>
+<li>The dispatch routine must execute using a direct array-index jump path. Traditional <code>if-else</code> or <code>switch</code> selectors inside core dispatches are forbidden.</li>
+</ul></div><div class="section week-plan"><h1>Week 06: Compound Data Structures &amp; Layout</h1>
+<h2>🎯 Weekly Goal</h2>
+<p>Master the exact layout of compound structures inside computer memory, control byte alignment and structure padding, exploit unions for type punning, and implement safe binary packet serialization routines.</p>
+<h2>🎓 Weekly Outcome</h2>
+<p>By the end of this week, you will be able to construct non-padded structures matching industrial hardware standards, analyze layout offsets using compile-time assertions, pack bit-level telemetry variables using bitfields, and serialize structures securely for network transmission.</p>
+<hr />
+<h2>📅 Session Breakdown</h2>
+<h3>Monday: Structure Padding &amp; Byte Alignment</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> The CPU alignment optimization.</li>
+<li>Modern 32-bit or 64-bit CPUs fetch memory in word blocks (4 or 8 bytes). If variables cross word boundaries, the CPU must make multiple read cycles.</li>
+<li>To optimize, compilers automatically insert "padding bytes" to align variables to addresses matching their size.</li>
+<li><strong>The Alignment Rule:</strong> Every basic type is aligned to an address that is a multiple of its size (e.g. <code>double</code> aligned to 8-byte boundaries).</li>
+<li><strong>Hands-on Experiment:</strong>
+  Inspect structure size expansion and observe padding bytes:
+  ```c
+  #include <stdio.h>
+  #include <stddef.h></li>
+</ul>
+<p>struct Padded {
+      char a;      // 1 byte
+      // 3 padding bytes inserted here to align b (int is 4 bytes)
+      int b;       // 4 bytes
+      char c;      // 1 byte
+      // 3 padding bytes inserted here to align structure total size to multiple of 4
+  };</p>
+<p>struct Optimized {
+      int b;       // 4 bytes
+      char a;      // 1 byte
+      char c;      // 1 byte
+      // 2 padding bytes inserted at end
+  };</p>
+<p>int main(void) {
+      printf("Padded structure size: %lu bytes (Expected: 12)\n", sizeof(struct Padded));
+      printf("Optimized structure size: %lu bytes (Expected: 8)\n", sizeof(struct Optimized));
+      printf("Offset of b in Padded: %lu bytes\n", offsetof(struct Padded, b));
+      return 0;
+  }
+  ```</p>
+<hr />
+<h3>Tuesday: Packing Structures</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Forcing zero-padding layout.</li>
+<li>When writing drivers or mapping network packets, structure layout must match the protocol exactly.</li>
+<li><strong>Forcing packing:</strong> Using GCC attributes <code>__attribute__((packed))</code> or <code>#pragma pack(1)</code>.</li>
+<li><strong>Trade-off:</strong> Packing saves memory and simplifies serialization but can cause performance penalties or hardware faults on architectures that do not support unaligned memory accesses (like some ARM Cortex chips).</li>
+<li><strong>Hands-on Exercise:</strong>
+  Construct and verify compile-time assertion size checks:
+  ```c
+  #include <stdio.h></li>
+</ul>
+<p>struct <strong>attribute</strong>((packed)) PackedStruct {
+      char a;
+      int b;
+      char c;
+  };</p>
+<p>// Static compile-time assertion (fails compile if struct layout is incorrect)
+  _Static_assert(sizeof(struct PackedStruct) == 6, "PackedStruct layout alignment failed!");</p>
+<p>int main(void) {
+      printf("Size: %lu bytes\n", sizeof(struct PackedStruct));
+      return 0;
+  }
+  ```</p>
+<hr />
+<h3>Wednesday: Unions &amp; Type Punning</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Shared memory locations.</li>
+<li>Unions allocate a single block of memory matching the size of their largest member.</li>
+<li><strong>Type Punning:</strong> Reading the same memory address as a different data type. Excellent for decomposing floats into byte streams.</li>
+<li><strong>Hands-on Exercise:</strong>
+  Inspect float bytes using unions:
+  ```c
+  #include <stdio.h>
+  #include <stdint.h></li>
+</ul>
+<p>union FloatPunder {
+      float f_val;
+      uint32_t raw_bits;
+  };</p>
+<p>int main(void) {
+      union FloatPunder punner;
+      punner.f_val = 1.0f;
+      printf("Float: %f, Binary bits: 0x%08X\n", punner.f_val, punner.raw_bits);
+      return 0;
+  }
+  ```</p>
+<hr />
+<h3>Thursday: Bitfields</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Bit-level structures packing.</li>
+<li>Declaring variables with precise bit widths inside structures.</li>
+<li>Syntax: <code>type name : bit_width;</code>.</li>
+<li>Real-world usage: Register configuration maps.</li>
+</ul>
+<hr />
+<h3>Friday: Binary Serialization over Channels</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Packing structures safely into transport-ready byte streams and resolving endian mismatches securely.</li>
+</ul>
+<hr />
+<h2>🛠️ Hands-On Assignment: Telemetry Frame Pack/Unpack Engine</h2>
+<p>Design and build a byte-aligned <strong>Telemetry Serialization Engine</strong> that packs sensor measurements into unpadded byte frames.</p>
+<h3>1. Requirements</h3>
+<ul>
+<li>Define a Telemetry Frame containing: <code>device_id</code> (8-bit), <code>status_flags</code> (8-bit bitfield), <code>temperature</code> (32-bit float), <code>counter</code> (16-bit unsigned).</li>
+<li>Force zero-padding using strict attributes, and verify sizes using <code>_Static_assert</code>.</li>
+<li>Implement:</li>
+<li><code>int serialize_frame(const Telemetry *t, uint8_t *buffer, size_t max_len)</code></li>
+<li><code>int deserialize_frame(Telemetry *t, const uint8_t *buffer, size_t len)</code></li>
+<li>Ensure correct Endian translation when serializing (Big-Endian network byte format conversion).</li>
+</ul>
+<h3>2. File Deliverables</h3>
+<ul>
+<li><code>telemetry.h</code>: Structure layouts and bitfields definitions.</li>
+<li><code>telemetry.c</code>: Serialization and Endian swaps execution.</li>
+<li><code>main.c</code>: Test scenarios asserting data integrity across byte networks.</li>
+</ul>
+<hr />
+<h2>📋 Deliverables Checklist</h2>
+<ul>
+<li>[ ] <code>telemetry.h</code> (Zero-padded structures, assertions)</li>
+<li>[ ] <code>telemetry.c</code> (Safe endian conversion logic)</li>
+<li>[ ] <code>main.c</code> (Precision checks verification)</li>
+<li>[ ] <code>Makefile</code> (Strict C11 compiler setup)</li>
+</ul>
+<hr />
+<h2>❓ Self-Check Questions</h2>
+<ol>
+<li>Why does the compiler automatically add padding bytes to structure configurations?</li>
+<li>What are the performance penalties associated with unaligned memory access on RISC hardware architectures?</li>
+<li>How does <code>_Static_assert</code> differ from standard runtime <code>assert()</code> functions?</li>
+<li>Explain how a union allows you to decompose a floating-point number into four raw bytes without casting or math operations.</li>
+<li>In bitfield declarations, why are data types like <code>uint8_t</code> or <code>uint32_t</code> preferred over raw signed integers?</li>
+</ol>
+<hr />
+<h2>🚀 Stretch Task</h2>
+<p>Implement an automated <strong>Structure Packing Visualizer</strong> function. Write C code that reads structural addresses and outputs an ASCII map illustrating the exact memory location and spacing of every member, highlighting padding bytes visually.</p>
+<hr />
+<h2>💡 Motivation Checkpoint</h2>
+<p>Space missions require hyper-efficient telemetry formatting. In space probes (like the Voyager or Mars Rover), every byte transmitted back to Earth takes massive power and signal time. Forcing tight, unpadded, bit-level data structures ensures that zero bandwidth is wasted on blank padding bytes.</p>
+<hr />
+<h2>🎓 Trainer Review Rules</h2>
+<ul>
+<li>Verify structure sizes: <code>sizeof(Telemetry)</code> must be exactly 8 bytes (1+1+4+2), validated via a compile-time static assertion.</li>
+<li>The serialize routine must translate the internal float structure into Big-Endian layout using portable bit shift mechanisms or standard network conversion routines (<code>htonl</code>/<code>ntohl</code> style punning).</li>
+</ul></div><div class="section week-plan"><h1>Week 07: Dynamic Memory Management (Heap)</h1>
+<h2>🎯 Weekly Goal</h2>
+<p>Master the mechanics of heap memory management, explore system virtual memory layouts, analyze allocator fragmentation, and write high-performance custom Arena and Object-pool allocators.</p>
+<h2>🎓 Weekly Outcome</h2>
+<p>By the end of this week, you will be able to construct specialized memory allocators that operate in constant time, eliminate standard <code>malloc</code> allocation latency, diagnose memory leaks using Valgrind, and manage memory alignment configurations from first-principles.</p>
+<hr />
+<h2>📅 Session Breakdown</h2>
+<h3>Monday: The Virtual Memory Layout &amp; System Heap</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> The OS virtual address space map:</li>
+<li><strong>Text Segment:</strong> Read-only assembly instructions.</li>
+<li><strong>Data &amp; BSS Segments:</strong> Global and static variables.</li>
+<li><strong>Stack Segment:</strong> Local context call frames.</li>
+<li><strong>Heap Segment:</strong> Dynamic allocations growing upwards towards the stack.</li>
+<li>How the operating system manages the heap break pointer using <code>brk</code> and <code>sbrk</code> system calls, or allocates massive page blocks via <code>mmap</code>.</li>
+<li><strong>Hands-on Experiment:</strong>
+  Inspect memory segment boundaries at runtime:
+  ```c
+  #include <stdio.h>
+  #include <stdlib.h></li>
+</ul>
+<p>int global_initialized = 42; // Data segment
+  int global_uninitialized;    // BSS segment</p>
+<p>int main(void) {
+      int stack_var = 10;
+      int *heap_var = malloc(sizeof(int));</p>
+<pre><code>  printf("Text Segment (main):       %p\n", (void *)main);
+  printf("Data Segment (initialized): %p\n", (void *)&amp;global_initialized);
+  printf("BSS Segment (uninitialized):%p\n", (void *)&amp;global_uninitialized);
+  printf("Heap Segment (allocation):  %p\n", (void *)heap_var);
+  printf("Stack Segment (local var):  %p\n", (void *)&amp;stack_var);
+
+  free(heap_var);
+  return 0;
+</code></pre>
+<p>}
+  ```</p>
+<hr />
+<h3>Tuesday: How Allocators Work (<code>malloc</code>/<code>free</code> Internals)</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> The algorithmic design of dynamic memory managers.</li>
+<li>Allocation blocks: Payload and Header (stores block size and allocation flag).</li>
+<li><strong>Implicit vs Explicit Free Lists:</strong> Finding free blocks using First Fit, Best Fit, or Next Fit algorithms.</li>
+<li><strong>Coalescing:</strong> Merging adjacent free memory blocks to prevent memory fragmentation.</li>
+<li><strong>Hands-on Exercise:</strong>
+  Trace block splitting and fragmentation in memory layouts through theoretical diagrams and structures.</li>
+</ul>
+<hr />
+<h3>Wednesday: Memory Arena Allocator Design</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> High-speed bulk linear allocations.</li>
+<li>An <strong>Arena Allocator</strong> pre-allocates a massive static block of memory. </li>
+<li>Allocation occurs by incrementing an offset pointer in O(1) constant time.</li>
+<li>Freeing individual allocations is blocked. Instead, the entire Arena is cleared in bulk in a single step.</li>
+<li><strong>Alignment:</strong> Arena pointers <em>must</em> align allocations to 8-byte boundaries to prevent CPU alignment performance degradation.</li>
+</ul>
+<hr />
+<h3>Thursday: Object Pool Allocators</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Fixed-size chunk allocation managers.</li>
+<li>An <strong>Object Pool Allocator</strong> manages a collection of fixed-size blocks (e.g. 64-byte blocks).</li>
+<li>Excellent for allocating/freeing structures of the same type dynamically.</li>
+<li>Tracking allocation states using a <strong>Free-List Stack</strong> or a <strong>Bitmap Index</strong>.</li>
+<li>No external fragmentation, zero runtime overhead, constant time O(1) allocation/deallocation.</li>
+</ul>
+<hr />
+<h3>Friday: Debugging with Valgrind Memcheck</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Memory diagnostic tools.</li>
+<li>Using Valgrind to audit allocations.</li>
+<li>Catching out-of-bounds array writes, accessing freed memory (Use-After-Free), and identifying unfreed bytes leaks.</li>
+</ul>
+<hr />
+<h2>🛠️ Hands-On Assignment: Constant-Time Memory Manager</h2>
+<p>Design and implement a custom memory allocator system containing a fast linear <strong>Arena Allocator</strong> and a fast fixed-size <strong>Object Pool Allocator</strong>.</p>
+<h3>1. Specifications</h3>
+<ul>
+<li><strong>Arena Allocator:</strong></li>
+<li><code>void arena_init(Arena *a, void *buffer, size_t size)</code></li>
+<li><code>void *arena_alloc(Arena *a, size_t size)</code> (must align return addresses to 8-byte boundaries).</li>
+<li><code>void arena_reset(Arena *a)</code> (resets the allocation pointer to 0).</li>
+<li><strong>Object Pool Allocator:</strong></li>
+<li><code>void pool_init(Pool *p, void *buffer, size_t block_size, size_t num_blocks)</code></li>
+<li><code>void *pool_alloc(Pool *p)</code> (constant time O(1) check).</li>
+<li><code>void pool_free(Pool *p, void *ptr)</code> (constant time O(1) check using free-list).</li>
+<li><strong>Strict Law:</strong> Banish the use of standard <code>malloc</code> and <code>free</code> inside active test loops.</li>
+</ul>
+<h3>2. File Deliverables</h3>
+<ul>
+<li><code>allocators.h</code>: Structures definitions and alignment formulas.</li>
+<li><code>allocators.c</code>: Arena pointer-offset and Pool free-list tracking.</li>
+<li><code>main.c</code>: Unit tests and benchmarks comparing your allocators against standard <code>malloc</code> speed.</li>
+</ul>
+<hr />
+<h2>📋 Deliverables Checklist</h2>
+<ul>
+<li>[ ] <code>allocators.h</code> (Strict structures, alignment macros)</li>
+<li>[ ] <code>allocators.c</code> (O(1) allocation mechanics)</li>
+<li>[ ] <code>main.c</code> (Rich speed benchmarks and validations)</li>
+<li>[ ] <code>Makefile</code> (Strict C11 compiler setup)</li>
+</ul>
+<hr />
+<h2>❓ Self-Check Questions</h2>
+<ol>
+<li>What is the system break pointer, and how does the operating system adjust it using <code>brk</code>?</li>
+<li>Explain the difference between internal fragmentation and external fragmentation inside memory heap pools.</li>
+<li>Why does an Arena Allocator require offset alignment to 8-byte boundaries, and what is the formula to align a pointer?</li>
+<li>How does a Free-List stack allow an Object Pool Allocator to perform allocations and frees in O(1) time?</li>
+<li>What does Valgrind mean when it reports a "Use-After-Free" runtime warning?</li>
+</ol>
+<hr />
+<h2>🚀 Stretch Task</h2>
+<p>Implement an <strong>Arena Backed Object Pool</strong>. Create an architecture where your Object Pool allocator requests block memory extensions dynamically from an Arena allocator when it runs out of local block units, allowing the pool to expand on demand.</p>
+<hr />
+<h2>💡 Motivation Checkpoint</h2>
+<p>High-frequency trading platforms, game engines, and operating system kernels cannot afford the latency of standard <code>malloc</code> allocations, which are non-deterministic and can trigger system context switches. By building specialized, custom memory pools, you achieve latency-free execution and absolute control over memory lifetimes.</p>
+<hr />
+<h2>🎓 Trainer Review Rules</h2>
+<ul>
+<li>Compile with zero warnings. Auditing with <code>valgrind --leak-check=full</code> must report zero leaks and zero errors.</li>
+<li>The Arena allocator must return pointers aligned to 8-byte boundaries. Address addresses ending in <code>0</code>, <code>8</code> or hexadecimal <code>C</code> must be checked and asserted inside tests.</li>
+</ul></div><div class="section week-plan"><h1>Week 08: Low-Level File I/O &amp; Error Handling</h1>
+<h2>🎯 Weekly Goal</h2>
+<p>Master the boundaries between user applications and the operating system kernel, understand file descriptors, handle system errors dynamically using <code>errno</code>, and implement lightning-fast file operations using memory mapping (<code>mmap</code>).</p>
+<h2>🎓 Weekly Outcome</h2>
+<p>By the end of this week, you will be able to bypass standard buffered standard I/O library streams, read and write files using unbuffered system calls, recover safely from file descriptors errors, and map file segments directly into virtual memory paths for high-performance reading and writing.</p>
+<hr />
+<h2>📅 Session Breakdown</h2>
+<h3>Monday: System Calls vs Library Streams</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> The boundary between user mode and kernel mode.</li>
+<li><strong>Standard Library (<code>stdio.h</code>):</strong> Buffered operations (like <code>fopen</code>, <code>fread</code>, <code>printf</code>). Data is stored in a user-space buffer before being flushed to the disk.</li>
+<li><strong>System Calls (<code>unistd.h</code>):</strong> Unbuffered direct requests to the kernel (like <code>open</code>, <code>read</code>, <code>write</code>, <code>close</code>). Each system call forces a CPU context switch to kernel execution mode.</li>
+<li>Performance implications: When to use buffered vs unbuffered approaches.</li>
+<li><strong>Hands-on Experiment:</strong>
+  Compare the execution speed of writing 100,000 bytes via <code>fwrite</code> vs raw <code>write</code> calls. Note how standard library buffering reduces the frequency of slow context switches.</li>
+</ul>
+<hr />
+<h3>Tuesday: File Descriptors &amp; The Kernel File Table</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> How the operating system manages resources.</li>
+<li><strong>File Descriptor (FD):</strong> A non-negative integer that represents an open file index in the process's descriptor table.</li>
+<li>Standard File Descriptors: Standard Input (<code>0</code>, <code>STDIN_FILENO</code>), Standard Output (<code>1</code>, <code>STDOUT_FILENO</code>), Standard Error (<code>2</code>, <code>STDERR_FILENO</code>).</li>
+<li>
+<p>Creating, reading, and writing files using low-level calls:
+    ```c
+    #include <fcntl.h>
+    #include <unistd.h></p>
+<p>int main(void) {
+    // Open file for writing, create if not exist, truncate size to 0.
+    int fd = open("log.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    if (fd &lt; 0) {
+        return -1;
+    }
+    write(fd, "Data\n", 5);
+    close(fd);
+    return 0;
+}
+```</p>
+</li>
+</ul>
+<hr />
+<h3>Wednesday: Defensive Error Handling &amp; <code>errno</code></h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Diagnosing kernel failures.</li>
+<li>When a system call fails, it returns <code>-1</code> and sets a global integer variable <code>errno</code> to indicate the error code.</li>
+<li>Diagnosing errors using standard macros: <code>EACCES</code> (Permission denied), <code>ENOENT</code> (No such file), <code>EAGAIN</code> (Resource temporarily unavailable).</li>
+<li>Safe error mapping: using <code>strerror</code> and <code>perror</code> to translate integer codes into readable strings.</li>
+<li><strong>Safety warning:</strong> <code>strerror</code> is not thread-safe. Use <code>strerror_r</code> in concurrent code.</li>
+</ul>
+<hr />
+<h3>Thursday: Memory-Mapped Files (<code>mmap</code>)</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Direct virtual mapping.</li>
+<li>Instead of executing slow <code>read</code>/<code>write</code> calls to copy data between disk caches and user space buffers, <code>mmap</code> maps a file's disk sectors directly into the process's virtual memory map.</li>
+<li>Reading from the file is as fast as reading directly from a pointer!</li>
+<li>Modifying the mapped pointer automatically flushes changes to the disk.</li>
+<li><strong>Hands-on Exercise:</strong>
+  Map a file into memory and print its contents using pure character pointer arithmetic:
+  ```c
+  #include <stdio.h>
+  #include <sys/mman.h>
+  #include <sys/stat.h>
+  #include <fcntl.h>
+  #include <unistd.h></li>
+</ul>
+<p>int main(void) {
+      int fd = open("log.txt", O_RDONLY);
+      if (fd &lt; 0) return -1;</p>
+<pre><code>  struct stat sb;
+  fstat(fd, &amp;sb); // Get file details
+
+  // Map file to memory
+  char *mapped = mmap(NULL, sb.st_size, PROT_READ, MAP_PRIVATE, fd, 0);
+  if (mapped == MAP_FAILED) {
+      close(fd);
+      return -1;
+  }
+
+  // Print mapped contents
+  for (off_t i = 0; i &lt; sb.st_size; i++) {
+      putchar(mapped[i]);
+  }
+
+  munmap(mapped, sb.st_size); // Unmap
+  close(fd);
+  return 0;
+</code></pre>
+<p>}
+  ```</p>
+<hr />
+<h3>Friday: Defensive System Call Integrations</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Managing partial writes and EINTR interrupts.</li>
+<li>System calls can be interrupted by signals (<code>EINTR</code>). Your code must handle loop recovery.</li>
+<li>Partial writes: <code>write</code> might only write some of your buffer. You must track and retry.</li>
+</ul>
+<hr />
+<h2>🛠️ Hands-On Assignment: High-Performance Log File Parser</h2>
+<p>Design and build a low-level, high-performance file parsing engine that scans logs using <code>mmap</code> and compiles error reports using unbuffered I/O.</p>
+<h3>1. Requirements</h3>
+<ul>
+<li>Open files using <code>open()</code> with safe permissions checks.</li>
+<li>Map files into memory using <code>mmap()</code>.</li>
+<li>Parse files line-by-line, searching for lines containing <code>"ERROR"</code> or <code>"CRITICAL"</code>.</li>
+<li>Write matching log events to an output file named <code>audit.log</code> using unbuffered system calls (<code>write()</code>).</li>
+<li>Incorporate robust <code>errno</code> checking at every stage (opening, mapping, parsing, writing).</li>
+</ul>
+<h3>2. File Deliverables</h3>
+<ul>
+<li><code>parser.h</code>: Buffer sizes, function prototypes, and boundaries.</li>
+<li><code>parser.c</code>: Memory-mapped parsing and direct file writes.</li>
+<li><code>main.c</code>: Unit tests and log generators.</li>
+</ul>
+<hr />
+<h2>📋 Deliverables Checklist</h2>
+<ul>
+<li>[ ] <code>parser.h</code> (Clean interface declarations)</li>
+<li>[ ] <code>parser.c</code> (Safe <code>mmap</code> execution, loop retry controls)</li>
+<li>[ ] <code>main.c</code> (Log generator and test validations)</li>
+<li>[ ] <code>Makefile</code> (Strict C11 compiler setup)</li>
+</ul>
+<hr />
+<h2>❓ Self-Check Questions</h2>
+<ol>
+<li>Why does standard library buffered I/O outperform unbuffered system calls when performing massive numbers of small write operations?</li>
+<li>What are the three standard file descriptors, and what integer values represent them in the kernel table?</li>
+<li>How does <code>errno</code> behave in multi-threaded programs, and why is <code>strerror</code> considered thread-unsafe?</li>
+<li>Explain the mechanics of memory paging and how <code>mmap</code> links disk sectors directly to virtual address pointer paths.</li>
+<li>Why must you loop the <code>write()</code> system call when serializing a buffer to an output channel?</li>
+</ol>
+<hr />
+<h2>🚀 Stretch Task</h2>
+<p>Implement a <strong>Read-Write Memory Mapper</strong> log editor. Write an application that opens a binary log, maps it with write permissions (<code>PROT_WRITE</code> / <code>MAP_SHARED</code>), scans for coordinates values, and modifies them in place directly via pointer modification, verifying that updates persist to disk.</p>
+<hr />
+<h2>💡 Motivation Checkpoint</h2>
+<p>High-performance database engines (like RocksDB, SQLite, and MongoDB) use memory-mapping and low-level unbuffered file handles to bypass OS operating system caching layers. This allows database engines to achieve maximum read speeds and control raw disk operations with absolute sub-millisecond precision.</p>
+<hr />
+<h2>🎓 Trainer Review Rules</h2>
+<ul>
+<li>Verify error paths: Attempting to parse missing or protected files must set explicit custom diagnostic outputs and report the correct <code>errno</code> message.</li>
+<li>Standard buffered streams (like <code>fopen</code>, <code>fprintf</code>, <code>fscanf</code>) are strictly banned from your parser files. Everything must be written via system-level unbuffered calls.</li>
+</ul></div><div class="section week-plan"><h1>Week 09: Preprocessor Metaprogramming</h1>
+<h2>🎯 Weekly Goal</h2>
+<p>Master the mechanics of the C preprocessor, learn how to write robust, side-effect-free macros, utilize stringification and token pasting, and deploy the powerful <strong>X-Macro</strong> design pattern to automate generic code generation.</p>
+<h2>🎓 Weekly Outcome</h2>
+<p>By the end of this week, you will be able to write safe compile-time macros, stringify variables, paste tokens dynamically, generate custom data structures automatically from lists, and eliminate redundant boilerplate code in C.</p>
+<hr />
+<h2>📅 Session Breakdown</h2>
+<h3>Monday: Preprocessor Mechanics &amp; Macro Safety</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> The preprocessor as a pure text replacer.</li>
+<li>Why macros do not understand type checks or block scope rules.</li>
+<li><strong>Macro Side-Effects Hazard:</strong> Double evaluation of parameters.</li>
+<li><strong>Rule of Parentheses:</strong> Always wrap macro parameters and the entire macro expression in parentheses to prevent operator precedence bugs.</li>
+<li>Wrapping multi-statement macros in <code>do { ... } while(0)</code> blocks.</li>
+<li><strong>Hands-on Experiment:</strong>
+  Identify and fix the double-evaluation macro bug:
+  ```c
+  #include <stdio.h></li>
+</ul>
+<p>// UNSAFE: If passed expression contains increments, they execute twice!
+  #define SQUARE_UNSAFE(x) ((x) * (x))</p>
+<p>// SAFE: Type-checked or side-effect free evaluations are preferred
+  inline int square_safe(int x) {
+      return x * x;
+  }</p>
+<p>int main(void) {
+      int a = 3;
+      int result = SQUARE_UNSAFE(a++); // a incremented twice!
+      printf("Unsafe result: %d, a: %d (Expected a to be 4, but got 5!)\n", result, a);
+      return 0;
+  }
+  ```</p>
+<hr />
+<h3>Tuesday: Stringification (<code>#</code>) &amp; Token Pasting (<code>##</code>)</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Code generation at compile-time.</li>
+<li><strong>Stringification Operator (<code>#</code>):</strong> Converts a macro parameter into a literal string.</li>
+<li><strong>Token Pasting Operator (<code>##</code>):</strong> Glues two separate tokens together to create a new C symbol name dynamically.</li>
+<li><strong>Hands-on Exercise:</strong>
+  Build a dynamic variable factory generator using token pasting:
+  ```c
+  #include <stdio.h></li>
+</ul>
+<p>// Generate declarations like: int val_1 = 10;
+  #define MAKE_VAR(name, id) int name##_##id = id * 10</p>
+<p>// Stringify variables to print their names
+  #define PRINT_VAR(var) printf("Variable " #var " value: %d\n", var)</p>
+<p>int main(void) {
+      MAKE_VAR(val, 5); // Decays to: int val_5 = 50;
+      PRINT_VAR(val_5);
+      return 0;
+  }
+  ```</p>
+<hr />
+<h3>Wednesday: Introduction to X-Macros</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> The master pattern for lists alignment.</li>
+<li><strong>The Problem:</strong> In C, adding a new configuration element (e.g. a new error code or state) requires updating multiple files: an <code>enum</code>, a string list, a switch case, etc. If you forget one, your code breaks.</li>
+<li><strong>The Solution (X-Macros):</strong> Define your list <em>once</em> in a macro table, and use it repeatedly to generate enumerations, structure layouts, and string tables automatically.</li>
+<li><strong>Hands-on Experiment:</strong>
+  Map error codes to names automatically using X-Macros:
+  ```c
+  #include <stdio.h></li>
+</ul>
+<p>// 1. Define the master list containing (Error ID, Error String)
+  #define ERROR_TABLE \
+      X(ERR_SUCCESS, "Operation completed successfully") \
+      X(ERR_NOT_FOUND, "Resource not located") \
+      X(ERR_TIMEOUT, "Resource request expired") \
+      X(ERR_IO, "Disk hardware error occurred")</p>
+<p>// 2. Generate the enumeration automatically
+  typedef enum {
+  #define X(id, desc) id,
+      ERROR_TABLE
+  #undef X
+  } ErrorCode;</p>
+<p>// 3. Generate the string description table automatically
+  const char *get_error_string(ErrorCode code) {
+      switch (code) {
+  #define X(id, desc) case id: return desc;
+          ERROR_TABLE
+  #undef X
+          default: return "Unknown error code";
+      }
+  }</p>
+<p>int main(void) {
+      ErrorCode err = ERR_TIMEOUT;
+      printf("Status: %s\n", get_error_string(err));
+      return 0;
+  }
+  ```</p>
+<hr />
+<h3>Thursday: Metaprogramming Data Structures</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Generic list structures generation.</li>
+<li>Using X-Macros to define and populate structures and initialize arrays cleanly.</li>
+</ul>
+<hr />
+<h3>Friday: Metaprogramming Debugging Tools</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Using compiler preprocessor dumps (<code>gcc -E</code>) to trace macro expansions and debug syntax errors.</li>
+</ul>
+<hr />
+<h2>🛠️ Hands-On Assignment: Generic Key-Value Map Generator</h2>
+<p>Design and implement a generic Key-Value Map data structure generator using <strong>X-Macros</strong> that automatically declares custom type-safe map structures.</p>
+<h3>1. Requirements</h3>
+<ul>
+<li>Define a master map list mapping variable types (e.g. <code>IntMap</code>, <code>FloatMap</code>).</li>
+<li>Use X-Macros to generate:</li>
+<li>The structure definitions containing key and value arrays.</li>
+<li>Type-safe access functions: <code>int_map_put()</code>, <code>int_map_get()</code>, <code>float_map_put()</code>, etc.</li>
+<li>The generated access functions must enforce bounds checks defensively.</li>
+</ul>
+<h3>2. File Deliverables</h3>
+<ul>
+<li><code>map_gen.h</code>: Master X-Macro list and generator expansions.</li>
+<li><code>main.c</code>: Unit tests registering and accessing maps dynamically.</li>
+</ul>
+<hr />
+<h2>📋 Deliverables Checklist</h2>
+<ul>
+<li>[ ] <code>map_gen.h</code> (Strict macro formatting, zero warnings expansions)</li>
+<li>[ ] <code>main.c</code> (Complete test runner asserting key retrieval)</li>
+<li>[ ] <code>Makefile</code> (Strict C11 compiler setup)</li>
+</ul>
+<hr />
+<h2>❓ Self-Check Questions</h2>
+<ol>
+<li>Why are preprocessor macros considered "untyped," and how does this create subtle bugs in calculations?</li>
+<li>What is the syntax difference and functional difference between <code>#</code> and <code>##</code> operators in C?</li>
+<li>How do X-Macros resolve the "Synchronization Problem" when aligning lists (like enums and string lookups)?</li>
+<li>Why is it standard practice to wrap multi-line macro instructions inside <code>do { ... } while(0)</code> blocks?</li>
+<li>How can you inspect the preprocessor output of your compiler using a terminal command?</li>
+</ol>
+<hr />
+<h2>🚀 Stretch Task</h2>
+<p>Modify your X-Macro map generator to support <strong>JSON serialization</strong>. Expand your macro definitions so that calling <code>serialize_map_to_json()</code> automatically outputs a fully formatted JSON string containing all active key-value pairs in the structure, mapped to their correct type structures.</p>
+<hr />
+<h2>💡 Motivation Checkpoint</h2>
+<p>Compilers, database systems, and game engines use X-Macros to map massive registers lists, SQL tokens, or physics properties automatically. For example, game engines use X-Macros to automatically parse and link physical assets properties tables, keeping code updates safe and synchronized across complex structures.</p>
+<hr />
+<h2>🎓 Trainer Review Rules</h2>
+<ul>
+<li>Verify expansion: The C code must compile cleanly. Run your preprocessor <code>gcc -E</code> and inspect the generated files to ensure zero redundant whitespace or empty statements are generated.</li>
+<li>Access functions must be completely type-safe: compiling code that passes incorrect argument types must fail immediately at compile-time.</li>
+</ul></div><div class="section week-plan"><h1>Week 10: Code Standards, Static Analysis, &amp; Testing</h1>
+<h2>🎯 Weekly Goal</h2>
+<p>Adopt high-reliability, safety-critical programming standards (MISRA C), harness automated static analysis tools to identify structural defects, and build a comprehensive unit testing framework with 100% code coverage.</p>
+<h2>🎓 Weekly Outcome</h2>
+<p>By the end of this week, you will be able to refactor legacy C code into a 100% MISRA-compliant library, configure static analysis rules (<code>cppcheck</code>, <code>clang-tidy</code>), write robust unit tests using the Unity test framework, and generate HTML test coverage reports using <code>lcov</code>.</p>
+<hr />
+<h2>📅 Session Breakdown</h2>
+<h3>Monday: Safety-Critical C (MISRA Guidelines)</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Why raw C is hazardous for critical systems (unpredictable behaviors, undefined behaviors).</li>
+<li>Introduction to <strong>MISRA C (Motor Industry Software Reliability Association)</strong> guidelines.</li>
+<li>Critical rules:<ul>
+<li><strong>Rule 1.3:</strong> There shall be no occurrence of undefined or critical behavior.</li>
+<li><strong>Rule 4.1:</strong> Run-time checks shall be used to verify validity of values passed to APIs.</li>
+<li><strong>Rule 11.3:</strong> Casts shall not be performed between pointers to different object types.</li>
+<li><strong>Rule 17.2:</strong> Functions shall not call themselves either directly or indirectly (Recurse forbidden in critical embedded environments).</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h3>Tuesday: Static Analysis Tools (<code>cppcheck</code> &amp; <code>clang-tidy</code>)</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> The power of automated semantic auditing.</li>
+<li>Difference between compiler syntax validation and static semantic validation.</li>
+<li>Installing and running <code>cppcheck</code> to find memory leaks, portability problems, and safety hazards.</li>
+<li>Running <code>clang-tidy</code> to check formatting and coding standards.</li>
+<li><strong>Hands-on Exercise:</strong>
+  Analyze a file containing latent errors using static analysis:
+  <code>bash
+  # Run cppcheck on the codebase
+  cppcheck --enable=all --inconclusive --addon=misra src/</code></li>
+</ul>
+<hr />
+<h3>Wednesday: Unit Testing Framework (Unity)</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> The TDD (Test-Driven Development) mindset.</li>
+<li>Decoupling systems so they can be tested in isolation (modular design).</li>
+<li>Introduction to <strong>Unity</strong>, a lightweight C unit testing framework.</li>
+<li>Structure of a unit test file: <code>setUp()</code>, <code>tearDown()</code>, <code>TEST_ASSERT_EQUAL()</code>, <code>TEST_ASSERT_NULL()</code>.</li>
+<li><strong>Hands-on Experiment:</strong>
+  Write a basic unit test scenario:
+  ```c
+  /<em> test_calculator.c </em>/
+  #include "unity.h"
+  #include "calculator.h"</li>
+</ul>
+<p>void setUp(void) {}
+  void tearDown(void) {}</p>
+<p>void test_addition_should_succeed(void) {
+      TEST_ASSERT_EQUAL_INT(5, add(2, 3));
+  }</p>
+<p>int main(void) {
+      UNITY_BEGIN();
+      RUN_TEST(test_addition_should_succeed);
+      return UNITY_END();
+  }
+  ```</p>
+<hr />
+<h3>Thursday: Test Coverage Profiling (<code>gcov</code> &amp; <code>lcov</code>)</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Ensuring all execution paths are hit.</li>
+<li><strong>Code Coverage:</strong> The percentage of statements, branches, and functions executed during testing.</li>
+<li>Using GCC compiler flags <code>-fprofile-arcs -ftest-coverage</code> to generate profiling instructions.</li>
+<li>Translating raw profile logs using <code>gcov</code> and rendering premium HTML dashboards using <code>lcov</code>.</li>
+<li><strong>Hands-on Exercise:</strong> Compile your code with coverage profiling flags, run your unit tests, and generate HTML reports.</li>
+</ul>
+<hr />
+<h3>Friday: Code Refactoring &amp; Security Hardening</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Re-architecting bad legacy codebases to follow professional standards, eliminating magic numbers, and wrapping data structures in secure API structures.</li>
+</ul>
+<hr />
+<h2>🛠️ Hands-On Assignment: HARDENED Ring Buffer Library</h2>
+<p>Take an unsafe, legacy, poorly written circular ring buffer C library and completely rewrite it into a 100% MISRA-compliant, statically checked, and 100% unit-tested library.</p>
+<h3>1. Requirements</h3>
+<ul>
+<li>Implement <code>typedef struct { uint8_t *buffer; size_t capacity; size_t head; size_t tail; } RingBuffer;</code></li>
+<li>Rewrite all operations (<code>init</code>, <code>push</code>, <code>pop</code>, <code>is_full</code>) to enforce defensive pointer and length checking (MISRA compliance).</li>
+<li>Run <code>cppcheck --enable=all</code> and fix all warnings.</li>
+<li>Write a minimum of 10 comprehensive unit tests using <strong>Unity</strong>.</li>
+<li>Achieve 100% statement and branch coverage, verified via <code>lcov</code>.</li>
+</ul>
+<h3>2. File Deliverables</h3>
+<ul>
+<li><code>ringbuffer.h</code>: Clean, safe declarations.</li>
+<li><code>ringbuffer.c</code>: High-reliability circular buffer functions.</li>
+<li><code>test_ringbuffer.c</code>: Unity unit testing scenarios.</li>
+<li><code>Makefile</code>: Builds library, runs tests, and outputs coverage HTML report to <code>build/coverage/</code>.</li>
+</ul>
+<hr />
+<h2>📋 Deliverables Checklist</h2>
+<ul>
+<li>[ ] <code>ringbuffer.h</code> (Strict header layout, MISRA checks)</li>
+<li>[ ] <code>ringbuffer.c</code> (Zero static warnings, fully hardened)</li>
+<li>[ ] <code>test_ringbuffer.c</code> (Unity test suite)</li>
+<li>[ ] <code>Makefile</code> (Automated target <code>make test</code> and <code>make coverage</code>)</li>
+</ul>
+<hr />
+<h2>❓ Self-Check Questions</h2>
+<ol>
+<li>Why does MISRA C forbid the use of recursive function calls in safety-critical systems?</li>
+<li>What is the fundamental difference between dynamic testing (unit tests) and static analysis (<code>cppcheck</code>)?</li>
+<li>How does branch coverage differ from statement coverage, and why is branch coverage significantly harder to satisfy?</li>
+<li>In test frameworks, what exact roles do the functions <code>setUp()</code> and <code>tearDown()</code> perform before and after each test case?</li>
+<li>Why are raw pointer type casts (such as casting <code>char *</code> directly to <code>float *</code>) prohibited under MISRA C?</li>
+</ol>
+<hr />
+<h2>🚀 Stretch Task</h2>
+<p>Configure your Makefile to run your unit tests through <strong>Valgrind</strong> automatically inside <code>make test</code>. If Valgrind detects any memory errors or leaks during test runs, force the test build target to fail and abort execution.</p>
+<hr />
+<h2>💡 Motivation Checkpoint</h2>
+<p>In automotive braking systems (ABS), flight control computers, and medical pacemakers, a single software crash can result in the loss of human lives. Strict adherence to standards like MISRA C and achieving 100% test coverage are not administrative chores—they are the ethical and professional baseline of systems engineering.</p>
+<hr />
+<h2>🎓 Trainer Review Rules</h2>
+<ul>
+<li>Verify compliance: Run <code>cppcheck --enable=all</code> on the submitted files. Any style, performance, or portability warning triggers a failure.</li>
+<li>The test execution report must indicate 100% statement and branch coverage. If any logical branch in <code>ringbuffer.c</code> is not reached during test execution, the grade is capped at 6.</li>
+</ul></div><div class="section week-plan"><h1>Week 11: Multi-Threading, Race Conditions, &amp; Atomic Safety</h1>
+<h2>🎯 Weekly Goal</h2>
+<p>Master concurrent programming in C using POSIX threads (<code>pthreads</code>), understand the hazards of race conditions, deploy synchronization primitives (mutexes, semaphores, cond variables) cleanly, and explore basic lock-free atomic structures.</p>
+<h2>🎓 Weekly Outcome</h2>
+<p>By the end of this week, you will be able to spawn and join concurrent POSIX threads, protect shared memory blocks using mutex locks, coordinate threads using condition variables, diagnose multi-threaded bugs using Valgrind's Helgrind and DRD tools, and explain CPU cache alignment hazards.</p>
+<hr />
+<h2>📅 Session Breakdown</h2>
+<h3>Monday: Introduction to POSIX Threads (<code>pthreads</code>)</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> The thread execution model.</li>
+<li>Difference between processes (separate virtual memory spaces) and threads (shared virtual memory space within a single process).</li>
+<li>Spawning and joining threads using:<ul>
+<li><code>pthread_create</code>: Launches a thread executing a specific function pointer.</li>
+<li><code>pthread_join</code>: Blocks calling thread until the target thread terminates.</li>
+<li><code>pthread_exit</code>: Terminates the calling thread.</li>
+</ul>
+</li>
+<li><strong>Hands-on Experiment:</strong>
+  Spawn 4 parallel threads that print their unique numeric identifiers:
+  ```c
+  #include <stdio.h>
+  #include <pthread.h></li>
+</ul>
+<p>void <em>thread_routine(void </em>arg) {
+      int id = <em>(int </em>)arg;
+      printf("Thread %d running in parallel.\n", id);
+      return NULL;
+  }</p>
+<p>int main(void) {
+      pthread_t threads[4];
+      int ids[4] = {0, 1, 2, 3};</p>
+<pre><code>  for (int i = 0; i &lt; 4; i++) {
+      pthread_create(&amp;threads[i], NULL, thread_routine, &amp;ids[i]);
+  }
+  for (int i = 0; i &lt; 4; i++) {
+      pthread_join(threads[i], NULL);
+  }
+  return 0;
+</code></pre>
+<p>}
+  ```</p>
+<hr />
+<h3>Tuesday: Race Conditions &amp; Shared State Hazards</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> The synchronization nightmare.</li>
+<li><strong>Race Condition:</strong> Occurs when multiple threads read and write to the same memory location concurrently, and the final value depends on the non-deterministic scheduling of the threads.</li>
+<li>Why operation increments (<code>x++</code>) are not atomic (they require: read, modify, write CPU cycles).</li>
+<li><strong>Hands-on Experiment:</strong>
+  Demonstrate a data race by incrementing a counter in parallel without locks:
+  ```c
+  #include <stdio.h>
+  #include <pthread.h></li>
+</ul>
+<p>long long counter = 0;</p>
+<p>void <em>increment_routine(void </em>arg) {
+      (void)arg;
+      for (int i = 0; i &lt; 100000; i++) {
+          counter++; // Unsafe data race!
+      }
+      return NULL;
+  }</p>
+<p>int main(void) {
+      pthread_t t1, t2;
+      pthread_create(&amp;t1, NULL, increment_routine, NULL);
+      pthread_create(&amp;t2, NULL, increment_routine, NULL);
+      pthread_join(t1, NULL);
+      pthread_join(t2, NULL);
+      printf("Counter value: %lld (Expected: 200000, Actual: Less due to data races)\n", counter);
+      return 0;
+  }
+  ```</p>
+<hr />
+<h3>Wednesday: Thread Synchronization Primitives</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Restricting access to critical sections.</li>
+<li><strong>Mutex (Mutual Exclusion):</strong> A lock that ensures only one thread can access a critical block at a time.</li>
+<li><strong>Condition Variable:</strong> Allows threads to suspend execution and go to sleep until notified by another thread that a condition has been met (prevents CPU-burning busy-waiting loops).</li>
+<li><strong>Hands-on Exercise:</strong>
+  Harden your Tuesday increment routine using <code>pthread_mutex_t</code> locks.</li>
+</ul>
+<hr />
+<h3>Thursday: Thread Analysis Tools (Helgrind &amp; DRD)</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Dynamic thread safety validation.</li>
+<li>Concurrent bugs are notoriously hard to debug because they are non-deterministic (they might only crash once in a million runs).</li>
+<li>Using Valgrind <strong>Helgrind</strong> and <strong>DRD</strong> to dynamically analyze compiled binaries and pinpoint precise lock ordering violations and data races.</li>
+<li><strong>Hands-on Exercise:</strong> Run your binaries under Valgrind's Helgrind:
+  <code>bash
+  valgrind --tool=helgrind ./concurrent_app</code></li>
+</ul>
+<hr />
+<h3>Friday: Atomic Operations &amp; Lock-Free Basics</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Eliminating mutex overhead.</li>
+<li>Understanding how mutexes force heavy kernel thread suspends.</li>
+<li>CPU <strong>Atomic Instructions</strong> (Compare-and-Swap).</li>
+<li>Introduction to C11 atomic types (<code>stdatomic.h</code>).</li>
+</ul>
+<hr />
+<h2>🛠️ Hands-On Assignment: Thread-Safe Task Pool Executor</h2>
+<p>Design and build a high-performance, thread-safe <strong>Task Pool Executor</strong> that schedules and processes custom work functions across multiple parallel worker threads.</p>
+<h3>1. Requirements</h3>
+<ul>
+<li>Define a <code>ThreadPool</code> struct that contains: An array of worker threads, a task queue, a queue mutex, and queue condition variables.</li>
+<li>Implement:</li>
+<li><code>int threadpool_init(ThreadPool *tp, int num_threads)</code> (spawns worker loops).</li>
+<li><code>int threadpool_submit(ThreadPool *tp, void (*work)(void *), void *arg)</code> (adds tasks to queue safely).</li>
+<li><code>void threadpool_destroy(ThreadPool *tp)</code> (shuts down threads cleanly).</li>
+<li>Worker threads must sleep when the task queue is empty (zero active CPU busy-waiting loops).</li>
+<li>Running code under <code>valgrind --tool=helgrind</code> must report <strong>zero data races</strong>.</li>
+</ul>
+<h3>2. File Deliverables</h3>
+<ul>
+<li><code>threadpool.h</code>: Struct definitions and task signatures.</li>
+<li><code>threadpool.c</code>: Spawning, queue locks, and thread signaling execution.</li>
+<li><code>main.c</code>: Benchmarks executing heavy parallel tasks.</li>
+</ul>
+<hr />
+<h2>📋 Deliverables Checklist</h2>
+<ul>
+<li>[ ] <code>threadpool.h</code> (Clean synchronization interfaces)</li>
+<li>[ ] <code>threadpool.c</code> (Zero race conditions, proper lock cleanups)</li>
+<li>[ ] <code>main.c</code> (Benchmark scenarios)</li>
+<li>[ ] <code>Makefile</code> (Linked against <code>-pthread</code> compiler flag)</li>
+</ul>
+<hr />
+<h2>❓ Self-Check Questions</h2>
+<ol>
+<li>Why do processes have isolated memory maps while threads share memory context spaces?</li>
+<li>What are the three mechanical CPU operations executed during a standard C variable increment (<code>x++</code>)?</li>
+<li>How does a Condition Variable prevent a thread from burning CPU cycles while waiting for task queues?</li>
+<li>What does the term "Deadlock" mean, and what is the rule of Lock Ordering to prevent it?</li>
+<li>How can you detect data races dynamically using Valgrind's Helgrind tool?</li>
+</ol>
+<hr />
+<h2>🚀 Stretch Task</h2>
+<p>Modify your Thread Pool to support a <strong>Dynamic Thread Count Scaling</strong>. Expand your executor so that it monitors active queue length. If queue size surges past a threshold, spawn new auxiliary threads dynamically; if queue loads fall, scale the thread count back down cleanly.</p>
+<hr />
+<h2>💡 Motivation Checkpoint</h2>
+<p>Concurrent multi-threading is the standard for high-performance servers, operating systems, and database systems. Modern web servers (like Nginx) and database frameworks schedule and execute millions of queries concurrently. Writing flawless, lock-disciplined code separates senior systems engineers from application programmers.</p>
+<hr />
+<h2>🎓 Trainer Review Rules</h2>
+<ul>
+<li>Verify race conditions: Execution under <code>valgrind --tool=helgrind</code> must complete with zero conflict alerts.</li>
+<li>Worker threads must cleanly terminate and join upon calling <code>threadpool_destroy()</code>. Any lingering orphan threads or memory leaks trigger a grade of 0.</li>
+</ul></div><div class="section week-plan"><h1>Week 12: Production-Grade Capstone Systems Project</h1>
+<h2>🎯 Weekly Goal</h2>
+<p>Assemble all your tools, concurrency controls, compiler mastery, and memory managers to build a production-grade <strong>Concurrent CLI Systems Command Shell</strong> from scratch, profile its execution speed, and assemble an elite systems portfolio.</p>
+<h2>🎓 Weekly Outcome</h2>
+<p>By the end of this week, you will be able to write complex concurrent C projects from scratch, use profiling tools (<code>gprof</code>) to target execution hot-spots, audit code paths for memory efficiency, design decoupled file execution systems, and present your work inside professional portfolio frameworks.</p>
+<hr />
+<h2>📅 Session Breakdown</h2>
+<h3>Monday: The System Architectural Design</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Architecture of an interactive CLI Shell.</li>
+<li>The Read-Eval-Print-Loop (REPL) structure.</li>
+<li>Parsing tokenized string commands defensively.</li>
+<li>Forking child processes using <code>fork()</code>, loading executable images using <code>execvp()</code>, and managing process exit states via <code>waitpid()</code>.</li>
+<li><strong>Hands-on Experiment:</strong>
+  Map out structure maps illustrating process fork operations and pipe paths.</li>
+</ul>
+<hr />
+<h3>Tuesday: Threaded Subprocess Pipelines</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Managing parallel task jobs.</li>
+<li>Spawning execution processes inside separate background threads to ensure the main interactive shell never locks or freezes.</li>
+<li>Intercepting Standard Input and Output descriptors to implement shell pipes (<code>|</code>) and redirection (<code>&gt;</code>, <code>&lt;</code>) using the <code>dup2()</code> system call.</li>
+</ul>
+<hr />
+<h3>Wednesday: Performance Profiling with <code>gprof</code></h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Identifying execution performance bottlenecks.</li>
+<li>You cannot optimize what you do not measure. </li>
+<li>Compile code with profiling symbols (<code>-pg</code>).</li>
+<li>Run the execution scenario to compile profiling telemetry data.</li>
+<li>Analyze execution statistics using <code>gprof</code> to pinpoint functions consuming excessive clock cycles or triggering lock blockages.</li>
+<li><strong>Hands-on Exercise:</strong>
+  Compile a CPU-heavy application with profiling enabled:
+  ```bash
+  # Compile with profiling support
+  gcc -pg -O2 main.c -o app</li>
+</ul>
+<p># Run the application (generates gmon.out)
+  ./app</p>
+<p># Render the profiling report
+  gprof ./app gmon.out &gt; profile_report.txt
+  ```</p>
+<hr />
+<h3>Thursday: Optimization Strategies</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Safe, compiler-aided optimization patterns.</li>
+<li>Bypassing double evaluations.</li>
+<li>Minimizing scope dereferences.</li>
+<li>Replacing dynamic allocation in high-frequency loops with local memory arenas.</li>
+<li>Inlining critical functions (<code>inline</code>).</li>
+</ul>
+<hr />
+<h3>Friday: Graduation Portfolio Review</h3>
+<ul>
+<li><strong>Conceptual Focus:</strong> Landing embedded systems roles.</li>
+<li>How to organize code repositories to impress technical reviewers.</li>
+<li>Building premium README guides explaining architectures, memory leak logs, and unit test coverage.</li>
+<li>Mock interview systems-level conceptual review.</li>
+</ul>
+<hr />
+<h2>🛠️ Hands-On Assignment: Concurrent CLI Command Shell</h2>
+<p>Design and build a fully functional, memory-hardened <strong>Concurrent CLI Systems Command Shell</strong> (named <code>c-shell</code>) in pure C.</p>
+<h3>1. Requirements</h3>
+<ul>
+<li>Implement a robust REPL loop reading standard input with safe constraints.</li>
+<li>Support concurrent background execution: typing a command ending with <code>&amp;</code> must spawn it in a separate thread/process without locking the shell CLI prompt.</li>
+<li>Implement built-in commands: <code>cd</code> (directory change), <code>status</code> (system info), <code>exit</code>.</li>
+<li>Support piping: <code>command1 | command2</code> (using <code>pipe()</code> and <code>dup2()</code>).</li>
+<li>Code must compile cleanly under strict flags, have <strong>zero memory leaks</strong> (Valgrind verified), and include a robust automated Makefile.</li>
+</ul>
+<h3>2. File Deliverables</h3>
+<ul>
+<li><code>shell.h</code>: Command token structures and state interfaces.</li>
+<li><code>shell.c</code>: Fork pipelines, token parsing, and thread redirections.</li>
+<li><code>main.c</code>: The core REPL loop execution file.</li>
+</ul>
+<hr />
+<h2>📋 Deliverables Checklist</h2>
+<ul>
+<li>[ ] <code>shell.h</code> (Clean interface declarations)</li>
+<li>[ ] <code>shell.c</code> (Zero warnings, safe unbuffered I/O and process forks)</li>
+<li>[ ] <code>main.c</code> (High-integrity REPL loop)</li>
+<li>[ ] <code>Makefile</code> (Automated targets and clean symbols profiling)</li>
+</ul>
+<hr />
+<h2>❓ Self-Check Questions</h2>
+<ol>
+<li>How does the <code>fork()</code> system call replicate process memory maps while <code>execvp()</code> replaces them?</li>
+<li>Explain how <code>dup2()</code> redirects standard file descriptors to custom file descriptors or pipes.</li>
+<li>What profiling metrics does the <code>-pg</code> flag record, and how do you read a <code>gprof</code> flat profile?</li>
+<li>Why are background job executions in shells usually launched in separate process groups?</li>
+<li>What are the core layout files and logs that must be present in a professional GitHub systems portfolio?</li>
+</ol>
+<hr />
+<h2>🚀 Stretch Task</h2>
+<p>Add support for <strong>Environment Variables</strong> storage and retrieval. Implement custom shell built-ins <code>export NAME=VALUE</code> and parse inputs dynamically so that typing <code>echo $NAME</code> retrieves and prints variables from a thread-safe global environment map struct.</p>
+<hr />
+<h2>💡 Motivation Checkpoint</h2>
+<p>Writing a custom shell is the classic graduation test of systems programming. It requires combining string processing, low-level process maps, unbuffered descriptors redirection, concurrency thread blocks, and absolute memory control. Completing this assignment successfully demonstrates that you are ready to build production-grade operating systems systems.</p>
+<hr />
+<h2>🎓 Trainer Review Rules</h2>
+<ul>
+<li>Compile with zero warnings. Running under <code>valgrind --leak-check=full</code> during standard operations must report 0 bytes lost.</li>
+<li>The shell must successfully execute command piping (e.g. <code>ls -l | grep c-shell</code>) and background operations without memory corruption or orphan processes.</li>
+</ul></div>
+</body>
+</html>
