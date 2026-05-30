@@ -1,46 +1,51 @@
 # Microscopic Daily Vetting Specification
-## Week 04, Day 3: R11 Frame Pointer Tracking and Stacked registers layouts
+## Week 04, Day 3 (Wednesday): Function Pointers & Callback Architectures
 
 ---
 
 ### 1. Architectural Alignment & Reference Manifest
-*   **Target Week:** Week 04 | Day 3
-*   **Hardware Core Target:** ARM Cortex-M4 Core (specifically STM32F407VGT6) & System SRAM Segments.
-*   **Documentation Maps:** Technical Reference Manual (TRM), vector table offsets maps, and GCC compiler toolchain manuals.
+*   **Target Phase:** Phase Vetting Alignment
+*   **Target Week & Day:** Week 04 | Day 3 (Wednesday)
+*   **Core Systems Topic:** Function Pointers & Callback Architectures
+*   **Documentation Map:** Silicon datasheets, compiler architecture manuals, and POSIX standard specs.
 
 ---
 
 ### 2. Microscopic Daily Blueprint
 
 #### 📘 Theory Deep-Dive (4 Hours)
-Understand the role of the Frame Pointer (usually register R11 or R7). It provides a constant reference point within the function's stack frame, making it easy to access local variables and parameters. It allows debuggers to backtrace stack calls cleanly.
+Understand that functions reside in memory inside the Text Segment and possess corresponding start addresses. Master function pointer declaration syntax, argument assignments, and callback functions for event-driven systems.
 
 #### 🛠️ Unassisted Lab Track (4 Hours)
-Compile files with '-fno-omit-frame-pointer'. Set breakpoints in GDB, read the value of R11/R7, and trace offset addresses.
+1. Declare and initialize function pointers matching specific math parameters.
+  2. Build a callback-driven sensor polling loop that triggers different callbacks based on value thresholds.
 
 ---
 
 ### 3. Concrete Code Snippet & Register Mapping Example
 
-The following code is a complete, production-grade C/Assembly implementation illustrating the day's core technical challenge. It conforms to strict type safety parameters and compiles with zero warnings under GCC.
+The following code is the reference implementation illustrating the day's core technical challenge, aligned directly with the master curriculum specification:
 
 ```c
-// Stack frame pointer offsets tracking
-#include <stdint.h>
+// Function pointer declaration: returns void, takes int
+void (*event_handler)(int event_id);
 
-void trace_frame_offsets(void) {
-    volatile uint32_t a = 1;
-    volatile uint32_t b = 2;
-    (void)a; (void)b;
+void on_temp_alert(int temp) {
+    printf("ALERT: Temperature exceeded limit! Current: %d\n", temp);
+}
+
+void check_sensor(int value, void (*callback)(int)) {
+    if (value > 100) {
+        callback(value); // Execute callback
+    }
 }
 ```
 
 ---
 
-### 4. Post-Silicon Validation & Instrumentation Plan
+### 4. Post-Silicon Validation & Verification Plan
 
-To verify this day's execution on real hardware:
-*   **Verification Tooling:** Step under GDB. Examine variables locations relative to frame pointer register R11/R7.
-*   **Instrumentation Checklist:**
-    *   Monitor address registers, SP offsets, or output pins using GDB or an Oscilloscope.
-    *   Expected outcome: Trace execution cycles alignment and confirm memory states match specifications.
+To verify this day's execution on real hardware/host system:
+*   **Verification Checklist:**
+    *   Monitor register configurations, compiler exit statuses, or stack frame values.
+    *   Perform static scans or logic traces to confirm execution satisfies safety bounds.

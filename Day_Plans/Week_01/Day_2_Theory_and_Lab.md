@@ -1,42 +1,47 @@
 # Microscopic Daily Vetting Specification
-## Week 01, Day 2: Transistor Gate Delays, noise margins, and Half-Adders
+## Week 01, Day 2 (Tuesday): Advanced Bash Environment Configuration
 
 ---
 
 ### 1. Architectural Alignment & Reference Manifest
-*   **Target Week:** Week 01 | Day 2
-*   **Hardware Core Target:** ARM Cortex-M4 Core (specifically STM32F407VGT6) & System SRAM Segments.
-*   **Documentation Maps:** Technical Reference Manual (TRM), vector table offsets maps, and GCC compiler toolchain manuals.
+*   **Target Phase:** Phase Vetting Alignment
+*   **Target Week & Day:** Week 01 | Day 2 (Tuesday)
+*   **Core Systems Topic:** Advanced Bash Environment Configuration
+*   **Documentation Map:** Silicon datasheets, compiler architecture manuals, and POSIX standard specs.
 
 ---
 
 ### 2. Microscopic Daily Blueprint
 
 #### 📘 Theory Deep-Dive (4 Hours)
-Analyze the physical propagation delay ($t_{pd}$) across basic CMOS logic gates (NAND, NOR, XOR). Dissect the transistor-level latency of a basic half-adder circuit consisting of an XOR gate (for Sum) and an AND gate (for Carry). Map noise margins ($V_{IL}, V_{IH}, V_{OL}, V_{OH}$) under varying thermal conditions and parasitic capacitive loads.
+Learn how the shell initializes (`.bashrc` vs `.bash_profile`), path variable manipulation (`PATH`), export dynamics, and configuring environment variables for embedded cross-compilers.
 
 #### 🛠️ Unassisted Lab Track (4 Hours)
-Build a simulation schematic of a half-adder on your workstation using raw CMOS logic models. Measure the delay between input transition and sum output. Alternatively, hook up discrete 74-series logic chips (7408 AND, 7486 XOR) on a breadboard. Probes pins using a logic analyzer to trace output skew.
+1. Open `~/.bashrc` and construct custom aliases for system information and micro-controller connection monitoring.
+  2. Map a dedicated variable `EMBEDDED_TOOLS_DIR` to `/opt/toolchains`.
+  3. Source `.bashrc` and verify modification using print commands.
 
 ---
 
 ### 3. Concrete Code Snippet & Register Mapping Example
 
-The following code is a complete, production-grade C/Assembly implementation illustrating the day's core technical challenge. It conforms to strict type safety parameters and compiles with zero warnings under GCC.
+The following code is the reference implementation illustrating the day's core technical challenge, aligned directly with the master curriculum specification:
 
 ```c
-// Simulating logic gate delays using precise clock counting
-#include <stdint.h>
+# Append to ~/.bashrc
+export TOOLS_PATH="$HOME/embedded_tools"
+export PATH="$PATH:$TOOLS_PATH"
 
-#define MEASURE_GATE_DELAY(sum, carry, a, b)     do {         sum = (a) ^ (b);   /* XOR Gate sum */         carry = (a) & (b); /* AND Gate carry */     } while(0)
+# Custom utility alias
+alias check-usb="lsusb | grep -iE 'stlink|ftdi|ch340|cp210x'"
+alias print-env="echo 'PATH='$PATH && arm-none-eabi-gcc --version 2>/dev/null || echo 'No cross-compiler yet'"
 ```
 
 ---
 
-### 4. Post-Silicon Validation & Instrumentation Plan
+### 4. Post-Silicon Validation & Verification Plan
 
-To verify this day's execution on real hardware:
-*   **Verification Tooling:** Probing Sum pin. Scope trigger: Channel 1 falling edge. Channel 2 rising edge. Max allowable skew is 12ns at 5V VCC.
-*   **Instrumentation Checklist:**
-    *   Monitor address registers, SP offsets, or output pins using GDB or an Oscilloscope.
-    *   Expected outcome: Trace execution cycles alignment and confirm memory states match specifications.
+To verify this day's execution on real hardware/host system:
+*   **Verification Checklist:**
+    *   Monitor register configurations, compiler exit statuses, or stack frame values.
+    *   Perform static scans or logic traces to confirm execution satisfies safety bounds.

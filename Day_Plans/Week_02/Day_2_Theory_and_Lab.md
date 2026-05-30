@@ -1,51 +1,46 @@
 # Microscopic Daily Vetting Specification
-## Week 02, Day 2: SRAM memory segments: Stack, Heap, .data, and .bss
+## Week 02, Day 2 (Tuesday): Boolean Algebra, Laws, and Logic Simplification
 
 ---
 
 ### 1. Architectural Alignment & Reference Manifest
-*   **Target Week:** Week 02 | Day 2
-*   **Hardware Core Target:** ARM Cortex-M4 Core (specifically STM32F407VGT6) & System SRAM Segments.
-*   **Documentation Maps:** Technical Reference Manual (TRM), vector table offsets maps, and GCC compiler toolchain manuals.
+*   **Target Phase:** Phase Vetting Alignment
+*   **Target Week & Day:** Week 02 | Day 2 (Tuesday)
+*   **Core Systems Topic:** Boolean Algebra, Laws, and Logic Simplification
+*   **Documentation Map:** Silicon datasheets, compiler architecture manuals, and POSIX standard specs.
 
 ---
 
 ### 2. Microscopic Daily Blueprint
 
 #### 📘 Theory Deep-Dive (4 Hours)
-Dissect the physical mapping of SRAM. Analyze the distinct boundaries of runtime memory segments: Stack (dynamic local frames, grows downwards), Heap (dynamic runtime pool, grows upwards), .data (initialized global/static variables), and .bss (uninitialized global variables, initialized to zero by startup code).
+Learn logic gate logic rules (AND, OR, NOT, NAND, NOR, XOR, XNOR). Master Boolean theorems: Commutative, Associative, Distributive, Identity, and De Morgan’s Laws ($\overline{A \cdot B} = \overline{A} + \overline{B}$ and $\overline{A + B} = \overline{A} \cdot \overline{B}$).
 
 #### 🛠️ Unassisted Lab Track (4 Hours)
-Write a C file containing global variables in initialized and uninitialized states, heap allocations, and local variables. Link the file using a custom linker script. Dump symbol mappings using 'nm' and 'objdump -t'.
+1. Draw truth tables for all 7 fundamental logic gates.
+  2. Prove De Morgan's Law algebraically and simplify a complex multi-gate circuit down to minimal gates.
 
 ---
 
 ### 3. Concrete Code Snippet & Register Mapping Example
 
-The following code is a complete, production-grade C/Assembly implementation illustrating the day's core technical challenge. It conforms to strict type safety parameters and compiles with zero warnings under GCC.
+The following code is the reference implementation illustrating the day's core technical challenge, aligned directly with the master curriculum specification:
 
 ```c
-// Map variables to specific memory segments
-#include <stdint.h>
-#include <stdlib.h>
-
-uint32_t global_initialized = 0x12345678U; // allocated to .data
-uint32_t global_uninitialized;             // allocated to .bss
-
-void check_segments_layout(void) {
-    volatile uint32_t stack_local = 0x55U;  // allocated to stack
-    uint8_t *heap_local = (uint8_t *)malloc(10); // allocated to heap
-    (void)stack_local;
-    free(heap_local);
-}
+Boolean Circuit Simplification:
+Y = A·B·C + A·B·C' + A'·B
+Step 1: Factor out A·B -> Y = A·B·(C + C') + A'·B
+Step 2: C + C' = 1    -> Y = A·B·(1) + A'·B
+Step 3: Factor out B   -> Y = B·(A + A')
+Step 4: A + A' = 1    -> Y = B·(1)
+Simplified Result: Y = B
 ```
 
 ---
 
-### 4. Post-Silicon Validation & Instrumentation Plan
+### 4. Post-Silicon Validation & Verification Plan
 
-To verify this day's execution on real hardware:
-*   **Verification Tooling:** Execute 'size' on compiled binary. Verify size of .data and .bss segments dynamically maps to code variables.
-*   **Instrumentation Checklist:**
-    *   Monitor address registers, SP offsets, or output pins using GDB or an Oscilloscope.
-    *   Expected outcome: Trace execution cycles alignment and confirm memory states match specifications.
+To verify this day's execution on real hardware/host system:
+*   **Verification Checklist:**
+    *   Monitor register configurations, compiler exit statuses, or stack frame values.
+    *   Perform static scans or logic traces to confirm execution satisfies safety bounds.

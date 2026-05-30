@@ -1,50 +1,69 @@
 # Microscopic Daily Vetting Specification
-## Week 02, Day 6: Linker Script Configurations and Memory Allocations
+## Week 02, Day 6 (Saturday): Comprehensive Capstone & Vetting Verification
 
 ---
 
 ### 1. Architectural Alignment & Reference Manifest
-*   **Target Week:** Week 02 | Day 6
-*   **Hardware Core Target:** ARM Cortex-M4 Core (specifically STM32F407VGT6) & System SRAM Segments.
-*   **Documentation Maps:** Technical Reference Manual (TRM), vector table offsets maps, and GCC compiler toolchain manuals.
+*   **Target Phase:** Phase Vetting Alignment
+*   **Target Week & Day:** Week 02 | Day 6 (Saturday)
+*   **Core Systems Topic:** Comprehensive Capstone & Vetting Verification
+*   **Documentation Map:** Silicon datasheets, compiler architecture manuals, and POSIX standard specs.
 
 ---
 
 ### 2. Microscopic Daily Blueprint
 
 #### 📘 Theory Deep-Dive (4 Hours)
-Study the architecture of Linker Scripts (.ld). Understand how the linker controls the layout of the final binary image. Learn the syntax of the MEMORY directive (declaring physical regions of FLASH and SRAM) and the SECTIONS directive (mapping compiler-output sections to physical regions).
+Integrate all weekly systems concepts into a unified production-grade model. Audit corner conditions and performance boundaries.
 
 #### 🛠️ Unassisted Lab Track (4 Hours)
-Write a custom linker script defining flash and RAM regions. Allocate a specific section '.ram_vector_table' at address `0x20000000`. Compile, and inspect code maps using a physical MAP file.
+4-Bit Binary Full-Adder Emulator
+
+### Functional Requirements
+Write a production-grade C library that models hardware logic gates and assemblies a complete 4-bit Binary Full-Adder.
+1. The library must define distinct structures for `gate` behaviors. No standard logical operators `&&`, `||`, or `!` may be used inside the adder implementation—it must construct logic exclusively by calling your individual gate functions.
+2. The user must be able to input two 4-bit integers (e.g., $10$ and $7$) represented in arrays of bits.
+3. The adder must output the binary array showing sum bits and carry-out,...
 
 ---
 
 ### 3. Concrete Code Snippet & Register Mapping Example
 
-The following code is a complete, production-grade C/Assembly implementation illustrating the day's core technical challenge. It conforms to strict type safety parameters and compiles with zero warnings under GCC.
+The following code is the reference implementation illustrating the day's core technical challenge, aligned directly with the master curriculum specification:
 
 ```c
-/* Linker Script Syntax Structure */
-MEMORY {
-    FLASH (rx)  : ORIGIN = 0x08000000, LENGTH = 1024K
-    SRAM  (rwx) : ORIGIN = 0x20000000, LENGTH = 128K
-}
+#ifndef LOGIC_GATES_H
+#define LOGIC_GATES_H
 
-SECTIONS {
-    .text : {
-        *(.isr_vector)
-        *(.text*)
-    } > FLASH
-}
+#include <stdbool.h>
+
+// Fundamental gates
+bool gate_and(bool a, bool b);
+bool gate_or(bool a, bool b);
+bool gate_not(bool a);
+
+// Compound gates built on fundamentals
+bool gate_nand(bool a, bool b);
+bool gate_nor(bool a, bool b);
+bool gate_xor(bool a, bool b);
+
+// Adders
+typedef struct {
+    bool sum;
+    bool carry_out;
+} adder_result_t;
+
+adder_result_t half_adder(bool a, bool b);
+adder_result_t full_adder(bool a, bool b, bool carry_in);
+
+#endif // LOGIC_GATES_H
 ```
 
 ---
 
-### 4. Post-Silicon Validation & Instrumentation Plan
+### 4. Post-Silicon Validation & Verification Plan
 
-To verify this day's execution on real hardware:
-*   **Verification Tooling:** Check MAP file output. Ensure '.ram_vector_table' is allocated at address `0x20000000` with correct size bounds.
-*   **Instrumentation Checklist:**
-    *   Monitor address registers, SP offsets, or output pins using GDB or an Oscilloscope.
-    *   Expected outcome: Trace execution cycles alignment and confirm memory states match specifications.
+To verify this day's execution on real hardware/host system:
+*   **Verification Checklist:**
+    *   Monitor register configurations, compiler exit statuses, or stack frame values.
+    *   Perform static scans or logic traces to confirm execution satisfies safety bounds.

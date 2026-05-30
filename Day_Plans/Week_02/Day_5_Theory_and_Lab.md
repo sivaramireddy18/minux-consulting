@@ -1,48 +1,59 @@
 # Microscopic Daily Vetting Specification
-## Week 02, Day 5: Compiler Optimizations -O0 to -Os, Reordering, and Volatile
+## Week 02, Day 5 (Friday): Sequential Circuits Basics (Latches & Flip-Flops)
 
 ---
 
 ### 1. Architectural Alignment & Reference Manifest
-*   **Target Week:** Week 02 | Day 5
-*   **Hardware Core Target:** ARM Cortex-M4 Core (specifically STM32F407VGT6) & System SRAM Segments.
-*   **Documentation Maps:** Technical Reference Manual (TRM), vector table offsets maps, and GCC compiler toolchain manuals.
+*   **Target Phase:** Phase Vetting Alignment
+*   **Target Week & Day:** Week 02 | Day 5 (Friday)
+*   **Core Systems Topic:** Sequential Circuits Basics (Latches & Flip-Flops)
+*   **Documentation Map:** Silicon datasheets, compiler architecture manuals, and POSIX standard specs.
 
 ---
 
 ### 2. Microscopic Daily Blueprint
 
 #### 📘 Theory Deep-Dive (4 Hours)
-Analyze the internal mechanics of compiler optimizations. At higher levels (-O2, -O3, -Os), the compiler reorders instructions, eliminates dead code paths, and caches values in CPU core registers. Learn why 'volatile' is the only protection mechanism to prevent register-caching during hardware status checks.
+Learn the core transition from combinational to sequential logic (state-holding). Study the SR Latch, gated D Latch, and edge-triggered D Flip-Flop. Understand how clocks control propagation.
 
 #### 🛠️ Unassisted Lab Track (4 Hours)
-Write a delay loop counting to 1,000,000 without volatile. Compile it at '-O0' and '-O3'. Observe how the compiler completely eliminates the '-O3' loop as dead code. Re-insert volatile and verify loop preservation.
+1. Trace an active-low SR NAND latch truth table and identify the "forbidden" state.
+  2. Write a state-based loop in C simulating clock cycles and latch state updates.
 
 ---
 
 ### 3. Concrete Code Snippet & Register Mapping Example
 
-The following code is a complete, production-grade C/Assembly implementation illustrating the day's core technical challenge. It conforms to strict type safety parameters and compiles with zero warnings under GCC.
+The following code is the reference implementation illustrating the day's core technical challenge, aligned directly with the master curriculum specification:
 
 ```c
-// Loop optimization suppression test
-#include <stdint.h>
+typedef struct {
+    bool Q;
+    bool Q_bar;
+} sr_latch_t;
 
-void delay_cycles_loop(void) {
-    // Without volatile, compiler eliminates this loop under -O3
-    volatile uint32_t counter = 0;
-    while (counter < 100000U) {
-        counter++;
+// Update latch outputs based on inputs
+void update_sr_latch(bool S, bool R, sr_latch_t *latch) {
+    if (!S && R) {
+        latch->Q = true;
+        latch->Q_bar = false;
+    } else if (S && !R) {
+        latch->Q = false;
+        latch->Q_bar = true;
+    } else if (!S && !R) {
+        // Forbidden state for Active-Low Latch
+        latch->Q = true;
+        latch->Q_bar = true;
     }
+    // S=1, R=1: Hold state (no change)
 }
 ```
 
 ---
 
-### 4. Post-Silicon Validation & Instrumentation Plan
+### 4. Post-Silicon Validation & Verification Plan
 
-To verify this day's execution on real hardware:
-*   **Verification Tooling:** Disassemble '-O3' binary. Ensure loop assembly instructions are present and execute correct loop cycles.
-*   **Instrumentation Checklist:**
-    *   Monitor address registers, SP offsets, or output pins using GDB or an Oscilloscope.
-    *   Expected outcome: Trace execution cycles alignment and confirm memory states match specifications.
+To verify this day's execution on real hardware/host system:
+*   **Verification Checklist:**
+    *   Monitor register configurations, compiler exit statuses, or stack frame values.
+    *   Perform static scans or logic traces to confirm execution satisfies safety bounds.

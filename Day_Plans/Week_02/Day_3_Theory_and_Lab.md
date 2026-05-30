@@ -1,52 +1,53 @@
 # Microscopic Daily Vetting Specification
-## Week 02, Day 3: Struct Padding Alignments and 32-bit Memory Boundaries
+## Week 02, Day 3 (Wednesday): Logical Gates Implementations in C
 
 ---
 
 ### 1. Architectural Alignment & Reference Manifest
-*   **Target Week:** Week 02 | Day 3
-*   **Hardware Core Target:** ARM Cortex-M4 Core (specifically STM32F407VGT6) & System SRAM Segments.
-*   **Documentation Maps:** Technical Reference Manual (TRM), vector table offsets maps, and GCC compiler toolchain manuals.
+*   **Target Phase:** Phase Vetting Alignment
+*   **Target Week & Day:** Week 02 | Day 3 (Wednesday)
+*   **Core Systems Topic:** Logical Gates Implementations in C
+*   **Documentation Map:** Silicon datasheets, compiler architecture manuals, and POSIX standard specs.
 
 ---
 
 ### 2. Microscopic Daily Blueprint
 
 #### 📘 Theory Deep-Dive (4 Hours)
-Analyze structure alignments and hardware memory boundaries. In a 32-bit architecture, the processor fetches data on 32-bit aligned boundaries (addresses ending in 0, 4, 8, C). To optimize bus speeds, the compiler automatically inserts padding bytes into structures. Learn how '__attribute__((packed))' eliminates padding at the cost of execution cycles.
+Understand the mapping between logical gates and C bitwise programming operators (`&` for AND, `|` for OR, `^` for XOR, `~` for NOT). Avoid confusing these with logical evaluation operators (`&&`, `||`, `!`).
 
 #### 🛠️ Unassisted Lab Track (4 Hours)
-Create structures containing interleaved data types (char, int, short). Measure sizes using 'sizeof'. Apply packed attributes and analyze structural offset mapping changes under GDB.
+1. Write individual, clean functions in C that simulate AND, OR, XOR, NOT, NAND, NOR, and XNOR.
+  2. The function parameters and return types must be strict booleans or single bits.
 
 ---
 
 ### 3. Concrete Code Snippet & Register Mapping Example
 
-The following code is a complete, production-grade C/Assembly implementation illustrating the day's core technical challenge. It conforms to strict type safety parameters and compiles with zero warnings under GCC.
+The following code is the reference implementation illustrating the day's core technical challenge, aligned directly with the master curriculum specification:
 
 ```c
-// Struct alignment padding and size checks
-#include <stdint.h>
+#include <stdbool.h>
 
-struct NormalStruct {
-    uint8_t  a;
-    uint32_t b; // Compiler inserts 3 padding bytes after 'a' to align 'b'
-    uint16_t c;
-};
+// Core NAND gate simulation
+bool gate_nand(bool input_a, bool input_b) {
+    return !(input_a && input_b);
+}
 
-struct __attribute__((packed)) PackedStruct {
-    uint8_t  a;
-    uint32_t b; // Zero padding bytes inserted
-    uint16_t c;
-};
+// Core XOR gate using basic NAND gates only
+bool gate_xor(bool a, bool b) {
+    bool n1 = gate_nand(a, b);
+    bool n2 = gate_nand(a, n1);
+    bool n3 = gate_nand(b, n1);
+    return gate_nand(n2, n3);
+}
 ```
 
 ---
 
-### 4. Post-Silicon Validation & Instrumentation Plan
+### 4. Post-Silicon Validation & Verification Plan
 
-To verify this day's execution on real hardware:
-*   **Verification Tooling:** Write test asserting sizeof(struct NormalStruct) == 12 and sizeof(struct PackedStruct) == 7. Compile and run.
-*   **Instrumentation Checklist:**
-    *   Monitor address registers, SP offsets, or output pins using GDB or an Oscilloscope.
-    *   Expected outcome: Trace execution cycles alignment and confirm memory states match specifications.
+To verify this day's execution on real hardware/host system:
+*   **Verification Checklist:**
+    *   Monitor register configurations, compiler exit statuses, or stack frame values.
+    *   Perform static scans or logic traces to confirm execution satisfies safety bounds.

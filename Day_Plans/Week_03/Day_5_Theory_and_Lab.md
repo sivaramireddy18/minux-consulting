@@ -1,49 +1,45 @@
 # Microscopic Daily Vetting Specification
-## Week 03, Day 5: Branch Target Optimizations and Assembly branch offsets
+## Week 03, Day 5 (Friday): Static and Extern in Multi-File Architectures
 
 ---
 
 ### 1. Architectural Alignment & Reference Manifest
-*   **Target Week:** Week 03 | Day 5
-*   **Hardware Core Target:** ARM Cortex-M4 Core (specifically STM32F407VGT6) & System SRAM Segments.
-*   **Documentation Maps:** Technical Reference Manual (TRM), vector table offsets maps, and GCC compiler toolchain manuals.
+*   **Target Phase:** Phase Vetting Alignment
+*   **Target Week & Day:** Week 03 | Day 5 (Friday)
+*   **Core Systems Topic:** Static and Extern in Multi-File Architectures
+*   **Documentation Map:** Silicon datasheets, compiler architecture manuals, and POSIX standard specs.
 
 ---
 
 ### 2. Microscopic Daily Blueprint
 
 #### 📘 Theory Deep-Dive (4 Hours)
-Understand how the CPU branch predictor and link registers behave during indirect branch jumps. Analyze how the compiler translates switch cases and jump tables into branch instructions (e.g. `BX` or `BLX` on ARM) and maps execution jumps offset tables.
+Grasp the dual role of `static` (restricts symbol visibility to the current file when applied globally; preserves variable value across function calls when applied locally). Understand `extern` (declares existence of symbol defined in another file).
 
 #### 🛠️ Unassisted Lab Track (4 Hours)
-Write a switch block with 8 entries. Disassemble using 'objdump -d'. Observe how the compiler generates branch offset tables inside assembly to optimize branch times.
+1. Build a C modular layout where internal functions are protected using `static` declarations.
+  2. Expose specific API control structures to `main.c` via headers using `extern` correctly.
 
 ---
 
 ### 3. Concrete Code Snippet & Register Mapping Example
 
-The following code is a complete, production-grade C/Assembly implementation illustrating the day's core technical challenge. It conforms to strict type safety parameters and compiles with zero warnings under GCC.
+The following code is the reference implementation illustrating the day's core technical challenge, aligned directly with the master curriculum specification:
 
 ```c
-// Switch jump table optimization test
-#include <stdint.h>
+// sensor.c
+static int raw_sensor_reading; // Private global variable (internal linkage)
 
-uint32_t execute_jump_branch(uint32_t index) {
-    switch (index) {
-        case 0: return 0x11;
-        case 1: return 0x22;
-        case 2: return 0x33;
-        default: return 0x00;
-    }
+int get_sensor_value(void) {   // Public function (external linkage)
+    return raw_sensor_reading;
 }
 ```
 
 ---
 
-### 4. Post-Silicon Validation & Instrumentation Plan
+### 4. Post-Silicon Validation & Verification Plan
 
-To verify this day's execution on real hardware:
-*   **Verification Tooling:** Verify compiled assembly matches jump instruction blocks, and check performance cycles count.
-*   **Instrumentation Checklist:**
-    *   Monitor address registers, SP offsets, or output pins using GDB or an Oscilloscope.
-    *   Expected outcome: Trace execution cycles alignment and confirm memory states match specifications.
+To verify this day's execution on real hardware/host system:
+*   **Verification Checklist:**
+    *   Monitor register configurations, compiler exit statuses, or stack frame values.
+    *   Perform static scans or logic traces to confirm execution satisfies safety bounds.

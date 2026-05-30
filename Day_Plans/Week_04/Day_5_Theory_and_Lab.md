@@ -1,46 +1,44 @@
 # Microscopic Daily Vetting Specification
-## Week 04, Day 5: Stack Overflow mechanisms and MPU guard bands
+## Week 04, Day 5 (Friday): Custom Block Allocators Mechanics (Singly Linked Heap)
 
 ---
 
 ### 1. Architectural Alignment & Reference Manifest
-*   **Target Week:** Week 04 | Day 5
-*   **Hardware Core Target:** ARM Cortex-M4 Core (specifically STM32F407VGT6) & System SRAM Segments.
-*   **Documentation Maps:** Technical Reference Manual (TRM), vector table offsets maps, and GCC compiler toolchain manuals.
+*   **Target Phase:** Phase Vetting Alignment
+*   **Target Week & Day:** Week 04 | Day 5 (Friday)
+*   **Core Systems Topic:** Custom Block Allocators Mechanics (Singly Linked Heap)
+*   **Documentation Map:** Silicon datasheets, compiler architecture manuals, and POSIX standard specs.
 
 ---
 
 ### 2. Microscopic Daily Blueprint
 
 #### 📘 Theory Deep-Dive (4 Hours)
-Understand the physical disaster of a stack overflow. If a call stack grows beyond its allocated memory boundary, it silently overwrites adjacent global variables or heap blocks. Configure the Memory Protection Unit (MPU) to set up a read-only guard band to trigger a HardFault on boundary breach.
+Conceptualize how an allocator operates without operating system system-calls (like `sbrk`). Learn how to partition a static array of raw bytes into a linked list of managed heap blocks.
 
 #### 🛠️ Unassisted Lab Track (4 Hours)
-Write infinite recursive functions to trigger a stack overflow. Trace PC values during crash, and set up watchpoint breakpoints.
+1. Design a block metadata header structure containing the size of the block and a boolean indicating whether it is free or allocated.
+  2. Plan the link mechanism for traversing adjacent blocks.
 
 ---
 
 ### 3. Concrete Code Snippet & Register Mapping Example
 
-The following code is a complete, production-grade C/Assembly implementation illustrating the day's core technical challenge. It conforms to strict type safety parameters and compiles with zero warnings under GCC.
+The following code is the reference implementation illustrating the day's core technical challenge, aligned directly with the master curriculum specification:
 
 ```c
-// Intentional recursion loop to audit stack overflow
-#include <stdint.h>
-
-void trigger_infinite_stack_overflow(uint32_t depth) {
-    volatile uint32_t local_var[128]; // Allocate large stack frame
-    local_var[0] = depth;
-    trigger_infinite_stack_overflow(depth + 1);
-}
+typedef struct block_header {
+    size_t size;
+    bool is_free;
+    struct block_header *next;
+} block_header_t;
 ```
 
 ---
 
-### 4. Post-Silicon Validation & Instrumentation Plan
+### 4. Post-Silicon Validation & Verification Plan
 
-To verify this day's execution on real hardware:
-*   **Verification Tooling:** Set a GDB memory write watchpoint at stack base boundary. Ensure watchpoint triggers before heap segments get corrupted.
-*   **Instrumentation Checklist:**
-    *   Monitor address registers, SP offsets, or output pins using GDB or an Oscilloscope.
-    *   Expected outcome: Trace execution cycles alignment and confirm memory states match specifications.
+To verify this day's execution on real hardware/host system:
+*   **Verification Checklist:**
+    *   Monitor register configurations, compiler exit statuses, or stack frame values.
+    *   Perform static scans or logic traces to confirm execution satisfies safety bounds.

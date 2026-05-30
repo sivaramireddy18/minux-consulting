@@ -1,52 +1,57 @@
 # Microscopic Daily Vetting Specification
-## Week 04, Day 6: Compiler Stack Canaries and Canary address audits
+## Week 04, Day 6 (Saturday): Comprehensive Capstone & Vetting Verification
 
 ---
 
 ### 1. Architectural Alignment & Reference Manifest
-*   **Target Week:** Week 04 | Day 6
-*   **Hardware Core Target:** ARM Cortex-M4 Core (specifically STM32F407VGT6) & System SRAM Segments.
-*   **Documentation Maps:** Technical Reference Manual (TRM), vector table offsets maps, and GCC compiler toolchain manuals.
+*   **Target Phase:** Phase Vetting Alignment
+*   **Target Week & Day:** Week 04 | Day 6 (Saturday)
+*   **Core Systems Topic:** Comprehensive Capstone & Vetting Verification
+*   **Documentation Map:** Silicon datasheets, compiler architecture manuals, and POSIX standard specs.
 
 ---
 
 ### 2. Microscopic Daily Blueprint
 
 #### 📘 Theory Deep-Dive (4 Hours)
-Study compiler-inserted Stack Canaries. Under '-fstack-protector-all', the compiler inserts a random canary value onto the stack right before local variables in the function prologue. In the epilogue, it verifies that the canary is unchanged before returning. If modified, it aborts.
+Integrate all weekly systems concepts into a unified production-grade model. Audit corner conditions and performance boundaries.
 
 #### 🛠️ Unassisted Lab Track (4 Hours)
-Compile code with '-fstack-protector-all'. Write code that intentionally overflows a local character buffer, and track the call to '__stack_chk_fail'.
+Raw Static Array Memory Allocator
+
+### Functional Requirements
+Create a custom, high-reliability memory allocation library (`my_alloc.c`, `my_alloc.h`) that partitions and manages a static memory pool array of 4KB ($4096$ bytes) using a raw block linked list.
+1. The library must implement two core functions: `void* my_malloc(size_t size)` and `void my_free(void *ptr)`.
+2. Do *not* use standard library `<stdlib.h>` functions (`malloc`, `free`, `realloc`).
+3. Every allocated block must be preceded by a `block_header_t` block metadata node.
+4. `my_malloc` must use a **First-Fit** algorithm: searc...
 
 ---
 
 ### 3. Concrete Code Snippet & Register Mapping Example
 
-The following code is a complete, production-grade C/Assembly implementation illustrating the day's core technical challenge. It conforms to strict type safety parameters and compiles with zero warnings under GCC.
+The following code is the reference implementation illustrating the day's core technical challenge, aligned directly with the master curriculum specification:
 
 ```c
-// Stack canary overrun test
-#include <string.h>
+#ifndef MY_ALLOC_H
+#define MY_ALLOC_H
 
-void __stack_chk_fail(void) {
-    // Local stack handler overrun hook
-    __asm volatile ("bkpt #1");
-    while(1);
-}
+#include <stddef.h>
+#include <stdbool.h>
 
-void trigger_buffer_overrun(void) {
-    char dest[4];
-    // Overrun will corrupt compiler stack canary
-    strcpy(dest, "overrun_buffer_text");
-}
+void my_alloc_init(void);
+void* my_malloc(size_t size);
+void my_free(void *ptr);
+void my_alloc_dump(void); // Utility to print layout of heap memory
+
+#endif // MY_ALLOC_H
 ```
 
 ---
 
-### 4. Post-Silicon Validation & Instrumentation Plan
+### 4. Post-Silicon Validation & Verification Plan
 
-To verify this day's execution on real hardware:
-*   **Verification Tooling:** Compile, execute, verify execution halts inside __stack_chk_fail hook before function exits.
-*   **Instrumentation Checklist:**
-    *   Monitor address registers, SP offsets, or output pins using GDB or an Oscilloscope.
-    *   Expected outcome: Trace execution cycles alignment and confirm memory states match specifications.
+To verify this day's execution on real hardware/host system:
+*   **Verification Checklist:**
+    *   Monitor register configurations, compiler exit statuses, or stack frame values.
+    *   Perform static scans or logic traces to confirm execution satisfies safety bounds.

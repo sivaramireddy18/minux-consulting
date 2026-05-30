@@ -1,48 +1,43 @@
 # Microscopic Daily Vetting Specification
-## Week 02, Day 1: Static, Extern, Volatile variables Cache Coherency
+## Week 02, Day 1 (Monday): Radix Formats, Hex, Binary, and Octal conversions
 
 ---
 
 ### 1. Architectural Alignment & Reference Manifest
-*   **Target Week:** Week 02 | Day 1
-*   **Hardware Core Target:** ARM Cortex-M4 Core (specifically STM32F407VGT6) & System SRAM Segments.
-*   **Documentation Maps:** Technical Reference Manual (TRM), vector table offsets maps, and GCC compiler toolchain manuals.
+*   **Target Phase:** Phase Vetting Alignment
+*   **Target Week & Day:** Week 02 | Day 1 (Monday)
+*   **Core Systems Topic:** Radix Formats, Hex, Binary, and Octal conversions
+*   **Documentation Map:** Silicon datasheets, compiler architecture manuals, and POSIX standard specs.
 
 ---
 
 ### 2. Microscopic Daily Blueprint
 
 #### 📘 Theory Deep-Dive (4 Hours)
-Explore variables lifetimes and scopes. Analyze register-level variable storage class mappings (static, extern, register). Explore the 'volatile' qualifier: it tells the compiler that the register value can change outside program execution blocks, bypassing register caching and forcing direct memory reads.
+Understand base systems (binary - base 2, octal - base 8, decimal - base 10, hexadecimal - base 16). Comprehend binary scaling, signed formats (One's complement, Two's complement), and how fixed-width integers sit in core registers.
 
 #### 🛠️ Unassisted Lab Track (4 Hours)
-Write a polling delay loop using a global volatile flag. Compile it under '-O2'. Compare the compiled assembly generation of a standard flag versus a volatile flag. Verify register caching behavior in GDB.
+1. Complete a mental math matrix converting numbers between binary, decimal, and hexadecimal.
+  2. Map out how negative integers are represented in two's complement and verify overflow limits on a 8-bit, 16-bit, and 32-bit boundary.
 
 ---
 
 ### 3. Concrete Code Snippet & Register Mapping Example
 
-The following code is a complete, production-grade C/Assembly implementation illustrating the day's core technical challenge. It conforms to strict type safety parameters and compiles with zero warnings under GCC.
+The following code is the reference implementation illustrating the day's core technical challenge, aligned directly with the master curriculum specification:
 
 ```c
-// Volatile vs Standard variables registers optimization check
-#include <stdint.h>
-
-#define STAT_ADDR 0x20002000U
-
-void polling_loop_volatile(void) {
-    volatile uint32_t *status = (volatile uint32_t *)STAT_ADDR;
-    // Compiler cannot cache this read in R0; forces 'LDR' on each iteration
-    while (*status == 0);
-}
+Value: 187 (Decimal)
+Hexadecimal: 0xBB (11*16^1 + 11*16^0 = 176 + 11 = 187)
+Binary: 0b10111011 (128 + 32 + 16 + 8 + 2 + 1 = 187)
+Octal: 0273 (2*64 + 7*8 + 3 = 128 + 56 + 3 = 187)
 ```
 
 ---
 
-### 4. Post-Silicon Validation & Instrumentation Plan
+### 4. Post-Silicon Validation & Verification Plan
 
-To verify this day's execution on real hardware:
-*   **Verification Tooling:** Disassemble compiled loop using 'objdump -d'. Verify the volatile loop contains active 'ldr' memory reads on each loop step.
-*   **Instrumentation Checklist:**
-    *   Monitor address registers, SP offsets, or output pins using GDB or an Oscilloscope.
-    *   Expected outcome: Trace execution cycles alignment and confirm memory states match specifications.
+To verify this day's execution on real hardware/host system:
+*   **Verification Checklist:**
+    *   Monitor register configurations, compiler exit statuses, or stack frame values.
+    *   Perform static scans or logic traces to confirm execution satisfies safety bounds.

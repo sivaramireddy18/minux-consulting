@@ -1,52 +1,44 @@
 # Microscopic Daily Vetting Specification
-## Week 03, Day 2: Pointer Arithmetic offset scale calculations by type sizes
+## Week 03, Day 2 (Tuesday): Compilation & Assembly Phases
 
 ---
 
 ### 1. Architectural Alignment & Reference Manifest
-*   **Target Week:** Week 03 | Day 2
-*   **Hardware Core Target:** ARM Cortex-M4 Core (specifically STM32F407VGT6) & System SRAM Segments.
-*   **Documentation Maps:** Technical Reference Manual (TRM), vector table offsets maps, and GCC compiler toolchain manuals.
+*   **Target Phase:** Phase Vetting Alignment
+*   **Target Week & Day:** Week 03 | Day 2 (Tuesday)
+*   **Core Systems Topic:** Compilation & Assembly Phases
+*   **Documentation Map:** Silicon datasheets, compiler architecture manuals, and POSIX standard specs.
 
 ---
 
 ### 2. Microscopic Daily Blueprint
 
 #### 📘 Theory Deep-Dive (4 Hours)
-Master pointer arithmetic mechanics. When you increment or decrement a pointer, the compiler automatically scales the address step by the size of the target type (e.g., a `uint32_t *` increments by 4 bytes, while a `uint8_t *` increments by 1 byte). Learn how this applies to structures and arrays.
+Study the compilation pipeline: translation from C to assembly representation (`.s`), optimization parameters (`-O0`, `-O1`, `-O2`, `-O3`, `-Os`), and translation of assembly to machine instructions inside binary object files (`.o`).
 
 #### 🛠️ Unassisted Lab Track (4 Hours)
-Write a program defining arrays of different type structures. Increment pointer variables by custom steps, and log address transitions to verify type scale offsets under GDB.
+1. Compile a simple loop function under different optimization levels (`-O0` vs `-O2`).
+  2. Inspect the resulting assembly code (`.s`) and compare how register usage and loop structures are optimized by the compiler.
 
 ---
 
 ### 3. Concrete Code Snippet & Register Mapping Example
 
-The following code is a complete, production-grade C/Assembly implementation illustrating the day's core technical challenge. It conforms to strict type safety parameters and compiles with zero warnings under GCC.
+The following code is the reference implementation illustrating the day's core technical challenge, aligned directly with the master curriculum specification:
 
 ```c
-// Pointer arithmetic type-scaling verify
-#include <stdint.h>
+# Generate assembly file from C
+gcc -S -O2 src/math.c -o build/math.s
 
-struct SensorData {
-    uint32_t val;
-    uint8_t  status;
-}; // Size is 8 bytes due to padding alignment
-
-void evaluate_pointer_scaling(void) {
-    struct SensorData data_array[2] = { {0x11, 1}, {0x22, 2} };
-    struct SensorData *ptr = data_array;
-    ptr++; // Pointer increments address by exactly 8 bytes (type size)
-    (void)ptr;
-}
+# Trace assembly instructions
+cat build/math.s
 ```
 
 ---
 
-### 4. Post-Silicon Validation & Instrumentation Plan
+### 4. Post-Silicon Validation & Verification Plan
 
-To verify this day's execution on real hardware:
-*   **Verification Tooling:** Assert that address difference '(uintptr_t)(ptr + 1) - (uintptr_t)ptr' equals sizeof(struct SensorData).
-*   **Instrumentation Checklist:**
-    *   Monitor address registers, SP offsets, or output pins using GDB or an Oscilloscope.
-    *   Expected outcome: Trace execution cycles alignment and confirm memory states match specifications.
+To verify this day's execution on real hardware/host system:
+*   **Verification Checklist:**
+    *   Monitor register configurations, compiler exit statuses, or stack frame values.
+    *   Perform static scans or logic traces to confirm execution satisfies safety bounds.
