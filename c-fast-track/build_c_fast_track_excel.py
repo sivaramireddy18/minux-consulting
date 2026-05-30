@@ -31,11 +31,13 @@ def main():
     wb = openpyxl.Workbook()
     
     # Setup Sheets
-    ws_dash = wb.active
-    ws_dash.title = "Executive Dashboard"
+    ws_intro = wb.active
+    ws_intro.title = "User Guide & Vetting Guide"
+    ws_dash = wb.create_sheet(title="Executive Dashboard")
     ws_tasks = wb.create_sheet(title="Daily Progress Tracker")
 
     # Ensure grid lines are visible
+    ws_intro.views.sheetView[0].showGridLines = True
     ws_dash.views.sheetView[0].showGridLines = True
     ws_tasks.views.sheetView[0].showGridLines = True
 
@@ -148,6 +150,141 @@ def main():
         if current_date.weekday() < 5: # Monday to Friday
             dates.append(current_date.strftime("%Y-%m-%d"))
         current_date += datetime.timedelta(days=1)
+
+    # -------------------------------------------------------------
+    # Populate Sheet 1: User Guide & Vetting Guide (Tab 1)
+    # -------------------------------------------------------------
+    ws_intro.merge_cells("A1:C2")
+    intro_title = ws_intro.cell(row=1, column=1, value="C SYSTEMS PROGRAMMING 45-DAY ELITE FAST-TRACK - GUIDE & METRICS")
+    intro_title.font = font_title
+    intro_title.alignment = align_center
+    intro_title.fill = fill_primary
+    
+    # Apply styling to merged title cells
+    for r in range(1, 3):
+        for c in range(1, 4):
+            ws_intro.cell(row=r, column=c).fill = fill_primary
+            ws_intro.cell(row=r, column=c).font = font_header
+
+    ws_intro.row_dimensions[1].height = 20
+    ws_intro.row_dimensions[2].height = 20
+
+    # Section 1: Navigation Guide
+    ws_intro.cell(row=4, column=1, value="1. HOW TO NAVIGATE AND FILL THE TRACKER").font = font_section
+    ws_intro.row_dimensions[4].height = 24
+    
+    nav_headers = ["Action Step", "Procedural Instructions & Methodology", "Associated Tab / Location"]
+    for col_idx, nh in enumerate(nav_headers, 1):
+        cell = ws_intro.cell(row=5, column=col_idx, value=nh)
+        cell.font = font_header
+        cell.fill = fill_accent
+        cell.alignment = align_center
+        cell.border = border_thin
+    ws_intro.row_dimensions[5].height = 22
+
+    nav_steps = [
+        ("Step 1: Read Daily Spec", "Go to your workspace folder: /c-fast-track/Day_Plans/. Read the corresponding daily blueprint (Day_01.md to Day_45.md). Read the 4-Hour Theory Deep-Dive and complete the 4-Hour Unassisted Lab.", "Workspace Files: Day_Plans/"),
+        ("Step 2: Update Progress Status", "Select the 'Daily Progress Tracker' worksheet tab in this workbook. Locate the current day and set the 'Status' column dropdown selector to 'In Progress' or 'Completed'.", "Tab 3: Daily Progress Tracker"),
+        ("Step 3: Audit & Grade Task", "Once the lab compiles and executes with zero warning flags, evaluate your understanding against the 5-Tier Vetting Scale. Select the appropriate rating from the 'Grade / Audit' column dropdown list.", "Tab 3: Daily Progress Tracker"),
+        ("Step 4: Analyze Dashboard", "Switch to the 'Executive Dashboard' worksheet tab. Analyze real-time KPI metrics cards and track active phase completion progress displayed on the column charts.", "Tab 2: Executive Dashboard")
+    ]
+
+    for idx, row_data in enumerate(nav_steps, 6):
+        ws_intro.row_dimensions[idx].height = 22
+        for col_idx, val in enumerate(row_data, 1):
+            cell = ws_intro.cell(row=idx, column=col_idx, value=val)
+            cell.font = font_body
+            cell.border = border_thin
+            if col_idx in [1, 2]:
+                cell.alignment = align_left
+            else:
+                cell.alignment = align_center
+        if idx % 2 == 1:
+            for c in range(1, 4):
+                ws_intro.cell(row=idx, column=c).fill = fill_zebra
+
+    # Section 2: Vetting Criteria (Understanding Measurement)
+    ws_intro.cell(row=12, column=1, value="2. 5-TIER UNDERSTANDING MEASUREMENT METRICS (VETTING CRITERIA)").font = font_section
+    ws_intro.row_dimensions[12].height = 24
+
+    v_headers = ["Grade / Audit Score", "Scale Target %", "Physical Evaluation Benchmarks (MISRA C & Hardware Vetting Standards)"]
+    for col_idx, vh in enumerate(v_headers, 1):
+        cell = ws_intro.cell(row=13, column=col_idx, value=vh)
+        cell.font = font_header
+        cell.fill = fill_accent
+        cell.alignment = align_center
+        cell.border = border_thin
+    ws_intro.row_dimensions[13].height = 22
+
+    vetting_criteria = [
+        ("A+ [100%]", "100%", "Perfect unassisted delivery. Zero compiler warnings under strict '-Wall -Wextra -Werror -pedantic' C11 constraints. No memory leaks detected under Valgrind. Registers and hardware metrics successfully audited via GDB/Logic Analyzer."),
+        ("A [90%]", "90%", "Clean compilation and execution with zero compiler warnings. Minor assisted code style adjustments permitted. High-quality documentation and safe defensive pointer boundaries implemented successfully."),
+        ("B [80%]", "80%", "Compiles cleanly. Minor assisted corrections needed during structural alignments or preprocessor macros expansions. Program achieves functional output targets under debug audits."),
+        ("C [70%]", "70%", "Compiles and runs with helper hints during lab execution. Program is functional, but contains suboptimal branching choices, redundant loops, or unoptimized variables structures."),
+        ("F [Fail]", "0%", "Program fails to compile cleanly, contains memory leaks under Valgrind, or fails to implement basic functional registers validation gates."),
+        ("Pending", "-", "Day task is not yet started or has not been audited.")
+    ]
+
+    for idx, row_data in enumerate(vetting_criteria, 14):
+        ws_intro.row_dimensions[idx].height = 24
+        for col_idx, val in enumerate(row_data, 1):
+            cell = ws_intro.cell(row=idx, column=col_idx, value=val)
+            cell.font = font_body
+            cell.border = border_thin
+            if col_idx == 1:
+                cell.font = font_body_bold
+                cell.alignment = align_center
+            elif col_idx == 2:
+                cell.alignment = align_center
+            else:
+                cell.alignment = align_left
+        if idx % 2 == 1:
+            for c in range(1, 4):
+                ws_intro.cell(row=idx, column=c).fill = fill_zebra
+
+    # Section 3: Summary Gating Checklist
+    ws_intro.cell(row=22, column=1, value="3. KEY MILESTONE GATING CHECKS").font = font_section
+    ws_intro.row_dimensions[22].height = 24
+
+    gate_headers = ["Phase", "Days Mapped", "Core Gating Challenge Target"]
+    for col_idx, gh in enumerate(gate_headers, 1):
+        cell = ws_intro.cell(row=23, column=col_idx, value=gh)
+        cell.font = font_header
+        cell.fill = fill_accent
+        cell.alignment = align_center
+        cell.border = border_thin
+    ws_intro.row_dimensions[23].height = 22
+
+    gate_checklists = [
+        ("Phase 1: Compiler & Toolchains", "Days 01 - 05", "Build modular project compiled with MM/MMD incremental Make dependency tracking."),
+        ("Phase 2: Data & Radix Hazards", "Days 06 - 10", "Write branch-free absolute value/conditional select routines checking asm loops."),
+        ("Phase 3: Stack & Execution Frame", "Days 11 - 15", "SMASH stack buffer of a dummy string array verifying stack canaries trap hook."),
+        ("Phase 4: Pointers & Arithmetic", "Days 16 - 20", "Implement command processor jump-table routing calculations cleanly without switch constructs."),
+        ("Phase 5: Structures & Alignments", "Days 21 - 25", "Manually serialize structural elements into Big-Endian arrays for network transport."),
+        ("Phase 6: Custom Allocators", "Days 26 - 30", "Write custom aligned linear Arena and O(1) Slab allocator free list."),
+        ("Phase 7: POSIX System Boundaries", "Days 31 - 35", "Configure zero-copy shared database mapper file index utilizing POSIX mmap."),
+        ("Phase 8: Preprocessor Metaprogramming", "Days 36 - 40", "Generate dynamic Enum lists and translate functions using X-Macros tables."),
+        ("Phase 9: Concurrency & MISRA C", "Days 41 - 45", "Create thread-safe Producer-Consumer ring buffer using POSIX mutexes and cond variables.")
+    ]
+
+    for idx, row_data in enumerate(gate_checklists, 24):
+        ws_intro.row_dimensions[idx].height = 22
+        for col_idx, val in enumerate(row_data, 1):
+            cell = ws_intro.cell(row=idx, column=col_idx, value=val)
+            cell.font = font_body
+            cell.border = border_thin
+            if col_idx in [1, 3]:
+                cell.alignment = align_left
+            else:
+                cell.alignment = align_center
+        if idx % 2 == 1:
+            for c in range(1, 4):
+                ws_intro.cell(row=idx, column=c).fill = fill_zebra
+
+    # Adjust Intro Column Widths
+    ws_intro.column_dimensions["A"].width = 32
+    ws_intro.column_dimensions["B"].width = 16
+    ws_intro.column_dimensions["C"].width = 95
 
     # -------------------------------------------------------------
     # Populate Sheet 2: Daily Progress Tracker
