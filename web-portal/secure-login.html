@@ -753,8 +753,30 @@
                 }
             });
 
-            // 5. Silent Token Check on Mount
+            // 5. Silent Token Check on Mount & Verification Parameter Interceptor
             async function bootstrapSession() {
+                // Intercept email verification tokens passed in local file URL params
+                const urlParams = new URLSearchParams(window.location.search);
+                const token = urlParams.get('token');
+                
+                if (token) {
+                    showFeedback('Verifying your email address...', false);
+                    try {
+                        const res = await authFetch(`/auth/verify-email?token=${token}`);
+                        const data = await res.json();
+                        if (res.status === 200) {
+                            showFeedback('✅ Email address verified successfully! You may now log in.', false);
+                            // Clean the URL address bar cleanly
+                            window.history.replaceState({}, document.title, window.location.pathname);
+                        } else {
+                            showFeedback(data.error || 'The email verification link is invalid or has expired.');
+                        }
+                    } catch (e) {
+                        showFeedback('Failed to reach authentication server to verify email.');
+                    }
+                    return;
+                }
+
                 try {
                     const res = await authFetch('/auth/refresh', { method: 'POST' });
                     if (res.status === 200) {
