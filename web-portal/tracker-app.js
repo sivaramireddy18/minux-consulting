@@ -102,6 +102,10 @@
         { name: "Phase 9: Concurrency & MISRA C", days: [41, 45] }
     ];
 
+    function pad2(num) {
+        return String(num).padStart(2, '0');
+    }
+
     function getSyllabusPlan(day) {
         if (SYLLABUS_DB[day]) {
             return SYLLABUS_DB[day];
@@ -182,7 +186,7 @@
                 cand.tasks[`day-${d}`] = {
                     id: `day-${d}`,
                     day: d,
-                    title: `Day ${d:02d}: ${plan.topic}`,
+                    title: `Day ${pad2(d)}: ${plan.topic}`,
                     phase: plan.phase,
                     description: plan.theory,
                     challenge: plan.lab,
@@ -214,7 +218,19 @@
     function saveState() { localStorage.setItem("minux_candidate_state", JSON.stringify(state)); }
     function loadState() {
         const data = localStorage.getItem("minux_candidate_state");
-        if (data) { state = JSON.parse(data); } else { seedInitialState(); }
+        if (data) { 
+            try {
+                state = JSON.parse(data); 
+                if (!state || !state.candidates || !Array.isArray(state.candidates) || state.candidates.length === 0) {
+                    seedInitialState();
+                }
+            } catch (e) {
+                console.error("Failed to parse cached state, seeding defaults.", e);
+                seedInitialState();
+            }
+        } else { 
+            seedInitialState(); 
+        }
     }
 
     function saveWiki() { localStorage.setItem("minux_wiki_pages", JSON.stringify(wikiPages)); }
@@ -300,7 +316,7 @@
             card.draggable = !isStudent || (task.status === "To Do" || task.status === "In Progress");
             
             card.innerHTML = `
-                <div class="card-key">C-FAST-${task.day:02d}</div>
+                <div class="card-key">C-FAST-${pad2(task.day)}</div>
                 <div class="card-title">${task.title}</div>
                 <div class="card-footer">
                     <span style="color: var(--text-muted);">Assignee: ${cand.name.split(" ")[0]}</span>
@@ -480,8 +496,8 @@
                 const link = document.createElement("a");
                 link.href = "#";
                 link.className = `wiki-day-link ${activeWikiPageId === `day-${d}` ? 'active' : ''}`;
-                link.textContent = `Day ${d:02d}: ${plan.topic.split(" ")[0]}`;
-                link.title = `Day ${d:02d}: ${plan.topic}`;
+                link.textContent = `Day ${pad2(d)}: ${plan.topic.split(" ")[0]}`;
+                link.title = `Day ${pad2(d)}: ${plan.topic}`;
                 link.dataset.pageId = `day-${d}`;
                 
                 link.addEventListener("click", (e) => {
@@ -542,7 +558,7 @@
             const dayNum = parseInt(activeWikiPageId.split("-")[1]);
             const plan = getSyllabusPlan(dayNum);
 
-            titleEl.textContent = `Day ${dayNum:02d}: ${plan.topic}`;
+            titleEl.textContent = `Day ${pad2(dayNum)}: ${plan.topic}`;
             metaEl.innerHTML = `
                 <span>Author: Minux Principal Architect</span>
                 <span>Reference: <strong>${plan.phase}</strong></span>
@@ -587,7 +603,7 @@
         document.getElementById("modal-task-grade").value = task.grade;
         document.getElementById("modal-task-notes").value = task.notes || "";
         document.getElementById("modal-task-blocker").checked = task.isBlocker;
-        document.getElementById("modal-task-key").textContent = `C-FAST-${task.day:02d} Task Vetting`;
+        document.getElementById("modal-task-key").textContent = `C-FAST-${pad2(task.day)} Task Vetting`;
 
         // Gating Check: Student cannot edit critical grade metrics!
         const isStudent = loggedUser.role === "student";
@@ -805,7 +821,7 @@
                 for (let d = 1; d <= 45; d++) {
                     const plan = getSyllabusPlan(d);
                     newCand.tasks[`day-${d}`] = {
-                        id: `day-${d}`, day: d, title: `Day ${d:02d}: ${plan.topic}`,
+                        id: `day-${d}`, day: d, title: `Day ${pad2(d)}: ${plan.topic}`,
                         phase: plan.phase, description: plan.theory, challenge: plan.lab,
                         status: "To Do", grade: "Pending", notes: "", isBlocker: false
                     };
@@ -835,7 +851,7 @@
             const newTaskId = `day-${nextDay}`;
             
             cand.tasks[newTaskId] = {
-                id: newTaskId, day: nextDay, title: `Task ${nextDay:02d}: Custom Track`,
+                id: newTaskId, day: nextDay, title: `Task ${pad2(nextDay)}: Custom Track`,
                 phase: "Custom Task", description: "Describe custom assignment details.",
                 challenge: "Describe testing expectations.", status: "To Do",
                 grade: "Pending", notes: "", isBlocker: false
