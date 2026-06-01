@@ -1,0 +1,14 @@
+{
+  "name": "secure-auth-system",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Enterprise Secure Authentication Platform Workspace",
+  "scripts": {
+    "install:backend": "npm install --prefix backend",
+    "install:frontend": "npm install --prefix frontend",
+    "install-all": "npm run install:backend && npm run install:frontend",
+    "dev:backend": "npm run dev --prefix backend",
+    "dev:frontend": "npm run dev --prefix frontend",
+    "dev": "npm run dev --prefix backend"
+  }
+}
