@@ -770,10 +770,10 @@
                 </select>
             </div>
             
-            <!-- Passcode Input Box (Hidden when Student is active) -->
-            <div class="form-group" id="login-passcode-group" style="display: none;">
-                <label for="login-passcode">Enter Mentor Passcode</label>
-                <input type="password" id="login-passcode" class="form-input" placeholder="Enter 'mentor123' to audit..." style="width: 100%;">
+            <!-- Passcode Input Box (Visible for both student and mentor) -->
+            <div class="form-group" id="login-passcode-group">
+                <label id="login-passcode-label" for="login-passcode">Enter Candidate Password</label>
+                <input type="password" id="login-passcode" class="form-input" placeholder="Enter password (e.g. siva123)..." style="width: 100%;">
                 <span id="login-error-msg" style="color: var(--color-coach); font-size: 0.75rem; font-weight: 600; display: none;">Invalid Passcode!</span>
             </div>
             

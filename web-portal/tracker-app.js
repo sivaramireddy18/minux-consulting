@@ -177,8 +177,8 @@
     };
 
     function seedInitialState() {
-        const candidate1 = { id: "cand-siva", name: "Siva Prasad", tasks: {} };
-        const candidate2 = { id: "cand-ram", name: "Ram Kumar", tasks: {} };
+        const candidate1 = { id: "cand-siva", name: "Siva Prasad", password: "siva123", tasks: {} };
+        const candidate2 = { id: "cand-ram", name: "Ram Kumar", password: "ram123", tasks: {} };
 
         [candidate1, candidate2].forEach(cand => {
             for (let d = 1; d <= 45; d++) {
@@ -223,6 +223,16 @@
                 state = JSON.parse(data); 
                 if (!state || !state.candidates || !Array.isArray(state.candidates) || state.candidates.length === 0) {
                     seedInitialState();
+                } else {
+                    // Inject fallback passwords into loaded candidates to prevent authentication blocks
+                    state.candidates.forEach(cand => {
+                        if (!cand.password) {
+                            if (cand.id === "cand-siva") cand.password = "siva123";
+                            else if (cand.id === "cand-ram") cand.password = "ram123";
+                            else cand.password = cand.name.toLowerCase().split(/\s+/)[0] + "123";
+                        }
+                    });
+                    saveState();
                 }
             } catch (e) {
                 console.error("Failed to parse cached state, seeding defaults.", e);
@@ -703,17 +713,29 @@
         } else {
             // Student login
             const studentId = document.getElementById("login-student-select").value;
-            loggedUser.role = "student";
-            loggedUser.studentId = studentId;
-            sessionStorage.setItem("minux_logged_role", "student");
-            sessionStorage.setItem("minux_logged_studentid", studentId);
+            const code = document.getElementById("login-passcode").value;
             
-            // Switch current active candidate context to the logged student!
-            state.activeCandidateId = studentId;
-            saveState();
+            const student = state.candidates.find(c => c.id === studentId);
+            const expectedPassword = student ? (student.password || "siva123") : "siva123";
 
-            document.getElementById("login-gateway").style.display = "none";
-            applyGatedPermissions();
+            if (code === expectedPassword) {
+                loggedUser.role = "student";
+                loggedUser.studentId = studentId;
+                sessionStorage.setItem("minux_logged_role", "student");
+                sessionStorage.setItem("minux_logged_studentid", studentId);
+                
+                // Switch current active candidate context to the logged student!
+                state.activeCandidateId = studentId;
+                saveState();
+
+                document.getElementById("login-gateway").style.display = "none";
+                document.getElementById("login-error-msg").style.display = "none";
+                applyGatedPermissions();
+            } else {
+                const errMsg = document.getElementById("login-error-msg");
+                errMsg.textContent = "Invalid Candidate Password!";
+                errMsg.style.display = "block";
+            }
         }
     }
 
@@ -817,7 +839,8 @@
             if (name && loggedUser.role !== "student") {
                 const id = `cand-${name.toLowerCase().replace(/\s+/g, "-")}`;
                 
-                const newCand = { id: id, name: name, tasks: {} };
+                const password = name.toLowerCase().split(/\s+/)[0] + "123";
+                const newCand = { id: id, name: name, password: password, tasks: {} };
                 for (let d = 1; d <= 45; d++) {
                     const plan = getSyllabusPlan(d);
                     newCand.tasks[`day-${d}`] = {
@@ -909,8 +932,21 @@
         // Login UI events
         document.getElementById("login-role").addEventListener("change", (e) => {
             const isMentor = e.target.value === "mentor";
-            document.getElementById("login-passcode-group").style.display = isMentor ? "block" : "none";
             document.getElementById("login-student-group").style.display = isMentor ? "none" : "block";
+            
+            const label = document.getElementById("login-passcode-label");
+            const input = document.getElementById("login-passcode");
+            if (label && input) {
+                if (isMentor) {
+                    label.textContent = "Enter Mentor Passcode";
+                    input.placeholder = "Enter 'mentor123' to audit...";
+                } else {
+                    label.textContent = "Enter Candidate Password";
+                    input.placeholder = "Enter password (e.g. siva123)...";
+                }
+            }
+            if (input) input.value = "";
+            document.getElementById("login-error-msg").style.display = "none";
         });
 
         document.getElementById("login-submit-btn").addEventListener("click", verifyLogin);
@@ -947,6 +983,15 @@
             // Display Login Gateway Fullscreen
             document.getElementById("login-gateway").style.display = "flex";
             populateLoginCandidateDropdown();
+
+            // Enforce student role default states for password input group
+            document.getElementById("login-passcode-group").style.display = "block";
+            const label = document.getElementById("login-passcode-label");
+            const input = document.getElementById("login-passcode");
+            if (label && input) {
+                label.textContent = "Enter Candidate Password";
+                input.placeholder = "Enter password (e.g. siva123)...";
+            }
         }
     }
 
