@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { env } from '../config/env.js';
+import { env } from '../config/env';
 
 /**
  * Centrally Managed Secure Error Handler.

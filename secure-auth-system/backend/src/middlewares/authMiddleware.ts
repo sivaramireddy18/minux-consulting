@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { verifyAccessToken, TokenPayload } from '../utils/token.js';
+import { verifyAccessToken, TokenPayload } from '../utils/token';
 
 // Extend Express Request declaration to include user context
 declare global {

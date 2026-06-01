@@ -1,12 +1,12 @@
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
-import { env } from './config/env.js';
-import { errorHandler } from './middlewares/errorMiddleware.js';
-import { apiRateLimiter, authRateLimiter } from './middlewares/rateLimiter.js';
-import { validateRequest } from './middlewares/validation.js';
-import { requireAuth, requireRoles } from './middlewares/authMiddleware.js';
-import * as auth from './controllers/authController.js';
+import { env } from './config/env';
+import { errorHandler } from './middlewares/errorMiddleware';
+import { apiRateLimiter, authRateLimiter } from './middlewares/rateLimiter';
+import { validateRequest } from './middlewares/validation';
+import { requireAuth, requireRoles } from './middlewares/authMiddleware';
+import * as auth from './controllers/authController';
 
 const app = express();
 

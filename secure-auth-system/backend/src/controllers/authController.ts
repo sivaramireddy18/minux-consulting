@@ -1,11 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
 import { z } from 'zod';
 import crypto from 'crypto';
-import { db } from '../utils/db.js';
-import { hashPassword, comparePassword } from '../utils/hash.js';
-import { signAccessToken, signRefreshToken, verifyRefreshToken } from '../utils/token.js';
-import { sendVerificationEmail, sendPasswordResetEmail } from '../utils/email.js';
-import { env } from '../config/env.js';
+import { db } from '../utils/db';
+import { hashPassword, comparePassword } from '../utils/hash';
+import { signAccessToken, signRefreshToken, verifyRefreshToken } from '../utils/token';
+import { sendVerificationEmail, sendPasswordResetEmail } from '../utils/email';
+import { env } from '../config/env';
 
 // -------------------------------------------------------------
 // Input Validation Schemas via Zod
