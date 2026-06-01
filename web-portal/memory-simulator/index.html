@@ -55,10 +55,16 @@
             <button id="btn-compiler-build" class="btn btn-primary" style="padding:6px 12px; font-size:0.75rem;" title="Run compilation stages">Build / Compile</button>
           </div>
 
-          <!-- Code viewer screen -->
-          <div class="code-viewer-scroller">
-            <div id="code-lines-container">
-              <!-- JS injections -->
+          <!-- Code editor screen -->
+          <div class="code-editor-container" style="flex:1; display:flex; background:#02060f; border:1px solid var(--border-light); border-radius:8px; overflow:hidden; position:relative;">
+            <div class="editor-gutter" id="editor-line-numbers" style="width:35px; background:#02050b; border-right:1px solid rgba(255,255,255,0.03); color:var(--text-dark); padding:10px 0; font-family:'JetBrains Mono',monospace; font-size:0.75rem; text-align:right; padding-right:8px; line-height:1.6; overflow:hidden;">
+              <div>1</div>
+            </div>
+            <textarea id="code-editor-textarea" spellcheck="false" style="flex:1; background:transparent; border:none; color:#94a3b8; padding:10px; font-family:'JetBrains Mono',monospace; font-size:0.75rem; line-height:1.6; resize:none; outline:none; white-space:pre; overflow:auto; caret-color:var(--accent-cyan); min-height:200px; height:100%;"></textarea>
+            
+            <!-- Execution Pointer Overlay during debugging -->
+            <div id="execution-pointer-overlay" style="position:absolute; left:0; width:100%; pointer-events:none; display:none; font-family:'JetBrains Mono',monospace; font-size:0.75rem; line-height:1.6;">
+              <span id="execution-arrow" style="position:absolute; left:2px; color:var(--accent-cyan); font-weight:bold; animation:bounceHorizontal 0.8s infinite alternate;">👉</span>
             </div>
           </div>
 
