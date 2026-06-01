@@ -836,10 +836,11 @@
 
         document.getElementById("modal-candidate-save").addEventListener("click", () => {
             const name = document.getElementById("new-candidate-name").value.trim();
-            if (name && loggedUser.role !== "student") {
+            const password = document.getElementById("new-candidate-password").value.trim();
+            
+            if (name && password && loggedUser.role !== "student") {
                 const id = `cand-${name.toLowerCase().replace(/\s+/g, "-")}`;
                 
-                const password = name.toLowerCase().split(/\s+/)[0] + "123";
                 const newCand = { id: id, name: name, password: password, tasks: {} };
                 for (let d = 1; d <= 45; d++) {
                     const plan = getSyllabusPlan(d);
@@ -860,6 +861,7 @@
                 renderReportsTable();
                 
                 document.getElementById("new-candidate-name").value = "";
+                document.getElementById("new-candidate-password").value = "";
                 document.getElementById("candidate-modal").style.display = "none";
             }
         });
