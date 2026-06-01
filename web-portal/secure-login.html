@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Minux Consulting - Secure Enterprise Authentication Gateway.">
+    <title>Secure Gateway | Minux Consulting</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Modern Glassmorphic Cyber Styling */
+        .auth-container {
+            min-height: calc(100vh - 80px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.5rem;
+            background: radial-gradient(circle at center, #110c26 0%, #070314 100%);
+            margin-top: 80px;
+        }
+
+        .auth-card {
+            width: 100%;
+            max-width: 440px;
+            background: rgba(10, 5, 27, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 40px rgba(79, 70, 229, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .auth-card:hover {
+            border-color: rgba(99, 102, 241, 0.2);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 50px rgba(79, 70, 229, 0.2);
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .auth-header h2 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -0.025em;
+        }
+
+        .auth-header p {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .form-input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            font-size: 0.875rem;
+            color: #ffffff;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .form-input:focus {
+            border-color: var(--color-python);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+
+        .btn-submit {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+            background: #4F46E5;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.3);
+            transition: all 0.2s ease;
+            margin-top: 1.5rem;
+        }
+
+        .btn-submit:hover:not(:disabled) {
+            background: #4338CA;
+            box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .auth-footer-text {
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 1.5rem;
+        }
+
+        .auth-footer-text button {
+            background: none;
+            border: none;
+            color: var(--color-python);
+            font-weight: 600;
+            cursor: pointer;
+            outline: none;
+            padding: 0;
+            font-size: 0.75rem;
+        }
+
+        .auth-footer-text button:hover {
+            text-decoration: underline;
+        }
+
+        /* Password Strength Meter */
+        .strength-container {
+            margin-top: 0.75rem;
+            display: none;
+        }
+
+        .strength-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.35rem;
+        }
+
+        .strength-meter-bar {
+            height: 5px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 9999px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .strength-meter-fill {
+            height: 100%;
+            width: 0%;
+            background: #EF4444;
+            transition: all 0.3s ease;
+        }
+
+        .strength-checklist {
+            display: grid;
+            grid-template-cols: 1fr 1fr;
+            gap: 0.35rem;
+            font-size: 0.65rem;
+            color: var(--text-secondary);
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .checklist-bullet {
+            height: 6px;
+            width: 6px;
+            border-radius: 50%;
+            background: rgba(239, 68, 68, 0.4);
+            transition: all 0.2s ease;
+        }
+
+        .checklist-item.valid .checklist-bullet {
+            background: #10B981;
+            box-shadow: 0 0 6px #10B981;
+        }
+
+        /* Error/Success Feedbacks */
+        .feedback-banner {
+            border-radius: 8px;
+            padding: 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-bottom: 1.25rem;
+            display: none;
+        }
+
+        .feedback-banner.error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            color: #F87171;
+        }
+
+        .feedback-banner.success {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            color: #34D399;
+        }
+
+        /* Dashboard Interface styles */
+        .dash-card {
+            max-width: 800px;
+            background: rgba(10, 5, 27, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+            display: none;
+        }
+
+        .dash-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-b: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .dash-grid {
+            display: grid;
+            grid-template-cols: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .dash-grid {
+                grid-template-cols: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Glassmorphic Cyber Header -->
+    <header id="main-header">
+        <div class="nav-container">
+            <a href="index.html" class="logo" id="header-logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+                MINUX<span>CONSULTING</span>
+            </a>
+            <button class="nav-toggle" id="menu-toggle" aria-label="Toggle Navigation Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="navigation-list">
+                <li><a href="index.html" id="link-home">Home</a></li>
+                <li><a href="embedded-linux.html" id="link-emb">Embedded & Linux Talent</a></li>
+                <li><a href="c-programming.html" id="link-c">C Core Specialists</a></li>
+                <li><a href="python-automation.html" id="link-py">HIL Automation Architects</a></li>
+                <li><a href="coaching-manual.html" id="link-coach">Vetting Protocol</a></li>
+                <li><a href="candidate-tracker.html" id="link-tracker">Candidate Hub</a></li>
+                <li><a href="secure-login.html" class="active" id="link-login">Secure Gateway</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="auth-container">
+        
+        <!-- 1. Secure Authentication Login / Register Card -->
+        <div class="auth-card" id="form-card">
+            
+            <div id="feedback-banner" class="feedback-banner"></div>
+
+            <!-- Login View -->
+            <form id="login-form">
+                <div class="auth-header">
+                    <h2>Welcome Back</h2>
+                    <p>Enter your credentials to access the secure operations hub</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="login-email">Email Address</label>
+                    <input type="email" id="login-email" class="form-input" placeholder="you@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                        <label style="margin: 0;" for="login-password">Password</label>
+                        <button type="button" id="forgot-trigger" style="background: none; border: none; font-size: 0.7rem; color: #818CF8; font-weight: 500; cursor: pointer; outline: none; padding: 0;">Forgot Password?</button>
+                    </div>
+                    <input type="password" id="login-password" class="form-input" placeholder="••••••••" required>
+                </div>
+
+                <button type="submit" id="btn-login-submit" class="btn-submit">Sign In &rarr;</button>
+
+                <p class="auth-footer-text">
+                    Don't have an account? 
+                    <button type="button" id="toggle-to-register">Register Profile</button>
+                </p>
+            </form>
+
+            <!-- Registration View -->
+            <form id="register-form" style="display: none;">
+                <div class="auth-header">
+                    <h2>Create Account</h2>
+                    <p>Register your verified security profile</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="reg-name">Full Name</label>
+                    <input type="text" id="reg-name" class="form-input" placeholder="e.g. Siva Prasad" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="reg-email">Email Address</label>
+                    <input type="email" id="reg-email" class="form-input" placeholder="you@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="reg-password">Password</label>
+                    <input type="password" id="reg-password" class="form-input" placeholder="••••••••" required>
+                    
+                    <!-- Dynamic Visual Password Strength Meter -->
+                    <div class="strength-container" id="strength-container">
+                        <div class="strength-header">
+                            <span>Password Strength:</span>
+                            <span id="strength-label" style="font-weight: 600;">Empty</span>
+                        </div>
+                        <div class="strength-meter-bar">
+                            <div class="strength-meter-fill" id="strength-fill"></div>
+                        </div>
+                        <div class="strength-checklist">
+                            <div class="checklist-item" id="chk-length">
+                                <span class="checklist-bullet"></span>
+                                <span>8+ Characters</span>
+                            </div>
+                            <div class="checklist-item" id="chk-upper">
+                                <span class="checklist-bullet"></span>
+                                <span>Uppercase Letter</span>
+                            </div>
+                            <div class="checklist-item" id="chk-lower">
+                                <span class="checklist-bullet"></span>
+                                <span>Lowercase Letter</span>
+                            </div>
+                            <div class="checklist-item" id="chk-number">
+                                <span class="checklist-bullet"></span>
+                                <span>One Number</span>
+                            </div>
+                            <div class="checklist-item" id="chk-special" style="grid-column: span 2;">
+                                <span class="checklist-bullet"></span>
+                                <span>Special Character (@$!%*?&)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" id="btn-register-submit" class="btn-submit">Sign Up &rarr;</button>
+
+                <p class="auth-footer-text">
+                    Already have an account? 
+                    <button type="button" id="toggle-to-login">Sign In</button>
+                </p>
+            </form>
+
+            <!-- Password Recovery View -->
+            <form id="forgot-form" style="display: none;">
+                <div class="auth-header">
+                    <h2>Reset Password</h2>
+                    <p>Request an expiring cryptographic recovery link</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="forgot-email">Email Address</label>
+                    <input type="email" id="forgot-email" class="form-input" placeholder="you@example.com" required>
+                </div>
+
+                <button type="submit" id="btn-forgot-submit" class="btn-submit">Send Secure Reset Link</button>
+
+                <p class="auth-footer-text">
+                    Back to 
+                    <button type="button" id="forgot-cancel">Sign In</button>
+                </p>
+            </form>
+        </div>
+
+        <!-- 2. Secure Active Workspace Dashboard Card -->
+        <div class="auth-card dash-card" id="dash-card">
+            <div class="dash-header">
+                <div>
+                    <span style="font-size: 0.65rem; color: #818CF8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;">Active Session Panel</span>
+                    <h2 id="dash-welcome" style="margin-top: 0.15rem;">Hello, User!</h2>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                    <span id="dash-role" style="font-size: 0.7rem; font-weight: 600; background: rgba(129, 140, 248, 0.1); border: 1px solid rgba(129, 140, 248, 0.2); padding: 0.25rem 0.5rem; border-radius: 4px; color: #818CF8;">Role</span>
+                    <button id="btn-logout" style="background: none; border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 4px; padding: 0.25rem 0.5rem; font-size: 0.7rem; font-weight: 600; color: #F87171; cursor: pointer; transition: all 0.2s ease;">Sign Out</button>
+                </div>
+            </div>
+
+            <div class="dash-grid">
+                <!-- Left panel: Metadata -->
+                <div style="border-right: 1px solid rgba(255, 255, 255, 0.05); padding-right: 1.5rem;">
+                    <h3 style="font-size: 0.95rem; font-weight: 700; color: white; margin-bottom: 1rem;">Cryptographic Session Specs</h3>
+                    <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.04); border-radius: 8px; padding: 1.25rem; font-family: monospace; font-size: 0.7rem; color: #cbd5e1; line-height: 1.6;">
+                        <div><span style="color: #64748b;">USER_ID:</span> <span id="spec-id"></span></div>
+                        <div style="margin-top: 0.5rem;"><span style="color: #64748b;">EMAIL:</span> <span id="spec-email"></span></div>
+                        <div style="margin-top: 0.5rem;"><span style="color: #64748b;">ROLE:</span> <span id="spec-role"></span></div>
+                        <div style="margin-top: 0.5rem;"><span style="color: #64748b;">SESSION_KEY:</span> SameSite=Strict Cookie</div>
+                    </div>
+                </div>
+
+                <!-- Right panel: API test triggers -->
+                <div>
+                    <h3 style="font-size: 0.95rem; font-weight: 700; color: white; margin-bottom: 0.5rem;">RBAC Router Endpoint Tests</h3>
+                    <p style="font-size: 0.7rem; color: var(--text-secondary); margin-bottom: 1.25rem;">Interact live with the security middlewares guarding API controllers.</p>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                        <button id="btn-test-profile" style="background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.25); border-radius: 6px; padding: 0.5rem 1rem; font-size: 0.75rem; font-weight: 600; color: #818CF8; cursor: pointer; text-align: left; transition: all 0.2s ease;">Verify Standard Profile Gate (requireAuth)</button>
+                        <button id="btn-test-admin" style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 6px; padding: 0.5rem 1rem; font-size: 0.75rem; font-weight: 600; color: #34D399; cursor: pointer; text-align: left; transition: all 0.2s ease;">Verify Admin Control Gate (requireRoles(['ADMIN']))</button>
+                    </div>
+
+                    <!-- Test Output display -->
+                    <div id="test-output-panel" style="display: none; margin-top: 1.25rem;">
+                        <span id="test-output-badge" style="display: inline-block; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; border-radius: 3px; padding: 0.15rem 0.35rem; margin-bottom: 0.5rem;">STATUS</span>
+                        <div id="test-output-body" style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); border-radius: 6px; padding: 0.75rem; font-family: monospace; font-size: 0.65rem; color: #e2e8f0; max-height: 150px; overflow-y: auto; white-space: pre-wrap;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer id="main-footer">
+        <div class="footer-container">
+            <a href="index.html" class="footer-logo">MINUX<span>CONSULTING</span></a>
+            <ul class="footer-nav">
+                <li><a href="embedded-linux.html">Embedded & Linux</a></li>
+                <li><a href="c-programming.html">C Programming</a></li>
+                <li><a href="python-automation.html">Python Automation</a></li>
+                <li><a href="coaching-manual.html">Vetting Protocol</a></li>
+            </ul>
+        </div>
+        <div class="footer-copyright">
+            <p>&copy; 2026 Minux Consulting. Supplying vetted, battle-tested systems engineering consultants to top global MNCs.</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+    <script>
+        // -------------------------------------------------------------
+        // Full-Stack Secure Auth Frontend Client Engine
+        // -------------------------------------------------------------
+        (function() {
+            'use strict';
+
+            const API_URL = 'http://localhost:5000/api';
+            let accessToken = null;
+            let refreshTimer = null;
+
+            // DOM Selectors
+            const formCard = document.getElementById('form-card');
+            const dashCard = document.getElementById('dash-card');
+            const banner = document.getElementById('feedback-banner');
+            const loginForm = document.getElementById('login-form');
+            const registerForm = document.getElementById('register-form');
+            const forgotForm = document.getElementById('forgot-form');
+
+            // View Swapping Controls
+            document.getElementById('toggle-to-register').addEventListener('click', () => {
+                loginForm.style.display = 'none';
+                registerForm.style.display = 'block';
+                hideFeedback();
+            });
+
+            document.getElementById('toggle-to-login').addEventListener('click', () => {
+                registerForm.style.display = 'none';
+                loginForm.style.display = 'block';
+                hideFeedback();
+            });
+
+            document.getElementById('forgot-trigger').addEventListener('click', () => {
+                loginForm.style.display = 'none';
+                forgotForm.style.display = 'block';
+                hideFeedback();
+            });
+
+            document.getElementById('forgot-cancel').addEventListener('click', () => {
+                forgotForm.style.display = 'none';
+                loginForm.style.display = 'block';
+                hideFeedback();
+            });
+
+            // Feedback utility
+            function showFeedback(text, isError = true) {
+                banner.textContent = text;
+                banner.className = `feedback-banner ${isError ? 'error' : 'success'}`;
+                banner.style.display = 'block';
+            }
+
+            function hideFeedback() {
+                banner.style.display = 'none';
+            }
+
+            // -------------------------------------------------------------
+            // Password Strength Meter Parser
+            // -------------------------------------------------------------
+            const regPassword = document.getElementById('reg-password');
+            const strengthContainer = document.getElementById('strength-container');
+            const strengthLabel = document.getElementById('strength-label');
+            const strengthFill = document.getElementById('strength-fill');
+
+            const chkLength = document.getElementById('chk-length');
+            const chkUpper = document.getElementById('chk-upper');
+            const chkLower = document.getElementById('chk-lower');
+            const chkNumber = document.getElementById('chk-number');
+            const chkSpecial = document.getElementById('chk-special');
+
+            regPassword.addEventListener('input', (e) => {
+                const val = e.target.value;
+                if (val.length === 0) {
+                    strengthContainer.style.display = 'none';
+                    return;
+                }
+
+                strengthContainer.style.display = 'block';
+
+                const checks = {
+                    length: val.length >= 8,
+                    upper: /[A-Z]/.test(val),
+                    lower: /[a-z]/.test(val),
+                    number: /[0-9]/.test(val),
+                    special: /[^A-Za-z0-9]/.test(val),
+                };
+
+                // Update checklist visual checkmarks
+                toggleCheckItem(chkLength, checks.length);
+                toggleCheckItem(chkUpper, checks.upper);
+                toggleCheckItem(chkLower, checks.lower);
+                toggleCheckItem(chkNumber, checks.number);
+                toggleCheckItem(chkSpecial, checks.special);
+
+                // Calculate strength index
+                const score = Object.values(checks).filter(Boolean).length;
+                const percentage = (score / 5) * 100;
+                
+                strengthFill.style.width = `${percentage}%`;
+
+                if (score <= 2) {
+                    strengthLabel.textContent = 'Weak (Vulnerable)';
+                    strengthLabel.style.color = '#F87171';
+                    strengthFill.style.background = '#EF4444';
+                } else if (score <= 4) {
+                    strengthLabel.textContent = 'Medium (Average)';
+                    strengthLabel.style.color = '#FBBF24';
+                    strengthFill.style.background = '#F59E0B';
+                } else {
+                    strengthLabel.textContent = 'Strong (Secure)';
+                    strengthLabel.style.color = '#34D399';
+                    strengthFill.style.background = '#10B981';
+                }
+            });
+
+            function toggleCheckItem(el, isValid) {
+                if (isValid) {
+                    el.classList.add('valid');
+                } else {
+                    el.classList.remove('valid');
+                }
+            }
+
+            // -------------------------------------------------------------
+            // API Ajax Engine & Sessions Management
+            // -------------------------------------------------------------
+
+            // Setup fetch auth headers helper
+            function authFetch(endpoint, options = {}) {
+                options.headers = options.headers || {};
+                options.headers['Content-Type'] = 'application/json';
+                if (accessToken) {
+                    options.headers['Authorization'] = `Bearer ${accessToken}`;
+                }
+                options.credentials = 'include'; // Essential for HttpOnly cookie exchange
+                return fetch(`${API_URL}${endpoint}`, options);
+            }
+
+            // Trigger silent background refresh
+            async function rotateTokens() {
+                try {
+                    const res = await authFetch('/auth/refresh', { method: 'POST' });
+                    if (res.status === 200) {
+                        const data = await res.json();
+                        accessToken = data.accessToken;
+                    } else {
+                        throw new Error('Refresh expired.');
+                    }
+                } catch (e) {
+                    handleSignOut();
+                }
+            }
+
+            function handleLoginSuccess(user, token) {
+                accessToken = token;
+                
+                // Show dynamic Dashboard
+                formCard.style.display = 'none';
+                dashCard.style.display = 'block';
+
+                document.getElementById('dash-welcome').textContent = `Hello, ${user.name}!`;
+                document.getElementById('dash-role').textContent = `Role: ${user.role}`;
+                
+                document.getElementById('spec-id').textContent = user.id;
+                document.getElementById('spec-email').textContent = user.email;
+                document.getElementById('spec-role').textContent = user.role;
+
+                // Configure silent token rotation (every 14 mins)
+                if (refreshTimer) clearInterval(refreshTimer);
+                refreshTimer = setInterval(rotateTokens, 14 * 60 * 1000);
+            }
+
+            function handleSignOut() {
+                accessToken = null;
+                if (refreshTimer) clearInterval(refreshTimer);
+                
+                dashCard.style.display = 'none';
+                formCard.style.display = 'block';
+                loginForm.style.display = 'block';
+                registerForm.style.display = 'none';
+                forgotForm.style.display = 'none';
+                
+                // Reset fields
+                document.getElementById('login-password').value = '';
+                document.getElementById('reg-password').value = '';
+            }
+
+            // 1. Login Form Submit
+            loginForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                hideFeedback();
+
+                const email = document.getElementById('login-email').value;
+                const password = document.getElementById('login-password').value;
+                const btn = document.getElementById('btn-login-submit');
+
+                btn.disabled = true;
+                btn.textContent = 'Authenticating...';
+
+                try {
+                    const res = await authFetch('/auth/login', {
+                        method: 'POST',
+                        body: JSON.stringify({ email, password }),
+                    });
+                    const data = await res.json();
+
+                    if (res.status === 200) {
+                        handleLoginSuccess(data.user, data.accessToken);
+                    } else {
+                        showFeedback(data.error || 'Failed to authenticate.');
+                    }
+                } catch (err) {
+                    showFeedback('Failed to reach authentication server API.');
+                } finally {
+                    btn.disabled = false;
+                    btn.textContent = 'Sign In \u2192';
+                }
+            });
+
+            // 2. Register Form Submit
+            registerForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                hideFeedback();
+
+                const name = document.getElementById('reg-name').value;
+                const email = document.getElementById('reg-email').value;
+                const password = regPassword.value;
+                const btn = document.getElementById('btn-register-submit');
+
+                btn.disabled = true;
+                btn.textContent = 'Creating Account...';
+
+                try {
+                    const res = await authFetch('/auth/register', {
+                        method: 'POST',
+                        body: JSON.stringify({ name, email, password }),
+                    });
+                    const data = await res.json();
+
+                    if (res.status === 201) {
+                        showFeedback(data.message, false);
+                        // Reset forms
+                        document.getElementById('reg-name').value = '';
+                        document.getElementById('reg-email').value = '';
+                        regPassword.value = '';
+                        strengthContainer.style.display = 'none';
+                    } else {
+                        showFeedback(data.error || 'Failed to create profile.');
+                    }
+                } catch (err) {
+                    showFeedback('Failed to reach authentication server API.');
+                } finally {
+                    btn.disabled = false;
+                    btn.textContent = 'Sign Up \u2192';
+                }
+            });
+
+            // 3. Password Forget Submit
+            forgotForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                hideFeedback();
+
+                const email = document.getElementById('forgot-email').value;
+                const btn = document.getElementById('btn-forgot-submit');
+
+                btn.disabled = true;
+                btn.textContent = 'Processing...';
+
+                try {
+                    const res = await authFetch('/auth/forgot-password', {
+                        method: 'POST',
+                        body: JSON.stringify({ email }),
+                    });
+                    const data = await res.json();
+
+                    if (res.status === 200) {
+                        showFeedback(data.message, false);
+                        document.getElementById('forgot-email').value = '';
+                    } else {
+                        showFeedback(data.error || 'Failed to process password request.');
+                    }
+                } catch (err) {
+                    showFeedback('Failed to reach authentication server API.');
+                } finally {
+                    btn.disabled = false;
+                    btn.textContent = 'Send Secure Reset Link';
+                }
+            });
+
+            // 4. Logout trigger
+            document.getElementById('btn-logout').addEventListener('click', async () => {
+                try {
+                    await authFetch('/auth/logout', { method: 'POST' });
+                } finally {
+                    handleSignOut();
+                }
+            });
+
+            // 5. Silent Token Check on Mount
+            async function bootstrapSession() {
+                try {
+                    const res = await authFetch('/auth/refresh', { method: 'POST' });
+                    if (res.status === 200) {
+                        const data = await res.json();
+                        accessToken = data.accessToken;
+                        
+                        const profileRes = await authFetch('/user/profile');
+                        const profileData = await profileRes.json();
+                        if (profileRes.status === 200) {
+                            handleLoginSuccess(profileData.user, accessToken);
+                        }
+                    }
+                } catch (e) {
+                    accessToken = null;
+                }
+            }
+
+            bootstrapSession();
+
+            // -------------------------------------------------------------
+            // Live RBAC Middleware Endpoint Verification Testing
+            // -------------------------------------------------------------
+            const outPanel = document.getElementById('test-output-panel');
+            const outBadge = document.getElementById('test-output-badge');
+            const outBody = document.getElementById('test-output-body');
+
+            function showTestResponse(status, isError, payload) {
+                outPanel.style.display = 'block';
+                outBadge.textContent = status;
+                outBadge.style.background = isError ? '#EF4444' : '#10B981';
+                outBadge.style.color = '#ffffff';
+                outBody.textContent = typeof payload === 'string' ? payload : JSON.stringify(payload, null, 2);
+            }
+
+            document.getElementById('btn-test-profile').addEventListener('click', async () => {
+                outPanel.style.display = 'none';
+                try {
+                    const res = await authFetch('/user/profile');
+                    const data = await res.json();
+                    showTestResponse(`HTTP ${res.status} ${res.statusText}`, res.status !== 200, data);
+                } catch (e) {
+                    showTestResponse('ERROR', true, 'Could not query profile API endpoint.');
+                }
+            });
+
+            document.getElementById('btn-test-admin').addEventListener('click', async () => {
+                outPanel.style.display = 'none';
+                try {
+                    const res = await authFetch('/admin/dashboard');
+                    const data = await res.json();
+                    showTestResponse(`HTTP ${res.status} ${res.statusText}`, res.status !== 200, data);
+                } catch (e) {
+                    showTestResponse('ERROR', true, 'Could not query admin dashboard API endpoint.');
+                }
+            });
+
+        })();
+    </script>
+</body>
+</html>
