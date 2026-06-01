@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MEM.OS - Embedded Memory Allocation & Compiler Simulator</title>
+  <meta name="description" content="Realistic Software Embedded Memory layout simulator - compilation pipeline preprocessor expansion, assembly compilers, linker script mappings, and static/auto/register storage classes allocations.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="app-container">
+    
+    <!-- HEADER BAR -->
+    <header>
+      <div class="brand">
+        <div class="logo-icon">
+          <!-- Memory RAM Chip SVG -->
+          <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round">
+            <rect x="2" y="5" width="20" height="14" rx="2" ry="2"/>
+            <line x1="6" y1="5" x2="6" y2="3"/><line x1="12" y1="5" x2="12" y2="3"/><line x1="18" y1="5" x2="18" y2="3"/>
+            <line x1="6" y1="19" x2="6" y2="21"/><line x1="12" y1="19" x2="12" y2="21"/><line x1="18" y1="19" x2="18" y2="21"/>
+            <line x1="2" y1="9" x2="6" y2="9"/><line x1="2" y1="15" x2="6" y2="15"/>
+            <circle cx="12" cy="12" r="2" fill="currentColor"/>
+          </svg>
+        </div>
+        <h1>MEM.OS</h1>
+        <span>SRAM & FLASH v1.2</span>
+        <a href="../index.html" class="btn" style="background: rgba(255,255,255,0.06); text-decoration: none; font-size: 0.75rem; padding: 4px 10px; margin-left: 12px; border-color: rgba(255,255,255,0.1); border-radius: 4px; display: inline-flex; align-items: center; gap: 6px;" title="Return to Minux recruitment home page">&larr; Back to Minux Portal</a>
+      </div>
+
+      <div class="header-nav-links" style="display: flex; gap: 12px;">
+        <a href="../logic-gate-simulator/index.html" class="btn btn-accent" style="padding: 6px 12px; font-size: 0.75rem;">Gate Sim</a>
+        <a href="../number-simulator/index.html" class="btn btn-accent" style="padding: 6px 12px; font-size: 0.75rem;">Register Sim &rarr;</a>
+      </div>
+    </header>
+
+    <!-- DASHBOARD PANELS -->
+    <main class="dashboard-container">
+      
+      <!-- COLUMN 1: CODE EDITOR & DEBUGGER CONTROLS -->
+      <div class="column-panel">
+        <section class="panel-card flex-grow">
+          <div class="section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <span>Embedded C Source Compiler</span>
+          </div>
+
+          <div class="code-editor-controls">
+            <select class="code-editor-select" id="code-snippet-select">
+              <option value="globals_boot">Snippet 1: Storage Classes & Globals</option>
+              <option value="stack_recursion">Snippet 2: Deep Stack Recursion</option>
+              <option value="heap_malloc">Snippet 3: Dynamic Heap Allocation</option>
+            </select>
+            <button id="btn-compiler-build" class="btn btn-primary" style="padding:6px 12px; font-size:0.75rem;" title="Run compilation stages">Build / Compile</button>
+          </div>
+
+          <!-- Code viewer screen -->
+          <div class="code-viewer-scroller">
+            <div id="code-lines-container">
+              <!-- JS injections -->
+            </div>
+          </div>
+
+          <div class="code-editor-controls" style="margin-top: 15px; margin-bottom: 0;">
+            <button id="btn-debugger-step" class="btn btn-accent" style="flex:1; justify-content:center;" disabled title="Execute current line in debugger (F10)">
+              <span>Step Instruction</span>
+            </button>
+            <button id="btn-debugger-reset" class="btn btn-danger" style="padding:8px;" disabled title="Reset program state">Reset</button>
+          </div>
+        </section>
+
+        <!-- Debugger terminal log -->
+        <section class="panel-card" style="height:170px;">
+          <div class="section-title">
+            <span>Terminal GDB Log Output</span>
+          </div>
+          <div class="terminal-console" id="debugger-console-log">
+            <div class="terminal-line" style="color:var(--text-dark);">Compile a source code block to launch active debugger...</div>
+          </div>
+        </section>
+      </div>
+
+      <!-- COLUMN 2: SRAM AND FLASH COLUMNS -->
+      <div class="column-panel" style="height: 100%;">
+        <section class="panel-card flex-grow" style="height: 100%;">
+          <div class="section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/></svg>
+            <span>Target Memory Address Space Map</span>
+          </div>
+
+          <div class="memory-scroller">
+            <div class="memory-columns-container">
+              
+              <!-- FLASH Memory -->
+              <div class="mcu-memory-col">
+                <span class="col-header">FLASH ROM (0x08000000)</span>
+                
+                <div class="flash-memory-map">
+                  <!-- Vector Table -->
+                  <div class="mem-segment-card text" style="border-style:dashed;">
+                    <div class="ram-lbl-name" style="color:var(--accent-violet);">Vector Table (0x08000000)</div>
+                    <div style="font-size:0.6rem; color:var(--text-dark);">Reset Handler, Interrupt Vectors</div>
+                  </div>
+
+                  <!-- Text Segment -->
+                  <div class="mem-segment-card text flex-grow" id="segment-text-card">
+                    <div class="ram-lbl-name" style="color:var(--accent-violet);">.text (Executable Code)</div>
+                    <div style="font-size:0.6rem; color:var(--text-muted); margin-bottom:6px;">Instructions, compiled functions</div>
+                    <div id="flash-text-instructions" style="display:flex; flex-direction:column; gap:4px;">
+                      <!-- JS injections -->
+                    </div>
+                  </div>
+
+                  <!-- Rodata Segment -->
+                  <div class="mem-segment-card rodata" id="segment-rodata-card">
+                    <div class="ram-lbl-name" style="color:var(--accent-amber);">.rodata (Read-Only Data)</div>
+                    <div style="font-size:0.6rem; color:var(--text-muted); margin-bottom:6px;">const constants, expanded macro text</div>
+                    <div id="flash-rodata-constants" style="display:flex; flex-direction:column; gap:4px;">
+                      <!-- JS injections -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- SRAM Memory -->
+              <div class="mcu-memory-col">
+                <span class="col-header">SRAM RAM (0x20000000)</span>
+                
+                <!-- CPU registers micro hud -->
+                <div class="cpu-registers-hud">
+                  <div class="reg-box" id="reg-r0"><span class="reg-name">R0</span><span class="reg-val" id="val-r0">00</span></div>
+                  <div class="reg-box" id="reg-r1"><span class="reg-name">R1</span><span class="reg-val" id="val-r1">00</span></div>
+                  <div class="reg-box" id="reg-r2"><span class="reg-name">R2</span><span class="reg-val" id="val-r2">00</span></div>
+                  <div class="reg-box" id="reg-r3"><span class="reg-name">R3</span><span class="reg-val" id="val-r3">00</span></div>
+                </div>
+
+                <div class="ram-memory-map">
+                  <div class="ram-growth-container">
+                    
+                    <!-- Stack grows DOWN from top -->
+                    <div class="ram-stack-region" id="ram-stack-container">
+                      <div class="ram-lbl-addr" style="text-align:right; font-size:0.6rem; border-bottom:1px dashed rgba(244,63,94,0.3); padding-bottom:2px; margin-bottom:4px;">SRAM High (0x20008000) &darr; Stack Grows Down</div>
+                      <!-- JS stack frames injections -->
+                    </div>
+
+                    <!-- Collision Hazard Overlay -->
+                    <div class="collision-hazard-warning" id="warning-stack-overflow">
+                      <h4>⚠️ STACK OVERFLOW ⚠️</h4>
+                      <p>SRAM Stack collided into Heap! Heap-pointer and Stack-pointer overlapped.</p>
+                    </div>
+
+                    <!-- Heap grows UP from bottom -->
+                    <div class="ram-heap-region" id="ram-heap-container">
+                      <!-- JS heap blocks injections -->
+                      <div class="ram-lbl-addr" style="font-size:0.6rem; border-top:1px dashed rgba(99,102,241,0.3); padding-top:2px; margin-top:4px;">Heap Grows Up &uarr; SRAM Low (0x20001000)</div>
+                    </div>
+                  </div>
+
+                  <!-- Static data segments at bottom of SRAM -->
+                  <div class="ram-static-data-region">
+                    <!-- .data -->
+                    <div id="ram-data-segment-container" style="display:flex; flex-direction:column; gap:4px;">
+                      <!-- JS .data injections -->
+                    </div>
+
+                    <!-- .bss -->
+                    <div id="ram-bss-segment-container" style="display:flex; flex-direction:column; gap:4px;">
+                      <!-- JS .bss injections -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- COLUMN 3: SYMBOL INSPECTOR & MACROS -->
+      <div class="column-panel">
+        <section class="panel-card flex-grow">
+          <div class="section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            <span>Target Symbol Table</span>
+          </div>
+
+          <div style="margin-bottom:10px; display:flex; gap:8px;">
+            <input type="text" id="symbol-search-input" class="code-editor-select" style="font-size:0.75rem;" placeholder="Search symbol tags...">
+          </div>
+
+          <!-- Symbol Matrix -->
+          <div class="symbol-table-container">
+            <table class="symbol-table">
+              <thead>
+                <tr>
+                  <th>Symbol</th>
+                  <th>Class</th>
+                  <th>Segment</th>
+                  <th>Addr</th>
+                  <th>Val</th>
+                </tr>
+              </thead>
+              <tbody id="symbol-table-body">
+                <!-- JS injections -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Preprocessor macro box -->
+        <section class="panel-card" style="height:190px;">
+          <div class="section-title">
+            <span>Preprocessor Symbol Registry</span>
+          </div>
+          <div id="preprocessor-macros-container" style="display:flex; flex-direction:column; gap:6px; font-family:'JetBrains Mono',monospace; font-size:0.7rem; overflow-y:auto;">
+            <!-- JS Macro mappings -->
+          </div>
+        </section>
+      </div>
+
+    </main>
+
+    <!-- COMPILATION PIPELINE SEQUENCE MODAL -->
+    <div class="modal-overlay" id="compilation-modal">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h2>Compilation Process Pipeline Visualizer</h2>
+          <button class="btn btn-icon-only btn-danger btn-modal-close" style="width: 28px; height: 28px;">&times;</button>
+        </div>
+        <div class="modal-body">
+          
+          <!-- Timeline diagram -->
+          <div class="compiler-flow-timeline">
+            <div class="timeline-line-connector" id="compiler-connector-progress"></div>
+            
+            <div class="timeline-node active" id="node-stage-1">
+              <div class="node-dot">1</div>
+              <span class="node-lbl">Preprocessor</span>
+            </div>
+            <div class="timeline-node" id="node-stage-2">
+              <div class="node-dot">2</div>
+              <span class="node-lbl">Compiler</span>
+            </div>
+            <div class="timeline-node" id="node-stage-3">
+              <div class="node-dot">3</div>
+              <span class="node-lbl">Assembler</span>
+            </div>
+            <div class="timeline-node" id="node-stage-4">
+              <div class="node-dot">4</div>
+              <span class="node-lbl">Linker Script</span>
+            </div>
+          </div>
+
+          <!-- File Compare view panels -->
+          <div class="compiler-compare-viewer">
+            <div class="viewer-half">
+              <span class="viewer-half-title" id="lbl-viewer-left">Source Code</span>
+              <div class="viewer-half-content" id="box-viewer-left">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+            <div class="viewer-half">
+              <span class="viewer-half-title" id="lbl-viewer-right">Preprocessor output (-E)</span>
+              <div class="viewer-half-content" id="box-viewer-right">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" id="btn-next-compile-stage">Next Compilation Stage &rarr;</button>
+          <button class="btn btn-danger btn-modal-close">Exit Pipeline</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
