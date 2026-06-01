@@ -501,8 +501,8 @@
             });
 
             // Feedback utility
-            function showFeedback(text, isError = true) {
-                banner.textContent = text;
+            function showFeedback(htmlContent, isError = true) {
+                banner.innerHTML = htmlContent;
                 banner.className = `feedback-banner ${isError ? 'error' : 'success'}`;
                 banner.style.display = 'block';
             }
@@ -667,7 +667,7 @@
                         showFeedback(data.error || 'Failed to authenticate.');
                     }
                 } catch (err) {
-                    showFeedback('Failed to reach authentication server API.');
+                    showFeedback('⚠️ <strong>Connection Error: Failed to reach authentication server API.</strong><br><br>Please verify that your Express backend is running on <b>http://localhost:5000</b>.<br><br>To start it, execute this in your terminal:<br><pre style="background: rgba(0,0,0,0.5); padding: 0.5rem; border-radius: 4px; font-family: monospace; font-size: 0.7rem; text-align: left; margin-top: 0.5rem; overflow-x: auto; border: 1px solid rgba(255,255,255,0.05); color: #818CF8;">cd secure-auth-system/backend\nnpm install\nnpm run dev</pre>');
                 } finally {
                     btn.disabled = false;
                     btn.textContent = 'Sign In \u2192';
@@ -705,7 +705,7 @@
                         showFeedback(data.error || 'Failed to create profile.');
                     }
                 } catch (err) {
-                    showFeedback('Failed to reach authentication server API.');
+                    showFeedback('⚠️ <strong>Connection Error: Failed to reach authentication server API.</strong><br><br>Please verify that your Express backend is running on <b>http://localhost:5000</b>.<br><br>To start it, execute this in your terminal:<br><pre style="background: rgba(0,0,0,0.5); padding: 0.5rem; border-radius: 4px; font-family: monospace; font-size: 0.7rem; text-align: left; margin-top: 0.5rem; overflow-x: auto; border: 1px solid rgba(255,255,255,0.05); color: #818CF8;">cd secure-auth-system/backend\nnpm install\nnpm run dev</pre>');
                 } finally {
                     btn.disabled = false;
                     btn.textContent = 'Sign Up \u2192';
@@ -737,7 +737,7 @@
                         showFeedback(data.error || 'Failed to process password request.');
                     }
                 } catch (err) {
-                    showFeedback('Failed to reach authentication server API.');
+                    showFeedback('⚠️ <strong>Connection Error: Failed to reach authentication server API.</strong><br><br>Please verify that your Express backend is running on <b>http://localhost:5000</b>.<br><br>To start it, execute this in your terminal:<br><pre style="background: rgba(0,0,0,0.5); padding: 0.5rem; border-radius: 4px; font-family: monospace; font-size: 0.7rem; text-align: left; margin-top: 0.5rem; overflow-x: auto; border: 1px solid rgba(255,255,255,0.05); color: #818CF8;">cd secure-auth-system/backend\nnpm install\nnpm run dev</pre>');
                 } finally {
                     btn.disabled = false;
                     btn.textContent = 'Send Secure Reset Link';
