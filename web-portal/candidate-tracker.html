@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Minux Academy Standalone Candidate Vetting Board - A complete offline Jira Kanban board and Confluence wiki hub.">
-    <title>Candidate Vetting Hub | Minux Academy Standalone Tracker</title>
+    <meta name="description" content="Minux Academy Standalone Candidate Vetting Hub - A complete offline Jira Kanban board, Confluence wiki space, role-based login gateway, and executive progress reporting hub.">
+    <title>Candidate Vetting Hub | Standalone Reports & Vetting Gateway</title>
     <link rel="stylesheet" href="styles.css">
     
-    <!-- Custom Cyberpunk Styles for Standalone Kanban & Wiki split workspace -->
+    <!-- Custom Cyberpunk Styles for Standalone Kanban, Wiki, Reports & login gating -->
     <style>
         .tracker-main-container {
             max-width: 1400px;
@@ -37,9 +37,10 @@
             display: flex;
             align-items: center;
             gap: 1rem;
+            flex-wrap: wrap;
         }
 
-        .candidate-select {
+        .candidate-select, .form-select, .form-input, .form-textarea {
             background: rgba(11, 15, 25, 0.9);
             border: 1px solid var(--border-light);
             color: var(--text-primary);
@@ -47,12 +48,11 @@
             border-radius: 6px;
             font-family: var(--font-sans);
             font-size: 1rem;
-            cursor: pointer;
             outline: none;
             transition: all 0.3s;
         }
 
-        .candidate-select:focus {
+        .candidate-select:focus, .form-select:focus, .form-input:focus, .form-textarea:focus {
             border-color: var(--color-embedded);
             box-shadow: 0 0 10px rgba(20, 184, 166, 0.3);
         }
@@ -168,9 +168,58 @@
             transition: width 0.5s ease;
         }
 
+        /* Nav Tab Selectors */
+        .tab-controls {
+            display: flex;
+            gap: 1rem;
+            border-bottom: 1px solid var(--border-light);
+            padding-bottom: 0.5rem;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-family: var(--font-sans);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            transition: all 0.25s;
+            position: relative;
+        }
+
+        .tab-btn:hover {
+            color: var(--text-primary);
+        }
+
+        .tab-btn.active {
+            color: var(--color-embedded);
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -9px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--color-embedded);
+            box-shadow: 0 0 8px var(--color-embedded);
+            border-radius: 2px;
+        }
+
+        /* Panel Swapper */
+        .workspace-panel {
+            display: none;
+        }
+
+        .workspace-panel.active {
+            display: grid;
+        }
+
         /* Main Workspace Split (Jira on left, Confluence on right) */
         .workspace-split {
-            display: grid;
             grid-template-columns: 1.2fr 0.8fr;
             gap: 2rem;
         }
@@ -288,9 +337,7 @@
             position: relative;
         }
 
-        .task-card:active {
-            cursor: grabbing;
-        }
+        .task-card:active { cursor: grabbing; }
 
         .task-card:hover {
             border-color: var(--border-hover);
@@ -298,7 +345,6 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
-        /* Blocker style card warning */
         .task-card.blocker {
             border-color: var(--color-coach);
             box-shadow: 0 0 10px rgba(236, 72, 153, 0.25);
@@ -383,7 +429,6 @@
             }
         }
 
-        /* Wiki Navigation tree sidebar */
         .wiki-tree {
             border-right: 1px solid var(--border-light);
             padding-right: 0.75rem;
@@ -433,7 +478,6 @@
             font-weight: 600;
         }
 
-        /* Wiki Content viewer pane */
         .wiki-content-pane {
             max-height: 600px;
             overflow-y: auto;
@@ -469,24 +513,6 @@
             font-size: 1rem;
         }
 
-        .wiki-doc-body p {
-            margin-bottom: 0.75rem;
-        }
-
-        .wiki-doc-body ul {
-            margin-left: 1.25rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .wiki-doc-body code {
-            font-family: var(--font-mono);
-            background: rgba(11, 15, 25, 0.6);
-            padding: 0.1rem 0.3rem;
-            border-radius: 3px;
-            color: var(--color-c-systems);
-            font-size: 0.85rem;
-        }
-
         .wiki-doc-body pre {
             font-family: var(--font-mono);
             background: rgba(5, 7, 11, 0.85);
@@ -500,11 +526,114 @@
         .wiki-doc-body pre code {
             color: var(--text-primary);
             background: none;
-            padding: 0;
             font-size: 0.82rem;
         }
 
-        /* Premium Modal Overlays */
+        /* Standalone Reporting Dashboard Panel */
+        .reporting-table-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(12px);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .reporting-table-container {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .report-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: var(--font-sans);
+        }
+
+        .report-table th, .report-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .report-table th {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            background: rgba(11, 15, 25, 0.5);
+        }
+
+        .report-table td {
+            font-size: 0.95rem;
+            color: var(--text-primary);
+        }
+
+        .report-table tr:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        /* Secure Login Gateway Overlay */
+        .login-gateway-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #05070B;
+            background-image: 
+                radial-gradient(circle at 50% 30%, rgba(20, 184, 166, 0.1) 0%, transparent 60%),
+                linear-gradient(rgba(255, 255, 255, 0.005) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.005) 1px, transparent 1px);
+            background-size: 100% 100%, 45px 45px, 45px 45px;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        .login-card {
+            background: rgba(17, 24, 39, 0.85);
+            border: 1px solid var(--border-light);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 420px;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.75rem;
+            text-align: center;
+        }
+
+        .login-logo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-logo svg {
+            color: var(--color-embedded);
+            filter: drop-shadow(0 0 8px var(--color-embedded));
+        }
+
+        .login-logo span {
+            color: var(--color-c-systems);
+        }
+
+        /* Modals */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -518,12 +647,6 @@
             align-items: center;
             justify-content: center;
             padding: 1.5rem;
-            animation: fadeIn 0.3s;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
 
         .modal-card {
@@ -536,12 +659,6 @@
             display: flex;
             flex-direction: column;
             max-height: 90%;
-            animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        @keyframes slideUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
         }
 
         .modal-header {
@@ -567,9 +684,7 @@
             transition: color 0.2s;
         }
 
-        .modal-close:hover {
-            color: var(--text-primary);
-        }
+        .modal-close:hover { color: var(--text-primary); }
 
         .modal-body {
             padding: 1.5rem;
@@ -587,11 +702,11 @@
             gap: 1rem;
         }
 
-        /* Form Inputs style */
         .form-group {
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
+            text-align: left;
         }
 
         .form-group label {
@@ -600,22 +715,6 @@
             text-transform: uppercase;
             letter-spacing: 0.05em;
             color: var(--text-secondary);
-        }
-
-        .form-input, .form-textarea, .form-select {
-            background: rgba(11, 15, 25, 0.8);
-            border: 1px solid var(--border-light);
-            border-radius: 6px;
-            color: var(--text-primary);
-            padding: 0.6rem 1rem;
-            font-family: var(--font-sans);
-            font-size: 0.95rem;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-
-        .form-input:focus, .form-textarea:focus, .form-select:focus {
-            border-color: var(--color-embedded);
         }
 
         .form-row-grid {
@@ -629,6 +728,7 @@
             align-items: center;
             gap: 0.5rem;
             cursor: pointer;
+            text-align: left;
         }
 
         .form-checkbox-row input {
@@ -640,6 +740,48 @@
     </style>
 </head>
 <body>
+
+    <!-- SECURE ROLE-BASED LOGIN GATEWAY (Standalone Bypassable Overlay) -->
+    <section class="login-gateway-overlay" id="login-gateway">
+        <div class="login-card">
+            <div class="login-logo">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+                MINUX<span>VETTING</span>
+            </div>
+            
+            <div style="margin-top: -0.5rem;">
+                <h4 style="font-weight: 700; color: var(--text-primary); margin-bottom: 0.25rem;">Candidate Vetting Gateway</h4>
+                <p style="color: var(--text-secondary); font-size: 0.85rem;">Select your role context to log in to the standalone workspace.</p>
+            </div>
+            
+            <div class="form-group">
+                <label for="login-role">Select Role Context</label>
+                <select id="login-role" class="form-select" style="width: 100%;">
+                    <option value="student">Student / Candidate Profile</option>
+                    <option value="mentor">Auditor / Mentor (Admin)</option>
+                </select>
+            </div>
+            
+            <!-- Student Select Box (Hidden when Mentor is active) -->
+            <div class="form-group" id="login-student-group">
+                <label for="login-student-select">Select Candidate Profile</label>
+                <select id="login-student-select" class="form-select" style="width: 100%;">
+                    <!-- Dynamically loaded from states -->
+                </select>
+            </div>
+            
+            <!-- Passcode Input Box (Hidden when Student is active) -->
+            <div class="form-group" id="login-passcode-group" style="display: none;">
+                <label for="login-passcode">Enter Mentor Passcode</label>
+                <input type="password" id="login-passcode" class="form-input" placeholder="Enter 'mentor123' to audit..." style="width: 100%;">
+                <span id="login-error-msg" style="color: var(--color-coach); font-size: 0.75rem; font-weight: 600; display: none;">Invalid Passcode!</span>
+            </div>
+            
+            <button class="btn-action" id="login-submit-btn" style="width: 100%; justify-content: center; padding: 0.75rem;">
+                Enter Vetting Hub &rarr;
+            </button>
+        </div>
+    </section>
 
     <!-- Glassmorphic Cyber Header -->
     <header id="main-header">
@@ -679,12 +821,25 @@
                     New Candidate
                 </button>
             </div>
-            <div>
+            
+            <!-- User Status & Logout Badge -->
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <span id="user-role-badge" style="font-size: 0.85rem; font-weight: 600; background: rgba(255,255,255,0.05); border: 1px solid var(--border-light); padding: 0.35rem 0.75rem; border-radius: 6px;">Logged in as: ...</span>
+                <button class="btn-secondary" id="user-logout-btn" style="padding: 0.35rem 0.75rem; font-size: 0.8rem; color: var(--color-coach); border-color: rgba(236,72,153,0.3);">Log Out</button>
+            </div>
+
+            <div id="add-task-btn-group">
                 <button class="btn-action" id="add-task-trigger">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                     Add Syllabus Task
                 </button>
             </div>
+        </section>
+
+        <!-- Dynamic Workspace Panel Selector Tabs -->
+        <section class="tab-controls">
+            <button class="tab-btn active" id="tab-trigger-board">Jira Board & Confluence Wiki</button>
+            <button class="tab-btn" id="tab-trigger-reports">Executive Performance Report</button>
         </section>
 
         <!-- KPI Panel Metrics -->
@@ -710,21 +865,20 @@
             </article>
         </section>
 
-        <!-- Split Workspace (Jira board on left, Confluence wiki on right) -->
-        <section class="workspace-split">
+        <!-- PANEL 1: Kanban Board & Confluence Wiki Space -->
+        <section class="workspace-split workspace-panel active" id="panel-board-wiki">
             
             <!-- Left Side: Jira Kanban Board -->
             <div class="jira-board-panel" id="jira-board">
                 <div class="panel-header">
                     <div class="panel-title">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line><line x1="15" y1="3" x2="15" y2="21"></line><line x1="3" y1="9" x2="21" y2="9"></line><line x1="3" y1="15" x2="21" y2="15"></line></svg>
-                        <span>Jira Board</span> - Candidate Issues
+                        <span>Jira Board</span> - Vetting Tasks
                     </div>
-                    <span id="board-sync-badge" style="font-size: 0.75rem; background: rgba(20,184,166,0.1); color: var(--color-embedded); padding: 0.1rem 0.5rem; border-radius: 4px; font-weight: 600;">STANDALONE LOGGED</span>
+                    <span style="font-size: 0.75rem; background: rgba(20,184,166,0.1); color: var(--color-embedded); padding: 0.1rem 0.5rem; border-radius: 4px; font-weight: 600;">DRAG & DROP ENABLED</span>
                 </div>
                 
                 <div class="kanban-grid">
-                    
                     <!-- Column: To Do -->
                     <div class="kanban-column" id="col-todo" data-status="To Do">
                         <div class="column-header col-todo">
@@ -760,7 +914,6 @@
                         </div>
                         <div class="kanban-cards-container" id="cards-completed"></div>
                     </div>
-                    
                 </div>
             </div>
 
@@ -795,7 +948,35 @@
                     </article>
                 </div>
             </div>
+        </section>
 
+        <!-- PANEL 2: Standalone Executive Reporting Dashboard -->
+        <section class="reporting-table-panel workspace-panel" id="panel-reports">
+            <div class="panel-header" style="border-bottom: 1px solid var(--border-light); padding-bottom: 0.75rem; margin-bottom: 1.5rem;">
+                <div class="panel-title">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                    <span>Executive Reports Hub</span> - Consolidated Metrics
+                </div>
+                <span id="total-candidates-badge" style="font-size: 0.85rem; font-weight: 600; background: rgba(20,184,166,0.1); color: var(--color-embedded); padding: 0.35rem 0.75rem; border-radius: 6px;">Total Tracked: 2 Candidates</span>
+            </div>
+            
+            <div class="reporting-table-container">
+                <table class="report-table" id="executive-reporting-table">
+                    <thead>
+                        <tr>
+                            <th>Candidate / Student</th>
+                            <th>Status Progress (45 Days)</th>
+                            <th>Audited Score / GPA</th>
+                            <th>Unresolved Blockers</th>
+                            <th>Current Coding Phase</th>
+                            <th style="text-align: center;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="report-table-body">
+                        <!-- Loaded dynamically via JS -->
+                    </tbody>
+                </table>
+            </div>
         </section>
 
     </main>
@@ -837,7 +1018,7 @@
                             </select>
                         </div>
                         
-                        <div class="form-group">
+                        <div class="form-group" id="grade-select-container">
                             <label for="modal-task-grade">Audit Grade / Score</label>
                             <select id="modal-task-grade" class="form-select">
                                 <option value="Pending">Pending Audit</option>
@@ -855,7 +1036,7 @@
                         <textarea id="modal-task-notes" class="form-textarea" rows="3" placeholder="Enter logic warnings, static errors, or dynamic measurements..."></textarea>
                     </div>
                     
-                    <div class="form-checkbox-row">
+                    <div class="form-checkbox-row" id="blocker-toggle-container">
                         <input type="checkbox" id="modal-task-blocker">
                         <label for="modal-task-blocker" style="color: var(--color-coach); font-weight: 600;">Flag as Active Blocker (Halts Vetting Pipeline)</label>
                     </div>
@@ -913,7 +1094,7 @@
                     </div>
                     <div class="form-group">
                         <label for="new-wiki-content">XHTML / Plaintext Page Body</label>
-                        <textarea id="new-wiki-content" class="form-textarea" rows="8" placeholder="Enter page text (supports simple paragraphs)..." required></textarea>
+                        <textarea id="new-wiki-content" class="form-textarea" rows="8" placeholder="Enter page text..." required></textarea>
                     </div>
                 </form>
             </div>
