@@ -1,0 +1,719 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+:root {
+  --bg-deep: #030712;
+  --bg-dark: #090d16;
+  --bg-card: rgba(17, 24, 39, 0.7);
+  --bg-card-hover: rgba(31, 41, 55, 0.85);
+  --border-light: rgba(255, 255, 255, 0.08);
+  --border-glow: rgba(6, 182, 212, 0.3);
+  
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --text-dark: #4b5563;
+  
+  --accent-cyan: #06b6d4;
+  --accent-cyan-glow: rgba(6, 182, 212, 0.5);
+  --accent-emerald: #10b981;
+  --accent-emerald-glow: rgba(16, 185, 129, 0.5);
+  --accent-rose: #f43f5e;
+  --accent-rose-glow: rgba(244, 63, 94, 0.5);
+  --accent-amber: #f59e0b;
+  --accent-amber-glow: rgba(245, 158, 11, 0.5);
+  --accent-violet: #6366f1;
+  
+  /* IEEE-754 Float Bit Fields Colors */
+  --float-sign: #3b82f6;
+  --float-sign-glow: rgba(59, 130, 246, 0.5);
+  --float-exp: #a855f7;
+  --float-exp-glow: rgba(168, 85, 247, 0.5);
+  --float-fraction: #14b8a6;
+  --float-fraction-glow: rgba(20, 184, 166, 0.5);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--bg-deep);
+  color: var(--text-main);
+  overflow-y: auto;
+  min-height: 100vh;
+}
+
+#app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header Styles */
+header {
+  background: rgba(3, 7, 18, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  height: 65px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, var(--accent-rose), var(--accent-amber));
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 15px var(--accent-rose-glow);
+}
+
+.logo-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke: #fff;
+  fill: none;
+}
+
+.brand h1 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  background: linear-gradient(to right, #ffffff, #9ca3af);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand span {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  background: rgba(244, 63, 94, 0.15);
+  color: var(--accent-rose);
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(244, 63, 94, 0.3);
+  font-weight: 600;
+}
+
+.btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  color: var(--text-main);
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-rose), #db2777);
+  border-color: rgba(244, 63, 94, 0.5);
+  box-shadow: 0 4px 12px rgba(244, 63, 94, 0.2);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #db2777, #be185d);
+  box-shadow: 0 4px 16px rgba(244, 63, 94, 0.4);
+}
+
+.btn-accent {
+  background: linear-gradient(135deg, var(--accent-cyan), #0891b2);
+  border-color: rgba(6, 182, 212, 0.5);
+}
+
+/* Dashboard Content Grid */
+main.dashboard-container {
+  flex: 1;
+  max-width: 1300px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.section-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  padding: 24px;
+  backdrop-filter: blur(16px);
+  position: relative;
+  overflow: hidden;
+}
+
+.section-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--border-light), transparent);
+}
+
+.section-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--accent-cyan);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-title svg {
+  width: 16px;
+  height: 16px;
+  stroke: var(--accent-cyan);
+}
+
+/* Register Byte Selectors */
+.register-controls-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.selector-group {
+  display: flex;
+  background: var(--bg-deep);
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  padding: 3px;
+}
+
+.selector-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.selector-btn.active {
+  background: var(--border-light);
+  color: var(--accent-cyan);
+}
+
+/* Register Active Bit Grid */
+.register-bit-grid {
+  display: grid;
+  grid-template-columns: repeat(32, 1fr);
+  gap: 4px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 1024px) {
+  .register-bit-grid {
+    grid-template-columns: repeat(16, 1fr);
+    gap: 6px;
+  }
+}
+
+@media (max-width: 640px) {
+  .register-bit-grid {
+    grid-template-columns: repeat(8, 1fr);
+    gap: 8px;
+  }
+}
+
+.bit-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.bit-index {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--text-dark);
+  font-weight: 700;
+}
+
+.bit-block {
+  width: 100%;
+  aspect-ratio: 1/1;
+  background: rgba(3, 7, 18, 0.6);
+  border: 1.5px solid var(--border-light);
+  border-radius: 6px;
+  color: var(--text-muted);
+  font-family: 'Orbitron', monospace;
+  font-size: 0.95rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.bit-block:hover {
+  border-color: var(--text-muted);
+  background: rgba(255,255,255,0.02);
+}
+
+.bit-block.high {
+  background: var(--bg-deep);
+  color: var(--accent-cyan);
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 10px var(--accent-cyan-glow), inset 0 0 4px var(--accent-cyan-glow);
+  text-shadow: 0 0 5px var(--accent-cyan-glow);
+}
+
+/* Bases Numerical Displays */
+.bases-display-board {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px;
+}
+
+@media (max-width: 900px) {
+  .bases-display-board {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .bases-display-board {
+    grid-template-columns: 1fr;
+  }
+}
+
+.base-card {
+  background: rgba(3, 7, 18, 0.4);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.base-card-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+}
+
+.base-card-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-main);
+  word-break: break-all;
+}
+
+.base-card.highlighted {
+  border-color: var(--accent-cyan-glow);
+  background: rgba(6, 182, 212, 0.02);
+}
+
+.base-card.highlighted .base-card-value {
+  color: var(--accent-cyan);
+  text-shadow: 0 0 3px rgba(6, 182, 212, 0.3);
+}
+
+/* Two-Column Middle Grid */
+.middle-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 30px;
+}
+
+@media (max-width: 960px) {
+  .middle-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Bitwise Operators Playground */
+.bitwise-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.bitwise-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  width: 50px;
+  color: var(--text-muted);
+}
+
+.bitwise-register {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 3px;
+}
+
+.bitwise-bit {
+  aspect-ratio: 1.1/1;
+  background: rgba(3,7,18,0.5);
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.85rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.bitwise-bit.high {
+  color: var(--accent-emerald);
+  border-color: var(--accent-emerald);
+  box-shadow: 0 0 6px var(--accent-emerald-glow);
+}
+
+.bitwise-bit.readonly {
+  cursor: not-allowed;
+  background: rgba(255,255,255,0.01);
+}
+
+.bitwise-operator-select {
+  background: var(--bg-deep);
+  border: 1px solid var(--border-light);
+  color: var(--text-main);
+  padding: 6px 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: bold;
+  border-radius: 6px;
+  outline: none;
+  cursor: pointer;
+  width: 70px;
+  text-align: center;
+}
+
+.bitwise-operator-select:focus {
+  border-color: var(--accent-cyan);
+}
+
+/* Endianness swapping RAM representation */
+.endian-input-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.endian-input-row label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.endian-input-row input {
+  background: var(--bg-deep);
+  border: 1px solid var(--border-light);
+  color: var(--text-main);
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  width: 140px;
+  outline: none;
+}
+
+.endian-input-row input:focus {
+  border-color: var(--accent-cyan);
+}
+
+.ram-layout-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.ram-column {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ram-column-title {
+  font-size: 0.7rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: center;
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+}
+
+.ram-byte-box {
+  background: rgba(3,7,18,0.4);
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  padding: 6px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+}
+
+.ram-address {
+  color: var(--text-dark);
+  font-weight: 500;
+}
+
+.ram-value {
+  color: var(--accent-amber);
+  font-weight: 700;
+}
+
+/* IEEE 754 Floating Point Representation Section */
+.ieee-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ieee-bit-legend {
+  display: flex;
+  gap: 15px;
+  font-size: 0.75rem;
+  margin-bottom: 4px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+}
+
+.legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
+
+.color-sign { background-color: var(--float-sign); }
+.color-exp { background-color: var(--float-exp); }
+.color-frac { background-color: var(--float-fraction); }
+
+.ieee-bit-blocks {
+  display: grid;
+  grid-template-columns: repeat(32, 1fr);
+  gap: 3px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 900px) {
+  .ieee-bit-blocks {
+    grid-template-columns: repeat(16, 1fr);
+    gap: 5px;
+  }
+}
+
+.ieee-bit {
+  aspect-ratio: 1/1;
+  background: rgba(3,7,18,0.6);
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.85rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.ieee-bit.sign { border-color: rgba(59, 130, 246, 0.3); }
+.ieee-bit.sign.high {
+  background: var(--float-sign);
+  color: #fff;
+  border-color: var(--float-sign);
+  box-shadow: 0 0 8px var(--float-sign-glow);
+}
+
+.ieee-bit.exponent { border-color: rgba(168, 85, 247, 0.3); }
+.ieee-bit.exponent.high {
+  background: var(--float-exp);
+  color: #fff;
+  border-color: var(--float-exp);
+  box-shadow: 0 0 8px var(--float-exp-glow);
+}
+
+.ieee-bit.mantissa { border-color: rgba(20, 184, 166, 0.3); }
+.ieee-bit.mantissa.high {
+  background: var(--float-fraction);
+  color: #fff;
+  border-color: var(--float-fraction);
+  box-shadow: 0 0 8px var(--float-fraction-glow);
+}
+
+/* Formula step-by-step display cards */
+.formula-breakdown-card {
+  background: rgba(3, 7, 18, 0.4);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  padding: 16px 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.formula-main {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--text-main);
+  text-align: center;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed var(--border-light);
+  margin-bottom: 4px;
+}
+
+.formula-step {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.formula-step-label {
+  color: var(--text-muted);
+}
+
+.formula-step-calc {
+  color: var(--text-main);
+}
+
+.formula-step-calc span.val-sign { color: var(--float-sign); font-weight: bold; }
+.formula-step-calc span.val-exp { color: var(--float-exp); font-weight: bold; }
+.formula-step-calc span.val-frac { color: var(--float-fraction); font-weight: bold; }
+
+/* Mask Generator sidebar card */
+.mask-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.mask-slider-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mask-slider-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.mask-slider-row input[type="range"] {
+  width: 100%;
+  height: 5px;
+  accent-color: var(--accent-rose);
+  background: #1e293b;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.code-viewer-container {
+  background: #02060f;
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  padding: 12px;
+  position: relative;
+}
+
+.code-viewer-container pre {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: #a7f3d0; /* Soft emerald */
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+
+.btn-copy {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--text-muted);
+  padding: 4px 8px;
+  font-size: 0.65rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-copy:hover {
+  color: var(--text-main);
+  background: rgba(255,255,255,0.1);
+}
+
+/* Interactive custom toasts */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
