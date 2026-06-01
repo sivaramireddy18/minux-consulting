@@ -20,7 +20,14 @@ app.use(helmet());
 // CORS Setup (Credentials enabled for HttpOnly Cookies)
 app.use(
   cors({
-    origin: env.CLIENT_URL,
+    origin: (origin, callback) => {
+      // Allow local file previews (origin is null or starts with file://) or localhost configurations in development
+      if (!origin || origin === 'null' || origin.startsWith('file://') || origin.includes('localhost') || origin.includes('127.0.0.1')) {
+        callback(null, true);
+      } else {
+        callback(null, env.CLIENT_URL);
+      }
+    },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
