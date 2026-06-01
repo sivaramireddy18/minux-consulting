@@ -90,6 +90,7 @@ function loadTemplateIntoEditor() {
   const selected = dropdownSnippet.value;
   if (SNIPPET_TEMPLATES[selected]) {
     textarea.value = SNIPPET_TEMPLATES[selected];
+    currentPresetKey = selected;
     updateLineNumbers();
     resetDebuggerState();
   }
@@ -110,6 +111,7 @@ let compiledPreset = {
   steps: []
 };
 
+const CODE_PRESETS = {};
 let currentPresetKey = 'globals_boot';
 let nextAddressFlash = 0x08000000;
 let nextAddressRam = 0x20000000;
@@ -658,6 +660,8 @@ btnNextStage.addEventListener('click', () => {
     showToast("Program successfully compiled and mapped to SRAM/FLASH!", "success");
   }
 });
+
+btnBuild.addEventListener('click', triggerCompilationPipeline);
 
 // ==========================================
 // 4. STEP DEBUGGER RUNTIME SOLVER
