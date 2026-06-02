@@ -324,6 +324,18 @@
         renderCpuRegisters();
         renderStackMemory();
         updateConsoleControls();
+
+        // Register NVIC exception nesting milestone in local storage
+        try {
+            const milestonesRaw = localStorage.getItem("minux_simulator_milestones") || "{}";
+            const milestones = JSON.parse(milestonesRaw);
+            milestones["nvic_exception_nesting"] = true;
+            localStorage.setItem("minux_simulator_milestones", JSON.stringify(milestones));
+            
+            ui.helperText.innerHTML = `<strong>Exception Return Complete!</strong> Thread Mode execution has successfully resumed. SP restored to 0x20008000. <br><span style="color:var(--color-embedded); font-weight:700;">⚡ Progress synced to Candidate Vetting Hub!</span>`;
+        } catch (e) {
+            console.error("Failed to write NVIC milestone:", e);
+        }
     }
 
     // Interactive Demo Tour Logic

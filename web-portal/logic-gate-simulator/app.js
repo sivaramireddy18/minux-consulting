@@ -1676,6 +1676,20 @@ document.getElementById('btn-truth-table').addEventListener('click', () => {
   `;
   
   container.innerHTML = html;
+  
+  // Register milestone in local storage and notify user
+  try {
+    const milestonesRaw = localStorage.getItem("minux_simulator_milestones") || "{}";
+    const milestones = JSON.parse(milestonesRaw);
+    milestones["logic_gate_adder"] = true;
+    localStorage.setItem("minux_simulator_milestones", JSON.stringify(milestones));
+    if (typeof showToast === 'function') {
+      showToast("⚡ Progress synced to Candidate Vetting Hub!");
+    }
+  } catch (e) {
+    console.error("Failed to write logic gate milestone:", e);
+  }
+
   openModal('truth-table-modal');
 });
 

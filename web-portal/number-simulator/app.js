@@ -82,6 +82,21 @@ function updateRegisterValues() {
     asciiStr = '\\t (TAB)';
   }
   document.getElementById('val-ascii').textContent = asciiStr;
+
+  // Trigger number simulator milestone synchronization!
+  try {
+    const milestonesRaw = localStorage.getItem("minux_simulator_milestones") || "{}";
+    const milestones = JSON.parse(milestonesRaw);
+    if (!milestones["number_representations"]) {
+      milestones["number_representations"] = true;
+      localStorage.setItem("minux_simulator_milestones", JSON.stringify(milestones));
+      if (typeof showToast === 'function') {
+        showToast("⚡ Progress synced to Candidate Vetting Hub!");
+      }
+    }
+  } catch (e) {
+    console.error("Failed to write register milestone:", e);
+  }
 }
 
 // Width Selectors

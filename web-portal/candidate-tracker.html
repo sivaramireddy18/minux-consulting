@@ -337,6 +337,22 @@
             position: relative;
         }
 
+        .task-verified-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.68rem;
+            font-weight: 700;
+            color: var(--color-embedded);
+            background: rgba(20, 184, 166, 0.1);
+            border: 1px solid rgba(20, 184, 166, 0.3);
+            border-radius: 4px;
+            padding: 2px 6px;
+            margin-top: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
         .task-card:active { cursor: grabbing; }
 
         .task-card:hover {
@@ -833,10 +849,13 @@
                 <button class="btn-secondary" id="user-logout-btn" style="padding: 0.35rem 0.75rem; font-size: 0.8rem; color: var(--color-coach); border-color: rgba(236,72,153,0.3);">Log Out</button>
             </div>
 
-            <div id="add-task-btn-group">
+            <div id="add-task-btn-group" style="display: flex; gap: 0.5rem; align-items: center;">
                 <button class="btn-action" id="add-task-trigger">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                     Add Syllabus Task
+                </button>
+                <button class="btn-secondary" id="btn-export-progress-json" title="Download the current state as progress_data.json to save changes permanently">
+                    💾 Export Progress JSON
                 </button>
             </div>
         </section>

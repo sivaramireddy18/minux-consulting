@@ -658,6 +658,21 @@ btnNextStage.addEventListener('click', () => {
     
     initializeProgramSimulation();
     showToast("Program successfully compiled and mapped to SRAM/FLASH!", "success");
+
+    // Trigger memory simulator milestone synchronization!
+    try {
+      const milestonesRaw = localStorage.getItem("minux_simulator_milestones") || "{}";
+      const milestones = JSON.parse(milestonesRaw);
+      if (!milestones["sram_segmentation"]) {
+        milestones["sram_segmentation"] = true;
+        localStorage.setItem("minux_simulator_milestones", JSON.stringify(milestones));
+        if (typeof showToast === 'function') {
+          showToast("⚡ Progress synced to Candidate Vetting Hub!");
+        }
+      }
+    } catch (e) {
+      console.error("Failed to write memory milestone:", e);
+    }
   }
 });
 

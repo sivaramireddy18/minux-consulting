@@ -11,7 +11,7 @@
         1: {
             phase: "Phase 1: Compiler & Toolchains",
             topic: "The Preprocessor Pipeline and Macro Expansion Hazards",
-            theory: "Deep-dive into the C Preprocessor (cpp). Understand header file inclusion (#include), conditional compilation (#ifdef, #if defined), and macro expansions. Study macro hazards such as side-effects, double evaluations, and operator precedence issues. Learn how compiler flags like '-E' produce intermediate '.i' files containing expanded text before tokenization.",
+            theory: "Deep-dive into the C Preprocessor (cpp). Understand header file inclusion (#include), conditional compilation (#ifdef, #if defined), and macro expansions. Study macro hazards such as side-effects, double evaluations, and operator precedence issues. Learn how compiler flags like '-E' produce intermediate '.i' files containing expanded text before tokenization.<br><br><a href='logic-gate-simulator/index.html' class='btn btn-accent' style='display:inline-block; font-size:0.75rem; text-decoration:none; padding:4px 8px; color:white;' target='_blank'>⚡ Open in Gate Simulator</a>",
             lab: "Write a complex nested macro system that calculates the square of a number and absolute values. Create a source file main.c, run it through the preprocessor using 'gcc -E' and inspect the generated '.i' file. Identify where the macro expansions occur and explain why double evaluation of side-effect expressions (e.g., ++x) leads to logical corruption.",
             code: `// Unsafe vs Safe Macro Evaluation Demo\n#define SQUARE_UNSAFE(x) ((x) * (x))\n\nstatic inline int square_safe(int x) {\n    return x * x;\n}\n\n// SQUARE_UNSAFE(++val) expands to ((++val) * (++val)) -> UNDEFINED!`,
             validation: "Compile with 'gcc -std=c11 -Wall -Wextra -Werror -O0'. Run 'gcc -E main.c' and verify that the preprocessor expands SQUARE_UNSAFE(++val) directly in the source text, while square_safe remains a standard function call boundary."
@@ -20,14 +20,14 @@
             phase: "Phase 1: Compiler & Toolchains",
             topic: "Compilation to Assembly and GDB Register Analysis",
             theory: "Analyze how the compiler translates preprocessed intermediate C code into assembly instructions specific to the target CPU architecture. Study ARMv7-M / x86-64 register structures, instruction sizing, and the translation of loops and branching statements into conditional branches. Master GDB commands for register inspection.",
-            lab: "Write a C function containing a nested loop and conditional branch. Compile the code to raw assembly using the '-S' flag. Inspect the assembly output to trace label naming conventions. Load the executable under GDB, set breakpoints, step instruction-by-instruction ('si'), and print register contents to see loops incrementing registers directly.",
+            lab: "Write a C function containing a nested loop and conditional branch. Compile the code to raw assembly using the '-S' flag. Inspect the assembly output to trace label naming conventions. Load the executable under GDB, set breakpoints, step instruction-by-step ('si'), and print register contents to see loops incrementing registers directly.",
             code: `// Factorial sum to analyze registers usage in GDB\nuint32_t compute_factorial_sum(uint32_t limit) {\n    uint32_t total = 0;\n    for (uint32_t i = 1; i <= limit; ++i) {\n        uint32_t fact = 1;\n        for (uint32_t j = 1; j <= i; ++j) {\n            fact *= j;\n        }\n        total += fact;\n    }\n    return total;\n}`,
             validation: "Compile with 'gcc -S -g -O0 factorial.c'. Load factorial.o into GDB. Run 'layout asm' and 'info registers' to physically observe register status updates (e.g. EAX/RAX changes) during execution steps."
         },
         3: {
             phase: "Phase 1: Compiler & Toolchains",
             topic: "Relocatable Object Files Dissection and Symbol Resolution",
-            theory: "Explore relocatable object files (.o) and ELF segment architecture. Map the physical layout of standard sections: .text (machine code), .data (initialized global/static variables), .bss (uninitialized variables zeroed out at startup), and .rodata (read-only constants). Understand symbol tables and states (Text 'T', Data 'D', BSS 'B', Undefined 'U').",
+            theory: "Explore relocatable object files (.o) and ELF segment architecture. Map the physical layout of standard sections: .text (machine code), .data (initialized global/static variables), .bss (uninitialized variables zeroed out at startup), and .rodata (read-only constants). Understand symbol tables and states (Text 'T', Data 'D', BSS 'B', Undefined 'U').<br><br><a href='memory-simulator/index.html' class='btn btn-accent' style='display:inline-block; font-size:0.75rem; text-decoration:none; padding:4px 8px; color:white;' target='_blank'>⚡ Open in Memory Simulator</a>",
             lab: "Write a C file defining variables in each of these sections. Compile to an object file using the '-c' flag. Use 'nm', 'objdump', and 'readelf' to dissect the symbols and sections. Confirm that global variables mapped to appropriate segments and trace dynamic relocations.",
             code: `// Variables mapping directly to distinct ELF segments\nuint32_t active_state_flag = 0xDEADC0DEU;   // Allocated in .data\nuint32_t sensor_telemetry_buffer[100];       // Allocated in .bss\nconst char device_serial_number[] = "SN-01"; // Allocated in .rodata`,
             validation: "Run 'nm -S -S symbol_test.o' and 'objdump -h symbol_test.o'. Verify that active_state_flag is in the 'D' (data) section, sensor_telemetry_buffer is in the 'B' (bss) section, and device_serial_number is in the 'R' (rodata) section."
@@ -51,7 +51,7 @@
         21: {
             phase: "Phase 5: Structures & Alignments",
             topic: "Structure Memory Layouts, Compiler Padding, and Offset Tracing",
-            theory: "Study structure layouts in memory. To optimize memory bus transfers, compilers insert silent padding bytes into structures so that individual members are aligned with their native byte sizes (e.g. 4-byte boundaries for int, 2-byte for short). Learn how struct member ordering affects total structural footprint.",
+            theory: "Study structure layouts in memory. To optimize memory bus transfers, compilers insert silent padding bytes into structures so that individual members are aligned with their native byte sizes (e.g. 4-byte boundaries for int, 2-byte for short). Learn how struct member ordering affects total structural footprint.<br><br><a href='memory-simulator/index.html' class='btn btn-accent' style='display:inline-block; font-size:0.75rem; text-decoration:none; padding:4px 8px; color:white;' target='_blank'>⚡ Open in Memory Simulator</a>",
             lab: "Define structures containing members of mixed sizes in different declarations. Calculate the size of each structure using 'sizeof' and identify the offsets of each member using the 'offsetof' macro. Optimize the structure footprint by reordering elements from largest to smallest.",
             code: `struct Unoptimized {\n    uint8_t a;  // Offset 0 (3 bytes padding)\n    uint32_t b; // Offset 4\n    uint8_t c;  // Offset 8 (3 bytes padding)\n}; // sizeof = 12 bytes\n\nstruct Optimized {\n    uint32_t b; // Offset 0\n    uint8_t a;  // Offset 4\n    uint8_t c;  // Offset 5 (2 bytes padding)\n}; // sizeof = 8 bytes`,
             validation: "Compile and execute. Verify the unoptimized size is 12 bytes and optimized size is 8 bytes, demonstrating effective padding reduction through ordering."
@@ -59,7 +59,7 @@
         27: {
             phase: "Phase 6: Custom Allocators",
             topic: "Custom Memory Arenas and Alignment Boundaries",
-            theory: "Understand the concept of a Memory Arena (or linear/bump allocator). Arena allocators speed up performance by allocating a single large buffer upfront and serving dynamic requests by bumping an offset index. Memory release is executed en-masse by clearing the entire arena. Learn how to enforce alignment on all sub-allocations.",
+            theory: "Understand the concept of a Memory Arena (or linear/bump allocator). Arena allocators speed up performance by allocating a single large buffer upfront and serving dynamic requests by bumping an offset index. Memory release is executed en-masse by clearing the entire arena. Learn how to enforce alignment on all sub-allocations.<br><br><a href='memory-simulator/index.html' class='btn btn-accent' style='display:inline-block; font-size:0.75rem; text-decoration:none; padding:4px 8px; color:white;' target='_blank'>⚡ Open in Memory Simulator</a>",
             lab: "Design and implement a complete, robust, type-aligned Memory Arena in C. The arena must take a statically allocated buffer and support variable-sized allocation requests. Ensure that the returned addresses are always aligned to 8-byte boundaries.",
             code: `typedef struct {\n    uint8_t *buffer;\n    size_t capacity;\n    size_t offset;\n} arena_t;\n\nvoid *arena_alloc(arena_t *arena, size_t size, size_t alignment) {\n    size_t current_addr = (size_t)(arena->buffer + arena->offset);\n    size_t aligned_addr = (current_addr + (alignment - 1)) & ~(alignment - 1);\n    size_t new_offset = aligned_addr - (size_t)arena->buffer;\n    if (new_offset + size > arena->capacity) return NULL;\n    arena->offset = new_offset + size;\n    return (void *)aligned_addr;\n}`,
             validation: "Write a test suite allocating various objects (e.g. chars, ints, structs) in sequence. Assert that every returned address is perfectly aligned to the requested size (e.g. multiple of 4 or 8) and fits within bounds."
@@ -121,7 +121,7 @@
 
         if (day === 6) {
             topic = "Two's Complement bit representations and conversions";
-            theory = "Study the physical logic of signed numbers. Master sign extension and arithmetic shifts.";
+            theory = "Study the physical logic of signed numbers. Master sign extension and arithmetic shifts.<br><br><a href='number-simulator/index.html' class='btn btn-accent' style='display:inline-block; font-size:0.75rem; text-decoration:none; padding:4px 8px; color:white;' target='_blank'>⚡ Open in Register Simulator</a>";
             code = `int8_t sign_ext = -5; // 0xFB\nint32_t extended = (int32_t)sign_ext; // 0xFFFFFFFB`;
         } else if (day === 7) {
             topic = "Safe Integer Addition and Promotions";
@@ -133,7 +133,7 @@
             code = `#define EPSILON 1e-6f\nbool float_equal(float a, float b) {\n    return fabsf(a - b) < EPSILON;\n}`;
         } else if (day === 11) {
             topic = "ARM Cortex Procedure Call Standards (AAPCS) and registers file";
-            theory = "Audit registers R0-R3 parameter passing conventions and callee-saved scratch mappings.";
+            theory = "Audit registers R0-R3 parameter passing conventions and callee-saved scratch mappings.<br><br><a href='nvic-simulator/index.html' class='btn btn-accent' style='display:inline-block; font-size:0.75rem; text-decoration:none; padding:4px 8px; color:white;' target='_blank'>⚡ Open in NVIC Simulator</a>";
             code = `// Param 1 in r0, Param 2 in r1, Param 3 in r2\nuint32_t verify_aapcs(uint32_t a, uint32_t b, uint32_t c) {\n    return a + b + c;\n}`;
         } else if (day === 18) {
             topic = "Volatile Registers Polling Loops";
@@ -232,6 +232,9 @@
         } catch (e) {
             console.log("No progress_data.json found or fetch failed, falling back to localStorage: ", e);
         }
+
+        // Always sync simulator achievements on state load!
+        syncSimulatorMilestones();
 
         const data = localStorage.getItem("minux_candidate_state");
         if (data) { 
@@ -341,9 +344,15 @@
             const isStudent = loggedUser.role === "student";
             card.draggable = !isStudent || (task.status === "To Do" || task.status === "In Progress");
             
+            let verifiedBadge = "";
+            if (task.verifiedViaSimulator) {
+                verifiedBadge = `<div class="task-verified-badge">⚡ Verified via Simulator</div>`;
+            }
+
             card.innerHTML = `
                 <div class="card-key">C-FAST-${pad2(task.day)}</div>
                 <div class="card-title">${task.title}</div>
+                ${verifiedBadge}
                 <div class="card-footer">
                     <span style="color: var(--text-muted);">Assignee: ${cand.name.split(" ")[0]}</span>
                     <span class="card-grade ${task.grade === 'Pending' ? 'grade-pending' : (task.grade === 'F [Fail]' ? 'grade-fail' : '')}">${task.grade.split(" ")[0]}</span>
@@ -821,12 +830,76 @@
     }
 
     // -------------------------------------------------------------
+    // Simulator State Bridge & Config Exporter Functions
+    // -------------------------------------------------------------
+    function syncSimulatorMilestones() {
+        const milestonesRaw = localStorage.getItem("minux_simulator_milestones");
+        if (!milestonesRaw) return;
+
+        let milestones = {};
+        try {
+            milestones = JSON.parse(milestonesRaw);
+        } catch (e) {
+            console.error("Error parsing milestones", e);
+            return;
+        }
+
+        // Map milestones to syllabus days
+        const mappings = {
+            "logic_gate_adder": "day-1",
+            "sram_segmentation": "day-3",
+            "number_representations": "day-6",
+            "nvic_exception_nesting": "day-11"
+        };
+
+        let updated = false;
+        state.candidates.forEach(cand => {
+            Object.keys(mappings).forEach(milestoneKey => {
+                if (milestones[milestoneKey]) {
+                    const taskId = mappings[milestoneKey];
+                    if (cand.tasks[taskId]) {
+                        const task = cand.tasks[taskId];
+                        if (task.status !== "Completed" || !task.verifiedViaSimulator) {
+                            task.status = "Completed";
+                            task.grade = "A+ [100%]";
+                            task.verifiedViaSimulator = true;
+                            task.notes = (task.notes || "") + " [Pass verified via Simulator Integration Bridge]";
+                            updated = true;
+                        }
+                    }
+                }
+            });
+        });
+
+        if (updated) {
+            saveState();
+            console.log("SUCCESS: Synchronized simulator milestones to Candidate Hub.");
+        }
+    }
+
+    function exportProgressState() {
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state, null, 4));
+        const downloadAnchor = document.createElement('a');
+        downloadAnchor.setAttribute("href", dataStr);
+        downloadAnchor.setAttribute("download", "progress_data.json");
+        document.body.appendChild(downloadAnchor);
+        downloadAnchor.click();
+        downloadAnchor.remove();
+    }
+
+    // -------------------------------------------------------------
     // Application Bootstrap Launch
     // -------------------------------------------------------------
     function setupEventListeners() {
         // Tab swapper buttons
         document.getElementById("tab-trigger-board").addEventListener("click", () => switchTab("board-wiki"));
         document.getElementById("tab-trigger-reports").addEventListener("click", () => switchTab("reports"));
+
+        // Export Config button
+        const exportBtn = document.getElementById("btn-export-progress-json");
+        if (exportBtn) {
+            exportBtn.addEventListener("click", exportProgressState);
+        }
 
         // Candidate select dropdown changed
         document.getElementById("active-candidate-select").addEventListener("change", (e) => {
