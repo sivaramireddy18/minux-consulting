@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PROTOCOL.OS - Embedded Communication Protocol Simulator & Logic Analyzer</title>
+  <meta name="description" content="Professional embedded serial communications simulator. Interactive visualizer for I2C clock stretching, SPI Modes 0-3 sampling phases, UART framing decoders, fault injections, and Canvas timing analyzer.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="app-container">
+    
+    <!-- SYSTEM HEADER BAR -->
+    <header>
+      <div class="brand">
+        <div class="logo-icon">
+          <!-- Protocol Network Packet SVG -->
+          <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 16 12 12 8 16"/>
+            <line x1="12" y1="12" x2="12" y2="21"/>
+            <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/>
+            <polyline points="16 16 12 12 8 16"/>
+          </svg>
+        </div>
+        <h1>PROTOCOL.OS</h1>
+        <span>Serial Bus v1.0</span>
+        <a href="../index.html" class="btn btn-back" style="background: rgba(255,255,255,0.06); text-decoration: none; font-size: 0.75rem; padding: 4px 10px; margin-left: 12px; border-color: rgba(255,255,255,0.1); border-radius: 4px; display: inline-flex; align-items: center; gap: 6px;" title="Return to Minux recruitment home page">&larr; Back to Minux Portal</a>
+      </div>
+
+      <!-- Quick Swap Header Links -->
+      <div class="header-nav-links" style="display: flex; gap: 12px; align-items: center;">
+        <a href="../logic-gate-simulator/index.html" class="btn btn-accent" style="padding: 6px 12px; font-size: 0.75rem;">Gate Sim</a>
+        <a href="../number-simulator/index.html" class="btn btn-accent" style="padding: 6px 12px; font-size: 0.75rem;">Register Sim</a>
+        <a href="../memory-simulator/index.html" class="btn btn-accent" style="padding: 6px 12px; font-size: 0.75rem;">Memory Sim &rarr;</a>
+      </div>
+    </header>
+
+    <!-- DASHBOARD PANELS -->
+    <main class="dashboard-container">
+      
+      <!-- COLUMN 1: CONTROLS & CONFIGURATIONS -->
+      <div class="column-panel">
+        
+        <!-- PROTOCOL SELECTOR CARD -->
+        <section class="panel-card">
+          <div class="section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2" ry="2"/><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/></svg>
+            <span>Select Protocol Standard</span>
+          </div>
+          <div style="margin-top: 10px;">
+            <select class="control-select" id="protocol-select" style="font-size: 0.85rem; width: 100%; height: 38px; font-weight: 600;">
+              <option value="i2c">I2C (Inter-Integrated Circuit)</option>
+              <option value="spi">SPI (Serial Peripheral Interface)</option>
+              <option value="uart">UART (Universal Asynchronous RX/TX)</option>
+            </select>
+          </div>
+        </section>
+
+        <!-- CONFIGURATION CARD (Dynamic inputs injected via JavaScript) -->
+        <section class="panel-card flex-grow" style="min-height: 250px;">
+          <div class="section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            <span>Bus Configurations</span>
+          </div>
+          
+          <div id="protocol-config-container" class="config-container">
+            <!-- Dynamic input configurations will be loaded here -->
+          </div>
+        </section>
+
+        <!-- FAULT ERROR INJECTION CARD -->
+        <section class="panel-card" style="min-height: 180px;">
+          <div class="section-title text-danger">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="glow-red"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <span>Hardware Fault Injection</span>
+          </div>
+          <div class="error-injection-grid" id="error-injection-container" style="margin-top: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+            <!-- Dynamic buttons generated by JS -->
+          </div>
+        </section>
+      </div>
+
+      <!-- COLUMN 2: WORKSPACE VISUALIZER & TIMING ANALYZER -->
+      <div class="column-panel flex-grow-2" style="flex: 2.2;">
+        
+        <!-- HARDWARE INTERACTIVE SCHEMATICS -->
+        <section class="panel-card" style="height: 250px; overflow: hidden; display: flex; flex-direction: column;">
+          <div class="section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+            <span>Physical Hardware Schematic Visualizer</span>
+          </div>
+          
+          <div id="schematic-canvas-area" style="flex: 1; display: flex; align-items: center; justify-content: center; position: relative; background: #030710; border-radius: 8px; border: 1px solid var(--border-light); margin-top: 10px; overflow: hidden;">
+            <!-- Render dynamic master-slave circuitry -->
+            <div id="nodes-wires-container" style="width: 100%; height: 100%; position: relative;"></div>
+          </div>
+        </section>
+
+        <!-- TIMING DIAGRAM LOGIC ANALYZER -->
+        <section class="panel-card flex-grow" style="display: flex; flex-direction: column; min-height: 380px;">
+          <div class="section-title" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/></svg>
+              <span>Logic Timing Analyzer</span>
+            </div>
+            <!-- Timing controls -->
+            <div class="logic-analyzer-tools" style="display: flex; gap: 6px;">
+              <button class="btn btn-tool" id="btn-zoom-in" title="Zoom In (+)">🔍+</button>
+              <button class="btn btn-tool" id="btn-zoom-out" title="Zoom Out (-)">🔍-</button>
+              <span style="width: 1px; background: var(--border-light); margin: 0 4px;"></span>
+              <button class="btn btn-tool" id="btn-step-prev" title="Step Frame Backward (Left Arrow)">&larr; Step</button>
+              <button class="btn btn-tool btn-primary" id="btn-play-pause" style="width: 70px;" title="Play/Pause Simulation (Spacebar)">Run</button>
+              <button class="btn btn-tool" id="btn-step-next" title="Step Frame Forward (Right Arrow)">Step &rarr;</button>
+              <button class="btn btn-tool btn-danger" id="btn-reset" title="Reset Timeline (R)">Reset</button>
+            </div>
+          </div>
+
+          <!-- HTML5 Waveform Renderer -->
+          <div class="canvas-wrapper" style="flex: 1; background: #02050b; border: 1px solid var(--border-light); border-radius: 8px; margin-top: 10px; position: relative; overflow: hidden;">
+            <canvas id="waveform-canvas" style="display: block; width: 100%; height: 100%;"></canvas>
+            
+            <div id="glitch-warning-alert" style="position: absolute; top: 10px; left: 50%; transform: translateX(-50%); background: rgba(244,63,94,0.9); padding: 5px 12px; border-radius: 4px; border: 1px solid var(--accent-rose); font-size: 0.65rem; color: #fff; font-weight: bold; display: none; z-index: 10; animation: bounceHorizontal 0.3s infinite alternate;">
+              ⚠️ PHYSICAL BUS GLITCH DETECTED ⚠️
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- COLUMN 3: LEARNING INTERPRETATIONS & PROTOCOL ANALYZER -->
+      <div class="column-panel">
+        
+        <!-- LEARNING EDUCATION MODE -->
+        <section class="panel-card" style="height: 250px; display: flex; flex-direction: column;">
+          <div class="section-title text-accent">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="glow-cyan"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            <span>Real-time Learning Guide</span>
+          </div>
+          <div class="learning-guide-box" id="learning-guide-content" style="flex: 1; background: rgba(6,182,212,0.03); border: 1px dashed rgba(6,182,212,0.15); border-radius: 6px; padding: 12px; margin-top: 10px; font-size: 0.75rem; line-height: 1.5; overflow-y: auto; color: var(--text-main);">
+            <!-- Explanations loaded here -->
+          </div>
+        </section>
+
+        <!-- PROTOCOL ANALYZER CONSOLE -->
+        <section class="panel-card flex-grow" style="display: flex; flex-direction: column; min-height: 380px;">
+          <div class="section-title" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 15 16 20 9"/><polyline points="20 14 20 9 15 9"/></svg>
+              <span>Protocol Analyzer decoded data</span>
+            </div>
+            <button class="btn btn-secondary" id="btn-export-logs" style="padding: 3px 8px; font-size: 0.65rem;" title="Download event trace as .txt">Export Logs</button>
+          </div>
+
+          <div class="analyzer-log-container" id="analyzer-log-entries" style="flex: 1; background: #010409; border: 1px solid var(--border-light); border-radius: 8px; padding: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; margin-top: 10px; overflow-y: auto; line-height: 1.6;">
+            <!-- Logs injected dynamically -->
+          </div>
+        </section>
+      </div>
+
+    </main>
+
+    <!-- FOOTER PANELS: STATISTICS & SESSION CONTROLS -->
+    <footer class="footer-dashboard" style="background: rgba(3, 7, 18, 0.85); backdrop-filter: blur(12px); border-top: 1px solid var(--border-light); display: flex; align-items: center; justify-content: space-between; padding: 10px 30px; gap: 20px;">
+      
+      <!-- STATS GRID -->
+      <div class="stats-panel-grid" style="display: flex; gap: 30px; align-items: center; flex: 1;">
+        
+        <div class="stat-widget">
+          <span class="stat-lbl">Packets Shifted</span>
+          <span class="stat-val" id="stat-packets">0</span>
+        </div>
+
+        <span class="stat-divider"></span>
+
+        <div class="stat-widget">
+          <span class="stat-lbl">Data Throughput</span>
+          <span class="stat-val text-accent" id="stat-throughput">0 bps</span>
+        </div>
+
+        <span class="stat-divider"></span>
+
+        <div class="stat-widget">
+          <span class="stat-lbl">Bus Efficiency</span>
+          <span class="stat-val text-success" id="stat-efficiency">0%</span>
+        </div>
+
+        <span class="stat-divider"></span>
+
+        <div class="stat-widget">
+          <span class="stat-lbl">Errors Triggered</span>
+          <span class="stat-val text-danger" id="stat-errors">0</span>
+        </div>
+
+        <span class="stat-divider"></span>
+
+        <div class="stat-widget">
+          <span class="stat-lbl">Tx Transfer Time</span>
+          <span class="stat-val" id="stat-tx-time">0 ms</span>
+        </div>
+      </div>
+
+      <!-- SESSION CONTROLS & COMPARISON -->
+      <div class="session-management-bar" style="display: flex; gap: 8px;">
+        <button class="btn btn-secondary" id="btn-save-session" style="font-size: 0.75rem;" title="Save current configurations & timeline">Save Run</button>
+        <button class="btn btn-secondary" id="btn-load-session" style="font-size: 0.75rem;" title="Load previously saved simulation states">Load Run</button>
+        <button class="btn btn-accent" id="btn-toggle-comparison" style="font-size: 0.75rem; font-weight: 600;" title="Compare I2C, SPI, and UART specs side-by-side">Comparison Matrix</button>
+      </div>
+
+    </footer>
+
+  </div>
+
+  <!-- PROTOCOL SPECS SIDE-BY-SIDE COMPARISON MODAL -->
+  <div class="modal-overlay" id="comparison-modal">
+    <div class="modal-card" style="max-width: 850px; width: 90%;">
+      <div class="modal-header">
+        <h2>Embedded Protocol Standards Side-by-Side Comparison</h2>
+        <button class="btn btn-icon-only btn-danger btn-modal-close" style="width: 28px; height: 28px;">&times;</button>
+      </div>
+      <div class="modal-body" style="padding-top: 15px;">
+        <table class="comparison-table" style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.75rem;">
+          <thead>
+            <tr style="border-bottom: 2px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.02);">
+              <th style="padding: 10px; color:#fff;">Feature Spec</th>
+              <th style="padding: 10px; color:var(--accent-emerald);">I2C (Inter-Integrated Circuit)</th>
+              <th style="padding: 10px; color:var(--accent-cyan);">SPI (Serial Peripheral Interface)</th>
+              <th style="padding: 10px; color:var(--accent-amber);">UART (Universal Asynchronous)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
+              <td style="padding: 10px; font-weight: bold; color: var(--text-main);">Bus Pins Required</td>
+              <td style="padding: 10px; color: var(--text-muted);">2 pins (SDA, SCL)</td>
+              <td style="padding: 10px; color: var(--text-muted);">4 pins (MOSI, MISO, SCLK, CS)</td>
+              <td style="padding: 10px; color: var(--text-muted);">2 pins (TX, RX)</td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
+              <td style="padding: 10px; font-weight: bold; color: var(--text-main);">Transmission Mode</td>
+              <td style="padding: 10px; color: var(--text-muted);">Half-Duplex (shared SDA line)</td>
+              <td style="padding: 10px; color: var(--text-muted);">Full-Duplex (separate MOSI/MISO)</td>
+              <td style="padding: 10px; color: var(--text-muted);">Full-Duplex (separate TX/RX lines)</td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
+              <td style="padding: 10px; font-weight: bold; color: var(--text-main);">Synchronicity</td>
+              <td style="padding: 10px; color: var(--text-muted);">Synchronous (Common SCL Clock)</td>
+              <td style="padding: 10px; color: var(--text-muted);">Synchronous (Common SCLK Clock)</td>
+              <td style="padding: 10px; color: var(--text-muted);">Asynchronous (No clock, relies on Baud rate)</td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
+              <td style="padding: 10px; font-weight: bold; color: var(--text-main);">Addressing Mechanism</td>
+              <td style="padding: 10px; color: var(--text-muted);">7-bit / 10-bit software addressing in frame</td>
+              <td style="padding: 10px; color: var(--text-muted);">Physical hardware Slave-Select line (CS)</td>
+              <td style="padding: 10px; color: var(--text-muted);">None (point-to-point connection)</td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
+              <td style="padding: 10px; font-weight: bold; color: var(--text-main);">Overhead Efficiency</td>
+              <td style="padding: 10px; color: var(--text-muted);">Lower (~75% due to addr/ACK bits)</td>
+              <td style="padding: 10px; color: var(--text-muted);">Maximum (~98% due to zero protocol headers)</td>
+              <td style="padding: 10px; color: var(--text-muted);">Medium (~80% due to start/parity/stop bits)</td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
+              <td style="padding: 10px; font-weight: bold; color: var(--text-main);">Typical Speed Range</td>
+              <td style="padding: 10px; color: var(--text-muted);">100kbps, 400kbps, up to 3.4Mbps</td>
+              <td style="padding: 10px; color: var(--text-muted);">1MHz, 10MHz, exceeding 50MHz</td>
+              <td style="padding: 10px; color: var(--text-muted);">9600bps up to 115200bps typically</td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
+              <td style="padding: 10px; font-weight: bold; color: var(--text-main);">Key Features & Limits</td>
+              <td style="padding: 10px; color: var(--text-muted);">Multi-master, clock stretching. Bus capacitance limit.</td>
+              <td style="padding: 10px; color: var(--text-muted);">Highest speeds. Pins consumption grows per slave.</td>
+              <td style="padding: 10px; color: var(--text-muted);">Simple. Timing critical. Mismatched bauds fail frames.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer" style="padding-top: 15px; text-align: right;">
+        <button class="btn btn-danger btn-modal-close">Dismiss Comparison</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
