@@ -29,36 +29,51 @@ function playTick(high = true) {
 }
 
 // Global UI Elements
-const protocolSelect = document.getElementById('protocol-select');
-const configContainer = document.getElementById('protocol-config-container');
-const errorContainer = document.getElementById('error-injection-container');
-const schematicContainer = document.getElementById('nodes-wires-container');
-const canvas = document.getElementById('waveform-canvas');
-const learningContent = document.getElementById('learning-guide-content');
-const logContainer = document.getElementById('analyzer-log-entries');
-const glitchAlert = document.getElementById('glitch-warning-alert');
+let protocolSelect, configContainer, errorContainer, schematicContainer, canvas, learningContent, logContainer, glitchAlert;
 
 // Statistics DOM Elements
-const statPackets = document.getElementById('stat-packets');
-const statThroughput = document.getElementById('stat-throughput');
-const statEfficiency = document.getElementById('stat-efficiency');
-const statErrors = document.getElementById('stat-errors');
-const statTxTime = document.getElementById('stat-tx-time');
+let statPackets, statThroughput, statEfficiency, statErrors, statTxTime;
 
 // Control Buttons
-const btnPlayPause = document.getElementById('btn-play-pause');
-const btnStepPrev = document.getElementById('btn-step-prev');
-const btnStepNext = document.getElementById('btn-step-next');
-const btnReset = document.getElementById('btn-reset');
-const btnZoomIn = document.getElementById('btn-zoom-in');
-const btnZoomOut = document.getElementById('btn-zoom-out');
-const btnExportLogs = document.getElementById('btn-export-logs');
-const btnSaveSession = document.getElementById('btn-save-session');
-const btnLoadSession = document.getElementById('btn-load-session');
+let btnPlayPause, btnStepPrev, btnStepNext, btnReset, btnZoomIn, btnZoomOut, btnExportLogs, btnSaveSession, btnLoadSession;
 
 // Modals
-const btnToggleComparison = document.getElementById('btn-toggle-comparison');
-const comparisonModal = document.getElementById('comparison-modal');
+let btnToggleComparison, comparisonModal;
+
+// Timing Waveform Engine reference
+let timingEngine;
+
+function setupUI() {
+  protocolSelect = document.getElementById('protocol-select');
+  configContainer = document.getElementById('protocol-config-container');
+  errorContainer = document.getElementById('error-injection-container');
+  schematicContainer = document.getElementById('nodes-wires-container');
+  canvas = document.getElementById('waveform-canvas');
+  learningContent = document.getElementById('learning-guide-content');
+  logContainer = document.getElementById('analyzer-log-entries');
+  glitchAlert = document.getElementById('glitch-warning-alert');
+
+  statPackets = document.getElementById('stat-packets');
+  statThroughput = document.getElementById('stat-throughput');
+  statEfficiency = document.getElementById('stat-efficiency');
+  statErrors = document.getElementById('stat-errors');
+  statTxTime = document.getElementById('stat-tx-time');
+
+  btnPlayPause = document.getElementById('btn-play-pause');
+  btnStepPrev = document.getElementById('btn-step-prev');
+  btnStepNext = document.getElementById('btn-step-next');
+  btnReset = document.getElementById('btn-reset');
+  btnZoomIn = document.getElementById('btn-zoom-in');
+  btnZoomOut = document.getElementById('btn-zoom-out');
+  btnExportLogs = document.getElementById('btn-export-logs');
+  btnSaveSession = document.getElementById('btn-save-session');
+  btnLoadSession = document.getElementById('btn-load-session');
+
+  btnToggleComparison = document.getElementById('btn-toggle-comparison');
+  comparisonModal = document.getElementById('comparison-modal');
+
+  timingEngine = new WaveformEngine(canvas);
+}
 
 // ==========================================
 // 2. EVENT LOGGER & DECODER
@@ -278,7 +293,7 @@ class WaveformEngine {
     }
   }
 }
-const timingEngine = new WaveformEngine(canvas);
+// WaveformEngine instance created inside setupUI()
 
 // ==========================================
 // 4. BASE PROTOCOL SIMULATOR STATE-MACHINE
@@ -1503,146 +1518,149 @@ function switchProtocol(protocolKey) {
   `;
 }
 
-// Register Header Dropdown Switch
-protocolSelect.addEventListener('change', (e) => {
-  switchProtocol(e.target.value);
-});
-
-// Play / Pause / Reset button listeners
-btnPlayPause.addEventListener('click', () => {
-  const sim = simulators[activeProtocol];
-  if (sim.isPlaying) {
-    sim.pause();
-  } else {
-    sim.start();
-  }
-});
-
-btnStepPrev.addEventListener('click', () => {
-  simulators[activeProtocol].stepBackward();
-});
-
-btnStepNext.addEventListener('click', () => {
-  simulators[activeProtocol].stepForward();
-});
-
-btnReset.addEventListener('click', () => {
-  simulators[activeProtocol].reset();
-});
-
-// Zoom triggers
-btnZoomIn.addEventListener('click', () => timingEngine.zoomIn());
-btnZoomOut.addEventListener('click', () => timingEngine.zoomOut());
-
-// Keyboard shortcuts for debugger step-arrows
-window.addEventListener('keydown', (e) => {
-  if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'SELECT') return;
-
-  if (e.key === ' ') {
-    e.preventDefault();
-    btnPlayPause.click();
-  } else if (e.key === 'ArrowLeft') {
-    e.preventDefault();
-    btnStepPrev.click();
-  } else if (e.key === 'ArrowRight') {
-    e.preventDefault();
-    btnStepNext.click();
-  } else if (e.key === 'r' || e.key === 'R') {
-    btnReset.click();
-  }
-});
-
-// Modal Toggles comparison
-btnToggleComparison.addEventListener('click', () => {
-  comparisonModal.classList.add('active');
-  playTick(true);
-});
-
-document.querySelectorAll('.btn-modal-close').forEach(btn => {
-  btn.addEventListener('click', () => {
-    comparisonModal.classList.remove('active');
-    playTick(false);
-  });
-});
-
-// Export Logs downloader
-btnExportLogs.addEventListener('click', () => {
-  logger.exportLogs();
-  playTick(true);
-});
-
-// Save & Load serialized state sessions
-btnSaveSession.addEventListener('click', () => {
-  const sim = simulators[activeProtocol];
-  const state = {
-    protocol: activeProtocol,
-    config: {},
-    errors: sim.activeErrors
-  };
-  
-  // Grab current inputs
-  if (activeProtocol === 'i2c') {
-    state.config.slave = document.getElementById('i2c-slave-select').value;
-    state.config.speed = document.getElementById('i2c-speed-select').value;
-    state.config.data = document.getElementById('i2c-data-input').value;
-    state.config.mode = document.getElementById('i2c-mode-select').value;
-  } else if (activeProtocol === 'spi') {
-    state.config.mode = document.getElementById('spi-mode-select').value;
-    state.config.freq = document.getElementById('spi-freq-select').value;
-    state.config.data = document.getElementById('spi-data-input').value;
-    state.config.order = document.getElementById('spi-order-select').value;
-  } else if (activeProtocol === 'uart') {
-    state.config.baud = document.getElementById('uart-baud-select').value;
-    state.config.data = document.getElementById('uart-data-input').value;
-    state.config.parity = document.getElementById('uart-parity-select').value;
-    state.config.stop = document.getElementById('uart-stop-select').value;
-  }
-
-  localStorage.setItem('protocol_os_session', JSON.stringify(state));
-  alert("Active simulation session configuration successfully saved!");
-  playTick(true);
-});
-
-btnLoadSession.addEventListener('click', () => {
-  const data = localStorage.getItem('protocol_os_session');
-  if (!data) {
-    alert("No saved simulation session found in browser cache storage.");
-    return;
-  }
-
-  const state = JSON.parse(data);
-  protocolSelect.value = state.protocol;
-  switchProtocol(state.protocol);
-
-  setTimeout(() => {
-    // Restore inputs
-    if (state.protocol === 'i2c') {
-      document.getElementById('i2c-slave-select').value = state.config.slave;
-      document.getElementById('i2c-speed-select').value = state.config.speed;
-      document.getElementById('i2c-data-input').value = state.config.data;
-      document.getElementById('i2c-mode-select').value = state.config.mode;
-    } else if (state.protocol === 'spi') {
-      document.getElementById('spi-mode-select').value = state.config.mode;
-      document.getElementById('spi-freq-select').value = state.config.freq;
-      document.getElementById('spi-data-input').value = state.config.data;
-      document.getElementById('spi-order-select').value = state.config.order;
-    } else if (state.protocol === 'uart') {
-      document.getElementById('uart-baud-select').value = state.config.baud;
-      document.getElementById('uart-data-input').value = state.config.data;
-      document.getElementById('uart-parity-select').value = state.config.parity;
-      document.getElementById('uart-stop-select').value = state.config.stop;
-    }
-
-    const sim = simulators[state.protocol];
-    sim.activeErrors = state.errors || {};
-    sim.generateTimeline();
-    sim.syncUI();
-    alert("Simulation session state successfully loaded!");
-    playTick(true);
-  }, 100);
-});
-
 // Initialize on page load
 window.addEventListener('load', () => {
+  setupUI(); // Initialize all DOM selectors & Waveform Engine first!
+
+  // Register Header Dropdown Switch
+  protocolSelect.addEventListener('change', (e) => {
+    switchProtocol(e.target.value);
+  });
+
+  // Play / Pause / Reset button listeners
+  btnPlayPause.addEventListener('click', () => {
+    const sim = simulators[activeProtocol];
+    if (sim.isPlaying) {
+      sim.pause();
+    } else {
+      sim.start();
+    }
+  });
+
+  btnStepPrev.addEventListener('click', () => {
+    simulators[activeProtocol].stepBackward();
+  });
+
+  btnStepNext.addEventListener('click', () => {
+    simulators[activeProtocol].stepForward();
+  });
+
+  btnReset.addEventListener('click', () => {
+    simulators[activeProtocol].reset();
+  });
+
+  // Zoom triggers
+  btnZoomIn.addEventListener('click', () => timingEngine.zoomIn());
+  btnZoomOut.addEventListener('click', () => timingEngine.zoomOut());
+
+  // Keyboard shortcuts for debugger step-arrows
+  window.addEventListener('keydown', (e) => {
+    if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'SELECT') return;
+
+    if (e.key === ' ') {
+      e.preventDefault();
+      btnPlayPause.click();
+    } else if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      btnStepPrev.click();
+    } else if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      btnStepNext.click();
+    } else if (e.key === 'r' || e.key === 'R') {
+      btnReset.click();
+    }
+  });
+
+  // Modal Toggles comparison
+  btnToggleComparison.addEventListener('click', () => {
+    comparisonModal.classList.add('active');
+    playTick(true);
+  });
+
+  document.querySelectorAll('.btn-modal-close').forEach(btn => {
+    btn.addEventListener('click', () => {
+      comparisonModal.classList.remove('active');
+      playTick(false);
+    });
+  });
+
+  // Export Logs downloader
+  btnExportLogs.addEventListener('click', () => {
+    logger.exportLogs();
+    playTick(true);
+  });
+
+  // Save & Load serialized state sessions
+  btnSaveSession.addEventListener('click', () => {
+    const sim = simulators[activeProtocol];
+    const state = {
+      protocol: activeProtocol,
+      config: {},
+      errors: sim.activeErrors
+    };
+    
+    // Grab current inputs
+    if (activeProtocol === 'i2c') {
+      state.config.slave = document.getElementById('i2c-slave-select').value;
+      state.config.speed = document.getElementById('i2c-speed-select').value;
+      state.config.data = document.getElementById('i2c-data-input').value;
+      state.config.mode = document.getElementById('i2c-mode-select').value;
+    } else if (activeProtocol === 'spi') {
+      state.config.mode = document.getElementById('spi-mode-select').value;
+      state.config.freq = document.getElementById('spi-freq-select').value;
+      state.config.data = document.getElementById('spi-data-input').value;
+      state.config.order = document.getElementById('spi-order-select').value;
+    } else if (activeProtocol === 'uart') {
+      state.config.baud = document.getElementById('uart-baud-select').value;
+      state.config.data = document.getElementById('uart-data-input').value;
+      state.config.parity = document.getElementById('uart-parity-select').value;
+      state.config.stop = document.getElementById('uart-stop-select').value;
+    }
+
+    localStorage.setItem('protocol_os_session', JSON.stringify(state));
+    alert("Active simulation session configuration successfully saved!");
+    playTick(true);
+  });
+
+  btnLoadSession.addEventListener('click', () => {
+    const data = localStorage.getItem('protocol_os_session');
+    if (!data) {
+      alert("No saved simulation session found in browser cache storage.");
+      return;
+    }
+
+    const state = JSON.parse(data);
+    protocolSelect.value = state.protocol;
+    switchProtocol(state.protocol);
+
+    setTimeout(() => {
+      // Restore inputs
+      if (state.protocol === 'i2c') {
+        document.getElementById('i2c-slave-select').value = state.config.slave;
+        document.getElementById('i2c-speed-select').value = state.config.speed;
+        document.getElementById('i2c-data-input').value = state.config.data;
+        document.getElementById('i2c-mode-select').value = state.config.mode;
+      } else if (state.protocol === 'spi') {
+        document.getElementById('spi-mode-select').value = state.config.mode;
+        document.getElementById('spi-freq-select').value = state.config.freq;
+        document.getElementById('spi-data-input').value = state.config.data;
+        document.getElementById('spi-order-select').value = state.config.order;
+      } else if (state.protocol === 'uart') {
+        document.getElementById('uart-baud-select').value = state.config.baud;
+        document.getElementById('uart-data-input').value = state.config.data;
+        document.getElementById('uart-parity-select').value = state.config.parity;
+        document.getElementById('uart-stop-select').value = state.config.stop;
+      }
+
+      const sim = simulators[state.protocol];
+      sim.activeErrors = state.errors || {};
+      sim.generateTimeline();
+      sim.syncUI();
+      alert("Simulation session state successfully loaded!");
+      playTick(true);
+    }, 100);
+  });
+
+  // Switch initial protocol to I2C safely
   switchProtocol('i2c');
 });
