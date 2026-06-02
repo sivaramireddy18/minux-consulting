@@ -286,7 +286,7 @@ class WaveformEngine {
       this.ctx.stroke();
 
       // playhead dot
-      this.ctx.fillStyle = "var(--accent-rose)";
+      this.ctx.fillStyle = "#f43f5e";
       this.ctx.beginPath();
       this.ctx.arc(playheadX, this.canvas.height - 25, 4, 0, Math.PI * 2);
       this.ctx.fill();
@@ -570,8 +570,8 @@ class I2CSimulator extends ProtocolSimulator {
       </div>
     `;
     timingEngine.setChannels([
-      { name: 'SCL', color: 'var(--sig-scl)' },
-      { name: 'SDA', color: 'var(--sig-sda)' }
+      { name: 'SCL', color: '#a855f7' },
+      { name: 'SDA', color: '#10b981' }
     ]);
     timingEngine.draw([], -1);
   }
@@ -996,10 +996,10 @@ class SPISimulator extends ProtocolSimulator {
       </div>
     `;
     timingEngine.setChannels([
-      { name: 'CS', color: 'var(--sig-cs)' },
-      { name: 'SCLK', color: 'var(--sig-sclk)' },
-      { name: 'MOSI', color: 'var(--sig-mosi)' },
-      { name: 'MISO', color: 'var(--sig-miso)' }
+      { name: 'CS', color: '#f43f5e' },
+      { name: 'SCLK', color: '#6366f1' },
+      { name: 'MOSI', color: '#06b6d4' },
+      { name: 'MISO', color: '#f59e0b' }
     ]);
     timingEngine.draw([], -1);
   }
@@ -1313,7 +1313,7 @@ class UARTSimulator extends ProtocolSimulator {
       </div>
     `;
     timingEngine.setChannels([
-      { name: 'TX_LINE', color: 'var(--sig-tx)' }
+      { name: 'TX_LINE', color: '#fbbf24' }
     ]);
     timingEngine.draw([], -1);
   }
