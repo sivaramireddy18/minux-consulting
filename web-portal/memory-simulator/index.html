@@ -226,6 +226,37 @@
         </section>
       </div>
 
+      <!-- Guided Step-by-Step Instructions Panel -->
+      <section class="panel-card" style="margin-top: 2rem; grid-column: 1 / -1;">
+        <div class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+          <span>Memory Space & Compilation Layout: Step-by-Step Vetting Guide</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; font-size: 0.85rem; line-height: 1.6; color: var(--text-muted); margin-top: 15px;">
+          
+          <div style="background: rgba(5,7,11,0.4); border: 1px solid var(--border-light); padding: 1.25rem; border-radius: 8px;">
+            <h5 style="color: var(--text-main); font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;">01. FLASH vs SRAM Layout</h5>
+            <p><strong>FLASH</strong> is non-volatile silicon that stores instructions (`.text` segment) and constant data constants (`.rodata`). <strong>SRAM</strong> is volatile working memory that hosts variables (`.data` and `.bss` segments), the Stack, and the Heap.</p>
+          </div>
+
+          <div style="background: rgba(5,7,11,0.4); border: 1px solid var(--border-light); padding: 1.25rem; border-radius: 8px;">
+            <h5 style="color: var(--accent-cyan); font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;">02. Toolchain Compilation Phases</h5>
+            <p>The compiler toolchain compiles source code in 4 stages: <strong>Preprocessor</strong> (macro expansions & header insertion), <strong>Compiler</strong> (translates C to Assembly), <strong>Assembler</strong> (converts Assembly into machine ELF objects), and <strong>Linker</strong> (merges objects and maps symbols to physical addresses).</p>
+          </div>
+
+          <div style="background: rgba(5,7,11,0.4); border: 1px solid var(--border-light); padding: 1.25rem; border-radius: 8px;">
+            <h5 style="color: var(--accent-emerald); font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;">03. Memory Space Segments</h5>
+            <p>Global/static variables are allocated in <strong>.data</strong> (if initialized with non-zero values) or <strong>.bss</strong> (initialized to zero, consuming zero FLASH space). The <strong>Stack</strong> hosts local call frames and grows downward, while the <strong>Heap</strong> handles runtime dynamic allocations (`malloc`) growing upward.</p>
+          </div>
+
+          <div style="background: rgba(5,7,11,0.4); border: 1px solid var(--border-light); padding: 1.25rem; border-radius: 8px;">
+            <h5 style="color: var(--accent-rose); font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;">04. Memory Collisions & Arenas</h5>
+            <p>If the Stack and Heap grow towards each other and collide, memory corruption or a Stack Overflow crash occurs. In systems programming, custom <strong>Memory Arenas</strong> (bump allocators) or static block pools are preferred over standard `malloc` to achieve 100% deterministic timing.</p>
+          </div>
+
+        </div>
+      </section>
+
     </main>
 
     <!-- COMPILATION PIPELINE SEQUENCE MODAL -->

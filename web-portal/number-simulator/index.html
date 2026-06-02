@@ -291,6 +291,37 @@
         </div>
       </section>
 
+      <!-- Guided Step-by-Step Instructions Panel -->
+      <section class="section-card" style="margin-top: 2rem; margin-bottom: 2rem;">
+        <div class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+          <span>Register Bit & Number Systems: Step-by-Step Vetting Guide</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; font-size: 0.85rem; line-height: 1.6; color: var(--text-muted); margin-top: 15px;">
+          
+          <div style="background: rgba(5,7,11,0.4); border: 1px solid var(--border-light); padding: 1.25rem; border-radius: 8px;">
+            <h5 style="color: var(--text-main); font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;">01. Positional Radix Systems</h5>
+            <p>Under signed arithmetic, the most significant bit (MSB) acts as the sign weight (e.g. MSB has weight $-2^{N-1}$ under 2's complement). In hardware, subtractors are built using addition circuitry by taking the 2's complement of the subtrahend (`~x + 1`).</p>
+          </div>
+
+          <div style="background: rgba(5,7,11,0.4); border: 1px solid var(--border-light); padding: 1.25rem; border-radius: 8px;">
+            <h5 style="color: var(--accent-cyan); font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;">02. Bitmask Operations</h5>
+            <p>Direct register control uses logical operators. To <strong>Set</strong> a bit: `REG |= MASK`. To <strong>Clear</strong>: `REG &= ~MASK`. To <strong>Toggle</strong>: `REG ^= MASK`. To <strong>Inspect</strong>: `if (REG & MASK)`. This keeps other registers intact.</p>
+          </div>
+
+          <div style="background: rgba(5,7,11,0.4); border: 1px solid var(--border-light); padding: 1.25rem; border-radius: 8px;">
+            <h5 style="color: var(--accent-emerald); font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;">03. Memory Endianness</h5>
+            <p>Endianness dictates byte positioning in physical RAM. <strong>Little Endian</strong> stores the least significant byte at the lowest address (x86/ARM default), while <strong>Big Endian</strong> stores the most significant byte at the lowest address (network protocol header format).</p>
+          </div>
+
+          <div style="background: rgba(5,7,11,0.4); border: 1px solid var(--border-light); padding: 1.25rem; border-radius: 8px;">
+            <h5 style="color: var(--accent-rose); font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;">04. IEEE-754 Single-Precision</h5>
+            <p>Single-precision floating-point numbers parse 32 bits into three fields: 1 sign bit ($s$), 8 biased exponent bits ($e$ with bias $127$), and 23 fractional mantissa bits ($f$). The computed equation value is: $(-1)^s \times 2^{e-127} \times 1.f$.</p>
+          </div>
+
+        </div>
+      </section>
+
     </main>
 
   </div>

@@ -106,7 +106,7 @@
     <!-- LEFT SIDEBAR: COMPONENT LIBRARY -->
     <aside id="sidebar">
       <div class="sidebar-tabs">
-        <div class="sidebar-tab active">Library</div>
+        <div class="sidebar-tab active" id="tab-library">Library</div>
         <div class="sidebar-tab" id="tab-help" style="border-left: 1px solid var(--border-light)">Guide</div>
       </div>
       
@@ -257,6 +257,62 @@
           </div>
         </div>
 
+      </div>
+
+      <!-- GUIDE PANELS -->
+      <div class="guide-container" id="guide-container" style="display: none;">
+        <div class="guide-section">
+          <h3>01. Theoretical Foundations</h3>
+          <div class="guide-card">
+            <h4>NAND/NOR Universality</h4>
+            <p>Any boolean function can be realized using solely NAND or NOR gates. In silicon, CMOS NAND gates are preferred as they use N-channel transistors in series (faster mobility than P-channel series in NOR).</p>
+          </div>
+          <div class="guide-card">
+            <h4>Propagation Delay ($t_{pd}$)</h4>
+            <p>The time taken for an input transition to propagate and reflect at the output. In physical circuits, gate delays limit the maximum operating frequency ($f_{max} = 1 / t_{propagation}$).</p>
+          </div>
+          <div class="guide-card">
+            <h4>Thermal Noise Margins</h4>
+            <p>The measure of noise immunity of a gate. Calculated as: $NM_H = V_{OH} - V_{IH}$ and $NM_L = V_{IL} - V_{OL}$.</p>
+          </div>
+        </div>
+
+        <div class="guide-section">
+          <h3>02. Reference Circuits</h3>
+          <div class="guide-card">
+            <h4>1-Bit Full Adder</h4>
+            <p>Computes sum ($S$) and carry-out ($C_{out}$) from bits $A$, $B$, and carry-in ($C_{in}$):</p>
+            <p style="font-family: monospace; font-size: 0.7rem; color: var(--accent-cyan);">S = A &oplus; B &oplus; C<sub>in</sub><br>C<sub>out</sub> = (A &amp; B) | (C<sub>in</sub> &amp; (A &oplus; B))</p>
+          </div>
+          <div class="guide-card">
+            <h4>SR Latch (Feedback Loop)</h4>
+            <p>A bistable multivibrator utilizing feedback loops. Realized by connecting the output of one NOR gate to the input of the second NOR gate, forming a 1-bit static memory cell.</p>
+          </div>
+        </div>
+
+        <div class="guide-section">
+          <h3>03. Lab Challenges</h3>
+          <div class="guide-card">
+            <h4>Interactive Truth Tables</h4>
+            <p>1. Drag switches and gates onto the canvas.<br>2. Build a logic function (e.g. XOR using only NAND gates).<br>3. Open the "Truth Table Compiler" modal to automatically audit your circuit's binary outputs.</p>
+          </div>
+          <div class="guide-card">
+            <h4>Waveform Skew Analysis</h4>
+            <p>1. Add a high-speed Clock source.<br>2. Connect it through sequential NOT gates.<br>3. Enable auto-tracking on the Timing Analyzer to visually witness the physical gate delay propagation.</p>
+          </div>
+        </div>
+
+        <div class="guide-section">
+          <h3>04. Industrial Use Cases</h3>
+          <div class="guide-card">
+            <h4>ALU Overflow Flags</h4>
+            <p>In CPU ALUs, the Overflow flag ($V$) indicates signed arithmetic overflow. It is generated using a single XOR gate monitoring the carry-in and carry-out of the most significant bit ($V = C_{in} \oplus C_{out}$).</p>
+          </div>
+          <div class="guide-card">
+            <h4>Address Decoders</h4>
+            <p>Logic decoder circuits route CPU address bus lines to activate specific memory blocks (e.g. select line for SRAM vs FLASH) using combinational AND/NAND grids.</p>
+          </div>
+        </div>
       </div>
     </aside>
 

@@ -216,7 +216,23 @@
     }
 
     function saveState() { localStorage.setItem("minux_candidate_state", JSON.stringify(state)); }
-    function loadState() {
+    async function loadState() {
+        // Try fetching progress_data.json first!
+        try {
+            const response = await fetch('progress_data.json');
+            if (response.ok) {
+                const fetchedState = await response.json();
+                if (fetchedState && fetchedState.candidates && Array.isArray(fetchedState.candidates)) {
+                    state = fetchedState;
+                    saveState(); // Sync back to localStorage!
+                    console.log("SUCCESS: Loaded progress_data.json and synchronized states.");
+                    return;
+                }
+            }
+        } catch (e) {
+            console.log("No progress_data.json found or fetch failed, falling back to localStorage: ", e);
+        }
+
         const data = localStorage.getItem("minux_candidate_state");
         if (data) { 
             try {
@@ -960,8 +976,8 @@
         });
     }
 
-    function init() {
-        loadState();
+    async function init() {
+        await loadState();
         loadWiki();
         
         setupEventListeners();

@@ -2073,10 +2073,28 @@ document.getElementById('btn-shortcuts').addEventListener('click', () => {
   openModal('shortcuts-modal');
 });
 
-// Sidebar Guide Toggle
-document.getElementById('tab-help').addEventListener('click', () => {
-  alert(`⚡ Quick Guide to Logic OS ⚡\n\n1. Drag gates from the toolbox onto the workspace grid.\n2. Click on an Output (right terminal circle) and route it to an Input (left terminal circle) to create a wire.\n3. Double-Click Toggle Switches to flip state values.\n4. Select components or wires and press Del to delete.\n5. Click 'Truth Table' compile to view interactive solutions.\n6. Use analyzer auto-tracking to draw dynamic wave diagrams!`);
-});
+// Sidebar Tab Controls
+const tabLibrary = document.getElementById('tab-library');
+const tabHelp = document.getElementById('tab-help');
+const libraryContainer = document.querySelector('.library-container');
+const guideContainer = document.getElementById('guide-container');
+
+if (tabLibrary && tabHelp && libraryContainer && guideContainer) {
+  tabLibrary.addEventListener('click', () => {
+    tabLibrary.classList.add('active');
+    tabHelp.classList.remove('active');
+    libraryContainer.style.display = 'flex';
+    guideContainer.style.display = 'none';
+  });
+
+  tabHelp.addEventListener('click', () => {
+    tabHelp.classList.add('active');
+    tabLibrary.classList.remove('active');
+    libraryContainer.style.display = 'none';
+    guideContainer.style.display = 'flex';
+  });
+}
+
 
 // Dynamic Toast Notifications
 function showToast(msg, type = "success") {

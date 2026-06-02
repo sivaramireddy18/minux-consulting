@@ -156,6 +156,36 @@
           </div>
         </section>
       </div>
+      <!-- Guided Step-by-Step Instructions Panel -->
+      <section class="panel-card" style="margin-top: 2rem; grid-column: 1 / -1; margin-bottom: 2rem;">
+        <div class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+          <span>Serial Protocol Standards: Step-by-Step Vetting Guide</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; font-size: 0.85rem; line-height: 1.6; color: var(--text-muted); margin-top: 15px;">
+          
+          <div style="background: rgba(5,7,11,0.4); border: 1px solid var(--border-light); padding: 1.25rem; border-radius: 8px;">
+            <h5 style="color: var(--text-main); font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;">01. I2C Bus Topology</h5>
+            <p><strong>I2C</strong> is a synchronous, half-duplex bus using 2 lines: **SDA** (data) and **SCL** (clock). In silicon, it uses **open-drain** buffers; external pull-up resistors pull lines HIGH. Hardware allows multi-master setups and features clock stretching where a slow slave holds SCL LOW.</p>
+          </div>
+
+          <div style="background: rgba(5,7,11,0.4); border: 1px solid var(--border-light); padding: 1.25rem; border-radius: 8px;">
+            <h5 style="color: var(--accent-cyan); font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;">02. SPI Duplex Timing</h5>
+            <p><strong>SPI</strong> is a synchronous, full-duplex bus using 4 lines: **SCK** (clock), **MOSI** (master-out/slave-in), **MISO** (master-in/slave-out), and **CS** (chip-select). It specifies 4 transfer modes via CPOL (clock idle state) and CPHA (sampling edge phase) settings.</p>
+          </div>
+
+          <div style="background: rgba(5,7,11,0.4); border: 1px solid var(--border-light); padding: 1.25rem; border-radius: 8px;">
+            <h5 style="color: var(--accent-emerald); font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;">03. UART Asynchronous Framing</h5>
+            <p><strong>UART</strong> is asynchronous and point-to-point using **TX** (transmit) and **RX** (receive) lines. As it lacks a clock line, both sides must agree on **Baud rate** (speed). A frame consists of 1 Start bit (transition HIGH-to-LOW), 5-9 Data bits, an optional Parity bit, and 1-2 Stop bits (idle HIGH).</p>
+          </div>
+
+          <div style="background: rgba(5,7,11,0.4); border: 1px solid var(--border-light); padding: 1.25rem; border-radius: 8px;">
+            <h5 style="color: var(--accent-rose); font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;">04. Bus Capacitance & Pull-Ups</h5>
+            <p>Under I2C, bus capacitance ($C$) slows down rising edges. The maximum rise time ($t$) dictates pull-up resistor sizing. Calculated as: $t = 0.8473 \cdot R \cdot C$. A smaller pull-up ($R$) speeds up edges but consumes more current when lines are pulled LOW ($I = V_{cc} / R$).</p>
+          </div>
+
+        </div>
+      </section>
 
     </main>
 

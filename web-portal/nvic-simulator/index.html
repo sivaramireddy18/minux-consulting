@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bare-Metal NVIC & Exception Stacking Simulator. Interactive memory stack visualization and CPU register-level nesting auditing.">
+    <title>NVIC & Exception Stacking Simulator | Minux Academy</title>
+    <link rel="stylesheet" href="../styles.css">
+    
+    <style>
+        .sim-container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-bottom: 5rem;
+        }
+
+        .split-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 1024px) {
+            .split-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Glassmorphic Panel */
+        .glass-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 1.75rem;
+            backdrop-filter: blur(12px);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .panel-header {
+            border-bottom: 1px solid var(--border-light);
+            padding-bottom: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .panel-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .panel-title span {
+            color: var(--color-c-systems);
+        }
+
+        /* Control Board */
+        .console-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-sim {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-light);
+            color: var(--text-primary);
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .btn-sim:hover:not(:disabled) {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--text-secondary);
+        }
+
+        .btn-sim.active {
+            background: linear-gradient(135deg, var(--color-c-systems), #C2410C);
+            border: none;
+            box-shadow: var(--shadow-glow-c);
+        }
+
+        .btn-sim:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        /* Register Bit Grid */
+        .register-block {
+            background: rgba(5, 7, 11, 0.6);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 1.25rem;
+        }
+
+        .register-title {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--color-embedded);
+            margin-bottom: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .bit-row {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 0.5rem;
+        }
+
+        .bit-cell {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-light);
+            border-radius: 4px;
+            padding: 0.5rem 0.25rem;
+            text-align: center;
+            cursor: pointer;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            transition: all 0.2s;
+        }
+
+        .bit-cell:hover {
+            border-color: var(--color-embedded);
+            background: rgba(20, 184, 166, 0.05);
+        }
+
+        .bit-cell.active {
+            background: rgba(20, 184, 166, 0.15);
+            border-color: var(--color-embedded);
+            color: var(--color-embedded);
+            font-weight: 700;
+            box-shadow: 0 0 5px rgba(20, 184, 166, 0.3);
+        }
+
+        .bit-cell.pending {
+            background: rgba(249, 115, 22, 0.15);
+            border-color: var(--color-c-systems);
+            color: var(--color-c-systems);
+            font-weight: 700;
+            animation: pulse 1.5s infinite;
+        }
+
+        /* Core Register Block */
+        .core-registers {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .reg-card {
+            background: rgba(5, 7, 11, 0.6);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 0.75rem;
+            text-align: center;
+        }
+
+        .reg-lbl {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .reg-val {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            margin-top: 0.25rem;
+            font-weight: 600;
+        }
+
+        /* Stack Visualizer */
+        .stack-viewer {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            background: rgba(5, 7, 11, 0.8);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 1.25rem;
+            max-height: 480px;
+            overflow-y: auto;
+            font-family: var(--font-mono);
+        }
+
+        .stack-row {
+            display: grid;
+            grid-template-columns: 100px 1fr 120px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 4px;
+            padding: 0.4rem 0.75rem;
+            font-size: 0.8rem;
+            align-items: center;
+        }
+
+        .stack-addr {
+            color: var(--text-muted);
+        }
+
+        .stack-data {
+            color: var(--text-primary);
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .stack-label {
+            color: var(--color-python);
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .stack-row.sp-pointer {
+            border-color: var(--color-embedded);
+            background: rgba(20, 184, 166, 0.05);
+        }
+
+        .stack-row.stacked-frame {
+            border-color: var(--color-c-systems);
+            background: rgba(249, 115, 22, 0.05);
+        }
+
+        /* State Indicator Badge */
+        .state-badge {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-light);
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .state-badge.idle { color: var(--text-secondary); }
+        .state-badge.pending { color: var(--color-c-systems); border-color: var(--color-c-systems); }
+        .state-badge.active { color: var(--color-embedded); border-color: var(--color-embedded); }
+
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header id="main-header">
+        <div class="nav-container">
+            <a href="../index.html" class="logo" id="header-logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+                MINUX<span>CONSULTING</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../candidate-tracker.html">Vetting Hub</a></li>
+                <li><a href="#" class="active">NVIC Simulator</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="sim-container">
+        <!-- Control board header -->
+        <div class="glass-panel">
+            <div class="panel-header">
+                <div class="panel-title">
+                    <h4>Cortex-M4 <span>NVIC</span> & Timer Stacking Controller</h4>
+                </div>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <button class="btn-sim" id="btn-sim-demo" style="background: rgba(236, 72, 153, 0.15); border-color: var(--color-coach); color: var(--color-coach); padding: 0.35rem 0.85rem; font-size: 0.75rem; border-radius: 999px;">⚡ Start Demo Tour</button>
+                    <div class="state-badge idle" id="sim-state-badge">State: Idle</div>
+                </div>
+            </div>
+            
+            <div class="console-buttons" id="console-buttons">
+                <button class="btn-sim active" id="btn-step-idle">1. Thread Run</button>
+                <button class="btn-sim" id="btn-step-trigger" disabled>2. Assert Interrupt</button>
+                <button class="btn-sim" id="btn-step-stack" disabled>3. Push Stack Frame</button>
+                <button class="btn-sim" id="btn-step-isr" disabled>4. Exec ISR</button>
+                <button class="btn-sim" id="btn-step-return" disabled>5. Return BX LR</button>
+            </div>
+
+            <div style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5;" id="sim-helper-text">
+                <strong>Pedagogical Objective:</strong> Configure priorities and enable lines on the registers grid, then click "Assert Interrupt" to trace hardware stack frame pushes and context switches on interrupt vector entrance.
+            </div>
+        </div>
+
+        <!-- Split Grid layout -->
+        <div class="split-layout">
+            <!-- Left panel: NVIC Registers -->
+            <div class="glass-panel">
+                <div class="panel-header">
+                    <div class="panel-title">NVIC Memory-Mapped Registers</div>
+                </div>
+
+                <!-- NVIC_ISER -->
+                <div class="register-block">
+                    <div class="register-title">
+                        <span>NVIC_ISER0 (Interrupt Set Enable Register)</span>
+                        <span>Addr: 0xE000E100</span>
+                    </div>
+                    <div class="bit-row" id="iser-grid">
+                        <!-- Loaded by JS -->
+                    </div>
+                </div>
+
+                <!-- NVIC_ISPR -->
+                <div class="register-block">
+                    <div class="register-title">
+                        <span>NVIC_ISPR0 (Interrupt Set Pending Register)</span>
+                        <span>Addr: 0xE000E200</span>
+                    </div>
+                    <div class="bit-row" id="ispr-grid">
+                        <!-- Loaded by JS -->
+                    </div>
+                </div>
+
+                <!-- Priority Levels -->
+                <div class="register-block" style="display: flex; flex-direction: column; gap: 0.50rem;">
+                    <div class="register-title">
+                        <span>NVIC_IPR Priority Offsets</span>
+                        <span>Addr: 0xE000E400</span>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem;" id="ipr-list">
+                        <!-- Loaded by JS -->
+                    </div>
+                </div>
+
+                <!-- CPU core states registers -->
+                <div class="register-block">
+                    <div class="register-title">
+                        <span>Internal Core CPU Registers</span>
+                    </div>
+                    <div class="core-registers">
+                        <div class="reg-card">
+                            <div class="reg-lbl">PC (Program Counter)</div>
+                            <div class="reg-val" id="reg-pc">0x08000450</div>
+                        </div>
+                        <div class="reg-card">
+                            <div class="reg-lbl">SP (Stack Pointer)</div>
+                            <div class="reg-val" id="reg-sp">0x20008000</div>
+                        </div>
+                        <div class="reg-card">
+                            <div class="reg-lbl">LR (Link Register)</div>
+                            <div class="reg-val" id="reg-lr">0x08000620</div>
+                        </div>
+                        <div class="reg-card">
+                            <div class="reg-lbl">xPSR (Flags / IPSR)</div>
+                            <div class="reg-val" id="reg-xpsr">0x01000000</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right panel: Physical Stack Memory Frame visualizer -->
+            <div class="glass-panel">
+                <div class="panel-header">
+                    <div class="panel-title">SRAM Memory Map: Stack Frame (MSP)</div>
+                </div>
+                <div class="stack-viewer" id="stack-viewer">
+                    <!-- Dynamically rendered stack rows -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Guided Step-by-Step Instructions Panel -->
+        <div class="glass-panel" style="margin-top: 1rem;">
+            <div class="panel-header">
+                <div class="panel-title">
+                    <h4>Cortex-M4 Exception Handlers: <span>Step-by-Step Vetting Guide</span></h4>
+                </div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; font-size: 0.85rem; line-height: 1.6; color: var(--text-secondary);">
+                
+                <div style="background: rgba(5,7,11,0.4); border: 1px solid var(--border-light); padding: 1.25rem; border-radius: 8px;">
+                    <h5 style="color: var(--text-primary); font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="color:var(--text-muted);">01.</span> Thread Mode (Idle)</h5>
+                    <p>The processor runs user/application tasks in **Thread Mode** under low privilege levels. The active Stack Pointer points to **MSP** base (`0x20008000`), and IPSR reads `0` (indicating no exceptions are active).</p>
+                </div>
+
+                <div style="background: rgba(5,7,11,0.4); border: 1px solid var(--border-light); padding: 1.25rem; border-radius: 8px;">
+                    <h5 style="color: var(--color-c-systems); font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="color:var(--text-muted);">02.</span> Interrupt Assertion</h5>
+                    <p>An external peripheral asserts an interrupt line, writing a `1` to the pending register bit (`NVIC_ISPR0`). If enabled in `NVIC_ISER0`, the NVIC compares the priority in `NVIC_IPR` and triggers a CPU preemption if it exceeds the current execution level.</p>
+                </div>
+
+                <div style="background: rgba(5,7,11,0.4); border: 1px solid var(--border-light); padding: 1.25rem; border-radius: 8px;">
+                    <h5 style="color: var(--color-python); font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="color:var(--text-muted);">03.</span> Context Stacking</h5>
+                    <p>Before branching to the vector address, CPU hardware **automatically pushes an 8-word stack frame** onto the active MSP stack: `xPSR`, `PC (Return Addr)`, `LR`, `R12`, `R3`, `R2`, `R1`, `R0`. The Stack Pointer (SP) automatically decrements by 32 bytes (to `0x20007FE0`).</p>
+                </div>
+
+                <div style="background: rgba(5,7,11,0.4); border: 1px solid var(--border-light); padding: 1.25rem; border-radius: 8px;">
+                    <h5 style="color: var(--color-embedded); font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="color:var(--text-muted);">04.</span> Vector Entry (ISR)</h5>
+                    <p>The CPU fetches the starting instruction of the active Interrupt Service Routine (ISR) from the Vector Table (`0x080009A0 + vector_idx * 8`) and loads it into the `PC`. The Link Register (`LR`) is written with the exception return hook `EXC_RETURN` (`0xFFFFFFF9`). IPSR transitions to active exception number.</p>
+                </div>
+
+                <div style="background: rgba(5,7,11,0.4); border: 1px solid var(--border-light); padding: 1.25rem; border-radius: 8px;">
+                    <h5 style="color: var(--color-coach); font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="color:var(--text-muted);">05.</span> Exception Return</h5>
+                    <p>Upon ISR completion, the instruction `BX LR` executes. Because `LR` holds `0xFFFFFFF9`, the hardware unstacking routine triggers: the CPU automatically pops the 8-register context stack frame back from SRAM, increments `SP` by 32 bytes to `0x20008000`, and resumes thread mode.</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Script controller -->
+    <script src="app.js"></script>
+</body>
+</html>
