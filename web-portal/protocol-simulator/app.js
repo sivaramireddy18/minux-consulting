@@ -1519,7 +1519,7 @@ function switchProtocol(protocolKey) {
 }
 
 // Initialize on page load
-window.addEventListener('load', () => {
+function init() {
   setupUI(); // Initialize all DOM selectors & Waveform Engine first!
 
   // Register Header Dropdown Switch
@@ -1663,4 +1663,11 @@ window.addEventListener('load', () => {
 
   // Switch initial protocol to I2C safely
   switchProtocol('i2c');
-});
+}
+
+// Robust bootstrap initialization
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+  init();
+} else {
+  window.addEventListener('DOMContentLoaded', init);
+}
