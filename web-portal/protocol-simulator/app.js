@@ -562,14 +562,19 @@ class I2CSimulator extends ProtocolSimulator {
   }
 
   generateTimeline() {
-    const slaveAddrStr = document.getElementById('i2c-slave-select').value;
+    const slaveAddrEl = document.getElementById('i2c-slave-select');
+    const slaveAddrStr = slaveAddrEl ? slaveAddrEl.value : '0x2A';
     const slaveAddr = parseInt(slaveAddrStr, 16);
-    document.getElementById('i2c-slave-addr').innerText = `Addr: ${slaveAddrStr}`;
+    const slaveAddrLabel = document.getElementById('i2c-slave-addr');
+    if (slaveAddrLabel) slaveAddrLabel.innerText = `Addr: ${slaveAddrStr}`;
 
-    const speed = parseInt(document.getElementById('i2c-speed-select').value);
-    const dataStr = document.getElementById('i2c-data-input').value;
+    const speedEl = document.getElementById('i2c-speed-select');
+    const speed = speedEl ? parseInt(speedEl.value) : 100000;
+    const dataInput = document.getElementById('i2c-data-input');
+    const dataStr = dataInput ? dataInput.value : '0x55';
     const dataByte = parseInt(dataStr, 16) || 0x00;
-    const rWMode = document.getElementById('i2c-mode-select').value;
+    const modeSelect = document.getElementById('i2c-mode-select');
+    const rWMode = modeSelect ? modeSelect.value : 'write';
 
     this.timeline = [];
     let time = 0.0;
@@ -985,11 +990,15 @@ class SPISimulator extends ProtocolSimulator {
   }
 
   generateTimeline() {
-    const spiMode = parseInt(document.getElementById('spi-mode-select').value);
-    const dataStr = document.getElementById('spi-data-input').value;
+    const modeEl = document.getElementById('spi-mode-select');
+    const spiMode = modeEl ? parseInt(modeEl.value) : 0;
+    const dataInput = document.getElementById('spi-data-input');
+    const dataStr = dataInput ? dataInput.value : '0xAA';
     const masterData = parseInt(dataStr, 16) || 0x00;
-    const bitOrder = document.getElementById('spi-order-select').value;
-    const freq = parseInt(document.getElementById('spi-freq-select').value);
+    const orderSelect = document.getElementById('spi-order-select');
+    const bitOrder = orderSelect ? orderSelect.value : 'msb';
+    const freqSelect = document.getElementById('spi-freq-select');
+    const freq = freqSelect ? parseInt(freqSelect.value) : 1000000;
 
     // Dynamic MISO response byte: e.g. reversed value representing status acknowledge
     const slaveData = 0xAA;
@@ -1295,11 +1304,15 @@ class UARTSimulator extends ProtocolSimulator {
   }
 
   generateTimeline() {
-    const baudRate = parseInt(document.getElementById('uart-baud-select').value);
-    const dataChar = document.getElementById('uart-data-input').value || 'M';
+    const baudSelect = document.getElementById('uart-baud-select');
+    const baudRate = baudSelect ? parseInt(baudSelect.value) : 9600;
+    const dataInput = document.getElementById('uart-data-input');
+    const dataChar = dataInput ? (dataInput.value || 'M') : 'M';
     const charCode = dataChar.charCodeAt(0);
-    const parityType = document.getElementById('uart-parity-select').value;
-    const stopBitsCount = parseInt(document.getElementById('uart-stop-select').value);
+    const paritySelect = document.getElementById('uart-parity-select');
+    const parityType = paritySelect ? paritySelect.value : 'none';
+    const stopSelect = document.getElementById('uart-stop-select');
+    const stopBitsCount = stopSelect ? parseInt(stopSelect.value) : 1;
 
     this.timeline = [];
     let time = 0.0;
@@ -1478,12 +1491,9 @@ function switchProtocol(protocolKey) {
   
   activeProtocol = protocolKey;
   const sim = simulators[activeProtocol];
-  sim.reset();
   sim.loadConfig();
-  sim.loadFaultButtons();
   sim.loadSchematic();
-  sim.generateTimeline();
-  sim.syncUI();
+  sim.reset();
 
   // Add initial logs
   logger.log(0, `PROTOCOL.OS loaded active standard: ${protocolKey.toUpperCase()}`, '', false);
