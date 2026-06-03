@@ -394,6 +394,9 @@ class Component {
 // LOGIC GATE EXTENSIONS
 // ------------------------------------------
 class NotGate extends Component {
+  constructor(x, y) {
+    super('Not', x, y);
+  }
   initPorts() {
     this.inputs.push(new Port(this, 'input', 0, 'IN', 'A', 0, 25));
     this.outputs.push(new Port(this, 'output', 0, 'OUT', 'Q', 80, 25));
@@ -432,6 +435,9 @@ class AndGate extends Component {
 }
 
 class OrGate extends Component {
+  constructor(x, y) {
+    super('Or', x, y);
+  }
   initPorts() {
     this.inputs.push(new Port(this, 'input', 0, 'IN1', 'A', 0, 15));
     this.inputs.push(new Port(this, 'input', 1, 'IN2', 'B', 0, 35));
@@ -443,6 +449,9 @@ class OrGate extends Component {
 }
 
 class XorGate extends Component {
+  constructor(x, y) {
+    super('Xor', x, y);
+  }
   initPorts() {
     this.inputs.push(new Port(this, 'input', 0, 'IN1', 'A', 0, 15));
     this.inputs.push(new Port(this, 'input', 1, 'IN2', 'B', 0, 35));
@@ -454,6 +463,9 @@ class XorGate extends Component {
 }
 
 class NandGate extends Component {
+  constructor(x, y) {
+    super('Nand', x, y);
+  }
   initPorts() {
     this.inputs.push(new Port(this, 'input', 0, 'IN1', 'A', 0, 15));
     this.inputs.push(new Port(this, 'input', 1, 'IN2', 'B', 0, 35));
@@ -465,6 +477,9 @@ class NandGate extends Component {
 }
 
 class NorGate extends Component {
+  constructor(x, y) {
+    super('Nor', x, y);
+  }
   initPorts() {
     this.inputs.push(new Port(this, 'input', 0, 'IN1', 'A', 0, 15));
     this.inputs.push(new Port(this, 'input', 1, 'IN2', 'B', 0, 35));
@@ -476,6 +491,9 @@ class NorGate extends Component {
 }
 
 class XnorGate extends Component {
+  constructor(x, y) {
+    super('Xnor', x, y);
+  }
   initPorts() {
     this.inputs.push(new Port(this, 'input', 0, 'IN1', 'A', 0, 15));
     this.inputs.push(new Port(this, 'input', 1, 'IN2', 'B', 0, 35));
